@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Intro}{2}{section.1}
+\contentsline {section}{\numberline {2}Procedure}{3}{section.2}
+\contentsline {section}{\numberline {3}Function Specs}{4}{section.3}
+\contentsline {section}{\numberline {4}Question}{6}{section.4}
+\contentsline {section}{\numberline {5}Definitions}{7}{section.5}
