@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+\linespread{1.3}
+\usepackage{hyperref}
+\usepackage{enumitem}
+%\usepackage{enumerate}
+\usepackage{changepage,lipsum,titlesec, longtable}
+\usepackage{cite}
+\usepackage{comment, xcolor}
+\usepackage[pdftex]{graphicx}
+  \graphicspath{{images/}, {images/stat/}}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png, .jpg}
+\usepackage[cmex10]{amsmath}
+\usepackage{tikz}
+\usepackage{array} 
+\usepackage{subfigure} 
+\newcommand{\grey}[1]{\textcolor{black!30}{#1}}
+\newcommand{\red}[1]{\textcolor{red!50}{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\eref}[1]{Equation~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\aref}[1]{Appendix~\ref{#1}}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\\arabic{enumii}.}
+
+\oddsidemargin0cm
+\topmargin-2cm %I recommend adding these three lines to increase the
+\textwidth16.5cm %amount of usable space on the page (and save trees)
+\textheight23.5cm
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+
+\begin{document}
+\title{PM table to json converter\\
+       \large SEED project}
+\maketitle
+\tableofcontents
+\newpage
+\section{Matching and mapping}\label{sec:map}
+\begin{enumerate}
+\item SEED and PM
+
+  The following description of the connection between Portfolio
+  Manager and SEED platform is summarized from
+  \url{https://cc.readytalk.com/cc/playback/Playback.do} 
+
+  For commercial building benchmarking, the city government need to
+  acquire energy consumption data of buildings in the city. As a
+  result, there are requirements to collect building energy
+  consumption information for buildings greater than 5000 sq. ft. The
+  city will create a list of buildings they need to collect energy
+  information from. The owners of the buildings in the list will
+  report the energy consumption data through the
+  \href{https://portfoliomanager.energystar.gov/pm/home.html}{Portfolio
+    Manager} developed by U.S. Environmental Protection Agency
+  (EPA)and share the report with the city. The city can government can
+  download the data from the Portfolio Manager site into one big
+  folder. 
+
+  In order to hold and process the large amount of data, a database is
+  needed. DOE developed the SEED platform to assist cities to manage
+  the building energy consumption data. The city government would
+  import 1) the list of buildings into the SEED database, and 2)
+  import the energy consumption data from the portfolio manager. The
+  two sets of data just imported would go through a process called
+  \textbf{``Map Fields'' (Mapping)} which standardized the fields of
+  the two data sources. Then \textbf{``Matching''} (using fuzzy logic)
+  is performed between the two so that the building is associated with
+  its energy consumption records. Then the database is ready to carry
+  out analysis.
+  
+  In the ``Mapping'' process, the program will predict based on the
+  original name of the excel sheet user uploaded (my understanding)
+  and the user will confirm which field of the original uploaded data
+  is associated to the standard database field.
+  
+  Other sources of data started to be incorporated into the SEED
+  platform: GreenButton Data (short interval energy consumption data )
+  and Audit Data
+  (\href{https://www.ashrae.org/resources--publications/bookstore/procedures-for-commercial-building-energy-audits}{Procedures
+    For Commercial Building Energy Audits}).
+
+  Building list: the fields in the building list include: UBI(??),
+  GBA(Gross Building Area), BLDGS, Address, Owner, City, State, Zip,
+  Property Type, AYB\_YearBuilt. PM data has fields such as: Property
+  ID, Property Name, YearEnding, PropertyFloorArea, Address 1, Address
+  2, City, ... Although the two might both have ID field, they might
+  not be related. The suggested field for matching the building list
+  with the PM data is with Address (``Address Line 1'' in SEED). In
+  general, there are four suggested fields that improve the matching
+  result: Tax Lot ID, PM Property ID (``Property ID'' field in PM),
+  Custom ID and Address Line 1.
+  
+\end{enumerate}
+\newpage
+\bibliographystyle{plain}
+\bibliography{myCitation}
+\end{document}
