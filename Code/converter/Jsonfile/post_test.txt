@@ -1,0 +1,1 @@
+[{"Street Address":"5000 Forbes Ave","Project Name":"Name","meter_id":4674008,"Meter Type":"Natural Gas","Meter Consumption ID":16873474,"start":1414800000,"end":1417392000,"value":100000,"uom":"kBtu (thousand Btu)","Cost ($)":9000,"interval":2592000,"reading_kind":"energy"}]
