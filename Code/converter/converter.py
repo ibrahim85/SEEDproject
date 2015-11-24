@@ -4,7 +4,7 @@ import json
 
 # replace the following directory name and filename
 read_dir_name = os.getcwd() + "/PMfile/"
-read_file_name = "template.xlsx"
+read_file_name = "template-short.xlsx"
 read_sheet_name = 0
 write_dir_name = os.getcwd() + "/Jsonfile/"
 write_file_name = "test.txt"

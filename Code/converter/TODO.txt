@@ -1,0 +1,13 @@
+look at how to match and map buildings in TSDB
+about fuzzy logic matching
+contact doshar and test it with him
+
+For the template (retain the following):
+    Street Address
+    Portfolio Manager Meter ID
+    Meter Type
+    Start Date (with date and time)
+    End Date (with date and time)
+    Usage/Quantity
+    Usage Units
+    Cost

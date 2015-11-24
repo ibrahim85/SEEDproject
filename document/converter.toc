@@ -1,1 +1,4 @@
-\contentsline {section}{\numberline {1}Matching and mapping}{2}{section.1}
+\contentsline {section}{\numberline {1}Matching and mapping SEED and PM}{2}{section.1}
+\contentsline {section}{\numberline {2}Template Development}{3}{section.2}
+\contentsline {section}{\numberline {3}Code}{4}{section.3}
+\contentsline {section}{\numberline {4}Output}{5}{section.4}

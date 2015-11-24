@@ -1,0 +1,90 @@
+\documentclass[hidelinks,12pt]{article}
+\linespread{1.3}
+\usepackage{hyperref}
+\usepackage{enumitem}
+%\usepackage{enumerate}
+\usepackage{changepage,lipsum,titlesec, longtable}
+\usepackage{cite}
+\usepackage{comment, xcolor}
+\usepackage[pdftex]{graphicx}
+  \graphicspath{{images/}, {images/stat/}}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png, .jpg}
+\usepackage[cmex10]{amsmath}
+\usepackage{tikz}
+\usepackage{array} 
+\usepackage{subfigure} 
+\newcommand{\grey}[1]{\textcolor{black!30}{#1}}
+\newcommand{\red}[1]{\textcolor{red!50}{#1}}
+\newcommand{\fref}[1]{Figure \ref{#1}}
+\newcommand{\tref}[1]{Table \ref{#1}}
+\newcommand{\eref}[1]{Equation~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\aref}[1]{Appendix~\ref{#1}}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\\arabic{enumii}.}
+
+\oddsidemargin0cm
+\topmargin-2cm %I recommend adding these three lines to increase the
+\textwidth16.5cm %amount of usable space on the page (and save trees)
+\textheight23.5cm
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+
+\begin{document}
+\title{EnergyPlus Water-to-air Heat Pump\\
+       \large Ambient Water Loop System Modeling}
+\maketitle
+\tableofcontents
+\newpage
+\section{Definitions}\label{sec:def}
+\begin{description}
+\item[heat pump] An equipment that ``extracts heat from a source and
+  transfers it to a sink at a higher temperature.'' ~\cite{ASHRAE2012}
+  Heat sources of a heat pump could be ``water, solar energy, the air
+  and internal building heat''~\cite{ASHRAE2012} Commonly used water
+  sources include ground water, surface water, cooling tower, a closed
+  water-loop in a building or a community, or gray water.
+\item[water-to-air heat pump] heat pumps that use water as the heat
+  source and sink and use air to deliver thermal energy to conditioned
+  space~\cite{ASHRAE2012}.
+\item[water-loop heat pump (WLHP)] system: there are one or more heat
+  pumps in each zone. The heat pumps are connected to a shared pipe
+  system with one supply pipe and one return pipe. The water loop has
+  a cooling tower to reject heat, a heat source, usually a boiler, to
+  add heat and two pumps (one backup) for circulation. The units
+  absorbs heat from the loop if it is in heating mode and dumps heat
+  to the loop if it is in cooling mode. If the water loop is connected
+  to the ground (ground-coupled), then no additional boilers or
+  cooling towers are needed. The system would be beneficial for
+  buildings or building groups with a coincident heating and cooling
+  demand. One common application of WLHP is in office buildings where
+  in the heating season, internal gains from core zones can be
+  redirected to perimeter zones~\cite{ASHRAE2012}.
+  
+  The control of WLHP system: heat pump units are controlled by zone
+  thermostat. The boiler is controlled so that the boiler output water
+  temperature is at 60F (50F?) The cooling tower is controlled so that
+  its output temperature is 90F~\cite{ASHRAE2012}.
+\end{description}
+\section{General Introduction}\label{sec:intro}
+The work at this stage is to model a water ambient loop system that
+connects multiple zones of a group of buildings that could have
+different thermal demand. Before this, a single-building water-loop
+heat pump system (WLHP) needs to be implemented and tested. 
+
+According to ASHRAE project RP620[cite], the computer models for WLHP
+system has large variations.
+\newpage
+\bibliographystyle{plain}
+\bibliography{myCitation}
+\end{document}
