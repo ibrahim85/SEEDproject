@@ -2,4 +2,6 @@
 \BOOKMARK [1][-]{section.2}{SEED Mapping and Matching}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Mapping}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Matching}{section.2}% 4
-\BOOKMARK [1][-]{section.3}{Implementation strategy of mapping and matching: approximate string matching}{}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Automatic}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Manual}{subsection.2.2}% 6
+\BOOKMARK [1][-]{section.3}{Implementation strategy of mapping and matching: approximate string matching}{}% 7

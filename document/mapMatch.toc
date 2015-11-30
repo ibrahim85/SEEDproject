@@ -1,5 +1,7 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {section}{\numberline {2}SEED Mapping and Matching}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Mapping}{2}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Matching}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Matching}{2}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Automatic}{3}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Manual}{3}{subsubsection.2.2.2}
 \contentsline {section}{\numberline {3}Implementation strategy of mapping and matching: approximate string matching}{4}{section.3}

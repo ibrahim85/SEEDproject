@@ -70,20 +70,18 @@ current input as a sub string (\fref{fig:dropDown}).
   \label{fig:dropDown}
 \end{figure}
 
-The guideline for the process is ``to improve results in matching
-buildings across different data files, map as many of the following
-four (4) fields as possible: Tax Lot ID, PM Property ID, Custom ID,
-Address Line 1''~\cite{SEEDWebpage2015}.
-
 \subsection{Matching} 
 
-In this process the fields in the two input tables, the building list
-and the PM data, are combined. The combining process utilizes some
-common fields from the two tables. The process uses fuzzy string
-searching~\cite{SEEDTutorial2015, approxStringMatchWiki} to auto map
-the records in the two tables and returns a confidence score for the
-matching. In the table below we can see the leading zeros does not
-affect the matching result.
+In the matching process, the fields in the two input tables, the
+building list and the PM data, are combined. The combining process
+utilizes some common fields from the two tables. 
+
+\subsubsection{Automatic}
+The process uses fuzzy string searching~\cite{SEEDTutorial2015,
+  approxStringMatchWiki} to auto-match the records in the two tables
+and returns a confidence score for the matching. In
+\fref{fig:matchingResult} we can see the leading zeros does not affect
+the matching result.
 
 \begin{figure}[h!]
   \centering
@@ -93,6 +91,12 @@ affect the matching result.
   \label{fig:matchingResult}
 \end{figure}
 
+The guideline for the process is ``to improve results in matching
+buildings across different data files, map as many of the following
+four (4) fields as possible: Tax Lot ID, PM Property ID, Custom ID,
+Address Line 1''~\cite{SEEDWebpage2015}.
+
+\subsubsection{Manual}
 The matching can be manually corrected by clicking on the value of the
 shared field in the source table and one can choose \textbf{one or
   more} records from the drop-down list that matches the record in the
@@ -107,10 +111,10 @@ source table (\fref{fig:matchManual}).
 \end{figure}
 
 In the matching process, one table is the source and the other is the
-target. For each record/row in the target table, there is a unique
-record in the source table that matches this record, a match will be
-successful, but the score of confidence will not be 100\%. if there
-are multiple records in the target that matches the source.
+target. For each record/row in the target table, if there exists a
+unique record in the source table that matches this record, a match
+will be successful, but the score of confidence will not be 100\% if
+there are multiple records in the target that matches the source.
 
 \begin{figure}[h!]
   \centering
@@ -123,13 +127,13 @@ are multiple records in the target that matches the source.
 \section{Implementation strategy of mapping and matching: approximate
   string matching}
 The approximate string matching aims at finding strings that
-\emph{approximately} matches some pattern. The matching is normally
+\emph{approximately} match some pattern. The matching is normally
 evaluated by some edit distance, which is the minimum number of
 primitive operations (e.g. insertion, deletion and substitution)
 needed to convert the approximate match to an exact
 match~\cite{approxStringMatchWiki}. There are several versions of the
 set of primitive operations. One common definition is the Levenshtein
-distance, which include single character operations as insertion,
+distance, which include single-character operations as insertion,
 deletion and substitution.
 
 There is a package in Python called FuzzyWuzzy~\cite{fuzzyWuzzy2015}
@@ -141,7 +145,7 @@ str, unicode, list, tuple, bytearray, buffer, xrange) as long as they
 are hashable (those that can become a dictionary
 key). \href{https://docs.python.org/2/glossary.html#term-immutable}{Immutable}
 types (number, string, tuples) are all hashable in Python). There are
-some explanation of the fuzzywuzzy package
+some explanation of the FuzzyWuzzy package
 \href{http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/}{here}. The
 key functions include~\cite{fuzzyWuzzyGit2015}:
 \makeatletter
@@ -151,23 +155,46 @@ key functions include~\cite{fuzzyWuzzyGit2015}:
 from fuzzywuzzy import fuzz
 # simple ratio: pure edit distance
 # similar to difflib.SequenceMatcher
-fuzz.ratio("this is a test", "this is a test!")
+>>> fuzz.ratio("this is a test", "this is a test!")
+    96
 
-# partial ratio: when s1 and s2 have very different lengths (WOLG, s1
-< s2),
-partial_ratio(s1, s2) returns fuzz.ratio(s1, s2') where s2' is a
-sub string of s2 and len(s1) == len(s2')
+# partial ratio: when s1 and s2 have very different lengths 
+# WOLG, s1 < s2,
+# partial_ratio(s1, s2) returns fuzz.ratio(s1, s2') where s2' is a
+# sub string of s2 and len(s1) == len(s2')
 
-fuzz.partial_ratio("this is a test", "this is a test!")
+>>> fuzz.partial_ratio("this is a test", "this is a test!")
+    100
 
 # token sort ratio: 
 # to deal with the word re-order of strings
 break strings to tokens, sort tokens and then re-assemble them to strings before calculating the ratio
 fuzz.token_sort_ratio("fuzzy wuzzy was a bear", "wuzzy fuzzy was a bear")
 
+# token set ratio: 
+# another way to deal with the word re-order of strings
+# do not use it if duplicate words are important patterns
+# let the input strings be s0 and s1
+# t0 = intersection(sorted(s0), sorted(s1))
+# s0' = sorted(s0) \ t0
+# s1' = sorted(s1) \ t1
+# t1 = intersection(t0, s0')
+# t2 = intersection(t0, s1')
+# return max(fuzz.ratio(t0, t1), fuzz.ratio(t1, t2), fuzz.ratio(t0, t2))
+>>> fuzz.token_sort_ratio("fuzzy was a bear", "fuzzy fuzzy was a bear")
+    84
+>>> fuzz.token_set_ratio("fuzzy was a bear", "fuzzy fuzzy was a bear")
+    100
+
 # extracting a list of tuples of (str, score) where str is in choices 
 # and score is the matching score between query and choice)
-extract(query, choices, processor=None, scorer=None, limit=5)
+# scorer: the ratio calculation method, can also be user defined
+# limit: length of the returned list
+>>> extract(query, choices, processor=None, scorer=None, limit=5)
+
+>>> choices = ["Atlanta Falcons", "New York Jets", "New York Giants", "Dallas Cowboys"]
+>>> process.extract("new york jets", choices, limit=2)
+    [('New York Jets', 100), ('New York Giants', 78)]
 \end{verbatim}
 
 However, if the address line is selected as the field for matching
@@ -176,7 +203,7 @@ performed before the string searching process
 (\href{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.714&rep=rep1&type=pdf}{Figure
   2 in this paper}).
 
-Now I wrote a wrapper of matching function with fuzzywuzzy package,
+Now I wrote a wrapper of matching function with FuzzyWuzzy package,
 next step is to know which field to match (address or not) find a set
 of testing source and target strings to see if the matching function
 works.
