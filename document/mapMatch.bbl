@@ -1,0 +1,40 @@
+\begin{thebibliography}{1}
+
+\bibitem{fuzzyWuzzyGit2015}
+{JeffPaine et al.}
+\newblock seatgeek/fuzzywuzzy.
+\newblock web, November 2015.
+\newblock \url{https://github.com/seatgeek/fuzzywuzzy}.
+
+\bibitem{SEEDTutorial2015}
+{Lawrence Berkeley National Laboratory}.
+\newblock Seed 1.1 tutorial.
+\newblock web, November 2015.
+\newblock
+  \url{https://windows.lbl.gov/projects/SEED/IntroTutorial/SEED%201.2%20Overview.htm}.
+
+\bibitem{SEEDWebpage2015}
+{Lawrence Berkeley National Laboratory}.
+\newblock Seed platform.
+\newblock web, November 2015.
+\newblock \url{https://seed.lbl.gov/app/#/data/mapping/1815}.
+
+\bibitem{fuzzyWuzzy2015}
+{Python Software Foundation}.
+\newblock fuzzywuzzy 0.8.0.
+\newblock web, November 2015.
+\newblock \url{https://pypi.python.org/pypi/fuzzywuzzy}.
+
+\bibitem{BEDES2015}
+{U.S. Department of Energy}.
+\newblock Bedes.
+\newblock web, November 2015.
+\newblock \url{https://bedes.lbl.gov/}.
+
+\bibitem{approxStringMatchWiki}
+{Wikipedia}.
+\newblock Approximate string matching.
+\newblock web, November 2015.
+\newblock \url{https://en.wikipedia.org/wiki/Approximate_string_matching}.
+
+\end{thebibliography}
