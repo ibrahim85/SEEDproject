@@ -150,7 +150,6 @@ some explanation of the FuzzyWuzzy package
 key functions include~\cite{fuzzyWuzzyGit2015}:
 \makeatletter
 \def\verbatim@font{\linespread{1}\small\ttfamily}
-\makeatother
 \begin{verbatim}
 from fuzzywuzzy import fuzz
 # simple ratio: pure edit distance
@@ -200,13 +199,88 @@ fuzz.token_sort_ratio("fuzzy wuzzy was a bear", "wuzzy fuzzy was a bear")
 However, if the address line is selected as the field for matching
 calculation, a \textbf{substitution of common abbreviations} should be
 performed before the string searching process
-(\href{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.119.714&rep=rep1&type=pdf}{Figure
-  2 in this paper}).
 
-Now I wrote a wrapper of matching function with FuzzyWuzzy package,
-next step is to know which field to match (address or not) find a set
-of testing source and target strings to see if the matching function
-works.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.5\textwidth]{addMatchDiagram.png}
+  \caption{Schematic of deterministic address matching}~\cite{citeulike1466288}
+  \label{fig:addMatchDiagram}
+\end{figure}
+
+\pagebreak
+\section{Progress}
+Assuming the matching field is ``Address Line 1''
+\begin{itemize}
+\item Implemented a pre-process routine for input address strings with
+  \begin{itemize}
+  \item Removing trailing dots
+  \item Common abbreviation upper-case conversion and look-up (source: \url{http://pe.usps.gov/text/pub28/28apc_002.htm})
+    \begin{verbatim}
+    WLS -> WLS
+    CPE -> CPE
+    ORCHRD -> ORCH
+    CRESCENT -> CRES
+    FALL -> FALL
+    BEACH -> BCH
+    MSSN -> MSN
+    RAMP -> RAMP
+    KYS -> KYS
+    SPG -> SPG
+    JCTN -> JCT
+    TUNEL -> TUNL
+    PARKWAYS -> PKWY
+    COVE -> CV
+    BYP -> BYP
+    SPRINGS -> SPGS
+    ISLANDS -> ISS
+    RIVER -> RIV
+    SPUR -> SPUR
+    JCTS -> JCTS
+    VIADCT -> VIA
+    PINES -> PNES
+    EXPRESS -> EXPY
+    MNRS -> MNRS
+    TUNLS -> TUNL
+    GROVES -> GRVS
+    SUMITT -> SMT
+    OVL -> OVAL
+    VIEW -> VW
+    CRSNT -> CRES
+    ...
+    \end{verbatim}
+  \end{itemize}
+
+  Output of preProcess
+\begin{verbatim}
+                              input                           output
+0                  5000 Forbes Ave.                  5000 Forbes AVE
+1                  399 Asterisk Way                 399 Asterisk WAY
+2   Miller African-Centered Academy  Miller African-Centered Academy
+3                  5468 Bartlett St                 5468 Bartlett ST
+4          PNC Park, 115 Federal St         PNC Park, 115 Federal ST
+5          606A P J McArdle Roadway         606A P J McArdle Roadway
+6                  411 7th Ave #360                 411 7th AVE #360
+7                   436 Seventh Ave                  436 Seventh AVE
+8                    3915 O'Hara St                   3915 O'Hara ST
+9                         3302 WWPH                        3302 WWPH
+10                 5200 Pembroke Pl                 5200 Pembroke PL
+11                      2 Bayard Rd                      2 Bayard RD
+\end{verbatim}
+
+\item Wrote a wrapper of matching function with FuzzyWuzzy package
+\begin{verbatim}
+test_similarity(5000 Forbes Avenue, 5000 Forbes Ave)
+original: 5000 Forbes Avenue, after preProcess: 5000 Forbes AVE
+match ratio with simple is 87
+match ratio with partial is 87
+match ratio with token_sort is 100
+match ratio with token_set is 100
+\end{verbatim}
+\end{itemize}
+\section{Next Step}
+Next step is to know which field to match (address or not)
+find a set of testing source and target strings to see if the matching
+function works well.
 
 \newpage
 \bibliographystyle{plain}

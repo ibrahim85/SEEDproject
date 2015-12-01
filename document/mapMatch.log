@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  30 NOV 2015 08:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.7)  1 DEC 2015 13:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -628,28 +628,28 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<images/dropDown.png, id=54, 1371.1225pt x 770.88pt>
+<images/dropDown.png, id=64, 1371.1225pt x 770.88pt>
 File: images/dropDown.png Graphic file (type png)
  <use images/dropDown.png>
 Package pdftex.def Info: images/dropDown.png used on input line 68.
 (pdftex.def)             Requested size: 328.62788pt x 184.7562pt.
 
 [2 <./images/dropDown.png (PNG copy)>]
-<images/matchingResult.png, id=66, 1366.10374pt x 541.02126pt>
+<images/matchingResult.png, id=76, 1366.10374pt x 541.02126pt>
 File: images/matchingResult.png Graphic file (type png)
 
 <use images/matchingResult.png>
 Package pdftex.def Info: images/matchingResult.png used on input line 88.
 (pdftex.def)             Requested size: 328.62788pt x 130.14494pt.
 
-<images/matchManual.png, id=70, 1371.1225pt x 418.56375pt>
+<images/matchManual.png, id=80, 1371.1225pt x 418.56375pt>
 File: images/matchManual.png Graphic file (type png)
 
 <use images/matchManual.png>
 Package pdftex.def Info: images/matchManual.png used on input line 107.
 (pdftex.def)             Requested size: 328.62788pt x 100.31683pt.
 
-<images/matchManyOne.png, id=72, 1348.03625pt x 284.06125pt>
+<images/matchManyOne.png, id=82, 1348.03625pt x 284.06125pt>
 File: images/matchManyOne.png Graphic file (type png)
 
 <use images/matchManyOne.png>
@@ -657,46 +657,65 @@ Package pdftex.def Info: images/matchManyOne.png used on input line 121.
 (pdftex.def)             Requested size: 328.62788pt x 69.24669pt.
  [3 <./images/matchingResult.png (PNG copy)> <./images/matchManual.png (PNG cop
 y)>] [4 <./images/matchManyOne.png (PNG copy)>]
-Overfull \hbox (116.89569pt too wide) in paragraph at lines 198--198
+Overfull \hbox (116.89569pt too wide) in paragraph at lines 197--197
 []\OT1/cmtt/m/n/10.95 break strings to tokens, sort tokens and then re-assemble
  them to strings before calculating the ratio[] 
  []
 
 
-Overfull \hbox (30.66537pt too wide) in paragraph at lines 198--198
+Overfull \hbox (30.66537pt too wide) in paragraph at lines 197--197
 []\OT1/cmtt/m/n/10.95 >>> choices = ["Atlanta Falcons", "New York Jets", "New Y
 ork Giants", "Dallas Cowboys"][] 
  []
 
-[5] (./mapMatch.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 214.
- [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 214.
+<images/addMatchDiagram.png, id=107, 289.08pt x 610.28pt>
+File: images/addMatchDiagram.png Graphic file (type png)
+
+<use images/addMatchDiagram.png>
+Package pdftex.def Info: images/addMatchDiagram.png used on input line 205.
+(pdftex.def)             Requested size: 234.73523pt x 495.55328pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 214.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 214.
+ [6 <./images/addMatchDiagram.png (PNG copy)>] [7] [8] (./mapMatch.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 288.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 288.
  (./mapMatch.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 214.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 214.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 288.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 288.
 Package rerunfilecheck Info: File `mapMatch.out' has not changed.
-(rerunfilecheck)             Checksum: 2E592DCCFE1DFFD075A2A6295E65228E;464.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 214.
+(rerunfilecheck)             Checksum: 82E30C09F10E45F3ACA0ED0F440D470C;551.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 288.
  ) 
 Here is how much of TeX's memory you used:
- 15079 strings out of 495028
- 262404 string characters out of 6181498
- 423682 words of memory out of 5000000
- 17999 multiletter control sequences out of 15000+600000
+ 15121 strings out of 495028
+ 263084 string characters out of 6181498
+ 427785 words of memory out of 5000000
+ 18030 multiletter control sequences out of 15000+600000
  9792 words of font info for 35 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,6n,55p,423b,474s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,6n,55p,423b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on mapMatch.pdf (6 pages, 448250 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on mapMatch.pdf (9 pages, 507308 bytes).
 PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 181 PDF objects out of 1000 (max. 8388607)
+ 156 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
+ 110 words of extra memory for PDF output out of 10000 (max. 10000000)
 

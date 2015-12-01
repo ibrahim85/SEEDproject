@@ -5,3 +5,5 @@
 \contentsline {subsubsection}{\numberline {2.2.1}Automatic}{3}{subsubsection.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Manual}{3}{subsubsection.2.2.2}
 \contentsline {section}{\numberline {3}Implementation strategy of mapping and matching: approximate string matching}{4}{section.3}
+\contentsline {section}{\numberline {4}Progress}{6}{section.4}
+\contentsline {section}{\numberline {5}Next Step}{8}{section.5}

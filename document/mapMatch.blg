@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: mapMatch.aux
 The style file: plain.bst
 Database file #1: myCitation.bib
-You've used 6 entries,
+You've used 7 entries,
             2118 wiz_defined-function locations,
-            528 strings with 4723 characters,
-and the built_in function-call counts, 1334 in all, are:
-= -- 132
-> -- 42
+            535 strings with 4931 characters,
+and the built_in function-call counts, 1670 in all, are:
+= -- 164
+> -- 60
 < -- 0
-+ -- 18
-- -- 12
-* -- 50
-:= -- 231
-add.period$ -- 24
-call.type$ -- 6
-change.case$ -- 24
++ -- 25
+- -- 18
+* -- 78
+:= -- 289
+add.period$ -- 27
+call.type$ -- 7
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 42
-empty$ -- 133
-format.name$ -- 12
-if$ -- 289
+cite$ -- 7
+duplicate$ -- 53
+empty$ -- 158
+format.name$ -- 18
+if$ -- 358
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 0
-newline$ -- 39
-num.names$ -- 12
-pop$ -- 48
+int.to.str$ -- 7
+missing$ -- 1
+newline$ -- 44
+num.names$ -- 14
+pop$ -- 52
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 23
 quote$ -- 0
-skip$ -- 36
+skip$ -- 43
 stack$ -- 0
-substring$ -- 30
-swap$ -- 6
+substring$ -- 50
+swap$ -- 7
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 24
+type$ -- 28
 warning$ -- 0
-while$ -- 12
-width$ -- 7
-write$ -- 74
+while$ -- 15
+width$ -- 8
+write$ -- 85
