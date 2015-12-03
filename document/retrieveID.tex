@@ -82,10 +82,13 @@ For each table in the folder:
     Get a set (dictionary key), A, of addresses from the PM table
     Create an empty dictionary D (initializing all entries to None)
         for each address a in the set A:
-            make a QUERY to SEED database with (address, Portfolio Manager ID) 
+            make a QUERY to SEED database with (address, 
+                                                Portfolio Manager ID) 
                 if address identifies a building b is in SEED database
+                    //SEED.BuildingSnapshot.id
                     get the building snapshot id: s_id
-                    make a QUERY with the s_id to get the canonical id (SEED.BuildingSnapshot.canonical_building): c_id
+                    make a QUERY with s_id to get c_id
+                    //SEED.BuildingSnapshot.canonical_building
                     D[a] = {buildingsnapshot_id: s_id,
                             canonical_building: c_id}
                 else 
@@ -165,13 +168,16 @@ We:
 Download the remote folder that contains the tables with the specified format.
 For each table in the folder:
     Read the table into a data frame (Python pandas dataframe)
-    Get a set (dictionary key), A, of (addresses, Portfolio Manager ID) pairs from the PM table
+    Get a set (dictionary key), A, of ...
+    (addresses, Portfolio Manager ID) pairs from the PM table
     Create an empty dictionary D (initializing all entries to None)
         for each address a in the set A:
             make a QUERY to SEED database with (address, Portfolio Manager ID) 
-                if (address, Portfolio Manager ID) identifies a building b is in SEED database
+                if (address, Portfolio Manager ID) identifies ...
+                a building b is in SEED database
                     get the building snapshot id: s_id
-                    make a QUERY with the s_id to get the canonical id (SEED.BuildingSnapshot.canonical_building): c_id
+                    make a QUERY with s_id to get the c_id 
+                    //(SEED.BuildingSnapshot.canonical_building)
                     D[a] = {buildingsnapshot_id: s_id,
                             canonical_building: c_id}
                 else 
@@ -183,7 +189,7 @@ For each table in the folder:
 \subsubsection{Diagram}
 \begin{tikzpicture}
   \node (PM) [data]{Portfolio Manager};
-  \node (PM_table) [database, right of=PM,xshift=5cm]{\textbf{EnergyStar PM table}:\\
+  \node (PM_table) [database, below of=PM,yshift=-2cm]{\textbf{EnergyStar PM table}:\\
     Street Address\\
     Portfolio Manager ID\\
     Portfolio Manager Meter ID\\
