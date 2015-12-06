@@ -1,3 +1,4 @@
+nov. 24
 look at how to match and map buildings in TSDB
 about fuzzy logic matching
 contact doshar and test it with him
@@ -11,3 +12,25 @@ For the template (retain the following):
     Usage/Quantity
     Usage Units
     Cost
+
+dec. 1
+flow diagram
+
+//translate PM column names to SEED column names
+//make a POST request to SEED to upload PM excel template
+get a list A of addresses from the PM template
+make a QUERY to download the building snapshot id for each address in list A
+    if building b is in SEED database, return the snapshot id
+        make a QUERY to download cononical id
+    otherwise, make it None or something that indecate there isn't such a building yet
+
+building snapshot id
+cononical building id (+)
+
+No need to check if the meter id is valid
+
+TODO:
+check the following:
+jangle interface for query
+    MVC
+    how the model is defined

@@ -1,5 +1,5 @@
 from celery import Celery
-from celery import task 
+from celery import task
 import datetime
 import requests
 import json
@@ -20,7 +20,7 @@ def aggr_sum_metric(data):
 	#length of output array. Should be 1 per group since it's monthly aggregation and we are querying only for one month
     print len(r.json()['queries'][0]['results'])
     length =  len(r.json()['queries'][0]['results'])
-	
+
 	#Retrieve required values from array and call posgres insert function
     for num in range(0, length):
 		gb_bldg_snapshot_id =  r.json()['queries'][0]['results'][num]['tags']['building_snapshot_id'][0]
@@ -32,10 +32,10 @@ def aggr_sum_metric(data):
 		insert_into_postgres(gb_bldg_snapshot_id,gb_mtr_id,gb_energy_type_id,gb_timestamp,gb_agg_reading,tsMonthStart,tsMonthEnd)
     else:
 	print "End of for loop"
-    
-#insert into postgres	
+
+#insert into postgres
 def insert_into_postgres(gb_bldg_snapshot_id,gb_mtr_id,gb_energy_type_id,gb_timestamp,gb_agg_reading,tsMonthStart,tsMonthEnd):
-	try: 
+	try:
 		conn = psycopg2.connect("dbname='seed-deploy' user='seed-admin' host='localhost' password='SEEDDB@architecture.cmu.edu'")
 	except psycopg2.Error as e:
     		print "Unable to connect to database"
@@ -46,7 +46,7 @@ def insert_into_postgres(gb_bldg_snapshot_id,gb_mtr_id,gb_energy_type_id,gb_time
 	#retrieve meter_id from seed_meter using buildingsnapshot_id, green_button_meter_id, energy_type
 	cur.execute('SELECT seed_meter.id FROM seed_meter,seed_meter_building_snapshot WHERE seed_meter_building_snapshot.meter_id=seed_meter.id AND seed_meter_building_snapshot.buildingsnapshot_id=%(param_bs)s AND seed_meter.gb_meter_id=%(param_mtr_id)s AND seed_meter.energy_type=%(param_enrgy_type)s',{'param_bs': gb_bldg_snapshot_id,'param_enrgy_type': gb_energy_type_id,'param_mtr_id': gb_mtr_id})
 	rows = cur.fetchall()
-	
+
 	#insert in seed_timeseries
 	for row in rows:
 		gb_timestamp_endtime = gb_timestamp
@@ -57,7 +57,7 @@ def insert_into_postgres(gb_bldg_snapshot_id,gb_mtr_id,gb_energy_type_id,gb_time
 
 @task
 def aggregate():
-    print "Starting Aggregation" 
+    print "Starting Aggregation"
 	#find out last month's start and end timestamps
     monthlist = [1,3,5,7,8,10,12]
     today = datetime.datetime.today()
@@ -67,10 +67,10 @@ def aggregate():
       lastmonth = lastmonth.replace(month=12)
     else:
       lastmonth = today.replace(month = (today.month - 1))
-	
+
     #first day of last month
     firstDayOfLastMonth = lastmonth.replace(day=1).replace(hour=0).replace(minute=0).replace(second=0).replace(microsecond=0)
-	
+
 	#last day of the month
     if lastmonth.month in monthlist:
 		lastDayOfLastMonth = lastmonth.replace(day=31)
@@ -81,36 +81,25 @@ def aggregate():
     else:
 		lastDayOfLastMonth = lastmonth.replace(day=30)
     lastDayOfLastMonth = lastDayOfLastMonth.replace(hour=23).replace(minute=59).replace(second=59).replace(microsecond=999999)
-    
+
 	#timestamps
 	tsMonthStart = int(firstDayOfLastMonth.strftime("%s")) * 1000
     tsMonthEnd = int(lastDayOfLastMonth.strftime("%s")) * 1000
-    
-    #kairos aggregation query
-    agg_query = {
-                 "start_absolute": str(tsMonthStart),
-                 "end_absolute": str(tsMonthEnd),
 
-                 "metrics":[
-                   {
-                    "name": "gb_test",
-					"aggregators": [
-                        {
-                            "name": "sum",
-                            "sampling": {
-                               "value": 1,
-                               "unit": "months"
-                            }
-                        }
-                     ],
-                    "group_by": [
-                       {
-                           "name": "tag",
-                           "tags": ["usage_kind","building_snapshot_id","usage_point_id","interval"]
-                       }
-                    ]
-                    }
-                  ]
-               }
+    #kairos aggregation query
+    agg_query = {"start_absolute": str(tsMonthStart),
+                 "end_absolute": str(tsMonthEnd),
+                 "metrics":[{"name": "gb_test",
+                             "aggregators": [{"name": "sum",
+                                              "sampling": {"value": 1,
+                                                           "unit": "months"}
+                                             }],
+                             "group_by": [{"name": "tag",
+                                           "tags": ["usage_kind",
+                                                    "building_snapshot_id",
+                                                    "usage_point_id",
+                                                    "interval"]}]
+                           }]
+                 }
 	#aggregate data using the agg_query
     aggr_sum_metric(agg_query)
