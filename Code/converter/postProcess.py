@@ -1,17 +1,16 @@
 import os
-import converter as cv
-
-dir_name = os.getcwd() + "/Jsonfile/"
-in_file_name = cv.write_file_name
-out_file_name = "post_test.txt"
+import glob
 
 # convert unit of time from 'ns' to 's'
 def ns2s(string):
     return string.replace('000000000,', ',')
 
-def postProcess():
-    with open (dir_name + in_file_name, 'r+') as infile:
-        unit_ns = infile.readline()
-        unit_s = ns2s(unit_ns)
-    with open (dir_name + out_file_name, 'w') as out:
-        out.write(unit_s)
+def postProcess(in_dir, out_dir):
+    filelist = glob.glob(in_dir + "*.txt")
+    for file_in in filelist:
+        with open (file_in, 'r+') as r_in:
+            unit_ns = r_in.readline()
+            unit_s = ns2s(unit_ns)
+        file_out = file_in[len(in_dir):-4] + '_post.txt'
+        with open (out_dir + file_out, 'w') as out:
+            out.write(unit_s)
