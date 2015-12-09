@@ -3,6 +3,14 @@ import os
 import pandas as pd
 import glob
 
+## ## ## ## ## ## ## ## ## ## ##
+## create logger for print ##
+## ## ## ## ## ## ## ## ## ## ##
+import logging
+logger = logging.Logger('mainroutine')
+logger.setLevel(logging.INFO)
+logger.addHandler(logging.StreamHandler())
+
 def readPM(in_dir, out_dir):
     in_dir = os.getcwd() + "/PMfile/PMinput/"
     out_dir = os.getcwd() + "/PMfile/PMoutput/"
@@ -11,7 +19,7 @@ def readPM(in_dir, out_dir):
         processOneFile(excel, in_dir, out_dir)
 
 def processOneFile(filename, in_dir, out_dir):
-    print '\nProcess file{0}'.format(filename)
+    logger.info('convert file{0} to template'.format(filename))
     df_address = pd.read_excel(filename, sheetname=0, skiprows=4, header=5,
                                parse_cols = [1, 2])
     address_dict = dict(zip(df_address['Portfolio Manager ID'],

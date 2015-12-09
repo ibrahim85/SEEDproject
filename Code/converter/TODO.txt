@@ -34,3 +34,7 @@ check the following:
 jangle interface for query
     MVC
     how the model is defined
+
+dec. 7
+run and test the code
+write a converter for

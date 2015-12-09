@@ -6,7 +6,19 @@ import pandas as pd
 import json
 import glob
 import numpy as np
+import query as qr
 
+## ## ## ## ## ## ## ## ## ## ##
+## create logger for print ##
+## ## ## ## ## ## ## ## ## ## ##
+import logging
+logger = logging.Logger('mainroutine')
+logger.setLevel(logging.INFO)
+logger.addHandler(logging.StreamHandler())
+
+## ## ## ## ## ## ## ## ## ## ##
+## main function ##
+## ## ## ## ## ## ## ## ## ## ##
 # replace the following directory name and filename
 def pm2json(in_dir, out_dir):
     filelist = glob.glob(in_dir + "*.xlsx")
@@ -14,23 +26,22 @@ def pm2json(in_dir, out_dir):
         pm2jsonSingle(excel, in_dir, out_dir)
 
 def pm2jsonSingle(excel, in_dir, out_dir):
+    logger.info('\ntemplate to json:{0}'.format(excel))
     meter_con_df = pd.read_excel(excel, sheetname=0)
-    #print meter_con_df.ix[:10]
+    logger.debug(meter_con_df.ix[:10])
 
-    ## ## ## ## ## ## ## ## ## ## ##
-    ## query code goes here
-    ## ## ## ## ## ## ## ## ## ## ##
-    # address_dict: key:address, null as its initial value
+    logger.info('start query')
     ar = meter_con_df['Street Address'].values
     address_dict = {}
     for a in np.nditer(ar, flags=['refs_ok']):
         address_dict['{0}'.format(a)] = None
-    # uncomment this when the query code is working
-    # meter_con_df['buildingsnapshot_id'] = address_dict['Street Address'].map(lambda x:address_dict[x['buildingsnapshot_id'])
-    # meter_con_df['canonical_id'] = address_dict['Street Address'].map(lambda x:address_dict[x['canonical_building'])
-    ## ## ## ## ## ## ## ## ## ## ##
-    ## query code ends
-    ## ## ## ## ## ## ## ## ## ## ##
+    qr.retrieveID(address_dict)
+    logger.debug('address_dict: {0}'.format(address_dict))
+
+    meter_con_df['buildingsnapshot_id'] = meter_con_df['Street Address'].map(lambda x:address_dict[x]['buildingsnapshot_id'])
+    meter_con_df['canonical_id'] = meter_con_df['Street Address'].map(lambda x:address_dict[x]['canonical_building'])
+    #logger.debug(meter_con_df.info())
+    logger.info('end query')
 
     # Calculate time interval of days
     meter_con_df['interval'] = meter_con_df['End Date'] - meter_con_df['Start Date']
