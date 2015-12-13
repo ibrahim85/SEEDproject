@@ -1,0 +1,58 @@
+State,Postal,Region
+Alabama,AL,4
+Alaska,AK,10
+"American Samoa",,9
+Arizona,AZ,9
+Arkansas,AR,7
+California,CA,9
+Colorado,CO,8
+Connecticut,CT,1
+Delaware,DE,3
+"District of Columbia (D.C.)",DC,11
+"East Asia",,9
+Europe,,3
+Florida,FL,4
+Georgia,GA,4
+Guam,,9
+Hawaii,HI,9
+Idaho,ID,10
+Illinois,IL,5
+Indiana,IN,5
+Iowa,IA,6
+Kansas,KS,6
+Kentucky,KY,4
+Louisiana,LA,7
+Maine,ME,1
+Massachusetts,MA,1
+Maryland,MD,3
+Michigan,MI,5
+Minnesota,MN,5
+Mississippi,MS,4
+Missouri,MO,6
+Montana,MT,8
+Nebraska,NE,6
+Nevada,NV,9
+"New Hampshire",NH,1
+"New Jersey",NJ,2
+"New Mexico",NM,7
+"New York",NY,2
+"North Carolina",NC,4
+"North Dakota",ND,8
+Ohio,OH,5
+Oklahoma,OK,7
+Oregon,OR,10
+Pennsylvania,PA,3
+"Puerto Rico",,2
+"Rhode Island",RI,1
+"South Carolina",SC,4
+"South Dakota",SD,8
+Tennessee,TN,4
+Texas,TX,7
+"Virgin Islands of the U.S.",,2
+Utah,UT,8
+Virginia,VA,4
+Vermont,VT,1
+Washington,WA,10
+"West Virginia",WV,3
+Wisconsin,WI,5
+Wyoming,WY,8

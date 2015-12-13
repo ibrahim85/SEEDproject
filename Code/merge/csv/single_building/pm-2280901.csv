@@ -1,0 +1,217 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+2280901,4717447,Electric - Grid,2002-10-31 00:00:00,3126.0,kWh (thousand Watt-hours),129.0
+2280901,4717447,Electric - Grid,2002-11-30 00:00:00,2927.0,kWh (thousand Watt-hours),129.0
+2280901,4717447,Electric - Grid,2002-12-31 00:00:00,3035.0,kWh (thousand Watt-hours),140.0
+2280901,4717447,Electric - Grid,2003-01-31 00:00:00,3035.0,kWh (thousand Watt-hours),140.0
+2280901,4717447,Electric - Grid,2003-02-28 00:00:00,2910.0,kWh (thousand Watt-hours),146.0
+2280901,4717447,Electric - Grid,2003-03-31 00:00:00,3029.0,kWh (thousand Watt-hours),146.0
+2280901,4717447,Electric - Grid,2003-04-30 00:00:00,2823.0,kWh (thousand Watt-hours),147.0
+2280901,4717447,Electric - Grid,2003-05-31 00:00:00,2738.0,kWh (thousand Watt-hours),202.0
+2280901,4717447,Electric - Grid,2003-06-30 00:00:00,2947.0,kWh (thousand Watt-hours),108.0
+2280901,4717447,Electric - Grid,2003-07-31 00:00:00,2636.0,kWh (thousand Watt-hours),147.0
+2280901,4717447,Electric - Grid,2003-08-31 00:00:00,2847.0,kWh (thousand Watt-hours),163.0
+2280901,4717447,Electric - Grid,2003-09-30 00:00:00,2847.0,kWh (thousand Watt-hours),163.0
+2280901,4717447,Electric - Grid,2003-10-31 00:00:00,2847.0,kWh (thousand Watt-hours),163.0
+2280901,4717447,Electric - Grid,2003-11-30 00:00:00,2847.0,kWh (thousand Watt-hours),163.0
+2280901,4717447,Electric - Grid,2003-12-31 00:00:00,2847.0,kWh (thousand Watt-hours),163.0
+2280901,4717447,Electric - Grid,2004-01-31 00:00:00,2847.0,kWh (thousand Watt-hours),163.0
+2280901,4717447,Electric - Grid,2004-02-29 00:00:00,3226.0,kWh (thousand Watt-hours),162.0
+2280901,4717447,Electric - Grid,2004-03-31 00:00:00,2824.0,kWh (thousand Watt-hours),151.0
+2280901,4717447,Electric - Grid,2004-04-30 00:00:00,2834.0,kWh (thousand Watt-hours),152.0
+2280901,4717447,Electric - Grid,2004-05-31 00:00:00,3317.0,kWh (thousand Watt-hours),177.0
+2280901,4717447,Electric - Grid,2004-06-30 00:00:00,9321.0,kWh (thousand Watt-hours),340.0
+2280901,4717447,Electric - Grid,2004-07-31 00:00:00,3414.0,kWh (thousand Watt-hours),177.0
+2280901,4717447,Electric - Grid,2004-08-31 00:00:00,2204.0,kWh (thousand Watt-hours),114.0
+2280901,4717447,Electric - Grid,2004-09-30 00:00:00,3397.0,kWh (thousand Watt-hours),176.0
+2280901,4717447,Electric - Grid,2004-10-31 00:00:00,2983.0,kWh (thousand Watt-hours),155.0
+2280901,4717447,Electric - Grid,2004-11-30 00:00:00,2799.0,kWh (thousand Watt-hours),145.0
+2280901,4717447,Electric - Grid,2004-12-31 00:00:00,3106.0,kWh (thousand Watt-hours),165.0
+2280901,4717447,Electric - Grid,2005-01-31 00:00:00,3106.0,kWh (thousand Watt-hours),165.0
+2280901,4717447,Electric - Grid,2005-02-28 00:00:00,2370.0,kWh (thousand Watt-hours),141.0
+2280901,4717447,Electric - Grid,2005-03-31 00:00:00,3388.0,kWh (thousand Watt-hours),197.0
+2280901,4717447,Electric - Grid,2005-04-30 00:00:00,2792.0,kWh (thousand Watt-hours),161.0
+2280901,4717447,Electric - Grid,2005-05-31 00:00:00,2405.0,kWh (thousand Watt-hours),156.0
+2280901,4717447,Electric - Grid,2005-06-30 00:00:00,2686.0,kWh (thousand Watt-hours),171.0
+2280901,4717447,Electric - Grid,2005-07-31 00:00:00,2605.0,kWh (thousand Watt-hours),164.0
+2280901,4717447,Electric - Grid,2005-08-31 00:00:00,2995.0,kWh (thousand Watt-hours),180.0
+2280901,4717447,Electric - Grid,2005-09-30 00:00:00,2821.0,kWh (thousand Watt-hours),173.0
+2280901,4717447,Electric - Grid,2005-10-31 00:00:00,2901.0,kWh (thousand Watt-hours),189.0
+2280901,4717447,Electric - Grid,2005-11-30 00:00:00,3399.0,kWh (thousand Watt-hours),245.0
+2280901,4717447,Electric - Grid,2005-12-31 00:00:00,2912.0,kWh (thousand Watt-hours),212.0
+2280901,4717447,Electric - Grid,2006-01-31 00:00:00,2665.0,kWh (thousand Watt-hours),192.0
+2280901,4717447,Electric - Grid,2006-02-28 00:00:00,2665.0,kWh (thousand Watt-hours),193.0
+2280901,4717447,Electric - Grid,2006-03-31 00:00:00,2669.0,kWh (thousand Watt-hours),193.0
+2280901,4717447,Electric - Grid,2006-04-30 00:00:00,2674.0,kWh (thousand Watt-hours),183.0
+2280901,4717447,Electric - Grid,2006-05-31 00:00:00,2904.0,kWh (thousand Watt-hours),177.0
+2280901,4717447,Electric - Grid,2006-06-30 00:00:00,2733.0,kWh (thousand Watt-hours),165.0
+2280901,4717447,Electric - Grid,2006-07-31 00:00:00,2557.0,kWh (thousand Watt-hours),169.0
+2280901,4717447,Electric - Grid,2006-08-31 00:00:00,2774.0,kWh (thousand Watt-hours),175.0
+2280901,4717447,Electric - Grid,2006-09-30 00:00:00,2815.0,kWh (thousand Watt-hours),170.0
+2280901,4717447,Electric - Grid,2006-10-31 00:00:00,2821.0,kWh (thousand Watt-hours),168.0
+2280901,4717447,Electric - Grid,2006-11-30 00:00:00,3118.0,kWh (thousand Watt-hours),177.0
+2280901,4717447,Electric - Grid,2006-12-31 00:00:00,3203.0,kWh (thousand Watt-hours),203.0
+2280901,4717447,Electric - Grid,2007-01-31 00:00:00,2744.0,kWh (thousand Watt-hours),199.0
+2280901,4717447,Electric - Grid,2007-02-28 00:00:00,3303.0,kWh (thousand Watt-hours),236.0
+2280901,4717447,Electric - Grid,2007-03-31 00:00:00,2310.0,kWh (thousand Watt-hours),149.0
+2280901,4717447,Electric - Grid,2007-04-30 00:00:00,2999.0,kWh (thousand Watt-hours),187.0
+2280901,4717447,Electric - Grid,2007-05-31 00:00:00,2891.0,kWh (thousand Watt-hours),185.0
+2280901,4717447,Electric - Grid,2007-06-30 00:00:00,2896.0,kWh (thousand Watt-hours),193.0
+2280901,4717447,Electric - Grid,2007-07-31 00:00:00,3049.0,kWh (thousand Watt-hours),166.0
+2280901,4717447,Electric - Grid,2007-08-31 00:00:00,2954.0,kWh (thousand Watt-hours),164.0
+2280901,4717447,Electric - Grid,2007-09-30 00:00:00,2848.0,kWh (thousand Watt-hours),170.0
+2280901,4717447,Electric - Grid,2007-10-31 00:00:00,2811.0,kWh (thousand Watt-hours),182.0
+2280901,4717447,Electric - Grid,2007-11-30 00:00:00,3209.0,kWh (thousand Watt-hours),210.0
+2280901,4717447,Electric - Grid,2007-12-31 00:00:00,3308.0,kWh (thousand Watt-hours),210.0
+2280901,4717447,Electric - Grid,2008-01-31 00:00:00,2884.0,kWh (thousand Watt-hours),177.0
+2280901,4717447,Electric - Grid,2008-02-29 00:00:00,2897.0,kWh (thousand Watt-hours),178.0
+2280901,4717447,Electric - Grid,2008-03-31 00:00:00,3190.0,kWh (thousand Watt-hours),208.0
+2280901,4717447,Electric - Grid,2008-04-30 00:00:00,2899.0,kWh (thousand Watt-hours),235.0
+2280901,4717447,Electric - Grid,2008-05-31 00:00:00,3008.0,kWh (thousand Watt-hours),243.0
+2280901,4717447,Electric - Grid,2008-06-30 00:00:00,3158.0,kWh (thousand Watt-hours),252.0
+2280901,4717447,Electric - Grid,2008-07-31 00:00:00,2857.0,kWh (thousand Watt-hours),254.0
+2280901,4717447,Electric - Grid,2008-08-31 00:00:00,3048.0,kWh (thousand Watt-hours),265.0
+2280901,4717447,Electric - Grid,2008-09-30 00:00:00,3044.0,kWh (thousand Watt-hours),241.0
+2280901,4717447,Electric - Grid,2008-10-31 00:00:00,2839.0,kWh (thousand Watt-hours),200.0
+2280901,4717447,Electric - Grid,2008-11-30 00:00:00,3020.0,kWh (thousand Watt-hours),207.0
+2280901,4717447,Electric - Grid,2008-12-31 00:00:00,3278.0,kWh (thousand Watt-hours),199.0
+2280901,4717447,Electric - Grid,2009-01-31 00:00:00,3101.0,kWh (thousand Watt-hours),173.0
+2280901,4717447,Electric - Grid,2009-02-28 00:00:00,2768.0,kWh (thousand Watt-hours),165.0
+2280901,4717447,Electric - Grid,2009-03-31 00:00:00,2869.0,kWh (thousand Watt-hours),171.0
+2280901,4717447,Electric - Grid,2009-04-30 00:00:00,2757.0,kWh (thousand Watt-hours),171.0
+2280901,4717447,Electric - Grid,2009-05-31 00:00:00,3040.0,kWh (thousand Watt-hours),182.0
+2280901,4717447,Electric - Grid,2009-06-30 00:00:00,2860.0,kWh (thousand Watt-hours),195.0
+2280901,4717447,Electric - Grid,2009-07-31 00:00:00,2785.0,kWh (thousand Watt-hours),225.0
+2280901,4717447,Electric - Grid,2009-08-31 00:00:00,3197.0,kWh (thousand Watt-hours),222.0
+2280901,4717447,Electric - Grid,2009-09-30 00:00:00,2800.0,kWh (thousand Watt-hours),207.0
+2280901,4717447,Electric - Grid,2009-10-31 00:00:00,2727.0,kWh (thousand Watt-hours),221.0
+2280901,4717447,Electric - Grid,2009-11-30 00:00:00,3046.0,kWh (thousand Watt-hours),233.0
+2280901,4717447,Electric - Grid,2009-12-31 00:00:00,3078.0,kWh (thousand Watt-hours),217.0
+2280901,4717447,Electric - Grid,2010-01-31 00:00:00,2643.0,kWh (thousand Watt-hours),201.0
+2280901,4717447,Electric - Grid,2010-02-28 00:00:00,2653.0,kWh (thousand Watt-hours),201.0
+2280901,4717447,Electric - Grid,2010-03-31 00:00:00,2694.0,kWh (thousand Watt-hours),214.0
+2280901,4717447,Electric - Grid,2010-04-30 00:00:00,2795.0,kWh (thousand Watt-hours),230.0
+2280901,4717447,Electric - Grid,2010-05-31 00:00:00,3139.0,kWh (thousand Watt-hours),257.0
+2280901,4717447,Electric - Grid,2010-06-30 00:00:00,2891.0,kWh (thousand Watt-hours),267.0
+2280901,4717447,Electric - Grid,2010-07-31 00:00:00,2779.0,kWh (thousand Watt-hours),254.0
+2280901,4717447,Electric - Grid,2010-08-31 00:00:00,2715.0,kWh (thousand Watt-hours),252.0
+2280901,4717447,Electric - Grid,2010-10-05 00:00:00,3139.0,kWh (thousand Watt-hours),276.0
+2280901,4717447,Electric - Grid,2010-11-05 00:00:00,2913.0,kWh (thousand Watt-hours),229.0
+2280901,4717447,Electric - Grid,2010-12-06 00:00:00,3281.0,kWh (thousand Watt-hours),224.0
+2280901,4717447,Electric - Grid,2011-01-06 00:00:00,3141.0,kWh (thousand Watt-hours),240.0
+2280901,4717447,Electric - Grid,2011-02-06 00:00:00,3036.0,kWh (thousand Watt-hours),257.0
+2280901,4717447,Electric - Grid,2011-03-09 00:00:00,2776.0,kWh (thousand Watt-hours),248.0
+2280901,4717447,Electric - Grid,2011-04-09 00:00:00,2913.0,kWh (thousand Watt-hours),242.0
+2280901,4717447,Electric - Grid,2011-05-10 00:00:00,2886.0,kWh (thousand Watt-hours),268.0
+2280901,4717447,Electric - Grid,2011-06-10 00:00:00,3240.0,kWh (thousand Watt-hours),290.0
+2280901,4717447,Electric - Grid,2011-07-11 00:00:00,2867.0,kWh (thousand Watt-hours),374.0
+2280901,4717447,Electric - Grid,2011-08-11 00:00:00,2621.0,kWh (thousand Watt-hours),366.0
+2280901,4717447,Electric - Grid,2011-09-11 00:00:00,2835.0,kWh (thousand Watt-hours),269.0
+2280901,4717447,Electric - Grid,2011-10-12 00:00:00,2535.0,kWh (thousand Watt-hours),268.0
+2280901,4717447,Electric - Grid,2011-11-12 00:00:00,2752.0,kWh (thousand Watt-hours),245.0
+2280901,4717447,Electric - Grid,2011-12-13 00:00:00,3550.0,kWh (thousand Watt-hours),296.0
+2280901,4717447,Electric - Grid,2012-01-12 00:00:00,3704.0,kWh (thousand Watt-hours),289.0
+2280901,4717447,Electric - Grid,2012-02-14 00:00:00,3325.0,kWh (thousand Watt-hours),280.0
+2280901,4717447,Electric - Grid,2012-03-14 00:00:00,3619.0,kWh (thousand Watt-hours),290.0
+2280901,4717447,Electric - Grid,2012-04-13 00:00:00,3001.0,kWh (thousand Watt-hours),250.0
+2280901,4717447,Electric - Grid,2012-05-14 00:00:00,3081.0,kWh (thousand Watt-hours),238.0
+2280901,4717447,Electric - Grid,2012-06-13 00:00:00,2982.0,kWh (thousand Watt-hours),350.0
+2280901,4717447,Electric - Grid,2012-07-13 00:00:00,3072.0,kWh (thousand Watt-hours),282.0
+2280901,4717447,Electric - Grid,2012-08-13 00:00:00,3381.0,kWh (thousand Watt-hours),292.0
+2280901,4717447,Electric - Grid,2012-09-12 00:00:00,3286.0,kWh (thousand Watt-hours),311.0
+2280901,4717447,Electric - Grid,2012-10-11 00:00:00,3195.0,kWh (thousand Watt-hours),265.0
+2280901,4717447,Electric - Grid,2012-11-09 00:00:00,3213.0,kWh (thousand Watt-hours),266.0
+2280901,4717447,Electric - Grid,2012-12-12 00:00:00,3675.0,kWh (thousand Watt-hours),302.0
+2280901,4717447,Electric - Grid,2013-01-15 00:00:00,3811.0,kWh (thousand Watt-hours),330.0
+2280901,4717447,Electric - Grid,2013-02-13 00:00:00,3891.0,kWh (thousand Watt-hours),341.0
+2280901,4717447,Electric - Grid,2013-03-14 00:00:00,4455.0,kWh (thousand Watt-hours),346.0
+2280901,4717447,Electric - Grid,2013-04-15 00:00:00,3616.0,kWh (thousand Watt-hours),325.0
+2280901,4717447,Electric - Grid,2013-05-14 00:00:00,2664.0,kWh (thousand Watt-hours),285.0
+2280901,4717447,Electric - Grid,2013-06-13 00:00:00,2408.0,kWh (thousand Watt-hours),246.0
+2280901,4717447,Electric - Grid,2013-07-15 00:00:00,2532.0,kWh (thousand Watt-hours),260.0
+2280901,4717447,Electric - Grid,2013-08-13 00:00:00,2397.0,kWh (thousand Watt-hours),275.0
+2280901,4717447,Electric - Grid,2013-09-12 00:00:00,2473.0,kWh (thousand Watt-hours),234.0
+2280901,4717447,Electric - Grid,2013-10-11 00:00:00,2411.0,kWh (thousand Watt-hours),249.0
+2280901,4717447,Electric - Grid,2013-11-11 00:00:00,2662.0,kWh (thousand Watt-hours),271.0
+2280901,4717447,Electric - Grid,2013-12-12 00:00:00,2853.0,kWh (thousand Watt-hours),279.0
+2280901,4717447,Electric - Grid,2014-01-15 00:00:00,3452.0,kWh (thousand Watt-hours),399.0
+2280901,4717447,Electric - Grid,2014-02-13 00:00:00,3251.0,kWh (thousand Watt-hours),393.0
+2280901,4717447,Electric - Grid,2014-03-17 00:00:00,3100.0,kWh (thousand Watt-hours),316.0
+2280901,4717447,Electric - Grid,2014-04-15 00:00:00,3199.0,kWh (thousand Watt-hours),303.0
+2280901,4717447,Electric - Grid,2014-05-14 00:00:00,2852.0,kWh (thousand Watt-hours),314.0
+2280901,4717447,Electric - Grid,2014-06-13 00:00:00,2505.0,kWh (thousand Watt-hours),289.0
+2280901,4717447,Electric - Grid,2014-07-15 00:00:00,2627.0,kWh (thousand Watt-hours),287.0
+2280901,4717447,Electric - Grid,2014-08-13 00:00:00,2327.0,kWh (thousand Watt-hours),268.0
+2280901,4717447,Electric - Grid,2014-09-12 00:00:00,2413.0,kWh (thousand Watt-hours),286.0
+2280901,4717447,Electric - Grid,2014-10-13 00:00:00,2614.0,kWh (thousand Watt-hours),269.0
+2280901,4717447,Electric - Grid,2014-11-11 00:00:00,2669.0,kWh (thousand Watt-hours),259.0
+2280901,4717447,Electric - Grid,2014-12-12 00:00:00,3055.0,kWh (thousand Watt-hours),275.0
+2280901,4717447,Electric - Grid,2015-01-15 00:00:00,3195.0,kWh (thousand Watt-hours),279.0
+2280901,4717447,Electric - Grid,2015-02-16 00:00:00,2475.0,kWh (thousand Watt-hours),249.0
+2280901,4717447,Electric - Grid,2015-03-17 00:00:00,2677.0,kWh (thousand Watt-hours),253.0
+2280901,4717447,Electric - Grid,2015-04-15 00:00:00,2465.0,kWh (thousand Watt-hours),244.0
+2280901,4717447,Electric - Grid,2015-05-14 00:00:00,2385.0,kWh (thousand Watt-hours),240.0
+2280901,4717447,Electric - Grid,2015-06-15 00:00:00,2603.0,kWh (thousand Watt-hours),257.0
+2280901,4717447,Electric - Grid,2015-07-15 00:00:00,2406.0,kWh (thousand Watt-hours),251.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-04-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-05-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-06-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-07-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-08-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-09-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-10-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-11-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2010-12-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-01-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-02-28 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-03-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-04-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-05-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-06-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-07-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-08-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-09-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-10-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-11-30 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2011-12-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-01-31 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-02-29 00:00:00,0.0,Gallons,0.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-03-31 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-04-30 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-05-31 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-06-29 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-07-29 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-08-28 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-09-27 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-10-27 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-11-26 00:00:00,0.0,Gallons,17.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2012-12-26 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-01-25 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-02-24 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-03-26 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-04-25 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-05-25 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-06-24 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-07-24 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-08-23 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-09-22 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-10-22 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-11-21 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2013-12-21 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-01-22 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-02-28 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-03-31 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-04-30 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-06-12 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-07-12 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-08-11 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-09-10 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-10-10 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-11-09 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2014-12-09 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-01-08 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-02-07 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-03-09 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-04-10 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-05-08 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-06-07 00:00:00,0.0,Gallons,14.0
+2280901,6006184,Potable: Mixed Indoor/Outdoor,2015-07-07 00:00:00,0.0,Gallons,14.0

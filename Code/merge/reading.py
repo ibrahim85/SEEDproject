@@ -3,6 +3,9 @@ import pandas as pd
 import os
 import glob
 import datetime
+import numpy as np
+
+import util_io as io
 
 ## ## ## ## ## ## ## ## ## ## ##
 ## logging and debugging logger.info settings
@@ -19,6 +22,12 @@ def excel2csv_single(excel, i, outdir):
     file_out = outdir + 'sheet-{0}-all_col'.format(i) + '.csv'
     df.to_csv(file_out, index=False)
 
+def unique_value(df):
+    df.info()
+    logger.debug('number of unique values')
+    for col in df:
+        logger.debug('{0}: {1}'.format((col), len(df[col].unique())))
+
 # read static info to a data frame
 # sheet-0: static info
 #          1. postal code : take first 5 digit
@@ -32,7 +41,73 @@ def read_static():
     df['Property Name'] = df['Property Name'].map(lambda x: x[:x.find('-')])
     df['Postal Code'] = df['Postal Code'].map(lambda x: x[:5])
     #logger.debug(df[:20])
-    return df
+    df.info()
+    df.rename(columns={'Property Name' : 'Building ID',
+                       'State/Province' : 'State',
+                       'Gross Floor Area' : 'GSF'}, inplace=True)
+    df.info()
+    print df.groupby(['Country', 'State']).size()
+
+    # not used, because EUAS has insufficient number of buildings that match
+    # PM records
+    def attemptEUASlookup(df):
+        # read and clean up EUAS template
+        euas_temp = os.getcwd() + '/input/EUAS.csv'
+        logger.debug('Read in EUAS region')
+        df_t = pd.read_csv(euas_temp, usecols=['Building ID', 'Region'])
+        logger.debug('general info of EUAS data frame')
+        unique_value(df_t)
+        df_t.drop_duplicates(inplace=True)
+        logger.debug('general info of EUAS data frame after remove dup')
+        unique_value(df_t)
+
+        # checking common records between two tables
+        pm_set = set(df['Building ID'].tolist())
+        euas_set = set(df_t['Building ID'].tolist())
+        common_id_set = pm_set.intersection(euas_set)
+        logger.debug('{0} buildings in PM'.format(len(df['Building ID'].unique())))
+        logger.debug('{0} buildings in EUAS'.format(len(df_t['Building ID'].unique())))
+        logger.debug('{0} common building records between PM and EUAS'.format(len(common_id_set)))
+
+    regionfile = os.getcwd() + '/input/stateRegion.csv'
+    logger.debug('reading region look up table')
+    df_region = pd.read_csv(regionfile, usecols=['State', 'Region'])
+
+    df_set = set(df['State'].tolist())
+    region_set = set(df_region['State'].tolist())
+    common_state_set = df_set.intersection(region_set)
+    logger.debug('{0} states in PM'.format(len(df['State'].unique())))
+    logger.debug('{0} states in Region'.format(len(df_region['State'].unique())))
+    logger.debug('{0} common state records between PM and Region'.format(len(common_state_set)))
+
+    logger.debug('Mark non-U.S. records as nan')
+    df['mark_nu'] = df['Country'].map(lambda x: True if x == 'United States' else np.nan)
+    logger.debug(df['mark_nu'].isnull().value_counts())
+    df.dropna(inplace=True)
+    logger.debug('Null value count of removing non-U.S. countries')
+    logger.debug(df['mark_nu'].isnull().value_counts())
+    df.drop('mark_nu', axis = 1, inplace=True)
+
+    df = pd.merge(df, df_region, on='State')
+    logger.debug('number of un-mapped Region record')
+    logger.debug(df['Region'].isnull().value_counts())
+
+    static_info_file = os.getcwd() + '/csv/cleaned/static_info.csv'
+    print static_info_file
+    df.to_csv(static_info_file, index=False)
+
+    '''
+    logger.debug('merging dfs to get Region column value')
+    df_final = df.join(df_t, on='Building ID', how='inner', lsuffix='_l',
+                       rsuffix='_r')
+    df_final.info()
+    '''
+
+    #region_dict = dict(zip(df_t['Building ID'], df_t['Region']))
+    #io.print_dict(region_dict, 10)
+    #df['Region'] = df['Building ID'].map(lambda x: region_dict[x])
+
+    # add a region column
 
 def split_energy_building():
     indir = os.getcwd() + '/csv/select_column/'
@@ -46,19 +121,108 @@ def split_energy_building():
     for name, group in group_building:
         group.to_csv(outdir + 'pm-' + str(name) + '.csv', index=False)
 
-def print_meter_type():
-    indir = os.getcwd() + '/csv/select_column/'
-    csv = indir + 'sheet-5.csv'
+def check_null(csv):
+    print 'checking number of missing values for columns'
     df = pd.read_csv(csv)
-    group_building = df.groupby(['Portfolio Manager ID', 'Meter Type'])
-    print group_building.size()
-    group_type = df.groupby('Meter Type')
-    print 'number of meter type: {0}'.format(len(group_type.groups))
-    print group_type.size()
+    for col in df:
+        print '## ------------------------------------------##'
+        print col
+        df_check = df[col].isnull()
+        df_check = df_check.map(lambda x: 'Null' if x else 'non_Null')
+        print df_check.value_counts()
 
-print_meter_type()
+def check_null_df(df):
+    print 'checking number of missing values for columns'
+    for col in df:
+        print '## ------------------------------------------##'
+        print col
+        df_check = df[col].isnull()
+        df_check = df_check.map(lambda x: 'Null' if x else 'non_Null')
+        print df_check.value_counts()
+
+def get_range(df):
+    print 'range for columns'
+    for col in df:
+        if not (col == 'Meter Type' or col == 'Usage Units'):
+            print '{0:>28} {1:>25} {2:>25}'.format(col, df[col].min(),
+                                               df[col].max())
+
+def count_nn(df, col):
+    df['is_nn'] = df[col].map(lambda x: '>=0' if x >= 0 else '<0')
+    series = df['is_nn'].value_counts()
+    print series
+    grouped = df.groupby(['is_nn', 'Meter Type'])
+    print grouped.size()
+    '''
+    for name, group in grouped:
+        print name
+        print group
+    '''
+    df.drop('is_nn', axis = 1, inplace=True)
+
+def clean_data():
+    indir = os.getcwd() + '/csv/select_column/'
+    # check null value
+    '''
+    filelist = glob.glob(indir + '*.csv')
+    for csv in filelist:
+        check_null(csv)
+    '''
+
+    # return range of values
+    df = pd.read_csv(indir + 'sheet-5.csv')
+    get_range(df)
+
+    # count non-neg value for column
+    count_nn(df, 'Usage/Quantity')
+
+    # discard null 'End Date' value and negative 'Usage/Quantity'
+    # fill empty cost with -1 for current use
+    logger.debug('Null value count of \'Cost ($)\' before fillna')
+    print df['Cost ($)'].isnull().value_counts()
+    logger.debug('Fill \'Cost ($)\' with -1')
+    df['Cost ($)'].fillna(-1, inplace=True)
+    logger.debug('Null value count of \'Cost ($)\' after fillna')
+    print df['Cost ($)'].isnull().value_counts()
+
+    logger.debug('Null value count of \'End Date\' before drop null')
+    print df['End Date'].isnull().value_counts()
+    logger.debug('Drop null value of \'End Date\'')
+    df.dropna(inplace=True)
+    logger.debug('Null value count of \'End Date\'after drop null')
+    logger.debug(df['End Date'].isnull().value_counts())
+
+    logger.debug('negative value count of \'Usage\'')
+    df['sign_nn'] = df['Usage/Quantity'].map(lambda x: '>=0' if x >= 0 else '<0')
+    logger.debug(df['sign_nn'].value_counts())
+    logger.debug('Mark negative value as nan')
+    df['mark_nn'] = df['Usage/Quantity'].map(lambda x: x if x >= 0 else np.nan)
+    logger.debug(df['mark_nn'].isnull().value_counts())
+    df.dropna(inplace=True)
+    logger.debug('Null value count of removing negative usage')
+    logger.debug(df['Usage/Quantity'].isnull().value_counts())
+
+    # drop temporary columns
+    df.drop(['sign_nn', 'mark_nn'], axis = 1, inplace=True)
+    # return range of column after removing illegal values
+    get_range(df)
+
+    # count non-neg value for column
+    logger.debug('Checking non-negativity after initial clean')
+    count_nn(df, 'Usage/Quantity')
+
+    # create 'Year' and 'Month' column
+    df['Year'] = df['End Date'].map(lambda x : x[:4])
+    df['Month'] = df['End Date'].map(lambda x: x[5:7])
+
+    logger.debug('Final range of the data')
+    get_range(df)
+
+    return df
 
 def format_building(df_static):
+    excel2csv_single(excel, i, outdir)
+
     indir = os.getcwd() + '/csv/single_building/'
     filelist = glob.glob(indir + '*.csv')
     outdir = os.getcwd() + '/csv/single_building_allinfo/'
@@ -133,7 +297,7 @@ def main():
     logger.info('read csv in {0} with selected column: {1}'.format(outdir,
                                                                    filelist))
     filelist = glob.glob(os.getcwd() + '/csv/all_column/' + '*.csv')
-    col_dict = {'0':[0, 1, 5, 7, 9, 12], '5':[1, 2, 4, 6, 8, 9, 10]}
+    col_dict = {'0':[0, 1, 5, 7, 8, 9, 12], '5':[1, 2, 4, 6, 8, 9, 10]}
     for csv in filelist:
         filename = csv[csv.find('sheet'):]
         logger.info('reading csv file: {0}'.format(filename))
@@ -145,15 +309,10 @@ def main():
         logger.info('outdir = {0}, outfilename = {1}'.format(outdir,
             outfilename))
         df.to_csv(outdir + outfilename, index=False)
-
-    # split energy data to single building
-    split_energy_building()
-    # data frame containing static information
-    df_static = read_static()
-
-    format_building(df_static)
     '''
 
+    # data frame containing static information
+    df_static = read_static()
 
     # process:
     # sheet-1: energy info, read in df,

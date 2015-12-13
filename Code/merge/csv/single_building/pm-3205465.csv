@@ -1,0 +1,115 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+3205465,5078746,Electric - Grid,2010-01-31 00:00:00,5827.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-02-28 00:00:00,5432.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-03-31 00:00:00,5244.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-04-30 00:00:00,4557.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-05-31 00:00:00,5234.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-06-30 00:00:00,5871.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-07-31 00:00:00,6279.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-08-31 00:00:00,6353.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-09-30 00:00:00,5568.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-10-31 00:00:00,4736.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-11-30 00:00:00,5971.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2010-12-31 00:00:00,6173.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-01-31 00:00:00,6356.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-02-28 00:00:00,5996.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-03-31 00:00:00,5967.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-04-30 00:00:00,4933.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-05-31 00:00:00,4673.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-06-30 00:00:00,5045.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-07-31 00:00:00,5716.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-08-31 00:00:00,6089.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-09-30 00:00:00,4607.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-10-31 00:00:00,4147.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-11-30 00:00:00,5198.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2011-12-31 00:00:00,5634.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-01-31 00:00:00,6046.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-02-29 00:00:00,5484.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-03-31 00:00:00,4564.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-04-30 00:00:00,4438.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-05-31 00:00:00,4944.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-06-30 00:00:00,5733.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-07-31 00:00:00,6270.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-08-31 00:00:00,6301.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-09-30 00:00:00,5351.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-10-31 00:00:00,5039.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-11-30 00:00:00,4824.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2012-12-31 00:00:00,5773.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-01-31 00:00:00,6231.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-02-28 00:00:00,4791.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-03-31 00:00:00,4241.94,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-04-30 00:00:00,3949.06,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-05-31 00:00:00,3809.84,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-06-30 00:00:00,3983.44,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-07-31 00:00:00,3871.59,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-08-31 00:00:00,4251.09,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-09-30 00:00:00,3658.53,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-10-31 00:00:00,3473.34,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-11-30 00:00:00,3999.0,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2013-12-31 00:00:00,4924.25,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-01-31 00:00:00,5738.14,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-02-28 00:00:00,5245.04,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-03-31 00:00:00,5328.93,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-04-30 00:00:00,4583.37,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-05-31 00:00:00,4599.63,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-06-30 00:00:00,4630.32,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-07-31 00:00:00,5143.1,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-08-31 00:00:00,4795.95,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-09-30 00:00:00,4240.9,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-10-31 00:00:00,4163.65,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-11-30 00:00:00,4477.31,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2014-12-31 00:00:00,4970.94,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-01-31 00:00:00,4415.92,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-02-28 00:00:00,3802.49,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-03-31 00:00:00,4114.96,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-04-30 00:00:00,3507.25,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-05-31 00:00:00,3613.61,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-06-30 00:00:00,4047.64,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-07-31 00:00:00,4684.73,kWh (thousand Watt-hours),0.0
+3205465,5078746,Electric - Grid,2015-08-31 00:00:00,4651.2,kWh (thousand Watt-hours),0.0
+3205465,6140307,Natural Gas,2011-09-30 00:00:00,40.0,therms,0.0
+3205465,6140307,Natural Gas,2011-10-31 00:00:00,288.0,therms,0.0
+3205465,6140307,Natural Gas,2011-11-30 00:00:00,559.0,therms,0.0
+3205465,6140307,Natural Gas,2011-12-31 00:00:00,640.0,therms,0.0
+3205465,6140307,Natural Gas,2012-01-31 00:00:00,518.0,therms,0.0
+3205465,6140307,Natural Gas,2012-02-29 00:00:00,631.0,therms,0.0
+3205465,6140307,Natural Gas,2012-03-31 00:00:00,188.0,therms,0.0
+3205465,6140307,Natural Gas,2012-04-30 00:00:00,133.0,therms,0.0
+3205465,6140307,Natural Gas,2012-05-31 00:00:00,26.0,therms,0.0
+3205465,6140307,Natural Gas,2012-06-30 00:00:00,7.0,therms,0.0
+3205465,6140307,Natural Gas,2012-07-31 00:00:00,6.0,therms,0.0
+3205465,6140307,Natural Gas,2012-08-31 00:00:00,54.0,therms,0.0
+3205465,6140307,Natural Gas,2012-09-30 00:00:00,102.0,therms,0.0
+3205465,6140307,Natural Gas,2012-10-31 00:00:00,249.0,therms,0.0
+3205465,6140307,Natural Gas,2012-11-30 00:00:00,499.0,therms,0.0
+3205465,6140307,Natural Gas,2012-12-31 00:00:00,695.0,therms,0.0
+3205465,6140307,Natural Gas,2013-01-31 00:00:00,657.0,therms,0.0
+3205465,6140307,Natural Gas,2013-02-28 00:00:00,556.0,therms,0.0
+3205465,6140307,Natural Gas,2013-03-31 00:00:00,417.0,therms,0.0
+3205465,6140307,Natural Gas,2013-04-30 00:00:00,394.0,therms,0.0
+3205465,6140307,Natural Gas,2013-05-31 00:00:00,25.0,therms,0.0
+3205465,6140307,Natural Gas,2013-06-30 00:00:00,7.0,therms,0.0
+3205465,6140307,Natural Gas,2013-07-31 00:00:00,6.0,therms,0.0
+3205465,6140307,Natural Gas,2013-08-31 00:00:00,7.0,therms,0.0
+3205465,6140307,Natural Gas,2013-09-30 00:00:00,47.0,therms,0.0
+3205465,6140307,Natural Gas,2013-10-31 00:00:00,248.0,therms,0.0
+3205465,6140307,Natural Gas,2013-11-30 00:00:00,426.0,therms,0.0
+3205465,6140307,Natural Gas,2013-12-31 00:00:00,354.0,therms,0.0
+3205465,6140307,Natural Gas,2014-01-31 00:00:00,438.0,therms,0.0
+3205465,6140307,Natural Gas,2014-02-28 00:00:00,279.0,therms,0.0
+3205465,6140307,Natural Gas,2014-03-31 00:00:00,198.0,therms,0.0
+3205465,6140307,Natural Gas,2014-04-30 00:00:00,131.0,therms,0.0
+3205465,6140307,Natural Gas,2014-05-31 00:00:00,42.0,therms,0.0
+3205465,6140307,Natural Gas,2014-06-30 00:00:00,7.0,therms,0.0
+3205465,6140307,Natural Gas,2014-07-31 00:00:00,16.0,therms,0.0
+3205465,6140307,Natural Gas,2014-08-31 00:00:00,0.0,therms,0.0
+3205465,6140307,Natural Gas,2014-09-30 00:00:00,36.0,therms,0.0
+3205465,6140307,Natural Gas,2014-10-31 00:00:00,124.0,therms,0.0
+3205465,6140307,Natural Gas,2014-11-30 00:00:00,630.0,therms,0.0
+3205465,6140307,Natural Gas,2014-12-31 00:00:00,802.0,therms,0.0
+3205465,6140307,Natural Gas,2015-01-31 00:00:00,442.0,therms,0.0
+3205465,6140307,Natural Gas,2015-02-28 00:00:00,657.0,therms,0.0
+3205465,6140307,Natural Gas,2015-03-31 00:00:00,172.0,therms,0.0
+3205465,6140307,Natural Gas,2015-04-30 00:00:00,78.0,therms,0.0
+3205465,6140307,Natural Gas,2015-05-31 00:00:00,335.0,therms,0.0
+3205465,6140307,Natural Gas,2015-06-30 00:00:00,7.0,therms,0.0

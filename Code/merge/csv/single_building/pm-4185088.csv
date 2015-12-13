@@ -1,0 +1,33 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+4185088,9901381,Electric - Grid,2014-03-31 00:00:00,0.0,kWh (thousand Watt-hours),357.0
+4185088,9901381,Electric - Grid,2014-04-30 00:00:00,6640.0,kWh (thousand Watt-hours),1419.0
+4185088,9901381,Electric - Grid,2014-05-31 00:00:00,7760.0,kWh (thousand Watt-hours),1692.0
+4185088,9901381,Electric - Grid,2014-06-30 00:00:00,8960.0,kWh (thousand Watt-hours),1837.0
+4185088,9901381,Electric - Grid,2014-07-31 00:00:00,2880.0,kWh (thousand Watt-hours),1213.0
+4185088,9901381,Electric - Grid,2014-09-12 00:00:00,8560.0,kWh (thousand Watt-hours),1739.0
+4185088,9901381,Electric - Grid,2014-10-14 00:00:00,2640.0,kWh (thousand Watt-hours),801.0
+4185088,9901381,Electric - Grid,2014-11-12 00:00:00,4480.0,kWh (thousand Watt-hours),1091.0
+4185088,9901381,Electric - Grid,2014-12-12 00:00:00,480.0,kWh (thousand Watt-hours),704.0
+4185088,9901381,Electric - Grid,2015-01-14 00:00:00,28160.0,kWh (thousand Watt-hours),3384.0
+4185088,9901381,Electric - Grid,2015-02-12 00:00:00,10560.0,kWh (thousand Watt-hours),1653.0
+4185088,9901381,Electric - Grid,2015-03-17 00:00:00,10160.0,kWh (thousand Watt-hours),1366.0
+4185088,9901381,Electric - Grid,2015-04-15 00:00:00,30560.0,kWh (thousand Watt-hours),3831.0
+4185088,9901381,Electric - Grid,2015-05-14 00:00:00,6880.0,kWh (thousand Watt-hours),1403.0
+4185088,9901381,Electric - Grid,2015-06-14 00:00:00,11840.0,kWh (thousand Watt-hours),2389.0
+4185088,9901381,Electric - Grid,2015-07-17 00:00:00,16000.0,kWh (thousand Watt-hours),2807.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-04-09 00:00:00,15708.0,Gallons,119.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-05-09 00:00:00,15708.0,Gallons,119.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-06-09 00:00:00,16456.0,Gallons,124.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-07-02 00:00:00,23936.0,Gallons,271.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-08-01 00:00:00,7480.0,Gallons,150.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-09-08 00:00:00,20196.0,Gallons,243.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-10-06 00:00:00,17204.0,Gallons,221.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-11-05 00:00:00,32912.0,Gallons,337.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2014-12-02 00:00:00,11220.0,Gallons,177.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-01-08 00:00:00,19448.0,Gallons,241.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-02-06 00:00:00,14212.0,Gallons,202.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-03-09 00:00:00,14960.0,Gallons,208.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-04-07 00:00:00,14960.0,Gallons,216.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-05-07 00:00:00,18700.0,Gallons,246.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-06-07 00:00:00,18700.0,Gallons,246.0
+4185088,9901380,Other: Mixed Indoor/Outdoor,2015-07-08 00:00:00,23936.0,Gallons,271.0

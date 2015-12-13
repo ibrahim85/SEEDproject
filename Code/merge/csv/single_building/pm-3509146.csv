@@ -1,0 +1,90 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+3509146,5649703,Natural Gas,2013-01-09 00:00:00,1993848.0,cf (cubic feet),13472.0
+3509146,5649703,Natural Gas,2013-02-08 00:00:00,1703186.0,cf (cubic feet),10770.0
+3509146,5649703,Natural Gas,2013-03-11 00:00:00,1007848.0,cf (cubic feet),6270.0
+3509146,5649703,Natural Gas,2013-04-10 00:00:00,616547.0,cf (cubic feet),4017.0
+3509146,5649703,Natural Gas,2013-05-08 00:00:00,635351.0,cf (cubic feet),4823.0
+3509146,5649703,Natural Gas,2013-06-07 00:00:00,375278.0,cf (cubic feet),3093.0
+3509146,5649703,Natural Gas,2013-07-09 00:00:00,327210.0,cf (cubic feet),2474.0
+3509146,5649703,Natural Gas,2013-08-08 00:00:00,224849.0,cf (cubic feet),1756.0
+3509146,5649703,Natural Gas,2013-09-10 00:00:00,242858.0,cf (cubic feet),1866.0
+3509146,5649703,Natural Gas,2013-10-09 00:00:00,404013.0,cf (cubic feet),2941.0
+3509146,5649703,Natural Gas,2013-11-08 00:00:00,500415.0,cf (cubic feet),3693.0
+3509146,5649703,Natural Gas,2013-12-09 00:00:00,762077.0,cf (cubic feet),5437.0
+3509146,5649703,Natural Gas,2014-01-09 00:00:00,991031.0,cf (cubic feet),7412.0
+3509146,5649703,Natural Gas,2014-02-07 00:00:00,849871.0,cf (cubic feet),6498.0
+3509146,5649703,Natural Gas,2014-03-11 00:00:00,808953.0,cf (cubic feet),6042.0
+3509146,5649703,Natural Gas,2014-04-08 00:00:00,444798.0,cf (cubic feet),3515.0
+3509146,5649703,Natural Gas,2014-05-07 00:00:00,352767.0,cf (cubic feet),3009.0
+3509146,5649703,Natural Gas,2014-06-06 00:00:00,226306.0,cf (cubic feet),2136.0
+3509146,5649703,Natural Gas,2014-07-08 00:00:00,147913.0,cf (cubic feet),1509.0
+3509146,5649703,Natural Gas,2014-08-06 00:00:00,95210.0,cf (cubic feet),1038.0
+3509146,5649703,Natural Gas,2014-09-08 00:00:00,179561.0,cf (cubic feet),1626.0
+3509146,5649703,Natural Gas,2014-10-09 00:00:00,303639.0,cf (cubic feet),2625.0
+3509146,5649703,Natural Gas,2014-12-09 00:00:00,834643.0,cf (cubic feet),6625.0
+3509146,5649703,Natural Gas,2015-01-08 00:00:00,886816.0,cf (cubic feet),6686.0
+3509146,5649703,Natural Gas,2015-02-06 00:00:00,810410.0,cf (cubic feet),5953.0
+3509146,5649703,Natural Gas,2015-03-06 00:00:00,774524.0,cf (cubic feet),5553.0
+3509146,5649703,Natural Gas,2015-04-06 00:00:00,466118.0,cf (cubic feet),3397.0
+3509146,5649703,Natural Gas,2015-05-06 00:00:00,260867.0,cf (cubic feet),1910.0
+3509146,5649703,Natural Gas,2015-06-05 00:00:00,206707.0,cf (cubic feet),1691.0
+3509146,5649703,Natural Gas,2015-07-06 00:00:00,144073.0,cf (cubic feet),1261.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-03-19 00:00:00,265500.0,Gallons,4106.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-04-17 00:00:00,196100.0,Gallons,3198.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-05-17 00:00:00,342800.0,Gallons,4525.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-06-18 00:00:00,367700.0,Gallons,4646.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-07-18 00:00:00,409700.0,Gallons,5050.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-08-19 00:00:00,570700.0,Gallons,6003.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-09-18 00:00:00,438600.0,Gallons,6935.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-10-18 00:00:00,422100.0,Gallons,7191.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-11-18 00:00:00,249300.0,Gallons,6117.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2013-12-17 00:00:00,561700.0,Gallons,5652.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-01-21 00:00:00,601200.0,Gallons,6324.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-02-22 00:00:00,205100.0,Gallons,3173.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-03-17 00:00:00,244400.0,Gallons,3682.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-04-17 00:00:00,314000.0,Gallons,4862.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-05-17 00:00:00,193800.0,Gallons,5067.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-06-18 00:00:00,420400.0,Gallons,5131.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-07-18 00:00:00,510300.0,Gallons,7467.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-08-19 00:00:00,371000.0,Gallons,7210.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-09-19 00:00:00,237300.0,Gallons,4000.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-10-17 00:00:00,439300.0,Gallons,7245.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-11-16 00:00:00,365100.0,Gallons,5899.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2014-12-17 00:00:00,220100.0,Gallons,4487.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2015-01-20 00:00:00,203500.0,Gallons,3883.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2015-02-18 00:00:00,175600.0,Gallons,3856.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2015-03-19 00:00:00,194200.0,Gallons,4199.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2015-04-17 00:00:00,237800.0,Gallons,4976.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2015-05-18 00:00:00,287400.0,Gallons,5660.0
+3509146,6915694,Other: Mixed Indoor/Outdoor,2015-06-17 00:00:00,285200.0,Gallons,5615.0
+3509146,6915695,Electric - Grid,2012-12-17 00:00:00,328603.0,kWh (thousand Watt-hours),0.0
+3509146,6915695,Electric - Grid,2013-01-18 00:00:00,382004.0,kWh (thousand Watt-hours),0.0
+3509146,6915695,Electric - Grid,2013-02-16 00:00:00,367511.0,kWh (thousand Watt-hours),31014.0
+3509146,6915695,Electric - Grid,2013-03-19 00:00:00,350094.0,kWh (thousand Watt-hours),30146.0
+3509146,6915695,Electric - Grid,2013-04-17 00:00:00,319288.0,kWh (thousand Watt-hours),26254.0
+3509146,6915695,Electric - Grid,2013-05-17 00:00:00,330498.0,kWh (thousand Watt-hours),26296.0
+3509146,6915695,Electric - Grid,2013-06-18 00:00:00,417453.0,kWh (thousand Watt-hours),34970.0
+3509146,6915695,Electric - Grid,2013-07-18 00:00:00,403188.0,kWh (thousand Watt-hours),36593.0
+3509146,6915695,Electric - Grid,2013-08-19 00:00:00,440266.0,kWh (thousand Watt-hours),37084.0
+3509146,6915695,Electric - Grid,2013-09-18 00:00:00,384114.0,kWh (thousand Watt-hours),33241.0
+3509146,6915695,Electric - Grid,2013-10-18 00:00:00,363749.0,kWh (thousand Watt-hours),29303.0
+3509146,6915695,Electric - Grid,2013-11-18 00:00:00,326981.0,kWh (thousand Watt-hours),30183.0
+3509146,6915695,Electric - Grid,2013-12-17 00:00:00,313458.0,kWh (thousand Watt-hours),28466.0
+3509146,6915695,Electric - Grid,2014-01-21 00:00:00,426108.0,kWh (thousand Watt-hours),33999.0
+3509146,6915695,Electric - Grid,2014-02-18 00:00:00,326657.0,kWh (thousand Watt-hours),27908.0
+3509146,6915695,Electric - Grid,2014-03-18 00:00:00,311655.0,kWh (thousand Watt-hours),26542.0
+3509146,6915695,Electric - Grid,2014-04-18 00:00:00,358924.0,kWh (thousand Watt-hours),31040.0
+3509146,6915695,Electric - Grid,2014-05-17 00:00:00,384522.0,kWh (thousand Watt-hours),33363.0
+3509146,6915695,Electric - Grid,2014-06-18 00:00:00,455689.0,kWh (thousand Watt-hours),41134.0
+3509146,6915695,Electric - Grid,2014-07-18 00:00:00,458608.0,kWh (thousand Watt-hours),40038.0
+3509146,6915695,Electric - Grid,2014-08-19 00:00:00,496773.0,kWh (thousand Watt-hours),43161.0
+3509146,6915695,Electric - Grid,2014-09-19 00:00:00,478340.0,kWh (thousand Watt-hours),41632.0
+3509146,6915695,Electric - Grid,2014-10-17 00:00:00,344410.0,kWh (thousand Watt-hours),29932.0
+3509146,6915695,Electric - Grid,2014-11-16 00:00:00,365030.0,kWh (thousand Watt-hours),31117.0
+3509146,6915695,Electric - Grid,2014-12-17 00:00:00,298416.0,kWh (thousand Watt-hours),26309.0
+3509146,6915695,Electric - Grid,2015-01-20 00:00:00,325400.0,kWh (thousand Watt-hours),27048.0
+3509146,6915695,Electric - Grid,2015-02-18 00:00:00,287706.0,kWh (thousand Watt-hours),25215.0
+3509146,6915695,Electric - Grid,2015-03-19 00:00:00,280222.0,kWh (thousand Watt-hours),24758.0
+3509146,6915695,Electric - Grid,2015-04-17 00:00:00,296691.0,kWh (thousand Watt-hours),29376.0
+3509146,6915695,Electric - Grid,2015-05-18 00:00:00,330347.0,kWh (thousand Watt-hours),30592.0
+3509146,6915695,Electric - Grid,2015-06-17 00:00:00,350918.0,kWh (thousand Watt-hours),35631.0

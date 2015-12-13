@@ -1,0 +1,460 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+7371,4717626,Natural Gas,2002-10-31 00:00:00,1076250.0,cf (cubic feet),6891.0
+7371,4717626,Natural Gas,2002-11-30 00:00:00,866250.0,cf (cubic feet),17491.0
+7371,4717626,Natural Gas,2002-12-31 00:00:00,4488000.0,cf (cubic feet),30308.0
+7371,4717626,Natural Gas,2003-01-31 00:00:00,5018250.0,cf (cubic feet),38164.0
+7371,4717626,Natural Gas,2003-02-28 00:00:00,3447750.0,cf (cubic feet),28976.0
+7371,4717626,Natural Gas,2003-03-31 00:00:00,2001750.0,cf (cubic feet),24505.0
+7371,4717626,Natural Gas,2003-04-30 00:00:00,1393500.0,cf (cubic feet),11152.0
+7371,4717626,Natural Gas,2003-05-31 00:00:00,1155000.0,cf (cubic feet),9315.0
+7371,4717626,Natural Gas,2003-06-30 00:00:00,958500.0,cf (cubic feet),8703.0
+7371,4717626,Natural Gas,2003-07-31 00:00:00,921000.0,cf (cubic feet),7686.0
+7371,4717626,Natural Gas,2003-08-31 00:00:00,902250.0,cf (cubic feet),6934.0
+7371,4717626,Natural Gas,2003-09-30 00:00:00,915000.0,cf (cubic feet),7812.0
+7371,4717626,Natural Gas,2003-10-31 00:00:00,1188000.0,cf (cubic feet),9994.0
+7371,4717626,Natural Gas,2003-11-30 00:00:00,1464000.0,cf (cubic feet),11997.0
+7371,4717626,Natural Gas,2003-12-31 00:00:00,3811500.0,cf (cubic feet),31410.0
+7371,4717626,Natural Gas,2004-01-31 00:00:00,4399500.0,cf (cubic feet),36097.0
+7371,4717626,Natural Gas,2004-02-29 00:00:00,4131000.0,cf (cubic feet),33907.0
+7371,4717626,Natural Gas,2004-03-31 00:00:00,2143000.0,cf (cubic feet),17407.0
+7371,4717626,Natural Gas,2004-04-30 00:00:00,1611000.0,cf (cubic feet),13133.0
+7371,4717626,Natural Gas,2004-05-31 00:00:00,1219000.0,cf (cubic feet),10052.0
+7371,4717626,Natural Gas,2004-06-30 00:00:00,1097300.0,cf (cubic feet),9157.0
+7371,4717626,Natural Gas,2004-07-31 00:00:00,1052250.0,cf (cubic feet),9026.0
+7371,4717626,Natural Gas,2004-08-31 00:00:00,1638975.0,cf (cubic feet),10752.0
+7371,4717626,Natural Gas,2004-09-30 00:00:00,1638975.0,cf (cubic feet),10752.0
+7371,4717626,Natural Gas,2004-10-31 00:00:00,1192289.0,cf (cubic feet),9967.0
+7371,4717626,Natural Gas,2004-11-30 00:00:00,1824443.0,cf (cubic feet),14930.0
+7371,4717626,Natural Gas,2004-12-31 00:00:00,4428710.0,cf (cubic feet),35826.0
+7371,4717626,Natural Gas,2005-01-31 00:00:00,4040250.0,cf (cubic feet),32701.0
+7371,4717626,Natural Gas,2005-02-28 00:00:00,3525000.0,cf (cubic feet),28675.0
+7371,4717626,Natural Gas,2005-03-31 00:00:00,3525000.0,cf (cubic feet),28675.0
+7371,4717626,Natural Gas,2005-04-30 00:00:00,1751100.0,cf (cubic feet),15520.0
+7371,4717626,Natural Gas,2005-05-31 00:00:00,1341700.0,cf (cubic feet),10734.0
+7371,4717626,Natural Gas,2005-06-30 00:00:00,721000.0,cf (cubic feet),7377.0
+7371,4717626,Natural Gas,2005-07-31 00:00:00,934700.0,cf (cubic feet),7912.0
+7371,4717626,Natural Gas,2005-08-31 00:00:00,618560.0,cf (cubic feet),7732.0
+7371,4717626,Natural Gas,2005-09-30 00:00:00,618560.0,cf (cubic feet),7732.0
+7371,4717626,Natural Gas,2005-10-31 00:00:00,1197700.0,cf (cubic feet),13033.0
+7371,4717626,Natural Gas,2005-11-30 00:00:00,1548900.0,cf (cubic feet),15489.0
+7371,4717626,Natural Gas,2005-12-31 00:00:00,3743400.0,cf (cubic feet),30535.0
+7371,4717626,Natural Gas,2006-01-31 00:00:00,2844300.0,cf (cubic feet),21799.0
+7371,4717626,Natural Gas,2006-02-28 00:00:00,3158800.0,cf (cubic feet),25271.0
+7371,4717626,Natural Gas,2006-03-31 00:00:00,1847250.0,cf (cubic feet),19284.0
+7371,4717626,Natural Gas,2006-04-30 00:00:00,1166100.0,cf (cubic feet),9708.0
+7371,4717626,Natural Gas,2006-05-31 00:00:00,1659400.0,cf (cubic feet),13624.0
+7371,4717626,Natural Gas,2006-06-30 00:00:00,1372000.0,cf (cubic feet),11098.0
+7371,4717626,Natural Gas,2006-07-31 00:00:00,1418300.0,cf (cubic feet),11362.0
+7371,4717626,Natural Gas,2006-08-31 00:00:00,1539000.0,cf (cubic feet),13851.0
+7371,4717626,Natural Gas,2006-09-30 00:00:00,1197000.0,cf (cubic feet),12506.0
+7371,4717626,Natural Gas,2006-10-31 00:00:00,1398900.0,cf (cubic feet),15373.0
+7371,4717626,Natural Gas,2006-11-30 00:00:00,2058000.0,cf (cubic feet),22708.0
+7371,4717626,Natural Gas,2006-12-31 00:00:00,2614500.0,cf (cubic feet),37294.0
+7371,4717626,Natural Gas,2007-01-31 00:00:00,3771800.0,cf (cubic feet),49479.0
+7371,4717626,Natural Gas,2007-02-28 00:00:00,3464100.0,cf (cubic feet),38428.0
+7371,4717626,Natural Gas,2007-03-31 00:00:00,1793100.0,cf (cubic feet),26251.0
+7371,4717626,Natural Gas,2007-04-30 00:00:00,1770000.0,cf (cubic feet),19704.0
+7371,4717626,Natural Gas,2007-05-31 00:00:00,1019200.0,cf (cubic feet),12197.0
+7371,4717626,Natural Gas,2007-06-30 00:00:00,906000.0,cf (cubic feet),10407.0
+7371,4717626,Natural Gas,2007-07-31 00:00:00,1190000.0,cf (cubic feet),10834.0
+7371,4717626,Natural Gas,2007-08-31 00:00:00,964500.0,cf (cubic feet),11008.0
+7371,4717626,Natural Gas,2007-09-30 00:00:00,1016200.0,cf (cubic feet),11399.0
+7371,4717626,Natural Gas,2007-10-31 00:00:00,1353800.0,cf (cubic feet),15048.0
+7371,4717626,Natural Gas,2007-11-30 00:00:00,1912000.0,cf (cubic feet),21255.0
+7371,4717626,Natural Gas,2007-12-31 00:00:00,2597000.0,cf (cubic feet),36647.0
+7371,4717626,Natural Gas,2008-01-31 00:00:00,4166000.0,cf (cubic feet),45847.0
+7371,4717626,Natural Gas,2008-02-29 00:00:00,3185000.0,cf (cubic feet),33555.0
+7371,4717626,Natural Gas,2008-03-31 00:00:00,2572500.0,cf (cubic feet),28111.0
+7371,4717626,Natural Gas,2008-04-30 00:00:00,1653000.0,cf (cubic feet),18360.0
+7371,4717626,Natural Gas,2008-05-31 00:00:00,963700.0,cf (cubic feet),10763.0
+7371,4717626,Natural Gas,2008-06-30 00:00:00,904000.0,cf (cubic feet),10288.0
+7371,4717626,Natural Gas,2008-07-31 00:00:00,915600.0,cf (cubic feet),10383.0
+7371,4717626,Natural Gas,2008-08-31 00:00:00,892500.0,cf (cubic feet),10138.0
+7371,4717626,Natural Gas,2008-09-30 00:00:00,882749.0,cf (cubic feet),12079.0
+7371,4717626,Natural Gas,2008-10-31 00:00:00,1332000.0,cf (cubic feet),17753.0
+7371,4717626,Natural Gas,2008-11-30 00:00:00,2264200.0,cf (cubic feet),31173.0
+7371,4717626,Natural Gas,2008-12-31 00:00:00,2877000.0,cf (cubic feet),39249.0
+7371,4717626,Natural Gas,2009-01-31 00:00:00,3537000.0,cf (cubic feet),47141.0
+7371,4717626,Natural Gas,2009-02-28 00:00:00,3537000.0,cf (cubic feet),47141.0
+7371,4717626,Natural Gas,2009-03-31 00:00:00,2694000.0,cf (cubic feet),37512.0
+7371,4717626,Natural Gas,2009-04-30 00:00:00,1465000.0,cf (cubic feet),19872.0
+7371,4717626,Natural Gas,2009-05-31 00:00:00,963700.0,cf (cubic feet),10763.0
+7371,4717626,Natural Gas,2009-06-30 00:00:00,1077800.0,cf (cubic feet),8366.0
+7371,4717626,Natural Gas,2009-07-31 00:00:00,1029000.0,cf (cubic feet),13774.0
+7371,4717626,Natural Gas,2009-08-31 00:00:00,1049200.0,cf (cubic feet),14053.0
+7371,4717626,Natural Gas,2009-09-30 00:00:00,968300.0,cf (cubic feet),12988.0
+7371,4717626,Natural Gas,2009-10-31 00:00:00,1258600.0,cf (cubic feet),16505.0
+7371,4717626,Natural Gas,2009-11-30 00:00:00,1851800.0,cf (cubic feet),21181.0
+7371,4717626,Natural Gas,2009-12-31 00:00:00,2876100.0,cf (cubic feet),38703.0
+7371,4717626,Natural Gas,2010-01-31 00:00:00,4012308.0,cf (cubic feet),52549.0
+7371,4717626,Natural Gas,2010-02-28 00:00:00,3537000.0,cf (cubic feet),47141.0
+7371,4717626,Natural Gas,2010-03-31 00:00:00,2694000.0,cf (cubic feet),37512.0
+7371,4717626,Natural Gas,2010-04-30 00:00:00,1465000.0,cf (cubic feet),19872.0
+7371,4717626,Natural Gas,2010-05-31 00:00:00,884300.0,cf (cubic feet),8570.0
+7371,4717626,Natural Gas,2010-06-30 00:00:00,823500.0,cf (cubic feet),9916.0
+7371,4717626,Natural Gas,2010-07-31 00:00:00,731250.0,cf (cubic feet),10606.0
+7371,4717626,Natural Gas,2010-08-31 00:00:00,675000.0,cf (cubic feet),10154.0
+7371,4717626,Natural Gas,2010-09-25 00:00:00,695250.0,cf (cubic feet),6292.0
+7371,4717626,Natural Gas,2010-10-26 00:00:00,844500.0,cf (cubic feet),8052.0
+7371,4717626,Natural Gas,2010-11-26 00:00:00,1413000.0,cf (cubic feet),10666.0
+7371,4717626,Natural Gas,2010-12-27 00:00:00,3857250.0,cf (cubic feet),27594.0
+7371,4717626,Natural Gas,2011-01-27 00:00:00,3450750.0,cf (cubic feet),26125.0
+7371,4717626,Natural Gas,2011-02-27 00:00:00,2188500.0,cf (cubic feet),17067.0
+7371,4717626,Natural Gas,2011-03-30 00:00:00,1892250.0,cf (cubic feet),14128.0
+7371,4717626,Natural Gas,2011-04-30 00:00:00,1195500.0,cf (cubic feet),9405.0
+7371,4717626,Natural Gas,2011-05-31 00:00:00,1020750.0,cf (cubic feet),8081.0
+7371,4717626,Natural Gas,2011-07-01 00:00:00,977250.0,cf (cubic feet),7326.0
+7371,4717626,Natural Gas,2011-08-01 00:00:00,778698.0,cf (cubic feet),6647.0
+7371,4717626,Natural Gas,2011-09-01 00:00:00,929250.0,cf (cubic feet),7281.0
+7371,4717626,Natural Gas,2011-10-02 00:00:00,753750.0,cf (cubic feet),6348.0
+7371,4717626,Natural Gas,2011-11-02 00:00:00,1043250.0,cf (cubic feet),8209.0
+7371,4717626,Natural Gas,2011-12-03 00:00:00,1426500.0,cf (cubic feet),10448.0
+7371,4717626,Natural Gas,2011-12-31 00:00:00,1745093.0,cf (cubic feet),19020.0
+7371,4717626,Natural Gas,2012-01-31 00:00:00,2202643.0,cf (cubic feet),26412.0
+7371,4717626,Natural Gas,2012-02-29 00:00:00,1912400.0,cf (cubic feet),17977.0
+7371,4717626,Natural Gas,2012-03-31 00:00:00,1100594.0,cf (cubic feet),14383.0
+7371,4717626,Natural Gas,2012-04-30 00:00:00,1029306.0,cf (cubic feet),10202.0
+7371,4717626,Natural Gas,2012-05-31 00:00:00,873637.0,cf (cubic feet),8127.0
+7371,4717626,Natural Gas,2012-06-30 00:00:00,747065.0,cf (cubic feet),7460.0
+7371,4717626,Natural Gas,2012-07-31 00:00:00,712149.0,cf (cubic feet),6919.0
+7371,4717626,Natural Gas,2012-08-31 00:00:00,630577.0,cf (cubic feet),7092.0
+7371,4717626,Natural Gas,2012-09-30 00:00:00,664139.0,cf (cubic feet),6549.0
+7371,4717626,Natural Gas,2012-10-31 00:00:00,1008750.0,cf (cubic feet),8142.0
+7371,4717626,Natural Gas,2012-11-30 00:00:00,1540500.0,cf (cubic feet),11201.0
+7371,4717626,Natural Gas,2012-12-31 00:00:00,2850000.0,cf (cubic feet),18989.0
+7371,4717626,Natural Gas,2013-01-31 00:00:00,2574357.0,cf (cubic feet),24962.0
+7371,4717626,Natural Gas,2013-02-28 00:00:00,2581620.0,cf (cubic feet),18685.0
+7371,4717626,Natural Gas,2013-03-31 00:00:00,2750394.0,cf (cubic feet),18852.0
+7371,4717626,Natural Gas,2013-04-30 00:00:00,1026750.0,cf (cubic feet),8923.0
+7371,4717626,Natural Gas,2013-06-01 00:00:00,874500.0,cf (cubic feet),7473.0
+7371,4717626,Natural Gas,2013-07-01 00:00:00,652500.0,cf (cubic feet),6807.0
+7371,4717626,Natural Gas,2013-07-31 00:00:00,658500.0,cf (cubic feet),6548.0
+7371,4717626,Natural Gas,2013-08-31 00:00:00,599330.0,cf (cubic feet),6725.0
+7371,4717626,Natural Gas,2013-09-30 00:00:00,692770.0,cf (cubic feet),3944.0
+7371,4717626,Natural Gas,2013-11-01 00:00:00,1130770.0,cf (cubic feet),6139.0
+7371,4717626,Natural Gas,2013-11-30 00:00:00,2685000.0,cf (cubic feet),13952.0
+7371,4717626,Natural Gas,2013-12-31 00:00:00,3350700.0,cf (cubic feet),16837.0
+7371,4717626,Natural Gas,2014-01-31 00:00:00,4616520.0,cf (cubic feet),23661.0
+7371,4717626,Natural Gas,2014-02-28 00:00:00,2801010.0,cf (cubic feet),14584.0
+7371,4717626,Natural Gas,2014-03-31 00:00:00,2127750.0,cf (cubic feet),11246.0
+7371,4717626,Natural Gas,2014-04-30 00:00:00,1134000.0,cf (cubic feet),6258.0
+7371,4717626,Natural Gas,2014-05-31 00:00:00,836180.0,cf (cubic feet),4764.0
+7371,4717626,Natural Gas,2014-06-30 00:00:00,567837.0,cf (cubic feet),3433.0
+7371,4717626,Natural Gas,2014-07-31 00:00:00,643860.0,cf (cubic feet),3772.0
+7371,4717626,Natural Gas,2014-08-30 00:00:00,647250.0,cf (cubic feet),3827.0
+7371,4717626,Natural Gas,2014-09-29 00:00:00,640500.0,cf (cubic feet),3799.0
+7371,4717626,Natural Gas,2014-10-31 00:00:00,876730.0,cf (cubic feet),4977.0
+7371,4717626,Natural Gas,2014-11-30 00:00:00,1909407.0,cf (cubic feet),10238.0
+7371,4717626,Natural Gas,2014-12-30 00:00:00,2116270.0,cf (cubic feet),11259.0
+7371,4717626,Natural Gas,2015-01-31 00:00:00,2865980.0,cf (cubic feet),14958.0
+7371,4717626,Natural Gas,2015-02-28 00:00:00,3245580.0,cf (cubic feet),16849.0
+7371,4717626,Natural Gas,2015-03-31 00:00:00,1522050.0,cf (cubic feet),8175.0
+7371,4717626,Natural Gas,2015-04-30 00:00:00,940970.0,cf (cubic feet),5250.0
+7371,4717626,Natural Gas,2015-05-30 00:00:00,675980.0,cf (cubic feet),3907.0
+7371,4717626,Natural Gas,2015-06-29 00:00:00,631450.0,cf (cubic feet),3681.0
+7371,4717625,Electric - Grid,2002-10-31 00:00:00,1179296.0,kWh (thousand Watt-hours),67493.0
+7371,4717625,Electric - Grid,2002-11-30 00:00:00,1025868.0,kWh (thousand Watt-hours),64113.0
+7371,4717625,Electric - Grid,2002-12-31 00:00:00,1152427.0,kWh (thousand Watt-hours),67205.0
+7371,4717625,Electric - Grid,2003-01-31 00:00:00,1233777.0,kWh (thousand Watt-hours),68640.0
+7371,4717625,Electric - Grid,2003-02-28 00:00:00,1114590.0,kWh (thousand Watt-hours),65741.0
+7371,4717625,Electric - Grid,2003-03-31 00:00:00,1067956.0,kWh (thousand Watt-hours),64355.0
+7371,4717625,Electric - Grid,2003-04-30 00:00:00,1070530.0,kWh (thousand Watt-hours),64742.0
+7371,4717625,Electric - Grid,2003-05-31 00:00:00,1200515.0,kWh (thousand Watt-hours),67039.0
+7371,4717625,Electric - Grid,2003-06-30 00:00:00,1242758.0,kWh (thousand Watt-hours),96425.0
+7371,4717625,Electric - Grid,2003-07-31 00:00:00,1351106.0,kWh (thousand Watt-hours),99356.0
+7371,4717625,Electric - Grid,2003-08-31 00:00:00,1488456.0,kWh (thousand Watt-hours),103384.0
+7371,4717625,Electric - Grid,2003-09-30 00:00:00,1330181.0,kWh (thousand Watt-hours),96589.0
+7371,4717625,Electric - Grid,2003-10-31 00:00:00,1071677.0,kWh (thousand Watt-hours),65337.0
+7371,4717625,Electric - Grid,2003-11-30 00:00:00,1001209.0,kWh (thousand Watt-hours),63142.0
+7371,4717625,Electric - Grid,2003-12-31 00:00:00,1080883.0,kWh (thousand Watt-hours),64853.0
+7371,4717625,Electric - Grid,2004-01-31 00:00:00,1180102.0,kWh (thousand Watt-hours),66926.0
+7371,4717625,Electric - Grid,2004-02-29 00:00:00,1077621.0,kWh (thousand Watt-hours),64555.0
+7371,4717625,Electric - Grid,2004-03-31 00:00:00,1134910.0,kWh (thousand Watt-hours),65326.0
+7371,4717625,Electric - Grid,2004-04-30 00:00:00,1122588.0,kWh (thousand Watt-hours),65589.0
+7371,4717625,Electric - Grid,2004-05-31 00:00:00,1189493.0,kWh (thousand Watt-hours),65228.0
+7371,4717625,Electric - Grid,2004-06-30 00:00:00,1197687.0,kWh (thousand Watt-hours),95815.0
+7371,4717625,Electric - Grid,2004-07-31 00:00:00,1287960.0,kWh (thousand Watt-hours),100962.0
+7371,4717625,Electric - Grid,2004-08-31 00:00:00,1434047.0,kWh (thousand Watt-hours),103589.0
+7371,4717625,Electric - Grid,2004-09-30 00:00:00,1287940.0,kWh (thousand Watt-hours),101518.0
+7371,4717625,Electric - Grid,2004-10-31 00:00:00,1115389.0,kWh (thousand Watt-hours),68499.0
+7371,4717625,Electric - Grid,2004-11-30 00:00:00,1089336.0,kWh (thousand Watt-hours),65541.0
+7371,4717625,Electric - Grid,2004-12-31 00:00:00,1122444.0,kWh (thousand Watt-hours),66216.0
+7371,4717625,Electric - Grid,2005-01-31 00:00:00,1284530.0,kWh (thousand Watt-hours),69178.0
+7371,4717625,Electric - Grid,2005-02-28 00:00:00,1099910.0,kWh (thousand Watt-hours),60416.0
+7371,4717625,Electric - Grid,2005-03-31 00:00:00,1118645.0,kWh (thousand Watt-hours),61389.0
+7371,4717625,Electric - Grid,2005-04-30 00:00:00,1084221.0,kWh (thousand Watt-hours),59432.0
+7371,4717625,Electric - Grid,2005-05-31 00:00:00,1081452.0,kWh (thousand Watt-hours),59543.0
+7371,4717625,Electric - Grid,2005-06-30 00:00:00,1184784.0,kWh (thousand Watt-hours),97333.0
+7371,4717625,Electric - Grid,2005-07-31 00:00:00,1394815.0,kWh (thousand Watt-hours),115839.0
+7371,4717625,Electric - Grid,2005-08-31 00:00:00,1450741.0,kWh (thousand Watt-hours),121642.0
+7371,4717625,Electric - Grid,2005-09-30 00:00:00,1374298.0,kWh (thousand Watt-hours),115145.0
+7371,4717625,Electric - Grid,2005-10-31 00:00:00,1265273.0,kWh (thousand Watt-hours),85889.0
+7371,4717625,Electric - Grid,2005-11-30 00:00:00,1072075.0,kWh (thousand Watt-hours),68132.0
+7371,4717625,Electric - Grid,2005-12-31 00:00:00,1112621.0,kWh (thousand Watt-hours),70867.0
+7371,4717625,Electric - Grid,2006-01-31 00:00:00,1218847.0,kWh (thousand Watt-hours),76394.0
+7371,4717625,Electric - Grid,2006-02-28 00:00:00,1093637.0,kWh (thousand Watt-hours),69022.0
+7371,4717625,Electric - Grid,2006-03-31 00:00:00,1130590.0,kWh (thousand Watt-hours),71302.0
+7371,4717625,Electric - Grid,2006-04-30 00:00:00,1381088.0,kWh (thousand Watt-hours),87613.0
+7371,4717625,Electric - Grid,2006-05-31 00:00:00,1283450.0,kWh (thousand Watt-hours),81415.0
+7371,4717625,Electric - Grid,2006-06-30 00:00:00,1587117.0,kWh (thousand Watt-hours),124545.0
+7371,4717625,Electric - Grid,2006-07-31 00:00:00,1718503.0,kWh (thousand Watt-hours),146020.0
+7371,4717625,Electric - Grid,2006-08-31 00:00:00,1646391.0,kWh (thousand Watt-hours),143650.0
+7371,4717625,Electric - Grid,2006-09-30 00:00:00,1523528.0,kWh (thousand Watt-hours),130922.0
+7371,4717625,Electric - Grid,2006-10-31 00:00:00,1260535.0,kWh (thousand Watt-hours),88931.0
+7371,4717625,Electric - Grid,2006-11-30 00:00:00,1153562.0,kWh (thousand Watt-hours),78510.0
+7371,4717625,Electric - Grid,2006-12-31 00:00:00,1195696.0,kWh (thousand Watt-hours),81275.0
+7371,4717625,Electric - Grid,2007-01-31 00:00:00,1250951.0,kWh (thousand Watt-hours),83393.0
+7371,4717625,Electric - Grid,2007-02-28 00:00:00,1190581.0,kWh (thousand Watt-hours),80226.0
+7371,4717625,Electric - Grid,2007-03-31 00:00:00,1354234.0,kWh (thousand Watt-hours),96494.0
+7371,4717625,Electric - Grid,2007-04-30 00:00:00,1276809.0,kWh (thousand Watt-hours),92556.0
+7371,4717625,Electric - Grid,2007-05-31 00:00:00,1317158.0,kWh (thousand Watt-hours),96375.0
+7371,4717625,Electric - Grid,2007-06-30 00:00:00,1699798.0,kWh (thousand Watt-hours),147070.0
+7371,4717625,Electric - Grid,2007-07-31 00:00:00,1611114.0,kWh (thousand Watt-hours),146961.0
+7371,4717625,Electric - Grid,2007-08-31 00:00:00,1782379.0,kWh (thousand Watt-hours),165618.0
+7371,4717625,Electric - Grid,2007-09-30 00:00:00,1722784.0,kWh (thousand Watt-hours),155630.0
+7371,4717625,Electric - Grid,2007-10-31 00:00:00,1280405.0,kWh (thousand Watt-hours),97193.0
+7371,4717625,Electric - Grid,2007-11-30 00:00:00,1209128.0,kWh (thousand Watt-hours),88144.0
+7371,4717625,Electric - Grid,2007-12-31 00:00:00,1084191.0,kWh (thousand Watt-hours),79572.0
+7371,4717625,Electric - Grid,2008-01-31 00:00:00,1158044.0,kWh (thousand Watt-hours),89591.0
+7371,4717625,Electric - Grid,2008-02-29 00:00:00,1218147.0,kWh (thousand Watt-hours),94635.0
+7371,4717625,Electric - Grid,2008-03-31 00:00:00,1170611.0,kWh (thousand Watt-hours),91410.0
+7371,4717625,Electric - Grid,2008-04-30 00:00:00,1046718.0,kWh (thousand Watt-hours),82071.0
+7371,4717625,Electric - Grid,2008-05-31 00:00:00,1102838.0,kWh (thousand Watt-hours),86389.0
+7371,4717625,Electric - Grid,2008-06-30 00:00:00,1464241.0,kWh (thousand Watt-hours),146943.0
+7371,4717625,Electric - Grid,2008-07-31 00:00:00,1415641.0,kWh (thousand Watt-hours),147664.0
+7371,4717625,Electric - Grid,2008-08-31 00:00:00,1464837.0,kWh (thousand Watt-hours),152739.0
+7371,4717625,Electric - Grid,2008-09-30 00:00:00,1326199.0,kWh (thousand Watt-hours),139150.0
+7371,4717625,Electric - Grid,2008-10-31 00:00:00,1170501.0,kWh (thousand Watt-hours),99615.0
+7371,4717625,Electric - Grid,2008-11-30 00:00:00,1047927.0,kWh (thousand Watt-hours),85403.0
+7371,4717625,Electric - Grid,2008-12-31 00:00:00,1276377.0,kWh (thousand Watt-hours),102524.0
+7371,4717625,Electric - Grid,2009-01-31 00:00:00,1243056.0,kWh (thousand Watt-hours),99436.0
+7371,4717625,Electric - Grid,2009-02-28 00:00:00,1199341.0,kWh (thousand Watt-hours),95560.0
+7371,4717625,Electric - Grid,2009-03-31 00:00:00,1100808.0,kWh (thousand Watt-hours),87937.0
+7371,4717625,Electric - Grid,2009-04-30 00:00:00,1063799.0,kWh (thousand Watt-hours),85606.0
+7371,4717625,Electric - Grid,2009-05-31 00:00:00,1208516.0,kWh (thousand Watt-hours),98092.0
+7371,4717625,Electric - Grid,2009-06-30 00:00:00,1311738.0,kWh (thousand Watt-hours),134132.0
+7371,4717625,Electric - Grid,2009-07-31 00:00:00,1582809.0,kWh (thousand Watt-hours),159298.0
+7371,4717625,Electric - Grid,2009-08-31 00:00:00,1767917.0,kWh (thousand Watt-hours),174561.0
+7371,4717625,Electric - Grid,2009-09-30 00:00:00,1180841.0,kWh (thousand Watt-hours),154211.0
+7371,4717625,Electric - Grid,2009-10-31 00:00:00,1205144.0,kWh (thousand Watt-hours),102148.0
+7371,4717625,Electric - Grid,2009-11-30 00:00:00,998237.0,kWh (thousand Watt-hours),81481.0
+7371,4717625,Electric - Grid,2009-12-31 00:00:00,802497.0,kWh (thousand Watt-hours),94209.0
+7371,4717625,Electric - Grid,2010-01-31 00:00:00,1347418.0,kWh (thousand Watt-hours),107924.0
+7371,4717625,Electric - Grid,2010-02-28 00:00:00,1202145.0,kWh (thousand Watt-hours),95647.0
+7371,4717625,Electric - Grid,2010-03-31 00:00:00,1114943.0,kWh (thousand Watt-hours),89431.0
+7371,4717625,Electric - Grid,2010-04-30 00:00:00,1106695.0,kWh (thousand Watt-hours),94605.0
+7371,4717625,Electric - Grid,2010-05-31 00:00:00,1702005.0,kWh (thousand Watt-hours),101576.0
+7371,4717625,Electric - Grid,2010-06-30 00:00:00,1244322.0,kWh (thousand Watt-hours),138729.0
+7371,4717625,Electric - Grid,2010-07-31 00:00:00,1511524.0,kWh (thousand Watt-hours),168700.0
+7371,4717625,Electric - Grid,2010-08-31 00:00:00,1495079.0,kWh (thousand Watt-hours),169485.0
+7371,4717625,Electric - Grid,2010-09-13 00:00:00,1223552.0,kWh (thousand Watt-hours),144305.0
+7371,4717625,Electric - Grid,2010-10-14 00:00:00,1046704.0,kWh (thousand Watt-hours),97390.0
+7371,4717625,Electric - Grid,2010-11-14 00:00:00,1105183.0,kWh (thousand Watt-hours),96716.0
+7371,4717625,Electric - Grid,2010-12-15 00:00:00,1158609.0,kWh (thousand Watt-hours),99869.0
+7371,4717625,Electric - Grid,2011-01-15 00:00:00,1199961.0,kWh (thousand Watt-hours),109671.0
+7371,4717625,Electric - Grid,2011-02-15 00:00:00,989979.0,kWh (thousand Watt-hours),93660.0
+7371,4717625,Electric - Grid,2011-03-18 00:00:00,963366.0,kWh (thousand Watt-hours),90355.0
+7371,4717625,Electric - Grid,2011-04-18 00:00:00,1058590.0,kWh (thousand Watt-hours),99742.0
+7371,4717625,Electric - Grid,2011-05-19 00:00:00,1079984.0,kWh (thousand Watt-hours),102196.0
+7371,4717625,Electric - Grid,2011-06-19 00:00:00,1272189.0,kWh (thousand Watt-hours),157776.0
+7371,4717625,Electric - Grid,2011-07-20 00:00:00,1351718.0,kWh (thousand Watt-hours),172343.0
+7371,4717625,Electric - Grid,2011-08-20 00:00:00,1644052.0,kWh (thousand Watt-hours),172058.0
+7371,4717625,Electric - Grid,2011-09-20 00:00:00,1250048.0,kWh (thousand Watt-hours),161484.0
+7371,4717625,Electric - Grid,2011-10-21 00:00:00,1078584.0,kWh (thousand Watt-hours),108627.0
+7371,4717625,Electric - Grid,2011-11-21 00:00:00,982702.0,kWh (thousand Watt-hours),93396.0
+7371,4717625,Electric - Grid,2011-12-22 00:00:00,1021768.0,kWh (thousand Watt-hours),97139.0
+7371,4717625,Electric - Grid,2012-01-25 00:00:00,1088302.0,kWh (thousand Watt-hours),102182.0
+7371,4717625,Electric - Grid,2012-02-23 00:00:00,1041609.0,kWh (thousand Watt-hours),96461.0
+7371,4717625,Electric - Grid,2012-03-23 00:00:00,1088472.0,kWh (thousand Watt-hours),101896.0
+7371,4717625,Electric - Grid,2012-04-24 00:00:00,1135390.0,kWh (thousand Watt-hours),103221.0
+7371,4717625,Electric - Grid,2012-05-23 00:00:00,1136154.0,kWh (thousand Watt-hours),109362.0
+7371,4717625,Electric - Grid,2012-06-25 00:00:00,1283684.0,kWh (thousand Watt-hours),149333.0
+7371,4717625,Electric - Grid,2012-07-25 00:00:00,1333201.0,kWh (thousand Watt-hours),162753.0
+7371,4717625,Electric - Grid,2012-08-24 00:00:00,1239733.0,kWh (thousand Watt-hours),156127.0
+7371,4717625,Electric - Grid,2012-09-23 00:00:00,1256899.0,kWh (thousand Watt-hours),155401.0
+7371,4717625,Electric - Grid,2012-10-24 00:00:00,1028843.0,kWh (thousand Watt-hours),94706.0
+7371,4717625,Electric - Grid,2012-11-21 00:00:00,882173.0,kWh (thousand Watt-hours),77924.0
+7371,4717625,Electric - Grid,2012-12-21 00:00:00,913810.0,kWh (thousand Watt-hours),81985.0
+7371,4717625,Electric - Grid,2013-01-24 00:00:00,945318.0,kWh (thousand Watt-hours),85938.0
+7371,4717625,Electric - Grid,2013-02-22 00:00:00,1063392.0,kWh (thousand Watt-hours),91547.0
+7371,4717625,Electric - Grid,2013-03-25 00:00:00,1090171.0,kWh (thousand Watt-hours),93889.0
+7371,4717625,Electric - Grid,2013-04-24 00:00:00,937716.0,kWh (thousand Watt-hours),82490.0
+7371,4717625,Electric - Grid,2013-05-23 00:00:00,935651.0,kWh (thousand Watt-hours),83116.0
+7371,4717625,Electric - Grid,2013-06-24 00:00:00,1176803.0,kWh (thousand Watt-hours),139499.0
+7371,4717625,Electric - Grid,2013-07-24 00:00:00,1167579.0,kWh (thousand Watt-hours),145603.0
+7371,4717625,Electric - Grid,2013-08-23 00:00:00,1135256.0,kWh (thousand Watt-hours),144892.0
+7371,4717625,Electric - Grid,2013-09-24 00:00:00,892057.0,kWh (thousand Watt-hours),146423.0
+7371,4717625,Electric - Grid,2013-10-24 00:00:00,926982.0,kWh (thousand Watt-hours),88899.0
+7371,4717625,Electric - Grid,2013-11-21 00:00:00,883054.0,kWh (thousand Watt-hours),79222.0
+7371,4717625,Electric - Grid,2013-12-23 00:00:00,1018943.0,kWh (thousand Watt-hours),90658.0
+7371,4717625,Electric - Grid,2014-01-24 00:00:00,1020722.0,kWh (thousand Watt-hours),91140.0
+7371,4717625,Electric - Grid,2014-02-24 00:00:00,1004198.0,kWh (thousand Watt-hours),88316.0
+7371,4717625,Electric - Grid,2014-03-25 00:00:00,795214.0,kWh (thousand Watt-hours),82014.0
+7371,4717625,Electric - Grid,2014-04-24 00:00:00,930676.0,kWh (thousand Watt-hours),86198.0
+7371,4717625,Electric - Grid,2014-05-23 00:00:00,964135.0,kWh (thousand Watt-hours),89723.0
+7371,4717625,Electric - Grid,2014-06-24 00:00:00,1130937.0,kWh (thousand Watt-hours),143449.0
+7371,4717625,Electric - Grid,2014-07-24 00:00:00,1085642.0,kWh (thousand Watt-hours),143868.0
+7371,4717625,Electric - Grid,2014-08-25 00:00:00,1143156.0,kWh (thousand Watt-hours),151061.0
+7371,4717625,Electric - Grid,2014-09-24 00:00:00,1094235.0,kWh (thousand Watt-hours),146376.0
+7371,4717625,Electric - Grid,2014-10-24 00:00:00,920924.0,kWh (thousand Watt-hours),91692.0
+7371,4717625,Electric - Grid,2014-11-21 00:00:00,806363.0,kWh (thousand Watt-hours),75911.0
+7371,4717625,Electric - Grid,2014-12-23 00:00:00,868206.0,kWh (thousand Watt-hours),81817.0
+7371,4717625,Electric - Grid,2015-01-26 00:00:00,884562.0,kWh (thousand Watt-hours),85148.0
+7371,4717625,Electric - Grid,2015-02-24 00:00:00,855353.0,kWh (thousand Watt-hours),81256.0
+7371,4717625,Electric - Grid,2015-03-25 00:00:00,854253.0,kWh (thousand Watt-hours),82283.0
+7371,4717625,Electric - Grid,2015-04-24 00:00:00,882531.0,kWh (thousand Watt-hours),85683.0
+7371,4717625,Electric - Grid,2015-05-26 00:00:00,941381.0,kWh (thousand Watt-hours),91380.0
+7371,4717625,Electric - Grid,2015-06-24 00:00:00,1079132.0,kWh (thousand Watt-hours),141802.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2002-10-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2002-11-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2002-12-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-01-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-02-28 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-03-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-04-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-05-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-06-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-07-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-08-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-09-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-10-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-11-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2003-12-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-01-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-02-29 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-03-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-04-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-05-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-06-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-07-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-08-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-09-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-10-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-11-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2004-12-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-01-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-02-28 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-03-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-04-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-05-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-06-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-07-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-08-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-09-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-10-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-11-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2005-12-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-01-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-02-28 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-03-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-04-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-05-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-06-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-07-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-08-31 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-09-30 00:00:00,0.0,Gallons,0.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-10-31 00:00:00,1643356.0,Gallons,24462.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-11-30 00:00:00,1816144.0,Gallons,27036.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2006-12-31 00:00:00,1623908.0,Gallons,24173.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-01-31 00:00:00,1246916.0,Gallons,18558.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-02-28 00:00:00,1590248.0,Gallons,23671.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-03-31 00:00:00,1652332.0,Gallons,24596.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-04-30 00:00:00,1669536.0,Gallons,24852.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-05-31 00:00:00,1743588.0,Gallons,25955.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-06-30 00:00:00,1822128.0,Gallons,27125.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-07-31 00:00:00,3612092.0,Gallons,26646.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-08-31 00:00:00,1982948.0,Gallons,31200.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-09-30 00:00:00,1706936.0,Gallons,27918.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-10-31 00:00:00,1168376.0,Gallons,32350.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-11-30 00:00:00,1208768.0,Gallons,33836.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2007-12-31 00:00:00,1063656.0,Gallons,28616.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-01-31 00:00:00,1173612.0,Gallons,31811.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-02-29 00:00:00,1219988.0,Gallons,33316.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-03-31 00:00:00,1079364.0,Gallons,29840.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-04-30 00:00:00,882640.0,Gallons,11223.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-05-31 00:00:00,1230460.0,Gallons,34650.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-06-30 00:00:00,1085348.0,Gallons,30672.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-07-31 00:00:00,1045704.0,Gallons,29803.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-08-31 00:00:00,1232704.0,Gallons,42660.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-09-30 00:00:00,1167628.0,Gallons,43501.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-10-31 00:00:00,1947044.0,Gallons,40431.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-11-30 00:00:00,2045780.0,Gallons,42567.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2008-12-31 00:00:00,1496000.0,Gallons,40155.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-01-31 00:00:00,2412300.0,Gallons,50196.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-02-28 00:00:00,1930588.0,Gallons,40169.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-03-31 00:00:00,1844568.0,Gallons,40387.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-04-30 00:00:00,1950036.0,Gallons,48912.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-05-31 00:00:00,2283644.0,Gallons,47518.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-06-30 00:00:00,1956020.0,Gallons,40699.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-07-31 00:00:00,7198004.0,Gallons,164921.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-08-31 00:00:00,2089912.0,Gallons,48847.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-09-30 00:00:00,1686740.0,Gallons,39421.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-10-31 00:00:00,1543872.0,Gallons,36080.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-11-30 00:00:00,1895432.0,Gallons,44300.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2009-12-31 00:00:00,1940312.0,Gallons,45349.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-01-31 00:00:00,2402576.0,Gallons,56159.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-02-28 00:00:00,2121328.0,Gallons,49582.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-03-31 00:00:00,3318128.0,Gallons,77566.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-04-30 00:00:00,1379312.0,Gallons,32232.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-05-31 00:00:00,1265616.0,Gallons,29574.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-06-30 00:00:00,1318724.0,Gallons,30816.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-07-31 00:00:00,2802756.0,Gallons,71909.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-08-31 00:00:00,1157904.0,Gallons,30412.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-09-14 00:00:00,1558832.0,Gallons,40950.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-10-15 00:00:00,1509464.0,Gallons,39653.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-11-15 00:00:00,1737604.0,Gallons,45649.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2010-12-16 00:00:00,1938816.0,Gallons,50937.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-01-16 00:00:00,1695716.0,Gallons,44286.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-02-16 00:00:00,1588752.0,Gallons,41418.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-03-19 00:00:00,1632884.0,Gallons,42569.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-04-19 00:00:00,1883464.0,Gallons,49105.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-05-20 00:00:00,1549108.0,Gallons,40384.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-06-20 00:00:00,1998407.0,Gallons,56060.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-07-21 00:00:00,1998407.0,Gallons,56060.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-08-21 00:00:00,1998407.0,Gallons,56060.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-09-21 00:00:00,860200.0,Gallons,25103.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-10-22 00:00:00,1211760.0,Gallons,35373.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-11-22 00:00:00,872168.0,Gallons,25453.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2011-12-23 00:00:00,875160.0,Gallons,25541.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-01-25 00:00:00,695640.0,Gallons,20296.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-02-23 00:00:00,700876.0,Gallons,20449.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-03-23 00:00:00,974644.0,Gallons,28447.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-04-24 00:00:00,1204280.0,Gallons,35154.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-05-23 00:00:00,1636624.0,Gallons,47783.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-06-25 00:00:00,3556740.0,Gallons,103873.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-07-24 00:00:00,1958264.0,Gallons,57179.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-08-23 00:00:00,1881220.0,Gallons,54929.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-09-24 00:00:00,1600720.0,Gallons,46735.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-10-23 00:00:00,1367344.0,Gallons,39918.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-11-20 00:00:00,961928.0,Gallons,28075.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2012-12-19 00:00:00,877404.0,Gallons,25606.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-01-22 00:00:00,771936.0,Gallons,22525.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-02-21 00:00:00,725560.0,Gallons,21171.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-03-21 00:00:00,939488.0,Gallons,27419.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-04-22 00:00:00,753236.0,Gallons,21978.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-05-22 00:00:00,1331440.0,Gallons,38869.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-06-20 00:00:00,1318724.0,Gallons,38497.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-07-22 00:00:00,1877480.0,Gallons,54819.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-08-21 00:00:00,1582020.0,Gallons,46189.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-09-23 00:00:00,1669536.0,Gallons,48745.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-10-21 00:00:00,1063656.0,Gallons,31047.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-11-20 00:00:00,1218492.0,Gallons,35570.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2013-12-23 00:00:00,679184.0,Gallons,19816.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-01-23 00:00:00,613360.0,Gallons,17893.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-02-24 00:00:00,725560.0,Gallons,21171.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-03-24 00:00:00,620840.0,Gallons,18111.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-04-22 00:00:00,780912.0,Gallons,22787.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-05-23 00:00:00,1589500.0,Gallons,46407.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-06-23 00:00:00,1886456.0,Gallons,55082.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-07-22 00:00:00,1701700.0,Gallons,49684.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-08-25 00:00:00,1639616.0,Gallons,47871.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-09-23 00:00:00,1578280.0,Gallons,46079.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-10-24 00:00:00,1120504.0,Gallons,32707.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-11-24 00:00:00,831776.0,Gallons,24273.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2014-12-24 00:00:00,653752.0,Gallons,19073.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2015-01-26 00:00:00,517616.0,Gallons,15096.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2015-02-24 00:00:00,580448.0,Gallons,16932.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2015-03-25 00:00:00,790636.0,Gallons,23071.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2015-04-23 00:00:00,1052436.0,Gallons,30718.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2015-05-22 00:00:00,1034484.0,Gallons,30195.0
+7371,5893283,Potable: Mixed Indoor/Outdoor,2015-06-24 00:00:00,1448876.0,Gallons,42299.0

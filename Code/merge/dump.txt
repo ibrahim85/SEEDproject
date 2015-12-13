@@ -1,0 +1,56 @@
+checking numer of missing values for columns
+## ------------------------------------------##
+Property Name
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Portfolio Manager ID
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+State/Province
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Postal Code
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Year Built
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Gross Floor Area
+non_Null    850
+dtype: int64
+checking numer of missing values for columns
+## ------------------------------------------##
+Portfolio Manager ID
+non_Null    344509
+dtype: int64
+## ------------------------------------------##
+Portfolio Manager Meter ID
+non_Null    344509
+dtype: int64
+## ------------------------------------------##
+Meter Type
+non_Null    344509
+dtype: int64
+## ------------------------------------------##
+End Date
+non_Null    344470
+Null            39
+dtype: int64
+## ------------------------------------------##
+Usage/Quantity
+non_Null    344509
+dtype: int64
+## ------------------------------------------##
+Usage Units
+non_Null    344509
+dtype: int64
+## ------------------------------------------##
+Cost ($)
+non_Null    331567
+Null         12942
+dtype: int64

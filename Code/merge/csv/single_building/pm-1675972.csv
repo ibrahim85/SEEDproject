@@ -1,0 +1,613 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+1675972,4717525,Electric - Grid,2002-10-31 00:00:00,1495675.0,kWh (thousand Watt-hours),119167.0
+1675972,4717525,Electric - Grid,2002-11-30 00:00:00,1331813.0,kWh (thousand Watt-hours),71133.0
+1675972,4717525,Electric - Grid,2002-12-31 00:00:00,1444742.0,kWh (thousand Watt-hours),75358.0
+1675972,4717525,Electric - Grid,2003-01-31 00:00:00,1353815.0,kWh (thousand Watt-hours),58897.0
+1675972,4717525,Electric - Grid,2003-02-28 00:00:00,1183148.0,kWh (thousand Watt-hours),65284.0
+1675972,4717525,Electric - Grid,2003-03-31 00:00:00,1402614.0,kWh (thousand Watt-hours),73643.0
+1675972,4717525,Electric - Grid,2003-04-30 00:00:00,1289836.0,kWh (thousand Watt-hours),72252.0
+1675972,4717525,Electric - Grid,2003-05-31 00:00:00,1409660.0,kWh (thousand Watt-hours),60565.0
+1675972,4717525,Electric - Grid,2003-06-30 00:00:00,1646954.0,kWh (thousand Watt-hours),125323.0
+1675972,4717525,Electric - Grid,2003-07-31 00:00:00,1682106.0,kWh (thousand Watt-hours),133630.0
+1675972,4717525,Electric - Grid,2003-08-31 00:00:00,1814137.0,kWh (thousand Watt-hours),148442.0
+1675972,4717525,Electric - Grid,2003-09-30 00:00:00,1458630.0,kWh (thousand Watt-hours),123650.0
+1675972,4717525,Electric - Grid,2003-10-31 00:00:00,1181445.0,kWh (thousand Watt-hours),88905.0
+1675972,4717525,Electric - Grid,2003-11-30 00:00:00,1627701.0,kWh (thousand Watt-hours),94852.0
+1675972,4717525,Electric - Grid,2003-12-31 00:00:00,1441584.0,kWh (thousand Watt-hours),83680.0
+1675972,4717525,Electric - Grid,2004-01-31 00:00:00,539223.0,kWh (thousand Watt-hours),190999.0
+1675972,4717525,Electric - Grid,2004-02-29 00:00:00,874031.0,kWh (thousand Watt-hours),83854.0
+1675972,4717525,Electric - Grid,2004-03-31 00:00:00,1734288.0,kWh (thousand Watt-hours),93982.0
+1675972,4717525,Electric - Grid,2004-04-30 00:00:00,1734288.0,kWh (thousand Watt-hours),93982.0
+1675972,4717525,Electric - Grid,2004-05-31 00:00:00,1734288.0,kWh (thousand Watt-hours),93982.0
+1675972,4717525,Electric - Grid,2004-06-30 00:00:00,1855453.0,kWh (thousand Watt-hours),155249.0
+1675972,4717525,Electric - Grid,2004-07-31 00:00:00,1527760.0,kWh (thousand Watt-hours),126715.0
+1675972,4717525,Electric - Grid,2004-08-31 00:00:00,1469898.0,kWh (thousand Watt-hours),124379.0
+1675972,4717525,Electric - Grid,2004-09-30 00:00:00,2212946.0,kWh (thousand Watt-hours),182677.0
+1675972,4717525,Electric - Grid,2004-10-31 00:00:00,1780385.0,kWh (thousand Watt-hours),150485.0
+1675972,4717525,Electric - Grid,2004-11-30 00:00:00,2063724.0,kWh (thousand Watt-hours),115489.0
+1675972,4717525,Electric - Grid,2004-12-31 00:00:00,2063724.0,kWh (thousand Watt-hours),115489.0
+1675972,4717525,Electric - Grid,2005-01-31 00:00:00,1810100.0,kWh (thousand Watt-hours),102065.0
+1675972,4717525,Electric - Grid,2005-02-28 00:00:00,1563458.0,kWh (thousand Watt-hours),133343.0
+1675972,4717525,Electric - Grid,2005-03-31 00:00:00,1662258.0,kWh (thousand Watt-hours),139294.0
+1675972,4717525,Electric - Grid,2005-04-30 00:00:00,1701236.0,kWh (thousand Watt-hours),143225.0
+1675972,4717525,Electric - Grid,2005-05-31 00:00:00,1966687.0,kWh (thousand Watt-hours),161709.0
+1675972,4717525,Electric - Grid,2005-06-30 00:00:00,2130841.0,kWh (thousand Watt-hours),179022.0
+1675972,4717525,Electric - Grid,2005-07-31 00:00:00,2355644.0,kWh (thousand Watt-hours),195892.0
+1675972,4717525,Electric - Grid,2005-08-31 00:00:00,2593607.0,kWh (thousand Watt-hours),212969.0
+1675972,4717525,Electric - Grid,2005-09-30 00:00:00,2420225.0,kWh (thousand Watt-hours),198914.0
+1675972,4717525,Electric - Grid,2005-10-31 00:00:00,2099518.0,kWh (thousand Watt-hours),179129.0
+1675972,4717525,Electric - Grid,2005-11-30 00:00:00,2000596.0,kWh (thousand Watt-hours),137261.0
+1675972,4717525,Electric - Grid,2005-12-31 00:00:00,1953841.0,kWh (thousand Watt-hours),172444.0
+1675972,4717525,Electric - Grid,2006-01-31 00:00:00,2063078.0,kWh (thousand Watt-hours),179251.0
+1675972,4717525,Electric - Grid,2006-02-28 00:00:00,1825741.0,kWh (thousand Watt-hours),162040.0
+1675972,4717525,Electric - Grid,2006-03-31 00:00:00,1025102.0,kWh (thousand Watt-hours),93656.0
+1675972,4717525,Electric - Grid,2006-04-30 00:00:00,1025102.0,kWh (thousand Watt-hours),93656.0
+1675972,4717525,Electric - Grid,2006-05-31 00:00:00,1905551.0,kWh (thousand Watt-hours),172614.0
+1675972,4717525,Electric - Grid,2006-06-30 00:00:00,2037769.0,kWh (thousand Watt-hours),247779.0
+1675972,4717525,Electric - Grid,2006-07-31 00:00:00,2392717.0,kWh (thousand Watt-hours),304751.0
+1675972,4717525,Electric - Grid,2006-08-31 00:00:00,2214960.0,kWh (thousand Watt-hours),285585.0
+1675972,4717525,Electric - Grid,2006-09-30 00:00:00,2110867.0,kWh (thousand Watt-hours),273981.0
+1675972,4717525,Electric - Grid,2006-10-31 00:00:00,1856863.0,kWh (thousand Watt-hours),241246.0
+1675972,4717525,Electric - Grid,2006-11-30 00:00:00,1716600.0,kWh (thousand Watt-hours),182335.0
+1675972,4717525,Electric - Grid,2006-12-31 00:00:00,1811179.0,kWh (thousand Watt-hours),191090.0
+1675972,4717525,Electric - Grid,2007-01-31 00:00:00,1836897.0,kWh (thousand Watt-hours),193293.0
+1675972,4717525,Electric - Grid,2007-02-28 00:00:00,2070287.0,kWh (thousand Watt-hours),219482.0
+1675972,4717525,Electric - Grid,2007-03-31 00:00:00,2293786.0,kWh (thousand Watt-hours),245640.0
+1675972,4717525,Electric - Grid,2007-04-30 00:00:00,1781159.0,kWh (thousand Watt-hours),195054.0
+1675972,4717525,Electric - Grid,2007-05-31 00:00:00,1807252.0,kWh (thousand Watt-hours),196137.0
+1675972,4717525,Electric - Grid,2007-06-30 00:00:00,2114256.0,kWh (thousand Watt-hours),226694.0
+1675972,4717525,Electric - Grid,2007-07-31 00:00:00,2343436.0,kWh (thousand Watt-hours),254919.0
+1675972,4717525,Electric - Grid,2007-08-31 00:00:00,2289837.0,kWh (thousand Watt-hours),308273.0
+1675972,4717525,Electric - Grid,2007-09-30 00:00:00,2298586.0,kWh (thousand Watt-hours),245868.0
+1675972,4717525,Electric - Grid,2007-10-31 00:00:00,2051675.0,kWh (thousand Watt-hours),261960.0
+1675972,4717525,Electric - Grid,2007-11-30 00:00:00,1684092.0,kWh (thousand Watt-hours),211740.0
+1675972,4717525,Electric - Grid,2007-12-31 00:00:00,1806391.0,kWh (thousand Watt-hours),221965.0
+1675972,4717525,Electric - Grid,2008-01-31 00:00:00,1854222.0,kWh (thousand Watt-hours),228671.0
+1675972,4717525,Electric - Grid,2008-02-29 00:00:00,1717418.0,kWh (thousand Watt-hours),212697.0
+1675972,4717525,Electric - Grid,2008-03-31 00:00:00,1876705.0,kWh (thousand Watt-hours),232636.0
+1675972,4717525,Electric - Grid,2008-04-30 00:00:00,1718701.0,kWh (thousand Watt-hours),215522.0
+1675972,4717525,Electric - Grid,2008-05-31 00:00:00,1748809.0,kWh (thousand Watt-hours),219604.0
+1675972,4717525,Electric - Grid,2008-06-30 00:00:00,2026759.0,kWh (thousand Watt-hours),247338.0
+1675972,4717525,Electric - Grid,2008-07-31 00:00:00,2258412.0,kWh (thousand Watt-hours),275229.0
+1675972,4717525,Electric - Grid,2008-08-31 00:00:00,2000223.0,kWh (thousand Watt-hours),249612.0
+1675972,4717525,Electric - Grid,2008-09-30 00:00:00,2173172.0,kWh (thousand Watt-hours),268173.0
+1675972,4717525,Electric - Grid,2008-10-31 00:00:00,1747434.0,kWh (thousand Watt-hours),225367.0
+1675972,4717525,Electric - Grid,2008-11-30 00:00:00,1697525.0,kWh (thousand Watt-hours),219015.0
+1675972,4717525,Electric - Grid,2008-12-31 00:00:00,1795693.0,kWh (thousand Watt-hours),225523.0
+1675972,4717525,Electric - Grid,2009-01-31 00:00:00,1814992.0,kWh (thousand Watt-hours),230071.0
+1675972,4717525,Electric - Grid,2009-02-28 00:00:00,1586105.0,kWh (thousand Watt-hours),205021.0
+1675972,4717525,Electric - Grid,2009-03-31 00:00:00,1755006.0,kWh (thousand Watt-hours),226399.0
+1675972,4717525,Electric - Grid,2009-04-30 00:00:00,1662569.0,kWh (thousand Watt-hours),168830.0
+1675972,4717525,Electric - Grid,2009-05-31 00:00:00,1800915.0,kWh (thousand Watt-hours),232476.0
+1675972,4717525,Electric - Grid,2009-06-30 00:00:00,2070872.0,kWh (thousand Watt-hours),260692.0
+1675972,4717525,Electric - Grid,2009-07-31 00:00:00,2008508.0,kWh (thousand Watt-hours),274011.0
+1675972,4717525,Electric - Grid,2009-08-31 00:00:00,2081955.0,kWh (thousand Watt-hours),279334.0
+1675972,4717525,Electric - Grid,2009-09-30 00:00:00,2187306.0,kWh (thousand Watt-hours),295661.0
+1675972,4717525,Electric - Grid,2009-10-31 00:00:00,1719874.0,kWh (thousand Watt-hours),246308.0
+1675972,4717525,Electric - Grid,2009-11-30 00:00:00,1593104.0,kWh (thousand Watt-hours),233312.0
+1675972,4717525,Electric - Grid,2009-12-31 00:00:00,1635769.0,kWh (thousand Watt-hours),181153.0
+1675972,4717525,Electric - Grid,2010-01-31 00:00:00,1684526.0,kWh (thousand Watt-hours),213593.0
+1675972,4717525,Electric - Grid,2010-02-28 00:00:00,1453063.0,kWh (thousand Watt-hours),186978.0
+1675972,4717525,Electric - Grid,2010-03-31 00:00:00,1647166.0,kWh (thousand Watt-hours),160564.0
+1675972,4717525,Electric - Grid,2010-04-30 00:00:00,1644091.0,kWh (thousand Watt-hours),203832.0
+1675972,4717525,Electric - Grid,2010-05-31 00:00:00,1641969.0,kWh (thousand Watt-hours),203774.0
+1675972,4717525,Electric - Grid,2010-06-30 00:00:00,2147040.0,kWh (thousand Watt-hours),400852.0
+1675972,4717525,Electric - Grid,2010-07-31 00:00:00,2233999.0,kWh (thousand Watt-hours),261415.0
+1675972,4717525,Electric - Grid,2010-08-31 00:00:00,2137796.0,kWh (thousand Watt-hours),250576.0
+1675972,4717525,Electric - Grid,2010-09-12 00:00:00,2103092.0,kWh (thousand Watt-hours),252344.0
+1675972,4717525,Electric - Grid,2010-10-13 00:00:00,1670403.0,kWh (thousand Watt-hours),205823.0
+1675972,4717525,Electric - Grid,2010-11-13 00:00:00,1510561.0,kWh (thousand Watt-hours),191112.0
+1675972,4717525,Electric - Grid,2010-12-14 00:00:00,1721717.0,kWh (thousand Watt-hours),214211.0
+1675972,4717525,Electric - Grid,2011-01-14 00:00:00,1663096.0,kWh (thousand Watt-hours),204097.0
+1675972,4717525,Electric - Grid,2011-02-14 00:00:00,1542514.0,kWh (thousand Watt-hours),342633.0
+1675972,4717525,Electric - Grid,2011-03-17 00:00:00,1615143.0,kWh (thousand Watt-hours),202493.0
+1675972,4717525,Electric - Grid,2011-04-17 00:00:00,1599406.0,kWh (thousand Watt-hours),200524.0
+1675972,4717525,Electric - Grid,2011-05-18 00:00:00,1812860.0,kWh (thousand Watt-hours),223094.0
+1675972,4717525,Electric - Grid,2011-06-18 00:00:00,2030948.0,kWh (thousand Watt-hours),235433.0
+1675972,4717525,Electric - Grid,2011-07-19 00:00:00,2067529.0,kWh (thousand Watt-hours),234537.0
+1675972,4717525,Electric - Grid,2011-08-19 00:00:00,2075268.0,kWh (thousand Watt-hours),234982.0
+1675972,4717525,Electric - Grid,2011-09-19 00:00:00,1841543.0,kWh (thousand Watt-hours),312901.0
+1675972,4717525,Electric - Grid,2011-10-20 00:00:00,1537693.0,kWh (thousand Watt-hours),182528.0
+1675972,4717525,Electric - Grid,2011-11-20 00:00:00,1409445.0,kWh (thousand Watt-hours),165172.0
+1675972,4717525,Electric - Grid,2011-12-21 00:00:00,1434823.0,kWh (thousand Watt-hours),172458.0
+1675972,4717525,Electric - Grid,2012-01-23 00:00:00,1441269.0,kWh (thousand Watt-hours),157095.0
+1675972,4717525,Electric - Grid,2012-02-22 00:00:00,1376611.0,kWh (thousand Watt-hours),147046.0
+1675972,4717525,Electric - Grid,2012-03-22 00:00:00,1390494.0,kWh (thousand Watt-hours),149231.0
+1675972,4717525,Electric - Grid,2012-04-22 00:00:00,1467926.0,kWh (thousand Watt-hours),159012.0
+1675972,4717525,Electric - Grid,2012-05-21 00:00:00,1480645.0,kWh (thousand Watt-hours),159312.0
+1675972,4717525,Electric - Grid,2012-06-20 00:00:00,1680964.0,kWh (thousand Watt-hours),178484.0
+1675972,4717525,Electric - Grid,2012-07-21 00:00:00,1951294.0,kWh (thousand Watt-hours),197471.0
+1675972,4717525,Electric - Grid,2012-08-20 00:00:00,1772889.0,kWh (thousand Watt-hours),185647.0
+1675972,4717525,Electric - Grid,2012-09-20 00:00:00,1757434.0,kWh (thousand Watt-hours),186205.0
+1675972,4717525,Electric - Grid,2012-10-21 00:00:00,1474171.0,kWh (thousand Watt-hours),161994.0
+1675972,4717525,Electric - Grid,2012-11-19 00:00:00,1305792.0,kWh (thousand Watt-hours),144375.0
+1675972,4717525,Electric - Grid,2012-12-20 00:00:00,1424755.0,kWh (thousand Watt-hours),156472.0
+1675972,4717525,Electric - Grid,2013-01-23 00:00:00,1435204.0,kWh (thousand Watt-hours),158037.0
+1675972,4717525,Electric - Grid,2013-02-20 00:00:00,1240609.0,kWh (thousand Watt-hours),137240.0
+1675972,4717525,Electric - Grid,2013-03-24 00:00:00,1411223.0,kWh (thousand Watt-hours),143953.0
+1675972,4717525,Electric - Grid,2013-04-22 00:00:00,1379586.0,kWh (thousand Watt-hours),150398.0
+1675972,4717525,Electric - Grid,2013-05-22 00:00:00,1389031.0,kWh (thousand Watt-hours),153449.0
+1675972,4717525,Electric - Grid,2013-06-20 00:00:00,1479098.0,kWh (thousand Watt-hours),170261.0
+1675972,4717525,Electric - Grid,2013-07-23 00:00:00,1871120.0,kWh (thousand Watt-hours),212586.0
+1675972,4717525,Electric - Grid,2013-08-20 00:00:00,1522693.0,kWh (thousand Watt-hours),177328.0
+1675972,4717525,Electric - Grid,2013-09-22 00:00:00,1691887.0,kWh (thousand Watt-hours),192953.0
+1675972,4717525,Electric - Grid,2013-10-21 00:00:00,1257771.0,kWh (thousand Watt-hours),154559.0
+1675972,4717525,Electric - Grid,2013-11-19 00:00:00,1344995.0,kWh (thousand Watt-hours),160107.0
+1675972,4717525,Electric - Grid,2013-12-22 00:00:00,1508269.0,kWh (thousand Watt-hours),179213.0
+1675972,4717525,Electric - Grid,2014-01-23 00:00:00,1487040.0,kWh (thousand Watt-hours),170934.0
+1675972,4717525,Electric - Grid,2014-02-20 00:00:00,1291073.0,kWh (thousand Watt-hours),155822.0
+1675972,4717525,Electric - Grid,2014-03-24 00:00:00,1421662.0,kWh (thousand Watt-hours),169882.0
+1675972,4717525,Electric - Grid,2014-04-22 00:00:00,1308027.0,kWh (thousand Watt-hours),158552.0
+1675972,4717525,Electric - Grid,2014-05-21 00:00:00,1452698.0,kWh (thousand Watt-hours),176443.0
+1675972,4717525,Electric - Grid,2014-06-21 00:00:00,1640954.0,kWh (thousand Watt-hours),184114.0
+1675972,4717525,Electric - Grid,2014-07-22 00:00:00,1640954.0,kWh (thousand Watt-hours),184114.0
+1675972,4717525,Electric - Grid,2014-08-20 00:00:00,1588783.0,kWh (thousand Watt-hours),174931.0
+1675972,4717525,Electric - Grid,2014-09-22 00:00:00,1718950.0,kWh (thousand Watt-hours),187084.0
+1675972,4717525,Electric - Grid,2014-10-21 00:00:00,1428852.0,kWh (thousand Watt-hours),154148.0
+1675972,4717525,Electric - Grid,2014-11-19 00:00:00,1265923.0,kWh (thousand Watt-hours),144941.0
+1675972,4717525,Electric - Grid,2014-12-18 00:00:00,1416108.0,kWh (thousand Watt-hours),157601.0
+1675972,4717525,Electric - Grid,2015-01-23 00:00:00,1677664.0,kWh (thousand Watt-hours),170800.0
+1675972,4717525,Electric - Grid,2015-02-24 00:00:00,1188757.0,kWh (thousand Watt-hours),125918.0
+1675972,4717525,Electric - Grid,2015-03-26 00:00:00,1389006.0,kWh (thousand Watt-hours),143610.0
+1675972,4717525,Electric - Grid,2015-04-27 00:00:00,1582190.0,kWh (thousand Watt-hours),163082.0
+1675972,4717525,Electric - Grid,2015-05-26 00:00:00,1292184.0,kWh (thousand Watt-hours),139225.0
+1675972,4717525,Electric - Grid,2015-06-25 00:00:00,1516105.0,kWh (thousand Watt-hours),52690.0
+1675972,4717524,Natural Gas,2002-10-31 00:00:00,13300.0,cf (cubic feet),200.0
+1675972,4717524,Natural Gas,2002-11-30 00:00:00,15600.0,cf (cubic feet),210.0
+1675972,4717524,Natural Gas,2002-12-31 00:00:00,14200.0,cf (cubic feet),200.0
+1675972,4717524,Natural Gas,2003-01-31 00:00:00,64400.0,cf (cubic feet),759.0
+1675972,4717524,Natural Gas,2003-02-28 00:00:00,93000.0,cf (cubic feet),1471.0
+1675972,4717524,Natural Gas,2003-03-31 00:00:00,87900.0,cf (cubic feet),1180.0
+1675972,4717524,Natural Gas,2003-04-30 00:00:00,43900.0,cf (cubic feet),533.0
+1675972,4717524,Natural Gas,2003-05-31 00:00:00,14700.0,cf (cubic feet),203.0
+1675972,4717524,Natural Gas,2003-06-30 00:00:00,455100.0,cf (cubic feet),5606.0
+1675972,4717524,Natural Gas,2003-07-31 00:00:00,14700.0,cf (cubic feet),192.0
+1675972,4717524,Natural Gas,2003-08-31 00:00:00,13700.0,cf (cubic feet),170.0
+1675972,4717524,Natural Gas,2003-09-30 00:00:00,13300.0,cf (cubic feet),165.0
+1675972,4717524,Natural Gas,2003-10-31 00:00:00,185800.0,cf (cubic feet),2180.0
+1675972,4717524,Natural Gas,2003-11-30 00:00:00,16000.0,cf (cubic feet),230.0
+1675972,4717524,Natural Gas,2003-12-31 00:00:00,92600.0,cf (cubic feet),1240.0
+1675972,4717524,Natural Gas,2004-01-31 00:00:00,55700.0,cf (cubic feet),788.0
+1675972,4717524,Natural Gas,2004-02-29 00:00:00,64300.0,cf (cubic feet),794.0
+1675972,4717524,Natural Gas,2004-03-31 00:00:00,61700.0,cf (cubic feet),819.0
+1675972,4717524,Natural Gas,2004-04-30 00:00:00,73700.0,cf (cubic feet),1017.0
+1675972,4717524,Natural Gas,2004-05-31 00:00:00,56600.0,cf (cubic feet),828.0
+1675972,4717524,Natural Gas,2004-06-30 00:00:00,53800.0,cf (cubic feet),769.0
+1675972,4717524,Natural Gas,2004-07-31 00:00:00,52600.0,cf (cubic feet),750.0
+1675972,4717524,Natural Gas,2004-08-31 00:00:00,55100.0,cf (cubic feet),723.0
+1675972,4717524,Natural Gas,2004-09-30 00:00:00,58200.0,cf (cubic feet),762.0
+1675972,4717524,Natural Gas,2004-10-31 00:00:00,53200.0,cf (cubic feet),856.0
+1675972,4717524,Natural Gas,2004-11-30 00:00:00,56200.0,cf (cubic feet),875.0
+1675972,4717524,Natural Gas,2004-12-31 00:00:00,54100.0,cf (cubic feet),880.0
+1675972,4717524,Natural Gas,2005-01-31 00:00:00,57900.0,cf (cubic feet),920.0
+1675972,4717524,Natural Gas,2005-02-28 00:00:00,57600.0,cf (cubic feet),845.0
+1675972,4717524,Natural Gas,2005-03-31 00:00:00,60800.0,cf (cubic feet),986.0
+1675972,4717524,Natural Gas,2005-04-30 00:00:00,66400.0,cf (cubic feet),1016.0
+1675972,4717524,Natural Gas,2005-05-31 00:00:00,60800.0,cf (cubic feet),880.0
+1675972,4717524,Natural Gas,2005-06-30 00:00:00,62800.0,cf (cubic feet),973.0
+1675972,4717524,Natural Gas,2005-07-31 00:00:00,58900.0,cf (cubic feet),915.0
+1675972,4717524,Natural Gas,2005-08-31 00:00:00,53800.0,cf (cubic feet),914.0
+1675972,4717524,Natural Gas,2005-09-30 00:00:00,56658.0,cf (cubic feet),1153.0
+1675972,4717524,Natural Gas,2005-10-31 00:00:00,49800.0,cf (cubic feet),1029.0
+1675972,4717524,Natural Gas,2005-11-30 00:00:00,68100.0,cf (cubic feet),1227.0
+1675972,4717524,Natural Gas,2005-12-31 00:00:00,34300.0,cf (cubic feet),711.0
+1675972,4717524,Natural Gas,2006-01-31 00:00:00,52400.0,cf (cubic feet),1018.0
+1675972,4717524,Natural Gas,2006-02-28 00:00:00,51100.0,cf (cubic feet),870.0
+1675972,4717524,Natural Gas,2006-03-31 00:00:00,48300.0,cf (cubic feet),825.0
+1675972,4717524,Natural Gas,2006-04-30 00:00:00,52000.0,cf (cubic feet),762.0
+1675972,4717524,Natural Gas,2006-05-31 00:00:00,51500.0,cf (cubic feet),659.0
+1675972,4717524,Natural Gas,2006-06-30 00:00:00,48600.0,cf (cubic feet),623.0
+1675972,4717524,Natural Gas,2006-07-31 00:00:00,54100.0,cf (cubic feet),681.0
+1675972,4717524,Natural Gas,2006-08-31 00:00:00,49100.0,cf (cubic feet),674.0
+1675972,4717524,Natural Gas,2006-09-30 00:00:00,50800.0,cf (cubic feet),702.0
+1675972,4717524,Natural Gas,2006-10-31 00:00:00,47400.0,cf (cubic feet),714.0
+1675972,4717524,Natural Gas,2006-11-30 00:00:00,57500.0,cf (cubic feet),932.0
+1675972,4717524,Natural Gas,2006-12-31 00:00:00,50800.0,cf (cubic feet),827.0
+1675972,4717524,Natural Gas,2007-01-31 00:00:00,55100.0,cf (cubic feet),897.0
+1675972,4717524,Natural Gas,2007-02-28 00:00:00,50000.0,cf (cubic feet),756.0
+1675972,4717524,Natural Gas,2007-03-31 00:00:00,47045.0,cf (cubic feet),716.0
+1675972,4717524,Natural Gas,2007-04-30 00:00:00,45043.0,cf (cubic feet),668.0
+1675972,4717524,Natural Gas,2007-05-31 00:00:00,38537.0,cf (cubic feet),581.0
+1675972,4717524,Natural Gas,2007-06-30 00:00:00,64261.0,cf (cubic feet),920.0
+1675972,4717524,Natural Gas,2007-07-31 00:00:00,53551.0,cf (cubic feet),719.0
+1675972,4717524,Natural Gas,2007-08-31 00:00:00,48546.0,cf (cubic feet),706.0
+1675972,4717524,Natural Gas,2007-09-30 00:00:00,60158.0,cf (cubic feet),843.0
+1675972,4717524,Natural Gas,2007-10-31 00:00:00,48346.0,cf (cubic feet),725.0
+1675972,4717524,Natural Gas,2007-11-30 00:00:00,55253.0,cf (cubic feet),858.0
+1675972,4717524,Natural Gas,2007-12-31 00:00:00,50849.0,cf (cubic feet),759.0
+1675972,4717524,Natural Gas,2008-01-31 00:00:00,56483.0,cf (cubic feet),888.0
+1675972,4717524,Natural Gas,2008-02-29 00:00:00,52450.0,cf (cubic feet),826.0
+1675972,4717524,Natural Gas,2008-03-31 00:00:00,56625.0,cf (cubic feet),857.0
+1675972,4717524,Natural Gas,2008-04-30 00:00:00,49361.0,cf (cubic feet),844.0
+1675972,4717524,Natural Gas,2008-05-31 00:00:00,51152.0,cf (cubic feet),919.0
+1675972,4717524,Natural Gas,2008-06-30 00:00:00,49315.0,cf (cubic feet),1038.0
+1675972,4717524,Natural Gas,2008-07-31 00:00:00,50605.0,cf (cubic feet),920.0
+1675972,4717524,Natural Gas,2008-08-31 00:00:00,50605.0,cf (cubic feet),817.0
+1675972,4717524,Natural Gas,2008-09-30 00:00:00,46962.0,cf (cubic feet),758.0
+1675972,4717524,Natural Gas,2008-10-31 00:00:00,49612.0,cf (cubic feet),787.0
+1675972,4717524,Natural Gas,2008-11-30 00:00:00,47265.0,cf (cubic feet),800.0
+1675972,4717524,Natural Gas,2008-12-31 00:00:00,58855.0,cf (cubic feet),924.0
+1675972,4717524,Natural Gas,2009-01-31 00:00:00,42139.0,cf (cubic feet),641.0
+1675972,4717524,Natural Gas,2009-02-28 00:00:00,52795.0,cf (cubic feet),604.0
+1675972,4717524,Natural Gas,2009-03-31 00:00:00,47879.0,cf (cubic feet),695.0
+1675972,4717524,Natural Gas,2009-04-30 00:00:00,46321.0,cf (cubic feet),588.0
+1675972,4717524,Natural Gas,2009-05-31 00:00:00,49209.0,cf (cubic feet),617.0
+1675972,4717524,Natural Gas,2009-06-30 00:00:00,51500.0,cf (cubic feet),642.0
+1675972,4717524,Natural Gas,2009-07-31 00:00:00,51899.0,cf (cubic feet),647.0
+1675972,4717524,Natural Gas,2009-08-31 00:00:00,53991.0,cf (cubic feet),670.0
+1675972,4717524,Natural Gas,2009-09-30 00:00:00,51102.0,cf (cubic feet),649.0
+1675972,4717524,Natural Gas,2009-10-31 00:00:00,48512.0,cf (cubic feet),651.0
+1675972,4717524,Natural Gas,2009-11-30 00:00:00,54446.0,cf (cubic feet),684.0
+1675972,4717524,Natural Gas,2009-12-31 00:00:00,45580.0,cf (cubic feet),616.0
+1675972,4717524,Natural Gas,2010-01-31 00:00:00,47217.0,cf (cubic feet),650.0
+1675972,4717524,Natural Gas,2010-02-28 00:00:00,40721.0,cf (cubic feet),542.0
+1675972,4717524,Natural Gas,2010-03-31 00:00:00,45115.0,cf (cubic feet),565.0
+1675972,4717524,Natural Gas,2010-04-30 00:00:00,54960.0,cf (cubic feet),668.0
+1675972,4717524,Natural Gas,2010-05-31 00:00:00,53194.0,cf (cubic feet),674.0
+1675972,4717524,Natural Gas,2010-06-30 00:00:00,51102.0,cf (cubic feet),764.0
+1675972,4717524,Natural Gas,2010-07-31 00:00:00,59470.0,cf (cubic feet),892.0
+1675972,4717524,Natural Gas,2010-08-31 00:00:00,63806.0,cf (cubic feet),789.0
+1675972,4717524,Natural Gas,2010-09-19 00:00:00,57007.0,cf (cubic feet),707.0
+1675972,4717524,Natural Gas,2010-10-20 00:00:00,45629.0,cf (cubic feet),581.0
+1675972,4717524,Natural Gas,2010-11-20 00:00:00,42924.0,cf (cubic feet),524.0
+1675972,4717524,Natural Gas,2010-12-21 00:00:00,38808.0,cf (cubic feet),493.0
+1675972,4717524,Natural Gas,2011-01-21 00:00:00,37828.0,cf (cubic feet),486.0
+1675972,4717524,Natural Gas,2011-02-21 00:00:00,37475.0,cf (cubic feet),484.0
+1675972,4717524,Natural Gas,2011-03-24 00:00:00,39208.0,cf (cubic feet),482.0
+1675972,4717524,Natural Gas,2011-04-24 00:00:00,38461.0,cf (cubic feet),460.0
+1675972,4717524,Natural Gas,2011-05-25 00:00:00,43214.0,cf (cubic feet),531.0
+1675972,4717524,Natural Gas,2011-06-25 00:00:00,44504.0,cf (cubic feet),559.0
+1675972,4717524,Natural Gas,2011-07-26 00:00:00,40643.0,cf (cubic feet),530.0
+1675972,4717524,Natural Gas,2011-08-26 00:00:00,37927.0,cf (cubic feet),445.0
+1675972,4717524,Natural Gas,2011-09-26 00:00:00,47016.0,cf (cubic feet),554.0
+1675972,4717524,Natural Gas,2011-10-27 00:00:00,43078.0,cf (cubic feet),517.0
+1675972,4717524,Natural Gas,2011-11-27 00:00:00,42234.0,cf (cubic feet),540.0
+1675972,4717524,Natural Gas,2011-12-28 00:00:00,40352.0,cf (cubic feet),507.0
+1675972,4717524,Natural Gas,2012-01-30 00:00:00,38394.0,cf (cubic feet),461.0
+1675972,4717524,Natural Gas,2012-02-29 00:00:00,42350.0,cf (cubic feet),450.0
+1675972,4717524,Natural Gas,2012-03-29 00:00:00,41001.0,cf (cubic feet),475.0
+1675972,4717524,Natural Gas,2012-04-27 00:00:00,42262.0,cf (cubic feet),437.0
+1675972,4717524,Natural Gas,2012-05-29 00:00:00,41855.0,cf (cubic feet),475.0
+1675972,4717524,Natural Gas,2012-06-27 00:00:00,40090.0,cf (cubic feet),455.0
+1675972,4717524,Natural Gas,2012-07-27 00:00:00,42214.0,cf (cubic feet),504.0
+1675972,4717524,Natural Gas,2012-08-27 00:00:00,40565.0,cf (cubic feet),418.0
+1675972,4717524,Natural Gas,2012-09-26 00:00:00,37122.0,cf (cubic feet),384.0
+1675972,4717524,Natural Gas,2012-10-25 00:00:00,35987.0,cf (cubic feet),404.0
+1675972,4717524,Natural Gas,2012-11-28 00:00:00,33504.0,cf (cubic feet),385.0
+1675972,4717524,Natural Gas,2012-12-28 00:00:00,39857.0,cf (cubic feet),473.0
+1675972,4717524,Natural Gas,2013-01-30 00:00:00,27879.0,cf (cubic feet),339.0
+1675972,4717524,Natural Gas,2013-02-28 00:00:00,35793.0,cf (cubic feet),416.0
+1675972,4717524,Natural Gas,2013-03-29 00:00:00,35260.0,cf (cubic feet),457.0
+1675972,4717524,Natural Gas,2013-04-29 00:00:00,37277.0,cf (cubic feet),486.0
+1675972,4717524,Natural Gas,2013-05-29 00:00:00,31263.0,cf (cubic feet),395.0
+1675972,4717524,Natural Gas,2013-06-27 00:00:00,33378.0,cf (cubic feet),404.0
+1675972,4717524,Natural Gas,2013-07-29 00:00:00,32165.0,cf (cubic feet),353.0
+1675972,4717524,Natural Gas,2013-08-27 00:00:00,29246.0,cf (cubic feet),331.0
+1675972,4717524,Natural Gas,2013-09-26 00:00:00,34125.0,cf (cubic feet),399.0
+1675972,4717524,Natural Gas,2013-10-25 00:00:00,20370.0,cf (cubic feet),254.0
+1675972,4717524,Natural Gas,2013-11-26 00:00:00,32097.0,cf (cubic feet),360.0
+1675972,4717524,Natural Gas,2013-12-30 00:00:00,31719.0,cf (cubic feet),366.0
+1675972,4717524,Natural Gas,2014-01-30 00:00:00,32718.0,cf (cubic feet),395.0
+1675972,4717524,Natural Gas,2014-02-28 00:00:00,29013.0,cf (cubic feet),437.0
+1675972,4717524,Natural Gas,2014-03-31 00:00:00,37665.0,cf (cubic feet),516.0
+1675972,4717524,Natural Gas,2014-04-29 00:00:00,37151.0,cf (cubic feet),463.0
+1675972,4717524,Natural Gas,2014-05-29 00:00:00,37849.0,cf (cubic feet),461.0
+1675972,4717524,Natural Gas,2014-06-27 00:00:00,33397.0,cf (cubic feet),408.0
+1675972,4717524,Natural Gas,2014-07-29 00:00:00,39033.0,cf (cubic feet),409.0
+1675972,4717524,Natural Gas,2014-08-27 00:00:00,35473.0,cf (cubic feet),378.0
+1675972,4717524,Natural Gas,2014-09-26 00:00:00,33902.0,cf (cubic feet),362.0
+1675972,4717524,Natural Gas,2014-10-27 00:00:00,33426.0,cf (cubic feet),368.0
+1675972,4717524,Natural Gas,2014-11-26 00:00:00,34328.0,cf (cubic feet),396.0
+1675972,4717524,Natural Gas,2014-12-30 00:00:00,38810.0,cf (cubic feet),445.0
+1675972,4717524,Natural Gas,2015-01-30 00:00:00,9836.0,cf (cubic feet),123.0
+1675972,4717524,Natural Gas,2015-03-02 00:00:00,27141.0,cf (cubic feet),334.0
+1675972,4717524,Natural Gas,2015-03-31 00:00:00,26888.0,cf (cubic feet),331.0
+1675972,4717524,Natural Gas,2015-04-29 00:00:00,25899.0,cf (cubic feet),310.0
+1675972,4717524,Natural Gas,2015-05-29 00:00:00,26006.0,cf (cubic feet),296.0
+1675972,4717524,Natural Gas,2015-06-29 00:00:00,26830.0,cf (cubic feet),274.0
+1675972,4717526,District Steam,2002-10-31 00:00:00,2136.0,kLbs. (thousand pounds),43468.0
+1675972,4717526,District Steam,2002-11-30 00:00:00,3504.0,kLbs. (thousand pounds),71306.0
+1675972,4717526,District Steam,2002-12-31 00:00:00,4782.0,kLbs. (thousand pounds),97314.0
+1675972,4717526,District Steam,2003-01-31 00:00:00,5685.0,kLbs. (thousand pounds),115690.0
+1675972,4717526,District Steam,2003-02-28 00:00:00,4746.0,kLbs. (thousand pounds),96581.0
+1675972,4717526,District Steam,2003-03-31 00:00:00,3588.0,kLbs. (thousand pounds),73016.0
+1675972,4717526,District Steam,2003-04-30 00:00:00,2105.0,kLbs. (thousand pounds),42837.0
+1675972,4717526,District Steam,2003-05-31 00:00:00,1699.0,kLbs. (thousand pounds),34575.0
+1675972,4717526,District Steam,2003-06-30 00:00:00,1256.0,kLbs. (thousand pounds),25560.0
+1675972,4717526,District Steam,2003-07-31 00:00:00,1225.0,kLbs. (thousand pounds),24929.0
+1675972,4717526,District Steam,2003-08-31 00:00:00,1191.0,kLbs. (thousand pounds),24237.0
+1675972,4717526,District Steam,2003-09-30 00:00:00,1180.0,kLbs. (thousand pounds),24013.0
+1675972,4717526,District Steam,2003-10-31 00:00:00,2041.0,kLbs. (thousand pounds),41534.0
+1675972,4717526,District Steam,2003-11-30 00:00:00,2752.0,kLbs. (thousand pounds),56003.0
+1675972,4717526,District Steam,2003-12-31 00:00:00,5104.0,kLbs. (thousand pounds),103866.0
+1675972,4717526,District Steam,2004-01-31 00:00:00,7719.0,kLbs. (thousand pounds),157081.0
+1675972,4717526,District Steam,2004-02-29 00:00:00,4918.0,kLbs. (thousand pounds),100081.0
+1675972,4717526,District Steam,2004-03-31 00:00:00,3836.0,kLbs. (thousand pounds),78063.0
+1675972,4717526,District Steam,2004-04-30 00:00:00,2646.0,kLbs. (thousand pounds),58080.0
+1675972,4717526,District Steam,2004-05-31 00:00:00,1235.0,kLbs. (thousand pounds),27108.0
+1675972,4717526,District Steam,2004-06-30 00:00:00,866.0,kLbs. (thousand pounds),19007.0
+1675972,4717526,District Steam,2004-07-31 00:00:00,834.0,kLbs. (thousand pounds),18306.0
+1675972,4717526,District Steam,2004-08-31 00:00:00,917.0,kLbs. (thousand pounds),20128.0
+1675972,4717526,District Steam,2004-09-30 00:00:00,876.0,kLbs. (thousand pounds),19228.0
+1675972,4717526,District Steam,2004-10-31 00:00:00,1931.0,kLbs. (thousand pounds),42385.0
+1675972,4717526,District Steam,2004-11-30 00:00:00,2722.0,kLbs. (thousand pounds),59748.0
+1675972,4717526,District Steam,2004-12-31 00:00:00,4000.0,kLbs. (thousand pounds),103800.0
+1675972,4717526,District Steam,2005-01-31 00:00:00,5221.0,kLbs. (thousand pounds),135485.0
+1675972,4717526,District Steam,2005-02-28 00:00:00,4315.0,kLbs. (thousand pounds),111974.0
+1675972,4717526,District Steam,2005-03-31 00:00:00,4377.0,kLbs. (thousand pounds),113583.0
+1675972,4717526,District Steam,2005-04-30 00:00:00,2127.0,kLbs. (thousand pounds),55188.0
+1675972,4717526,District Steam,2005-05-31 00:00:00,1472.0,kLbs. (thousand pounds),38188.0
+1675972,4717526,District Steam,2005-06-30 00:00:00,1210.0,kLbs. (thousand pounds),31402.0
+1675972,4717526,District Steam,2005-07-31 00:00:00,888.0,kLbs. (thousand pounds),23033.0
+1675972,4717526,District Steam,2005-08-31 00:00:00,926.0,kLbs. (thousand pounds),24022.0
+1675972,4717526,District Steam,2005-09-30 00:00:00,929.0,kLbs. (thousand pounds),32476.0
+1675972,4717526,District Steam,2005-10-31 00:00:00,1973.0,kLbs. (thousand pounds),68960.0
+1675972,4717526,District Steam,2005-11-30 00:00:00,3250.0,kLbs. (thousand pounds),113591.0
+1675972,4717526,District Steam,2005-12-31 00:00:00,5837.0,kLbs. (thousand pounds),204010.0
+1675972,4717526,District Steam,2006-01-31 00:00:00,5593.0,kLbs. (thousand pounds),195493.0
+1675972,4717526,District Steam,2006-02-28 00:00:00,5388.0,kLbs. (thousand pounds),188314.0
+1675972,4717526,District Steam,2006-03-31 00:00:00,4645.0,kLbs. (thousand pounds),162353.0
+1675972,4717526,District Steam,2006-04-30 00:00:00,2708.0,kLbs. (thousand pounds),94645.0
+1675972,4717526,District Steam,2006-05-31 00:00:00,1874.0,kLbs. (thousand pounds),65486.0
+1675972,4717526,District Steam,2006-06-30 00:00:00,998.0,kLbs. (thousand pounds),34884.0
+1675972,4717526,District Steam,2006-07-31 00:00:00,1054.0,kLbs. (thousand pounds),36844.0
+1675972,4717526,District Steam,2006-08-31 00:00:00,1499.0,kLbs. (thousand pounds),52376.0
+1675972,4717526,District Steam,2006-09-30 00:00:00,1118.0,kLbs. (thousand pounds),43558.0
+1675972,4717526,District Steam,2006-10-31 00:00:00,2150.0,kLbs. (thousand pounds),83743.0
+1675972,4717526,District Steam,2006-11-30 00:00:00,3367.0,kLbs. (thousand pounds),131149.0
+1675972,4717526,District Steam,2006-12-31 00:00:00,4664.0,kLbs. (thousand pounds),181663.0
+1675972,4717526,District Steam,2007-01-31 00:00:00,6056.0,kLbs. (thousand pounds),235842.0
+1675972,4717526,District Steam,2007-02-28 00:00:00,5858.0,kLbs. (thousand pounds),228169.0
+1675972,4717526,District Steam,2007-03-31 00:00:00,3925.0,kLbs. (thousand pounds),152879.0
+1675972,4717526,District Steam,2007-04-30 00:00:00,3115.0,kLbs. (thousand pounds),121329.0
+1675972,4717526,District Steam,2007-05-31 00:00:00,1570.0,kLbs. (thousand pounds),61152.0
+1675972,4717526,District Steam,2007-06-30 00:00:00,1083.0,kLbs. (thousand pounds),42183.0
+1675972,4717526,District Steam,2007-07-31 00:00:00,1045.0,kLbs. (thousand pounds),40703.0
+1675972,4717526,District Steam,2007-08-31 00:00:00,1145.0,kLbs. (thousand pounds),44598.0
+1675972,4717526,District Steam,2007-09-30 00:00:00,1057.0,kLbs. (thousand pounds),41170.0
+1675972,4717526,District Steam,2007-10-31 00:00:00,2027.0,kLbs. (thousand pounds),78952.0
+1675972,4717526,District Steam,2007-11-30 00:00:00,3450.0,kLbs. (thousand pounds),134378.0
+1675972,4717526,District Steam,2007-12-31 00:00:00,3879.0,kLbs. (thousand pounds),151087.0
+1675972,4717526,District Steam,2008-01-31 00:00:00,5619.0,kLbs. (thousand pounds),218860.0
+1675972,4717526,District Steam,2008-02-29 00:00:00,5858.0,kLbs. (thousand pounds),228169.0
+1675972,4717526,District Steam,2008-03-31 00:00:00,4194.0,kLbs. (thousand pounds),163360.0
+1675972,4717526,District Steam,2008-04-30 00:00:00,2521.0,kLbs. (thousand pounds),98193.0
+1675972,4717526,District Steam,2008-05-31 00:00:00,1419.0,kLbs. (thousand pounds),55270.0
+1675972,4717526,District Steam,2008-06-30 00:00:00,2343.0,kLbs. (thousand pounds),91275.0
+1675972,4717526,District Steam,2008-07-31 00:00:00,1219.0,kLbs. (thousand pounds),47468.0
+1675972,4717526,District Steam,2008-08-31 00:00:00,1204.0,kLbs. (thousand pounds),46876.0
+1675972,4717526,District Steam,2008-09-30 00:00:00,1165.0,kLbs. (thousand pounds),46554.0
+1675972,4717526,District Steam,2008-10-31 00:00:00,2056.0,kLbs. (thousand pounds),82125.0
+1675972,4717526,District Steam,2008-11-30 00:00:00,3245.0,kLbs. (thousand pounds),129630.0
+1675972,4717526,District Steam,2008-12-31 00:00:00,4532.0,kLbs. (thousand pounds),181045.0
+1675972,4717526,District Steam,2009-01-31 00:00:00,6224.0,kLbs. (thousand pounds),248665.0
+1675972,4717526,District Steam,2009-02-28 00:00:00,4916.0,kLbs. (thousand pounds),196398.0
+1675972,4717526,District Steam,2009-03-31 00:00:00,4560.0,kLbs. (thousand pounds),182188.0
+1675972,4717526,District Steam,2009-04-30 00:00:00,3030.0,kLbs. (thousand pounds),121049.0
+1675972,4717526,District Steam,2009-05-31 00:00:00,1598.0,kLbs. (thousand pounds),63832.0
+1675972,4717526,District Steam,2009-06-30 00:00:00,1244.0,kLbs. (thousand pounds),49706.0
+1675972,4717526,District Steam,2009-07-31 00:00:00,1162.0,kLbs. (thousand pounds),46422.0
+1675972,4717526,District Steam,2009-08-31 00:00:00,1145.0,kLbs. (thousand pounds),45743.0
+1675972,4717526,District Steam,2009-09-30 00:00:00,1070.0,kLbs. (thousand pounds),43817.0
+1675972,4717526,District Steam,2009-10-31 00:00:00,2072.0,kLbs. (thousand pounds),84848.0
+1675972,4717526,District Steam,2009-11-30 00:00:00,2542.0,kLbs. (thousand pounds),104095.0
+1675972,4717526,District Steam,2009-12-31 00:00:00,4167.0,kLbs. (thousand pounds),170639.0
+1675972,4717526,District Steam,2010-01-31 00:00:00,5504.0,kLbs. (thousand pounds),225389.0
+1675972,4717526,District Steam,2010-02-28 00:00:00,4680.0,kLbs. (thousand pounds),191646.0
+1675972,4717526,District Steam,2010-03-31 00:00:00,2510.0,kLbs. (thousand pounds),102785.0
+1675972,4717526,District Steam,2010-04-30 00:00:00,1168.0,kLbs. (thousand pounds),47830.0
+1675972,4717526,District Steam,2010-05-31 00:00:00,1154.0,kLbs. (thousand pounds),47256.0
+1675972,4717526,District Steam,2010-06-30 00:00:00,1030.0,kLbs. (thousand pounds),42179.0
+1675972,4717526,District Steam,2010-07-31 00:00:00,989.0,kLbs. (thousand pounds),40500.0
+1675972,4717526,District Steam,2010-08-31 00:00:00,1046.0,kLbs. (thousand pounds),42834.0
+1675972,4717526,District Steam,2010-09-21 00:00:00,1048.0,kLbs. (thousand pounds),40767.0
+1675972,4717526,District Steam,2010-10-22 00:00:00,1103.0,kLbs. (thousand pounds),42907.0
+1675972,4717526,District Steam,2010-11-22 00:00:00,2522.0,kLbs. (thousand pounds),98106.0
+1675972,4717526,District Steam,2010-12-23 00:00:00,5220.0,kLbs. (thousand pounds),203058.0
+1675972,4717526,District Steam,2011-01-23 00:00:00,5329.0,kLbs. (thousand pounds),207298.0
+1675972,4717526,District Steam,2011-02-23 00:00:00,3899.0,kLbs. (thousand pounds),151671.0
+1675972,4717526,District Steam,2011-03-26 00:00:00,3599.0,kLbs. (thousand pounds),140001.0
+1675972,4717526,District Steam,2011-04-26 00:00:00,2531.0,kLbs. (thousand pounds),98456.0
+1675972,4717526,District Steam,2011-05-27 00:00:00,1418.0,kLbs. (thousand pounds),55160.0
+1675972,4717526,District Steam,2011-06-27 00:00:00,957.0,kLbs. (thousand pounds),37227.0
+1675972,4717526,District Steam,2011-07-28 00:00:00,867.0,kLbs. (thousand pounds),92084.0
+1675972,4717526,District Steam,2011-08-28 00:00:00,873.0,kLbs. (thousand pounds),33960.0
+1675972,4717526,District Steam,2011-09-28 00:00:00,932.0,kLbs. (thousand pounds),36255.0
+1675972,4717526,District Steam,2011-10-29 00:00:00,1162.0,kLbs. (thousand pounds),45202.0
+1675972,4717526,District Steam,2011-11-29 00:00:00,2346.0,kLbs. (thousand pounds),91259.0
+1675972,4717526,District Steam,2011-12-30 00:00:00,3113.0,kLbs. (thousand pounds),121096.0
+1675972,4717526,District Steam,2012-01-31 00:00:00,3990.0,kLbs. (thousand pounds),155211.0
+1675972,4717526,District Steam,2012-02-28 00:00:00,3091.0,kLbs. (thousand pounds),120240.0
+1675972,4717526,District Steam,2012-03-30 00:00:00,1853.0,kLbs. (thousand pounds),72082.0
+1675972,4717526,District Steam,2012-04-30 00:00:00,1777.0,kLbs. (thousand pounds),69125.0
+1675972,4717526,District Steam,2012-05-31 00:00:00,1204.0,kLbs. (thousand pounds),46836.0
+1675972,4717526,District Steam,2012-06-29 00:00:00,1419.0,kLbs. (thousand pounds),55199.0
+1675972,4717526,District Steam,2012-07-27 00:00:00,893.0,kLbs. (thousand pounds),34738.0
+1675972,4717526,District Steam,2012-08-31 00:00:00,692.0,kLbs. (thousand pounds),26919.0
+1675972,4717526,District Steam,2012-09-28 00:00:00,736.0,kLbs. (thousand pounds),28630.0
+1675972,4717526,District Steam,2012-10-30 00:00:00,1004.0,kLbs. (thousand pounds),39056.0
+1675972,4717526,District Steam,2012-11-30 00:00:00,2557.0,kLbs. (thousand pounds),99467.0
+1675972,4717526,District Steam,2012-12-31 00:00:00,3089.0,kLbs. (thousand pounds),120162.0
+1675972,4717526,District Steam,2013-01-31 00:00:00,3494.0,kLbs. (thousand pounds),135917.0
+1675972,4717526,District Steam,2013-02-27 00:00:00,3335.0,kLbs. (thousand pounds),129732.0
+1675972,4717526,District Steam,2013-03-29 00:00:00,3217.0,kLbs. (thousand pounds),125141.0
+1675972,4717526,District Steam,2013-04-30 00:00:00,1834.0,kLbs. (thousand pounds),71343.0
+1675972,4717526,District Steam,2013-05-31 00:00:00,1093.0,kLbs. (thousand pounds),42518.0
+1675972,4717526,District Steam,2013-06-28 00:00:00,983.0,kLbs. (thousand pounds),38239.0
+1675972,4717526,District Steam,2013-07-31 00:00:00,526.0,kLbs. (thousand pounds),20461.0
+1675972,4717526,District Steam,2013-08-30 00:00:00,581.0,kLbs. (thousand pounds),22601.0
+1675972,4717526,District Steam,2013-09-30 00:00:00,720.0,kLbs. (thousand pounds),28008.0
+1675972,4717526,District Steam,2013-10-31 00:00:00,1091.0,kLbs. (thousand pounds),42440.0
+1675972,4717526,District Steam,2013-11-29 00:00:00,2502.0,kLbs. (thousand pounds),97328.0
+1675972,4717526,District Steam,2013-12-31 00:00:00,3275.0,kLbs. (thousand pounds),127398.0
+1675972,4717526,District Steam,2014-01-31 00:00:00,3676.0,kLbs. (thousand pounds),142996.0
+1675972,4717526,District Steam,2014-02-28 00:00:00,2757.0,kLbs. (thousand pounds),107247.0
+1675972,4717526,District Steam,2014-03-28 00:00:00,3533.0,kLbs. (thousand pounds),137434.0
+1675972,4717526,District Steam,2014-04-30 00:00:00,1959.0,kLbs. (thousand pounds),76205.0
+1675972,4717526,District Steam,2014-06-02 00:00:00,793.0,kLbs. (thousand pounds),30848.0
+1675972,4717526,District Steam,2014-06-30 00:00:00,486.0,kLbs. (thousand pounds),18905.0
+1675972,4717526,District Steam,2014-07-31 00:00:00,277.0,kLbs. (thousand pounds),10775.0
+1675972,4717526,District Steam,2014-08-30 00:00:00,848.0,kLbs. (thousand pounds),32987.0
+1675972,4717526,District Steam,2014-09-30 00:00:00,1004.0,kLbs. (thousand pounds),39056.0
+1675972,4717526,District Steam,2014-10-31 00:00:00,1355.0,kLbs. (thousand pounds),52710.0
+1675972,4717526,District Steam,2014-11-30 00:00:00,2431.0,kLbs. (thousand pounds),94554.0
+1675972,4717526,District Steam,2014-12-31 00:00:00,3214.0,kLbs. (thousand pounds),125028.0
+1675972,4717526,District Steam,2015-01-31 00:00:00,4218.0,kLbs. (thousand pounds),164065.0
+1675972,4717526,District Steam,2015-02-27 00:00:00,4215.0,kLbs. (thousand pounds),163971.0
+1675972,4717526,District Steam,2015-03-31 00:00:00,3147.0,kLbs. (thousand pounds),122403.0
+1675972,4717526,District Steam,2015-04-30 00:00:00,1386.0,kLbs. (thousand pounds),53915.0
+1675972,4717526,District Steam,2015-05-29 00:00:00,589.0,kLbs. (thousand pounds),22904.0
+1675972,4717526,District Steam,2015-06-30 00:00:00,14.0,kLbs. (thousand pounds),533.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2002-10-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2002-11-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2002-12-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-01-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-02-28 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-03-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-04-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-05-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-06-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-07-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-08-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-09-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-10-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-11-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2003-12-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-01-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-02-29 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-03-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-04-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-05-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-06-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-07-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-08-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-09-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-10-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-11-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2004-12-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-01-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-02-28 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-03-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-04-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-05-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-06-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-07-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-08-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-09-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-10-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-11-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2005-12-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-01-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-02-28 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-03-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-04-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-05-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-06-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-07-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-08-31 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-09-30 00:00:00,0.0,Gallons,0.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-10-31 00:00:00,639540.0,Gallons,4930.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-11-30 00:00:00,907324.0,Gallons,6957.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2006-12-31 00:00:00,1132472.0,Gallons,8648.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-01-31 00:00:00,664224.0,Gallons,5130.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-02-28 00:00:00,699380.0,Gallons,5394.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-03-31 00:00:00,675444.0,Gallons,5214.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-04-30 00:00:00,497420.0,Gallons,3877.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-05-31 00:00:00,682176.0,Gallons,5265.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-06-30 00:00:00,476476.0,Gallons,3719.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-07-31 00:00:00,484704.0,Gallons,3781.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-08-31 00:00:00,577456.0,Gallons,4478.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-09-30 00:00:00,587928.0,Gallons,4557.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-10-31 00:00:00,586432.0,Gallons,4773.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-11-30 00:00:00,520608.0,Gallons,4267.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2007-12-31 00:00:00,1100308.0,Gallons,8863.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-01-31 00:00:00,514999.0,Gallons,4153.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-02-29 00:00:00,521356.0,Gallons,4273.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-03-31 00:00:00,499664.0,Gallons,4101.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-04-30 00:00:00,663476.0,Gallons,5399.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-05-31 00:00:00,703120.0,Gallons,5714.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-06-30 00:00:00,558756.0,Gallons,4569.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-07-31 00:00:00,818816.0,Gallons,6615.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-08-31 00:00:00,713592.0,Gallons,5797.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-09-30 00:00:00,647020.0,Gallons,5281.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-10-31 00:00:00,624580.0,Gallons,5488.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-11-30 00:00:00,455532.0,Gallons,4192.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2008-12-31 00:00:00,1132472.0,Gallons,10214.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-01-31 00:00:00,465256.0,Gallons,4278.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-02-28 00:00:00,521356.0,Gallons,4777.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-03-31 00:00:00,557260.0,Gallons,5097.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-04-30 00:00:00,754732.0,Gallons,6849.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-05-31 00:00:00,566236.0,Gallons,5226.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-06-30 00:00:00,578952.0,Gallons,5330.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-07-31 00:00:00,1259632.0,Gallons,10909.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-08-31 00:00:00,1265616.0,Gallons,10957.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-09-30 00:00:00,2028576.0,Gallons,28280.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-10-31 00:00:00,1428680.0,Gallons,13476.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-11-30 00:00:00,1126488.0,Gallons,10773.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2009-12-31 00:00:00,1179596.0,Gallons,11248.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-01-31 00:00:00,1097316.0,Gallons,10512.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-02-28 00:00:00,842996.0,Gallons,8238.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-03-31 00:00:00,1130976.0,Gallons,10813.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-04-30 00:00:00,1118260.0,Gallons,10700.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-05-31 00:00:00,1004564.0,Gallons,9683.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-06-30 00:00:00,1082356.0,Gallons,10378.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-07-31 00:00:00,1231208.0,Gallons,11710.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-08-31 00:00:00,1015748.0,Gallons,9783.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-09-24 00:00:00,1279080.0,Gallons,12505.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-10-25 00:00:00,813076.0,Gallons,9147.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-11-25 00:00:00,1113024.0,Gallons,12175.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2010-12-26 00:00:00,1436908.0,Gallons,15431.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-01-26 00:00:00,1113772.0,Gallons,12182.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-02-26 00:00:00,1624656.0,Gallons,17318.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-03-29 00:00:00,1142196.0,Gallons,12468.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-04-29 00:00:00,1137708.0,Gallons,12423.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-05-30 00:00:00,1214752.0,Gallons,13197.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-06-30 00:00:00,1113024.0,Gallons,12175.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-07-31 00:00:00,860200.0,Gallons,9633.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-08-31 00:00:00,466004.0,Gallons,5670.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-10-01 00:00:00,439076.0,Gallons,5785.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-11-01 00:00:00,406164.0,Gallons,5615.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2011-12-02 00:00:00,445808.0,Gallons,6031.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-01-02 00:00:00,500412.0,Gallons,6603.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-01-31 00:00:00,560252.0,Gallons,7231.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-02-28 00:00:00,443564.0,Gallons,6007.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-03-28 00:00:00,460020.0,Gallons,6180.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-04-27 00:00:00,446556.0,Gallons,6039.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-05-29 00:00:00,433840.0,Gallons,5906.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-06-29 00:00:00,471988.0,Gallons,6305.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-07-30 00:00:00,407660.0,Gallons,5631.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-08-28 00:00:00,423368.0,Gallons,5796.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-09-28 00:00:00,462264.0,Gallons,6547.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-11-01 00:00:00,476476.0,Gallons,6948.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2012-11-30 00:00:00,481712.0,Gallons,7021.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-01-02 00:00:00,453288.0,Gallons,6285.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-02-07 00:00:00,453288.0,Gallons,6285.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-03-01 00:00:00,304436.0,Gallons,5063.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-04-02 00:00:00,507892.0,Gallons,7310.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-04-30 00:00:00,808588.0,Gallons,5022.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-05-28 00:00:00,384472.0,Gallons,5947.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-06-26 00:00:00,385968.0,Gallons,5964.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-08-01 00:00:00,473484.0,Gallons,6930.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-09-04 00:00:00,400928.0,Gallons,6607.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-09-26 00:00:00,327624.0,Gallons,5076.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-11-01 00:00:00,504152.0,Gallons,7811.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-12-05 00:00:00,342584.0,Gallons,5962.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2013-12-31 00:00:00,424864.0,Gallons,6921.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-01-31 00:00:00,420376.0,Gallons,6869.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-03-03 00:00:00,130900.0,Gallons,3494.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-03-27 00:00:00,471240.0,Gallons,7462.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-04-29 00:00:00,505648.0,Gallons,7863.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-05-28 00:00:00,486948.0,Gallons,7645.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-06-27 00:00:00,474980.0,Gallons,7506.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-07-30 00:00:00,482460.0,Gallons,7593.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-08-29 00:00:00,449548.0,Gallons,7209.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-10-09 00:00:00,527340.0,Gallons,8772.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-10-31 00:00:00,387464.0,Gallons,7334.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-11-30 00:00:00,479468.0,Gallons,8471.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2014-12-29 00:00:00,329120.0,Gallons,6612.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2015-01-28 00:00:00,412896.0,Gallons,7648.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2015-02-26 00:00:00,427856.0,Gallons,7833.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2015-04-01 00:00:00,436333.0,Gallons,2411.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2015-04-30 00:00:00,436333.0,Gallons,2411.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2015-05-31 00:00:00,436333.0,Gallons,2411.0
+1675972,5863801,Potable: Mixed Indoor/Outdoor,2015-06-29 00:00:00,474980.0,Gallons,8416.0

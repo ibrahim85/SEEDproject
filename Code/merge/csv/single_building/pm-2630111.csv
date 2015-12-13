@@ -1,0 +1,49 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+2630111,4004743,Electric - Grid,2010-01-31 00:00:00,172320.0,kWh (thousand Watt-hours),6615.0
+2630111,4004743,Electric - Grid,2010-02-28 00:00:00,166800.0,kWh (thousand Watt-hours),8411.0
+2630111,4004743,Electric - Grid,2010-03-31 00:00:00,214560.0,kWh (thousand Watt-hours),10057.0
+2630111,4004743,Electric - Grid,2010-04-30 00:00:00,197760.0,kWh (thousand Watt-hours),11527.0
+2630111,4004743,Electric - Grid,2010-05-31 00:00:00,183120.0,kWh (thousand Watt-hours),10509.0
+2630111,4004743,Electric - Grid,2010-06-30 00:00:00,198240.0,kWh (thousand Watt-hours),10616.0
+2630111,4004743,Electric - Grid,2010-07-31 00:00:00,142320.0,kWh (thousand Watt-hours),7144.0
+2630111,4004743,Electric - Grid,2010-08-31 00:00:00,160800.0,kWh (thousand Watt-hours),6054.0
+2630111,4004743,Electric - Grid,2010-09-30 00:00:00,170880.0,kWh (thousand Watt-hours),6291.0
+2630111,4004743,Electric - Grid,2010-10-31 00:00:00,197040.0,kWh (thousand Watt-hours),8608.0
+2630111,4004743,Electric - Grid,2010-11-30 00:00:00,189840.0,kWh (thousand Watt-hours),9227.0
+2630111,4004743,Electric - Grid,2010-12-31 00:00:00,177840.0,kWh (thousand Watt-hours),7759.0
+2630111,4004743,Electric - Grid,2011-01-31 00:00:00,0.0,kWh (thousand Watt-hours),0.0
+2630111,4004743,Electric - Grid,2011-02-28 00:00:00,0.0,kWh (thousand Watt-hours),0.0
+2630111,4004743,Electric - Grid,2011-03-31 00:00:00,0.0,kWh (thousand Watt-hours),0.0
+2630111,4004743,Electric - Grid,2011-04-30 00:00:00,0.0,kWh (thousand Watt-hours),0.0
+2630111,3981194,Natural Gas,2010-01-31 00:00:00,909100.0,cf (cubic feet),5934.0
+2630111,3981194,Natural Gas,2010-02-28 00:00:00,1072400.0,cf (cubic feet),9269.0
+2630111,3981194,Natural Gas,2010-03-31 00:00:00,2397000.0,cf (cubic feet),20911.0
+2630111,3981194,Natural Gas,2010-04-30 00:00:00,1976300.0,cf (cubic feet),17237.0
+2630111,3981194,Natural Gas,2010-05-31 00:00:00,2057300.0,cf (cubic feet),18108.0
+2630111,3981194,Natural Gas,2010-06-30 00:00:00,1458600.0,cf (cubic feet),13836.0
+2630111,3981194,Natural Gas,2010-07-31 00:00:00,707000.0,cf (cubic feet),6327.0
+2630111,3981194,Natural Gas,2010-08-31 00:00:00,428200.0,cf (cubic feet),3647.0
+2630111,3981194,Natural Gas,2010-09-30 00:00:00,175700.0,cf (cubic feet),1414.0
+2630111,3981194,Natural Gas,2010-10-31 00:00:00,100300.0,cf (cubic feet),857.0
+2630111,3981194,Natural Gas,2010-11-30 00:00:00,181200.0,cf (cubic feet),1592.0
+2630111,3981194,Natural Gas,2010-12-31 00:00:00,321000.0,cf (cubic feet),2691.0
+2630111,3981194,Natural Gas,2011-01-31 00:00:00,0.0,cf (cubic feet),0.0
+2630111,3981194,Natural Gas,2011-02-28 00:00:00,0.0,cf (cubic feet),0.0
+2630111,3981194,Natural Gas,2011-03-31 00:00:00,0.0,cf (cubic feet),0.0
+2630111,3981194,Natural Gas,2011-04-30 00:00:00,0.0,cf (cubic feet),0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-01-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-02-28 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-03-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-04-30 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-05-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-06-30 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-07-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-08-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-09-30 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-10-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-11-30 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2010-12-31 00:00:00,242371.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2011-01-31 00:00:00,0.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2011-02-28 00:00:00,0.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2011-03-31 00:00:00,0.0,Gallons,0.0
+2630111,5956396,Potable: Mixed Indoor/Outdoor,2011-04-30 00:00:00,0.0,Gallons,0.0

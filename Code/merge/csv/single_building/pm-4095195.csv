@@ -1,0 +1,50 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+4095195,9110443,Natural Gas,2014-04-10 00:00:00,1506643.0,cf (cubic feet),12431.0
+4095195,9110443,Natural Gas,2014-05-09 00:00:00,2905335.0,cf (cubic feet),21067.0
+4095195,9110443,Natural Gas,2014-06-12 00:00:00,1467653.0,cf (cubic feet),11633.0
+4095195,9110443,Natural Gas,2014-07-14 00:00:00,1642817.0,cf (cubic feet),13008.0
+4095195,9110443,Natural Gas,2014-08-13 00:00:00,1490639.0,cf (cubic feet),12006.0
+4095195,9110443,Natural Gas,2014-09-15 00:00:00,1598589.0,cf (cubic feet),12865.0
+4095195,9110443,Natural Gas,2014-10-15 00:00:00,1758332.0,cf (cubic feet),14412.0
+4095195,9110443,Natural Gas,2014-11-12 00:00:00,3178459.0,cf (cubic feet),27604.0
+4095195,9110443,Natural Gas,2014-12-16 00:00:00,4180269.0,cf (cubic feet),38481.0
+4095195,9110443,Natural Gas,2015-01-15 00:00:00,4651834.0,cf (cubic feet),41611.0
+4095195,9110443,Natural Gas,2015-02-07 00:00:00,2581259.0,cf (cubic feet),33885.0
+4095195,9110443,Natural Gas,2015-03-13 00:00:00,3419770.0,cf (cubic feet),30898.0
+4095195,9110443,Natural Gas,2015-04-09 00:00:00,1792084.0,cf (cubic feet),15339.0
+4095195,9110443,Natural Gas,2015-05-11 00:00:00,1566292.0,cf (cubic feet),11913.0
+4095195,9110443,Natural Gas,2015-06-11 00:00:00,1371148.0,cf (cubic feet),10105.0
+4095195,9110443,Natural Gas,2015-07-10 00:00:00,825967.0,cf (cubic feet),5765.0
+4095195,9110445,Electric - Grid,2014-03-27 00:00:00,109500.0,kWh (thousand Watt-hours),9285.0
+4095195,9110445,Electric - Grid,2014-04-27 00:00:00,504900.0,kWh (thousand Watt-hours),37052.0
+4095195,9110445,Electric - Grid,2014-05-27 00:00:00,463200.0,kWh (thousand Watt-hours),39894.0
+4095195,9110445,Electric - Grid,2014-06-26 00:00:00,534300.0,kWh (thousand Watt-hours),64477.0
+4095195,9110445,Electric - Grid,2014-07-28 00:00:00,558300.0,kWh (thousand Watt-hours),52310.0
+4095195,9110445,Electric - Grid,2014-08-26 00:00:00,488400.0,kWh (thousand Watt-hours),44450.0
+4095195,9110445,Electric - Grid,2014-09-25 00:00:00,496200.0,kWh (thousand Watt-hours),43158.0
+4095195,9110445,Electric - Grid,2014-10-24 00:00:00,478200.0,kWh (thousand Watt-hours),37238.0
+4095195,9110445,Electric - Grid,2014-11-25 00:00:00,478200.0,kWh (thousand Watt-hours),37862.0
+4095195,9110445,Electric - Grid,2014-12-30 00:00:00,508200.0,kWh (thousand Watt-hours),39973.0
+4095195,9110445,Electric - Grid,2015-01-28 00:00:00,404400.0,kWh (thousand Watt-hours),32080.0
+4095195,9110445,Electric - Grid,2015-02-26 00:00:00,454500.0,kWh (thousand Watt-hours),40113.0
+4095195,9110445,Electric - Grid,2015-03-27 00:00:00,407400.0,kWh (thousand Watt-hours),36107.0
+4095195,9110445,Electric - Grid,2015-04-27 00:00:00,460200.0,kWh (thousand Watt-hours),40995.0
+4095195,9110445,Electric - Grid,2015-05-27 00:00:00,454200.0,kWh (thousand Watt-hours),45795.0
+4095195,9110445,Electric - Grid,2015-06-25 00:00:00,477900.0,kWh (thousand Watt-hours),50830.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-03-02 00:00:00,0.0,Gallons,9.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-04-04 00:00:00,1334432.0,Gallons,2334.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-05-05 00:00:00,1595484.0,Gallons,5196.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-06-05 00:00:00,1282820.0,Gallons,4199.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-07-07 00:00:00,1992672.0,Gallons,6780.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-08-05 00:00:00,2357696.0,Gallons,8500.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-09-05 00:00:00,2567136.0,Gallons,9243.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-10-06 00:00:00,2247740.0,Gallons,8184.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-11-06 00:00:00,1840828.0,Gallons,6202.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2014-12-03 00:00:00,578952.0,Gallons,2363.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-01-07 00:00:00,977636.0,Gallons,3401.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-02-05 00:00:00,881144.0,Gallons,2926.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-03-05 00:00:00,936496.0,Gallons,2957.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-04-06 00:00:00,893112.0,Gallons,3108.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-05-06 00:00:00,1562572.0,Gallons,5879.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-06-04 00:00:00,1144440.0,Gallons,4511.0
+4095195,9110444,Other: Mixed Indoor/Outdoor,2015-07-06 00:00:00,1736856.0,Gallons,6513.0

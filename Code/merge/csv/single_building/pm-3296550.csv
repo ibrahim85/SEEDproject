@@ -1,0 +1,19 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+3296550,5242893,Electric - Grid,2011-10-15 00:00:00,11080.0,kWh (thousand Watt-hours),1767.0
+3296550,5242893,Electric - Grid,2011-11-15 00:00:00,9480.0,kWh (thousand Watt-hours),1648.0
+3296550,5242893,Electric - Grid,2011-12-16 00:00:00,11320.0,kWh (thousand Watt-hours),1800.0
+3296550,5242893,Electric - Grid,2012-01-20 00:00:00,13600.0,kWh (thousand Watt-hours),1931.0
+3296550,5242893,Electric - Grid,2012-02-06 00:00:00,6480.0,kWh (thousand Watt-hours),1031.0
+3296550,5242893,Electric - Grid,2012-03-08 00:00:00,10360.0,kWh (thousand Watt-hours),1847.0
+3296550,5242893,Electric - Grid,2012-04-08 00:00:00,11200.0,kWh (thousand Watt-hours),1908.0
+3296550,5242893,Electric - Grid,2012-05-09 00:00:00,11640.0,kWh (thousand Watt-hours),1933.0
+3296550,5242893,Electric - Grid,2012-06-09 00:00:00,14920.0,kWh (thousand Watt-hours),2187.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2011-11-07 00:00:00,5236.0,Gallons,91.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2011-12-08 00:00:00,2992.0,Gallons,27.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-01-11 00:00:00,4488.0,Gallons,39.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-02-11 00:00:00,2992.0,Gallons,27.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-03-01 00:00:00,3740.0,Gallons,33.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-04-01 00:00:00,5236.0,Gallons,46.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-05-02 00:00:00,5236.0,Gallons,46.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-06-02 00:00:00,3740.0,Gallons,33.0
+3296550,6003132,Potable: Mixed Indoor/Outdoor,2012-07-03 00:00:00,5236.0,Gallons,46.0

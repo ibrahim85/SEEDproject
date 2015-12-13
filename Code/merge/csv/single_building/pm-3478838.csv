@@ -1,0 +1,98 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+3478838,5587095,Electric - Grid,2012-10-11 00:00:00,0.0,kWh (thousand Watt-hours),0.0
+3478838,5587095,Electric - Grid,2012-11-12 00:00:00,185345.0,kWh (thousand Watt-hours),23967.0
+3478838,5587095,Electric - Grid,2012-12-13 00:00:00,499609.0,kWh (thousand Watt-hours),63616.0
+3478838,5587095,Electric - Grid,2013-01-13 00:00:00,466764.0,kWh (thousand Watt-hours),70458.0
+3478838,5587095,Electric - Grid,2013-02-13 00:00:00,392938.0,kWh (thousand Watt-hours),59314.0
+3478838,5587095,Electric - Grid,2013-03-17 00:00:00,453429.0,kWh (thousand Watt-hours),65404.0
+3478838,5587095,Electric - Grid,2013-04-16 00:00:00,422144.0,kWh (thousand Watt-hours),61481.0
+3478838,5587095,Electric - Grid,2013-05-15 00:00:00,453634.0,kWh (thousand Watt-hours),73148.0
+3478838,5587095,Electric - Grid,2013-06-16 00:00:00,495706.0,kWh (thousand Watt-hours),78891.0
+3478838,5587095,Electric - Grid,2013-07-17 00:00:00,538609.0,kWh (thousand Watt-hours),97210.0
+3478838,5587095,Electric - Grid,2013-08-15 00:00:00,478961.0,kWh (thousand Watt-hours),85943.0
+3478838,5587095,Electric - Grid,2013-09-14 00:00:00,595984.0,kWh (thousand Watt-hours),111490.0
+3478838,5587095,Electric - Grid,2013-10-15 00:00:00,462755.0,kWh (thousand Watt-hours),86120.0
+3478838,5587095,Electric - Grid,2013-11-13 00:00:00,437341.0,kWh (thousand Watt-hours),71101.0
+3478838,5587095,Electric - Grid,2013-12-15 00:00:00,441603.0,kWh (thousand Watt-hours),75871.0
+3478838,5587095,Electric - Grid,2014-01-15 00:00:00,489797.0,kWh (thousand Watt-hours),82118.0
+3478838,5587095,Electric - Grid,2014-02-13 00:00:00,409255.0,kWh (thousand Watt-hours),72700.0
+3478838,5587095,Electric - Grid,2014-03-17 00:00:00,450529.0,kWh (thousand Watt-hours),72666.0
+3478838,5587095,Electric - Grid,2014-04-15 00:00:00,412558.0,kWh (thousand Watt-hours),74002.0
+3478838,5587095,Electric - Grid,2014-05-14 00:00:00,429646.0,kWh (thousand Watt-hours),90768.0
+3478838,5587095,Electric - Grid,2014-06-15 00:00:00,479837.0,kWh (thousand Watt-hours),111865.0
+3478838,5587095,Electric - Grid,2014-07-15 00:00:00,494631.0,kWh (thousand Watt-hours),120466.0
+3478838,5587095,Electric - Grid,2014-08-13 00:00:00,525089.0,kWh (thousand Watt-hours),126081.0
+3478838,5587095,Electric - Grid,2014-09-15 00:00:00,587761.0,kWh (thousand Watt-hours),143799.0
+3478838,5587095,Electric - Grid,2014-10-14 00:00:00,505186.0,kWh (thousand Watt-hours),130156.0
+3478838,5587095,Electric - Grid,2014-11-13 00:00:00,444811.0,kWh (thousand Watt-hours),104541.0
+3478838,5587095,Electric - Grid,2014-12-15 00:00:00,440065.0,kWh (thousand Watt-hours),81101.0
+3478838,5587095,Electric - Grid,2015-01-15 00:00:00,390278.0,kWh (thousand Watt-hours),77122.0
+3478838,5587095,Electric - Grid,2015-02-16 00:00:00,418404.0,kWh (thousand Watt-hours),80949.0
+3478838,5587095,Electric - Grid,2015-03-17 00:00:00,405614.0,kWh (thousand Watt-hours),80524.0
+3478838,5587095,Electric - Grid,2015-04-15 00:00:00,407316.0,kWh (thousand Watt-hours),80060.0
+3478838,5587095,Electric - Grid,2015-05-17 00:00:00,422305.0,kWh (thousand Watt-hours),91310.0
+3478838,5587095,Electric - Grid,2015-06-16 00:00:00,400496.0,kWh (thousand Watt-hours),98789.0
+3478838,5587096,Natural Gas,2012-11-13 00:00:00,185464.0,cf (cubic feet),1216.0
+3478838,5587096,Natural Gas,2012-12-14 00:00:00,1248584.0,cf (cubic feet),3508.0
+3478838,5587096,Natural Gas,2013-01-14 00:00:00,1327833.0,cf (cubic feet),9189.0
+3478838,5587096,Natural Gas,2013-02-14 00:00:00,917717.0,cf (cubic feet),6351.0
+3478838,5587096,Natural Gas,2013-03-18 00:00:00,755436.0,cf (cubic feet),5330.0
+3478838,5587096,Natural Gas,2013-04-17 00:00:00,663189.0,cf (cubic feet),2837.0
+3478838,5587096,Natural Gas,2013-05-16 00:00:00,565219.0,cf (cubic feet),4041.0
+3478838,5587096,Natural Gas,2013-06-17 00:00:00,500811.0,cf (cubic feet),3720.0
+3478838,5587096,Natural Gas,2013-07-18 00:00:00,467443.0,cf (cubic feet),3336.0
+3478838,5587096,Natural Gas,2013-08-16 00:00:00,464851.0,cf (cubic feet),3026.0
+3478838,5587096,Natural Gas,2013-09-17 00:00:00,396730.0,cf (cubic feet),2731.0
+3478838,5587096,Natural Gas,2013-10-16 00:00:00,472099.0,cf (cubic feet),3188.0
+3478838,5587096,Natural Gas,2013-11-14 00:00:00,565025.0,cf (cubic feet),3850.0
+3478838,5587096,Natural Gas,2013-12-16 00:00:00,745057.0,cf (cubic feet),5193.0
+3478838,5587096,Natural Gas,2014-01-16 00:00:00,737879.0,cf (cubic feet),5462.0
+3478838,5587096,Natural Gas,2014-02-14 00:00:00,723911.0,cf (cubic feet),5811.0
+3478838,5587096,Natural Gas,2014-03-18 00:00:00,711107.0,cf (cubic feet),6204.0
+3478838,5587096,Natural Gas,2014-04-16 00:00:00,617987.0,cf (cubic feet),5246.0
+3478838,5587096,Natural Gas,2014-05-15 00:00:00,488783.0,cf (cubic feet),4035.0
+3478838,5587096,Natural Gas,2014-06-16 00:00:00,557351.0,cf (cubic feet),4636.0
+3478838,5587096,Natural Gas,2014-07-16 00:00:00,497901.0,cf (cubic feet),4186.0
+3478838,5587096,Natural Gas,2014-08-14 00:00:00,409436.0,cf (cubic feet),3358.0
+3478838,5587096,Natural Gas,2014-09-16 00:00:00,354923.0,cf (cubic feet),2769.0
+3478838,5587096,Natural Gas,2014-10-15 00:00:00,419234.0,cf (cubic feet),3193.0
+3478838,5587096,Natural Gas,2014-11-14 00:00:00,417488.0,cf (cubic feet),3097.0
+3478838,5587096,Natural Gas,2014-12-16 00:00:00,585007.0,cf (cubic feet),4392.0
+3478838,5587096,Natural Gas,2015-01-16 00:00:00,792781.0,cf (cubic feet),5840.0
+3478838,5587096,Natural Gas,2015-02-17 00:00:00,608190.0,cf (cubic feet),4268.0
+3478838,5587096,Natural Gas,2015-03-18 00:00:00,619054.0,cf (cubic feet),4311.0
+3478838,5587096,Natural Gas,2015-04-16 00:00:00,490432.0,cf (cubic feet),3345.0
+3478838,5587096,Natural Gas,2015-05-18 00:00:00,573852.0,cf (cubic feet),3751.0
+3478838,5587096,Natural Gas,2015-06-17 00:00:00,550087.0,cf (cubic feet),3719.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2012-12-11 00:00:00,481712.0,Gallons,5154.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-01-10 00:00:00,285736.0,Gallons,3426.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-02-11 00:00:00,351560.0,Gallons,4237.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-03-12 00:00:00,299948.0,Gallons,3734.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-04-11 00:00:00,378488.0,Gallons,4447.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-05-10 00:00:00,406912.0,Gallons,4917.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-06-12 00:00:00,546788.0,Gallons,6470.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-07-11 00:00:00,584936.0,Gallons,6870.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-08-12 00:00:00,634304.0,Gallons,7354.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-09-12 00:00:00,771936.0,Gallons,4259.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-10-10 00:00:00,451044.0,Gallons,6614.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-11-13 00:00:00,565488.0,Gallons,6258.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2013-12-11 00:00:00,410652.0,Gallons,4559.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-01-12 00:00:00,497420.0,Gallons,5417.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-02-11 00:00:00,502656.0,Gallons,5805.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-03-11 00:00:00,412896.0,Gallons,4869.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-04-10 00:00:00,481712.0,Gallons,5584.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-05-12 00:00:00,551276.0,Gallons,6506.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-06-12 00:00:00,647020.0,Gallons,7776.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-07-11 00:00:00,624580.0,Gallons,7418.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-08-12 00:00:00,804848.0,Gallons,9415.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-09-11 00:00:00,787644.0,Gallons,9554.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-10-10 00:00:00,884884.0,Gallons,10465.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-11-12 00:00:00,436084.0,Gallons,6768.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2014-12-10 00:00:00,574464.0,Gallons,7052.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-01-10 00:00:00,768196.0,Gallons,9638.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-02-11 00:00:00,622336.0,Gallons,7852.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-03-11 00:00:00,550528.0,Gallons,7207.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-04-10 00:00:00,806344.0,Gallons,10004.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-05-12 00:00:00,801108.0,Gallons,9983.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-06-10 00:00:00,579700.0,Gallons,7351.0
+3478838,5904985,Potable: Mixed Indoor/Outdoor,2015-07-13 00:00:00,643280.0,Gallons,8081.0

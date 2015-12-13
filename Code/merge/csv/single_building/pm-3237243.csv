@@ -1,0 +1,103 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+3237243,5139481,Electric - Grid,2011-01-31 00:00:00,13296.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-02-28 00:00:00,12418.19,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-03-31 00:00:00,13201.94,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-04-30 00:00:00,11895.81,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-05-31 00:00:00,12494.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-06-30 00:00:00,12416.31,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-07-31 00:00:00,12476.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-08-31 00:00:00,13308.19,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-09-30 00:00:00,13737.56,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-10-31 00:00:00,13472.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-11-30 00:00:00,13263.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2011-12-31 00:00:00,14131.88,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-01-31 00:00:00,13411.19,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-02-29 00:00:00,12548.38,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-03-31 00:00:00,12915.06,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-04-30 00:00:00,12332.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-05-31 00:00:00,12820.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-06-30 00:00:00,12029.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-07-31 00:00:00,12314.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-08-31 00:00:00,13530.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-09-30 00:00:00,12558.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-10-31 00:00:00,13844.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-11-30 00:00:00,13053.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2012-12-31 00:00:00,13446.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-01-31 00:00:00,15663.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-02-28 00:00:00,14754.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-03-31 00:00:00,15572.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-04-30 00:00:00,12815.13,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-05-31 00:00:00,12727.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-06-30 00:00:00,11502.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-07-31 00:00:00,11675.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-08-31 00:00:00,11666.88,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-09-30 00:00:00,11169.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-10-31 00:00:00,12062.5,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-11-30 00:00:00,11794.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2013-12-31 00:00:00,13801.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-01-31 00:00:00,13697.63,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-02-28 00:00:00,13134.38,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-03-31 00:00:00,13225.5,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-04-30 00:00:00,12257.88,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-05-31 00:00:00,13768.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-06-30 00:00:00,13287.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-07-31 00:00:00,12668.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-08-31 00:00:00,13196.5,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-09-30 00:00:00,12892.75,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-10-31 00:00:00,13354.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-11-30 00:00:00,14134.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2014-12-31 00:00:00,14541.0,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-01-31 00:00:00,13901.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-02-28 00:00:00,12572.13,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-03-31 00:00:00,13487.88,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-04-30 00:00:00,12797.13,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-05-31 00:00:00,12604.38,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-06-30 00:00:00,11988.25,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-07-31 00:00:00,11236.5,kWh (thousand Watt-hours),0.0
+3237243,5139481,Electric - Grid,2015-08-31 00:00:00,11424.38,kWh (thousand Watt-hours),0.0
+3237243,5139483,Natural Gas,2011-09-30 00:00:00,120.0,therms,0.0
+3237243,5139483,Natural Gas,2011-10-31 00:00:00,390.0,therms,0.0
+3237243,5139483,Natural Gas,2011-11-30 00:00:00,740.0,therms,0.0
+3237243,5139483,Natural Gas,2011-12-31 00:00:00,910.0,therms,0.0
+3237243,5139483,Natural Gas,2012-01-31 00:00:00,820.0,therms,0.0
+3237243,5139483,Natural Gas,2012-02-29 00:00:00,840.0,therms,0.0
+3237243,5139483,Natural Gas,2012-03-31 00:00:00,490.0,therms,0.0
+3237243,5139483,Natural Gas,2012-04-30 00:00:00,330.0,therms,0.0
+3237243,5139483,Natural Gas,2012-05-31 00:00:00,220.0,therms,0.0
+3237243,5139483,Natural Gas,2012-06-30 00:00:00,0.0,therms,0.0
+3237243,5139483,Natural Gas,2012-07-31 00:00:00,0.0,therms,0.0
+3237243,5139483,Natural Gas,2012-08-31 00:00:00,0.0,therms,0.0
+3237243,5139483,Natural Gas,2012-09-30 00:00:00,120.0,therms,0.0
+3237243,5139483,Natural Gas,2012-10-31 00:00:00,440.0,therms,0.0
+3237243,5139483,Natural Gas,2012-11-30 00:00:00,510.0,therms,0.0
+3237243,5139483,Natural Gas,2012-12-31 00:00:00,830.0,therms,0.0
+3237243,5139483,Natural Gas,2013-01-31 00:00:00,930.0,therms,0.0
+3237243,5139483,Natural Gas,2013-02-28 00:00:00,880.0,therms,0.0
+3237243,5139483,Natural Gas,2013-03-31 00:00:00,760.0,therms,0.0
+3237243,5139483,Natural Gas,2013-04-30 00:00:00,650.0,therms,0.0
+3237243,5139483,Natural Gas,2013-05-31 00:00:00,410.0,therms,0.0
+3237243,5139483,Natural Gas,2013-06-30 00:00:00,80.0,therms,0.0
+3237243,5139483,Natural Gas,2013-07-31 00:00:00,20.0,therms,0.0
+3237243,5139483,Natural Gas,2013-08-31 00:00:00,0.0,therms,0.0
+3237243,5139483,Natural Gas,2013-09-30 00:00:00,30.0,therms,0.0
+3237243,5139483,Natural Gas,2013-10-31 00:00:00,440.0,therms,0.0
+3237243,5139483,Natural Gas,2013-11-30 00:00:00,560.0,therms,0.0
+3237243,5139483,Natural Gas,2013-12-31 00:00:00,910.0,therms,0.0
+3237243,5139483,Natural Gas,2014-01-31 00:00:00,840.0,therms,0.0
+3237243,5139483,Natural Gas,2014-02-28 00:00:00,760.0,therms,0.0
+3237243,5139483,Natural Gas,2014-03-31 00:00:00,620.0,therms,0.0
+3237243,5139483,Natural Gas,2014-04-30 00:00:00,450.0,therms,0.0
+3237243,5139483,Natural Gas,2014-05-31 00:00:00,350.0,therms,0.0
+3237243,5139483,Natural Gas,2014-06-30 00:00:00,10.0,therms,0.0
+3237243,5139483,Natural Gas,2014-07-31 00:00:00,0.0,therms,0.0
+3237243,5139483,Natural Gas,2014-08-31 00:00:00,0.0,therms,0.0
+3237243,5139483,Natural Gas,2014-09-30 00:00:00,80.0,therms,0.0
+3237243,5139483,Natural Gas,2014-10-31 00:00:00,380.0,therms,0.0
+3237243,5139483,Natural Gas,2014-11-30 00:00:00,750.0,therms,0.0
+3237243,5139483,Natural Gas,2014-12-31 00:00:00,830.0,therms,0.0
+3237243,5139483,Natural Gas,2015-01-31 00:00:00,800.0,therms,0.0
+3237243,5139483,Natural Gas,2015-02-28 00:00:00,770.0,therms,0.0
+3237243,5139483,Natural Gas,2015-03-31 00:00:00,550.0,therms,0.0
+3237243,5139483,Natural Gas,2015-04-30 00:00:00,440.0,therms,0.0
+3237243,5139483,Natural Gas,2015-05-31 00:00:00,410.0,therms,0.0
+3237243,5139483,Natural Gas,2015-06-30 00:00:00,60.0,therms,0.0

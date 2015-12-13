@@ -1,0 +1,209 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+3237255,5139505,Electric - Grid,2011-01-31 00:00:00,34354.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-02-28 00:00:00,31206.38,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-03-31 00:00:00,33774.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-04-30 00:00:00,31420.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-05-31 00:00:00,33763.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-06-30 00:00:00,3665.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-07-31 00:00:00,1635.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-08-31 00:00:00,1766.5,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-09-30 00:00:00,8739.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-10-31 00:00:00,24460.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-11-30 00:00:00,31261.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2011-12-31 00:00:00,32796.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-01-31 00:00:00,33155.88,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-02-29 00:00:00,31598.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-03-31 00:00:00,25367.75,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-04-30 00:00:00,23980.75,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-05-31 00:00:00,18885.38,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-06-30 00:00:00,2109.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-07-31 00:00:00,1240.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-08-31 00:00:00,1307.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-09-30 00:00:00,8066.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-10-31 00:00:00,27937.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-11-30 00:00:00,30804.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2012-12-31 00:00:00,32218.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-01-31 00:00:00,32449.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-02-28 00:00:00,29348.13,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-03-31 00:00:00,31104.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-04-30 00:00:00,27561.88,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-05-31 00:00:00,20280.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-06-30 00:00:00,4709.63,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-07-31 00:00:00,1435.5,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-08-31 00:00:00,1319.75,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-09-30 00:00:00,2348.38,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-10-31 00:00:00,26469.88,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-11-30 00:00:00,23867.38,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2013-12-31 00:00:00,26511.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-01-31 00:00:00,23458.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-02-28 00:00:00,25417.75,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-03-31 00:00:00,24790.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-04-30 00:00:00,18941.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-05-31 00:00:00,13213.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-06-30 00:00:00,1739.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-07-31 00:00:00,1158.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-08-31 00:00:00,1075.75,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-09-30 00:00:00,4948.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-10-31 00:00:00,8506.0,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-11-30 00:00:00,9978.25,kWh (thousand Watt-hours),0.0
+3237255,5139505,Electric - Grid,2014-12-31 00:00:00,10986.88,kWh (thousand Watt-hours),0.0
+3237255,5139507,Natural Gas,2011-09-30 00:00:00,2460.0,therms,0.0
+3237255,5139507,Natural Gas,2011-10-31 00:00:00,8060.0,therms,0.0
+3237255,5139507,Natural Gas,2011-11-30 00:00:00,13140.0,therms,0.0
+3237255,5139507,Natural Gas,2011-12-31 00:00:00,21520.0,therms,0.0
+3237255,5139507,Natural Gas,2012-01-31 00:00:00,15600.0,therms,0.0
+3237255,5139507,Natural Gas,2012-02-29 00:00:00,17800.0,therms,0.0
+3237255,5139507,Natural Gas,2012-03-31 00:00:00,9820.0,therms,0.0
+3237255,5139507,Natural Gas,2012-04-30 00:00:00,8100.0,therms,0.0
+3237255,5139507,Natural Gas,2012-05-31 00:00:00,5690.0,therms,0.0
+3237255,5139507,Natural Gas,2012-06-30 00:00:00,200.0,therms,0.0
+3237255,5139507,Natural Gas,2012-07-31 00:00:00,0.0,therms,0.0
+3237255,5139507,Natural Gas,2012-08-31 00:00:00,0.0,therms,0.0
+3237255,5139507,Natural Gas,2012-09-30 00:00:00,1890.0,therms,0.0
+3237255,5139507,Natural Gas,2012-10-31 00:00:00,11700.0,therms,0.0
+3237255,5139507,Natural Gas,2012-11-30 00:00:00,13810.0,therms,0.0
+3237255,5139507,Natural Gas,2012-12-31 00:00:00,19180.0,therms,0.0
+3237255,5139507,Natural Gas,2013-01-31 00:00:00,18490.0,therms,0.0
+3237255,5139507,Natural Gas,2013-02-28 00:00:00,16070.0,therms,0.0
+3237255,5139507,Natural Gas,2013-03-31 00:00:00,13370.0,therms,0.0
+3237255,5139507,Natural Gas,2013-04-30 00:00:00,11560.0,therms,0.0
+3237255,5139507,Natural Gas,2013-05-31 00:00:00,5630.0,therms,0.0
+3237255,5139507,Natural Gas,2013-06-30 00:00:00,880.0,therms,0.0
+3237255,5139507,Natural Gas,2013-07-31 00:00:00,0.0,therms,0.0
+3237255,5139507,Natural Gas,2013-08-31 00:00:00,0.0,therms,0.0
+3237255,5139507,Natural Gas,2013-09-30 00:00:00,660.0,therms,0.0
+3237255,5139507,Natural Gas,2013-10-31 00:00:00,7770.0,therms,0.0
+3237255,5139507,Natural Gas,2013-11-30 00:00:00,10650.0,therms,0.0
+3237255,5139507,Natural Gas,2013-12-31 00:00:00,22050.0,therms,0.0
+3237255,5139507,Natural Gas,2014-01-31 00:00:00,18150.0,therms,0.0
+3237255,5139507,Natural Gas,2014-02-28 00:00:00,17830.0,therms,0.0
+3237255,5139507,Natural Gas,2014-03-31 00:00:00,13200.0,therms,0.0
+3237255,5139507,Natural Gas,2014-04-30 00:00:00,8310.0,therms,0.0
+3237255,5139507,Natural Gas,2014-05-31 00:00:00,5220.0,therms,0.0
+3237255,5139507,Natural Gas,2014-06-30 00:00:00,270.0,therms,0.0
+3237255,5139507,Natural Gas,2014-07-31 00:00:00,0.0,therms,0.0
+3237255,5139507,Natural Gas,2014-08-31 00:00:00,0.0,therms,0.0
+3237255,5139507,Natural Gas,2014-09-30 00:00:00,2200.0,therms,0.0
+3237255,5139507,Natural Gas,2014-10-31 00:00:00,4490.0,therms,0.0
+3237255,5139507,Natural Gas,2014-11-30 00:00:00,13500.0,therms,0.0
+3237255,5139507,Natural Gas,2014-12-31 00:00:00,17160.0,therms,0.0
+3237255,6350736,District Hot Water,2012-01-31 00:00:00,-939842.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-02-29 00:00:00,-1077698.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-03-31 00:00:00,-618200.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-04-30 00:00:00,-529372.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-05-31 00:00:00,-373904.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-06-30 00:00:00,-20008.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-07-31 00:00:00,-760.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-08-31 00:00:00,-732.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-09-30 00:00:00,-109466.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-10-31 00:00:00,-822704.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-11-30 00:00:00,-1023186.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2012-12-31 00:00:00,-1385200.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-01-31 00:00:00,-1291928.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-02-28 00:00:00,-1126936.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-03-31 00:00:00,-928332.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-04-30 00:00:00,-678440.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-05-31 00:00:00,-359104.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-06-30 00:00:00,-55316.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-07-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-08-31 00:00:00,-24.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-09-30 00:00:00,-30396.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-10-31 00:00:00,-428184.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-11-30 00:00:00,-632156.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2013-12-31 00:00:00,-1313884.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-01-31 00:00:00,-1148348.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-02-28 00:00:00,-1083272.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-03-31 00:00:00,-852220.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-04-30 00:00:00,-552660.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-05-31 00:00:00,-351708.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-06-30 00:00:00,-21664.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-07-31 00:00:00,-20.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-08-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-09-30 00:00:00,-139380.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-10-31 00:00:00,-318456.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-11-30 00:00:00,-906519.0,kBtu (thousand Btu),0.0
+3237255,6350736,District Hot Water,2014-12-31 00:00:00,-1235007.0,kBtu (thousand Btu),0.0
+3237255,5923804,Potable Indoor,2011-01-31 00:00:00,9.71,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-02-28 00:00:00,500.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-03-31 00:00:00,400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-04-30 00:00:00,800.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-05-31 00:00:00,1600.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-06-30 00:00:00,400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-07-31 00:00:00,2300.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-08-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-09-30 00:00:00,1400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-10-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-11-30 00:00:00,400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2011-12-31 00:00:00,100.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-01-31 00:00:00,100.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-02-29 00:00:00,100.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-03-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-04-30 00:00:00,300.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-05-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-06-30 00:00:00,100.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-07-31 00:00:00,5300.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-08-31 00:00:00,2000.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-09-30 00:00:00,2200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-10-31 00:00:00,700.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-11-30 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2012-12-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-01-31 00:00:00,100.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-02-28 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-03-31 00:00:00,600.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-04-30 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-05-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-06-30 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-07-31 00:00:00,1300.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-08-31 00:00:00,600.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-09-30 00:00:00,400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-10-31 00:00:00,2800.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-11-30 00:00:00,1000.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2013-12-31 00:00:00,8900.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-01-31 00:00:00,1400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-02-28 00:00:00,900.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-03-31 00:00:00,400.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-04-30 00:00:00,300.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-05-31 00:00:00,300.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-06-30 00:00:00,100.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-07-31 00:00:00,200.0,Gallons,0.0
+3237255,5923804,Potable Indoor,2014-08-31 00:00:00,100.0,Gallons,0.0
+3237255,6144228,District Hot Water,2011-09-30 00:00:00,-9487.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2011-10-31 00:00:00,-23264.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2011-11-30 00:00:00,-28411.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2011-12-31 00:00:00,-47304.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-01-31 00:00:00,-39280.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-02-29 00:00:00,-35681.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-03-31 00:00:00,-15583.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-04-30 00:00:00,-12154.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-05-31 00:00:00,-11480.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-06-30 00:00:00,-524.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-07-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-08-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-09-30 00:00:00,-4485.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-10-31 00:00:00,-20798.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-11-30 00:00:00,-20986.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2012-12-31 00:00:00,-22984.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-01-31 00:00:00,-23334.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-02-28 00:00:00,-15366.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-03-31 00:00:00,-38767.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-04-30 00:00:00,-28198.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-05-31 00:00:00,-18245.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-06-30 00:00:00,-2636.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-07-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-08-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-09-30 00:00:00,-1054.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-10-31 00:00:00,-23639.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-11-30 00:00:00,-29619.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2013-12-31 00:00:00,-43043.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-01-31 00:00:00,-35114.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-02-28 00:00:00,-37098.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-03-31 00:00:00,-32769.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-04-30 00:00:00,-17784.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-05-31 00:00:00,-14549.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-06-30 00:00:00,-825.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-07-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-08-31 00:00:00,0.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-09-30 00:00:00,-5682.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-10-31 00:00:00,-16789.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-11-30 00:00:00,-35713.0,kBtu (thousand Btu),0.0
+3237255,6144228,District Hot Water,2014-12-31 00:00:00,-40983.0,kBtu (thousand Btu),0.0

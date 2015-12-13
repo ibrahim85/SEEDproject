@@ -1,0 +1,25 @@
+Portfolio Manager ID,Portfolio Manager Meter ID,Meter Type,End Date,Usage/Quantity,Usage Units,Cost ($)
+2822500,4340478,Electric - Grid,2010-05-31 00:00:00,24200.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-06-30 00:00:00,37880.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-07-31 00:00:00,35600.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-08-31 00:00:00,35520.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-09-30 00:00:00,30640.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-10-31 00:00:00,17400.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-11-30 00:00:00,16240.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2010-12-31 00:00:00,14720.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2011-01-31 00:00:00,13920.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2011-02-28 00:00:00,16520.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2011-03-31 00:00:00,16360.0,kWh (thousand Watt-hours),0.0
+2822500,4340478,Electric - Grid,2011-04-30 00:00:00,16680.0,kWh (thousand Watt-hours),0.0
+2822500,4340441,Natural Gas,2010-05-31 00:00:00,0.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-06-30 00:00:00,0.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-07-31 00:00:00,0.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-08-31 00:00:00,0.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-09-30 00:00:00,0.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-10-31 00:00:00,19400.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-11-30 00:00:00,55600.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2010-12-31 00:00:00,117000.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2011-01-31 00:00:00,135200.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2011-02-28 00:00:00,105700.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2011-03-31 00:00:00,57000.0,cf (cubic feet),0.0
+2822500,4340441,Natural Gas,2011-04-30 00:00:00,21300.0,cf (cubic feet),0.0
