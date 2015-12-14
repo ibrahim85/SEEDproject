@@ -140,6 +140,12 @@ def check_null_df(df):
         df_check = df_check.map(lambda x: 'Null' if x else 'non_Null')
         print df_check.value_counts()
 
+def get_range(df, col):
+    print 'range for columns'
+    for col in df:
+        if not (col == 'Meter Type' or col == 'Usage Units'):
+            print '{0:>28} {1:>25} {2:>25}'.format(col, df[col].min(),
+                                               df[col].max())
 def get_range(df):
     print 'range for columns'
     for col in df:
@@ -217,6 +223,8 @@ def clean_data():
 
     logger.debug('Final range of the data')
     get_range(df)
+    energy_info_file = os.getcwd() + '/csv/cleaned/energy_info.csv'
+    df.to_csv(energy_info_file, index=False)
 
     return df
 
@@ -309,21 +317,94 @@ def main():
         logger.info('outdir = {0}, outfilename = {1}'.format(outdir,
             outfilename))
         df.to_csv(outdir + outfilename, index=False)
-    '''
 
     # data frame containing static information
     df_static = read_static()
+    df_energy = clean_data()
+    '''
 
-    # process:
-    # sheet-1: energy info, read in df,
-    #          group by Portfolio Manager ID
-    #          write to a folder
-    #          for each file in the folder
-    #              read to df
-    #              group by Meter Type
-    #              aggregate all meters in one df
+    # read from cleaned data
+    df_static = pd.read_csv(os.getcwd() + '/csv/cleaned/static_info.csv')
+    df_energy = pd.read_csv(os.getcwd() + '/csv/cleaned/energy_info.csv')
+    df_merge = pd.merge(df_energy, df_static, on='Portfolio Manager ID')
 
-    #              convert date time to year and month
-    #          write to a different folder
+    logger.debug('Rearrange columns: ')
+    cols = df_merge.columns.tolist()
+    logger.debug('original columns: \n{0}'.format(cols))
+    newcols = cols[9:] + cols[:9]
+    logger.debug('new columns: \n{0}'.format(newcols))
+
+    df_merge = df_merge[newcols]
+    df_merge.drop('End Date', axis=1, inplace=True)
+
+    # checks
+    df_merge.info()
+    #check_null_df(df_merge)
+    #count_nn(df_merge, 'Usage/Quantity')
+    #merged_file = (os.getcwd() + '/csv/cleaned/all_info_c.csv')
+    #df_merge.to_csv(merged_file, index=False)
+
+    df_base = df_merge.drop(['Usage/Quantity', 'Usage Units', 'Cost ($)', 'Portfolio Manager Meter ID', 'Meter Type'], axis=1, inplace=False)
+    df_base.info()
+    df_base = df_base.drop_duplicates()
+    df_base.info()
+
+    grouped = df_merge.groupby('Meter Type')
+    #print grouped.groups.keys()
+    df_01 = grouped.get_group('Electric - Grid')
+    df_01.rename(columns={'Usage/Quantity':'elec_amt',
+                          'Usage Units':'elec_unit',
+                          'Cost ($)':'elec_cost',
+                          'Portfolio Manager Meter ID':'elec_meter_id'},
+                 inplace=True)
+    df_01.drop(['Building ID', 'State', 'Country', 'Postal Code',
+                'Year Built', 'GSF', 'Region'],
+               axis=1, inplace=True)
+
+    df_01.info()
+    merge_01 = pd.merge(df_base, df_01, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
+    merge_01.info()
+    #check_null_df(merge_01)
+    #merge_01.to_csv(os.getcwd() + '/csv/testmerge1.csv', index=False)
+
+    df_02 = grouped.get_group('Natural Gas')
+    df_02.rename(columns={'Usage/Quantity':'gas_amt',
+                          'Usage Units':'gas_unit',
+                          'Cost ($)':'gas_cost',
+                          'Portfolio Manager Meter ID':'gas_meter_id'},
+                 inplace=True)
+    df_02.drop(['Building ID', 'State', 'Country', 'Postal Code',
+                'Year Built', 'GSF', 'Region', 'Meter Type'],
+               axis=1, inplace=True)
+    merge_02 = pd.merge(merge_01, df_02, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
+    merge_02.info()
+
+    df_03 = grouped.get_group('Fuel Oil (No. 2)')
+    df_03.rename(columns={'Usage/Quantity':'oil_amt',
+                          'Usage Units':'oil_unit',
+                          'Cost ($)':'oil_cost',
+                          'Portfolio Manager Meter ID':'oil_meter_id'},
+                 inplace=True)
+    df_03.drop(['Building ID', 'State', 'Country', 'Postal Code',
+                'Year Built', 'GSF', 'Region', 'Meter Type'],
+               axis=1, inplace=True)
+    merge_03 = pd.merge(merge_02, df_03, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
+    merge_03.info()
+
+    df_04 = grouped.get_group('Potable: Mixed Indoor/Outdoor')
+    df_04.rename(columns={'Usage/Quantity':'water_amt',
+                          'Usage Units':'water_unit',
+                          'Cost ($)':'water_cost',
+                          'Portfolio Manager Meter ID':'water_meter_id'},
+                 inplace=True)
+    df_04.drop(['Building ID', 'State', 'Country', 'Postal Code',
+                'Year Built', 'GSF', 'Region', 'Meter Type'],
+               axis=1, inplace=True)
+    merge_04 = pd.merge(merge_03, df_04, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
+    merge_04.drop(['Meter Type', 'Country'], axis=1, inplace=True)
+    merge_04.info()
+    output = merge_04.drop_duplicates()
+    output.info()
+    output.to_csv(os.getcwd() + '/csv/testmerge2.csv', index=False)
 
 main()

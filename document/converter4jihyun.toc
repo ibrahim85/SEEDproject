@@ -1,8 +1,12 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
-\contentsline {section}{\numberline {2}Input Data Analysis}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}Number of missing value for selected field}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Number of records for each energy type}{4}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}ranges}{5}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Non-negativity}{5}{subsection.2.4}
-\contentsline {section}{\numberline {3}Cleaned up}{6}{section.3}
-\contentsline {subsection}{\numberline {3.1}Static info from EUAS template}{6}{subsection.3.1}
+\contentsline {section}{\numberline {2}Definition of the mapping from source to target format}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Input data quality check - Energy Information}{3}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Number of missing value}{3}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Ranges}{4}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Non-negativity}{5}{subsubsection.2.1.3}
+\contentsline {subsection}{\numberline {2.2}Input data quality check - Static info}{5}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Missing data in PM file}{5}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Duplicate and missing record in EUAM template}{6}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}Clean up summary}{9}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Retrieving region information summary}{10}{subsubsection.2.3.1}
+\contentsline {section}{\numberline {3}Cleaned up and combined file}{10}{section.3}

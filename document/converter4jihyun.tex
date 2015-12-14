@@ -55,18 +55,23 @@
 
 \begin{document}
 \title{Excel converter for Jihyun\\
-       \large SEED project}
+       \large GSA project}
 \maketitle
 \tableofcontents
 \newpage
 \section{Introduction}\label{sec:intro}
 The document records the implementation of the data converter from
-excel to csv for Jihyn. The field of the target file (EUAS) include
+excel to csv for Jihyn. 
+
+\section{Definition of the mapping from source to target format}
+Via the discussion in the first meeting, the mapping from source PM
+table (containing energy consumption information) to the target EUAS
+template is depicted in \tref{tab:mapField}:
 \begin{table}[h!]
-  \footnotesize
+  \scriptsize
 \centering
 \caption{Excel merging script field mapping table}
-\label{my-label}
+\label{tab:mapField}
 \begin{tabular}{p{3cm}p{3cm}|p{3cm}|p{5cm}}
 Source                 &                              & target                      & Condition                   \\
 sheet name             & field name                   &                             &                             \\
@@ -112,36 +117,87 @@ Meter Consumption Data & Portfolio Manager Meter ID   & Portfolio Manager Meter 
   \hline
 \end{tabular}
 \end{table}
-\section{Input Data Analysis}
-\subsection{Number of missing value for selected field}
+As described in following sections, this template design of creating
+several columns (Usage/Quantity, Meter ID, unit, Cost (\$))for each
+new energy usage type have several draw backs:
+\begin{itemize}
+\item The large number of different energy usage types (19 in total)
+  will result in large number of columns
+\item The large variety in the number of energy record for each types
+  of energy source will result in a large number of waste space in the
+  table: for example, there are only 12 records for 'Electric - Wind'
+  but 111065 records for 'Electric - Grid'. For the EUAS template with
+  different columns for different energy source, there will be $111065
+  - 12 = 111053$ empty cells in the column of 'Electric - Wind'
+\item If in the future, the new type of energy usage is included, the
+  structure of the table will change (the number of columns), this
+  requires reprocessing the whole table again. If we maintain the way
+  of keeping all energy consumption stacked on top of each other (the
+  way in PM table), we can either append records of the new resource
+  to the end or save it to another table without affecting the already
+  tidied data.
+\end{itemize}
+
+Thus I propose to maintain the structure of the PM in recording energy
+usage information. Hence the mapping of fields from source to target
+table would be as the following:
+
+\begin{table}[h!]
+  \scriptsize
+\centering
+\caption{Excel merging script field mapping table}
+\label{tab:mapFieldNew}
+\begin{tabular}{c | c | c}%{p{3cm}p{3cm}|p{3cm}}
+  \hline
+Source                 &                              & target                                         \\
+sheet name             & field name                   &                                                          \\
+  \hline
+  \hline
+Properties             & State/Province               & State                                                    \\
+  \hline
+Properties             & Country               & Country\\
+  \hline
+Properties             & Gross Floor Area             & GSF                                                      \\
+  \hline
+Properties             & Year Built                   & Year Built                                               \\
+  \hline
+Properties             & Postal Code                  & Postal Code (first 5 digit)                            \\ 
+  \hline
+Property Use & Self-Selected Primary Function         & Use Type                    \\ 
+  \hline
+  \hline
+Meter Consumption Data & Property Name                & Building ID                                              \\
+  \hline
+Meter Consumption Data & End Date (month)             & Month                                                    \\
+  \hline
+Meter Consumption Data & End Date (year)             & Year                                                     \\
+  \hline
+Meter Consumption Data & (Usage/Quantity, Meter Type) & Usage/Quantity\\
+  \hline
+Meter Consumption Data & (Usage/Quantity, Meter Type) & Cost (\$)                    \\
+  \hline
+Meter Consumption Data & Portfolio Manager ID         & Portfolio Manager ID                                     \\
+  \hline
+Meter Consumption Data & Portfolio Manager Meter ID   & Portfolio Manager Meter ID                               \\
+  \hline
+  \hline
+\end{tabular}
+\end{table}
+\subsection{Input data quality check - Energy Information}
+\subsubsection{Number of missing value}
+From the output of the script, one can see there are missing data in
+the following fields:
+\begin{itemize}
+\item End Date: 39 missing data.
+\item ``Cost\$'': 12942 missing data.
+\end{itemize}
+
+For ``End Date'', we will discard these records with, for ``Cost
+(\$)'', we'll first mark the missing data with ``-1'', and discard it
+when doing cost related analysis
 \makeatletter
 \def\verbatim@font{\linespread{1}\small\ttfamily}
 \begin{verbatim}
-checking numer of missing values for columns
-## ------------------------------------------##
-Property Name
-non_Null    850
-dtype: int64
-## ------------------------------------------##
-Portfolio Manager ID
-non_Null    850
-dtype: int64
-## ------------------------------------------##
-State/Province
-non_Null    850
-dtype: int64
-## ------------------------------------------##
-Postal Code
-non_Null    850
-dtype: int64
-## ------------------------------------------##
-Year Built
-non_Null    850
-dtype: int64
-## ------------------------------------------##
-Gross Floor Area
-non_Null    850
-dtype: int64
 checking numer of missing values for columns
 ## ------------------------------------------##
 Portfolio Manager ID
@@ -174,45 +230,13 @@ non_Null    331567
 Null         12942
 dtype: int64
 \end{verbatim}
-From the output of the script, one can see there are missing data in
-the following fields:
-\begin{itemize}
-\item End Date: 39 missing data.
-\item ``Cost\$'' contains 12942 missing data.
-\end{itemize}
 
-For ``End Date'', we will discard these records with, for ``Cost\$'',
-we'll first mark the missing data with ``-1'', and discard it when
-doing cost related analysis
 
-After processing, there are 
-\subsection{Number of records for each energy type}
-\begin{verbatim}
-Meter Type
+\subsubsection{Ranges}
+From the range checking, one can see there are missing values for 'End
+Date' (marked as 'inf') and illegal values for the 'Usage/Quantity'
+(negative values)
 
-District Chilled Water - Absorption                   153
-District Chilled Water - Electric                     636
-District Chilled Water - Engine                        49
-District Chilled Water - Other                       5925
-District Hot Water                                    371
-District Steam                                      15784
-Electric - Grid                                    111065
-Electric - Solar                                     1900
-Electric - Wind                                        12
-Fuel Oil (No. 2)                                    20534
-Natural Gas                                         79492
-Other Indoor                                           14
-Other:                                                580
-Other: Mixed Indoor/Outdoor                           467
-Potable Indoor                                       1177
-Potable: Mixed Indoor/Outdoor                       98474
-Power Distribution Unit (PDU) Input Meter              16
-Power Distribution Unit (PDU) Output Meter            106
-Uninterruptible Power Supply (UPS) Output Meter      7754
-dtype: int64
-
-\end{verbatim}
-\subsection{ranges}
 \begin{verbatim}
         Portfolio Manager ID                       600                   4428021
   Portfolio Manager Meter ID                       519                  15550834
@@ -221,17 +245,18 @@ dtype: int64
                     Cost ($)                       0.0                 7858632.0
 \end{verbatim}
 
-\note when pandas read in date time, it converts missing data to
-current date by default
+\note when pandas read in date time, it converts missing datetime data
+to current date by default, which is why it shows up as inf (infinity)
 
-\subsection{Non-negativity}
-Checking the number of negative records for each group. From the
-result, we can see there are 108 records in District Chilled Water and
-151 records in District Hot Water with negative energy consumption
-records.
+\subsubsection{Non-negativity}
+Checking the number of negative records for each group of energy
+consumption. From the result, we can see there are 108 records in
+District Chilled Water and 151 records in District Hot Water with
+negative energy consumption records, which is identified as illegal
+records that needs to be removed.
 
 \begin{verbatim}
-is_nn  Meter Type                                     
+value  Meter Type                                     
 <0     District Chilled Water - Electric                     108
        District Hot Water                                    151
 >=0    District Chilled Water - Absorption                   153
@@ -255,47 +280,47 @@ is_nn  Meter Type
        Uninterruptible Power Supply (UPS) Output Meter      7754
 dtype: int64
 \end{verbatim}
-After removing 39 nan ``End Date'' and 259 negative
+
+After removing 39 missing ``End Date'' and 259 negative
 ``Usage/Quantity'', there are 344211 legal records to be further
 processed.
 
-\pagebreak
-\section{Cleaned up}
-After the initial clean up:
+\subsection{Input data quality check - Static info}
+\subsubsection{Missing data in PM file}
+There are no missing data for the static information in sheet-0 of the PM file
 \begin{verbatim}
-Checking non-negativity after initial clean
->=0    344211
+checking numer of missing values for columns
+## ------------------------------------------##
+Property Name
+non_Null    850
 dtype: int64
-is_nn  Meter Type                                     
->=0    District Chilled Water - Absorption                   153
-       District Chilled Water - Electric                     528
-       District Chilled Water - Engine                        49
-       District Chilled Water - Other                       5925
-       District Hot Water                                    220
-       District Steam                                      15784
-       Electric - Grid                                    111065
-       Electric - Solar                                     1900
-       Electric - Wind                                        12
-       Fuel Oil (No. 2)                                    20495
-       Natural Gas                                         79492
-       Other Indoor                                           14
-       Other:                                                580
-       Other: Mixed Indoor/Outdoor                           467
-       Potable Indoor                                       1177
-       Potable: Mixed Indoor/Outdoor                       98474
-       Power Distribution Unit (PDU) Input Meter              16
-       Power Distribution Unit (PDU) Output Meter            106
-       Uninterruptible Power Supply (UPS) Output Meter      7754
-
-# Ranges of columns
-        Portfolio Manager ID                       600                   4428021
-  Portfolio Manager Meter ID                       519                  15550834
-                    End Date       1998-06-30 00:00:00       2015-09-01 00:00:00
-              Usage/Quantity                       0.0               513798464.0
-                    Cost ($)                      -1.0                 7858632.0
-
+## ------------------------------------------##
+Portfolio Manager ID
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+State/Province
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Postal Code
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Year Built
+non_Null    850
+dtype: int64
+## ------------------------------------------##
+Gross Floor Area
+non_Null    850
+dtype: int64
 \end{verbatim}
-\subsection{Static info from EUAS template}
+
+\subsubsection{Duplicate and missing record in EUAM template}
+First read in ``Building ID'' and ``Region'' columns from EUAM
+template table, for each (``Building ID'', ``Region'')pair, there are
+11 duplicate records.
+
 \begin{verbatim}
 # number of records
 Building ID    11713 non-null object
@@ -308,21 +333,20 @@ Region: 11
 
 Per Jiyhun's advice, I should look up the 'Region' field with building
 id in PM table from the EUAS template, since there are more buildings
-in EUAS than in PM. However, after reading both tables, I found the
-EUAS template contains not enough matching building record information
-in the portfolio manager:
+in EUAS (1065) than in PM(850). However, after reading both tables, I
+found there are only 120 common buildings in the two files, which
+means one cannot use EUAS table as a lookup table to retrieve region
+information for buildings in the PM file.
+
 \begin{verbatim}
 850 buildings in PM
 1065 buildings in EUAS
 120 common building records between PM and EUAS
 \end{verbatim}
 
-Then Jiyhun pointed out the link to the definition of the
+Jiyhun pointed out the link to the definition of the
 \href{http://www.gsa.gov/portal/category/22227}{GSA lookup}, and
-\href{http://www.gsa.gov/graphics/pbs/RWAmap.pdf}{GSA region map}. I
-digitized it into a table and combined it with the data frame with the
-static information. State abbreviation table is retrieved from
-\url{http://www.stateabbreviations.us/}
+\href{http://www.gsa.gov/graphics/pbs/RWAmap.pdf}{GSA region map}. 
 
 There is a Canada state from the PM file, the following output shows
 the number of buildings in each state/Country in the PM file:
@@ -383,7 +407,96 @@ United States  Alabama                        12
                Wyoming                         6
 \end{verbatim}
 
-Need to drop the non-U.S. records
+The non-U.S. state should be dropped in the analysis, because it is
+not in the definition of GSA region. 
+
+\pagebreak
+\subsection{Clean up summary}
+\begin{itemize}
+\item PM sheet-0, static information
+  \begin{itemize}
+  \item Turn `Property Name' from `XXXXXXXX - XXXXXXXXXX' to just the
+    string before `-'
+  \item Keep only 5 digit for zip code
+  \item Drop non-U.S. state
+  \end{itemize}
+\item PM sheet-5, energy information
+  \begin{itemize}
+  \item Drop missing data for `End Date'
+  \item Mark missing cost data as `-1'
+  \item Drop negative energy consumption record
+  \item Drop non-U.S. state
+  \end{itemize}
+The cleaned up energy information
+\begin{verbatim}
+Checking non-negativity after initial clean
+>=0    344211
+dtype: int64
+is_nn  Meter Type                                     
+>=0    District Chilled Water - Absorption                   153
+       District Chilled Water - Electric                     528
+       District Chilled Water - Engine                        49
+       District Chilled Water - Other                       5925
+       District Hot Water                                    220
+       District Steam                                      15784
+       Electric - Grid                                    111065
+       Electric - Solar                                     1900
+       Electric - Wind                                        12
+       Fuel Oil (No. 2)                                    20495
+       Natural Gas                                         79492
+       Other Indoor                                           14
+       Other:                                                580
+       Other: Mixed Indoor/Outdoor                           467
+       Potable Indoor                                       1177
+       Potable: Mixed Indoor/Outdoor                       98474
+       Power Distribution Unit (PDU) Input Meter              16
+       Power Distribution Unit (PDU) Output Meter            106
+       Uninterruptible Power Supply (UPS) Output Meter      7754
+
+# Ranges of columns
+        Portfolio Manager ID                       600                   4428021
+  Portfolio Manager Meter ID                       519                  15550834
+                    End Date       1998-06-30 00:00:00       2015-09-01 00:00:00
+              Usage/Quantity                       0.0               513798464.0
+                    Cost ($)                      -1.0                 7858632.0
+
+\end{verbatim}
+
+\end{itemize}
+
+\subsubsection{Retrieving region information summary}
+I digitized the GSA region in into a table from
+\href{http://www.gsa.gov/portal/category/22227}{GSA lookup} and
+combined it with the data frame with the static information. State
+abbreviation table is retrieved from
+\url{http://www.stateabbreviations.us/}
+
+Attention should be paid for U.S. owned island, since they don't
+appear in \href{http://www.gsa.gov/graphics/pbs/RWAmap.pdf}{GSA region
+  map}.
+\section{Cleaned up and combined file}
+After cleaning the static and the energy information, retrieving
+region information and merging these three tables: static, energy and
+region, there are 344118 records in the cleaned up table.
+\begin{verbatim}
+Data columns (total 16 columns):
+Portfolio Manager ID          344118 non-null int64
+Portfolio Manager Meter ID    344118 non-null int64
+Meter Type                    344118 non-null object
+End Date                      344118 non-null object
+Usage/Quantity                344118 non-null float64
+Usage Units                   344118 non-null object
+Cost ($)                      344118 non-null float64
+Year                          344118 non-null int64
+Month                         344118 non-null int64
+Building ID                   344118 non-null object
+State                         344118 non-null object
+Postal Code                   344118 non-null int64
+Country                       344118 non-null object
+Year Built                    344118 non-null int64
+GSF                           344118 non-null int64
+Region                        344118 non-null int64
+\end{verbatim}
 \newpage
 \bibliographystyle{plain} \bibliography{myCitation}
 \end{document}
