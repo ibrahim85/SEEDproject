@@ -6,6 +6,8 @@ import pandas as pd
 import json
 import glob
 import numpy as np
+import datetime as dt
+
 import query as qr
 
 ## ## ## ## ## ## ## ## ## ## ##
@@ -24,6 +26,12 @@ def pm2json(in_dir, out_dir):
     filelist = glob.glob(in_dir + "*.xlsx")
     for excel in filelist:
         pm2jsonSingle(excel, in_dir, out_dir)
+
+# There are no documentation for whether PM is in local or UTC time
+# Assume it is in local time
+# Solution: offset time to 12:00 noon
+# Why: the date do not change for converting to UTC
+# Reasoning: according to: http://www.timetemperature.com/abbreviations/united_states_time_zone_abbreviations.shtml, there are no UTC-local difference of over 11 hours, so after the conversion, the time shown in SEED do not change its date.
 
 def pm2jsonSingle(excel, in_dir, out_dir):
     logger.info('\ntemplate to json:{0}'.format(excel))
@@ -45,6 +53,10 @@ def pm2jsonSingle(excel, in_dir, out_dir):
 
     # Calculate time interval of days
     meter_con_df['interval'] = meter_con_df['End Date'] - meter_con_df['Start Date']
+
+    meter_con_df['End Date'] = meter_con_df['End Date'].map(lambda x: x+dt.timedelta(hours=12))
+    meter_con_df['Start Date'] = meter_con_df['Start Date'].map(lambda x: x+dt.timedelta(hours=12))
+
     meter_con_df['reading_kind'] = 'energy'
 
     # renaming columns of df

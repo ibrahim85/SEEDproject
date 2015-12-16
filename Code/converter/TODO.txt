@@ -38,3 +38,21 @@ jangle interface for query
 dec. 7
 run and test the code
 write a converter for
+
+ATTENTION!!!!
+
+Change local time to UTC.
+
+Send email of all libraries
+
+Standard
+os
+glob
+logging
+json
+
+Additional
+pandas
+numpy
+
+psycopg2
