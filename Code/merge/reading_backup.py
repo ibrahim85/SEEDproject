@@ -163,8 +163,7 @@ def clear_data():
     print group_type.size()
     '''
 
-def format_building(df_static):
-    excel2csv_single(excel, i, outdir)
+def format_building():
 
     indir = os.getcwd() + '/csv/single_building/'
     filelist = glob.glob(indir + '*.csv')
@@ -173,10 +172,8 @@ def format_building(df_static):
         filename = csv[csv.find('pm'):]
         logger.info('format file: {0}'.format(filename))
         df = pd.read_csv(csv)
+        df.set_index
         # create year and month column
-        df['Year'] = df['End Date'].map(lambda x: x[:4])
-        df['Month'] = df['End Date'].map(lambda x: x[5:7])
-        df.drop('End Date', 1, inplace=True)
         group_type = df.groupby('Meter Type')
 
         for name, group in group_type:
@@ -210,7 +207,6 @@ def format_building(df_static):
         #logger.debug(merge_3[:10])
         merge_all.info()
         '''
-
 
         '''
         df_all.drop('Usage/Quantity')
@@ -274,4 +270,5 @@ def main():
     #              convert date time to year and month
     #          write to a different folder
 
-main()
+#main()
+format_building()

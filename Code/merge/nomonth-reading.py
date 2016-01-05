@@ -58,15 +58,15 @@ def read_static():
     csv = indir + 'sheet-0.csv'
     logger.debug('read static info')
     df = pd.read_csv(csv)
+    # take the five digits of zip code
+    # BOOKMARK: get the word from string
     df['Property Name'] = df['Property Name'].map(lambda x: x.partition(' ')[0][:8])
     df['Postal Code'] = df['Postal Code'].map(lambda x: x[:5])
     logger.debug(df['Property Name'].tolist()[:10])
 
-    df.info()
     df.rename(columns={'Property Name' : 'Building ID',
                        'State/Province' : 'State',
                        'Gross Floor Area' : 'GSF'}, inplace=True)
-    df.info()
     print df.groupby(['Country', 'State']).size()
 
     regionfile = os.getcwd() + '/input/stateRegion.csv'
@@ -95,6 +95,7 @@ def read_static():
     static_info_file = os.getcwd() + '/csv/cleaned/static_info.csv'
     print static_info_file
     df.to_csv(static_info_file, index=False)
+    return df
 
 # split energy consumption to different files
 def split_energy_building():
@@ -193,12 +194,9 @@ def clean_data():
 
     # create 'Year' and 'Month' column
     df['Year'] = df['End Date'].map(lambda x : x[:4])
-    df['Month'] = df['End Date'].map(lambda x : x[5:7])
 
-    #logger.debug('Final range of the data')
-    #get_range(df)
-    energy_info_file = os.getcwd() + '/csv/cleaned/energy_info.csv'
-    df.to_csv(energy_info_file, index=False)
+    #energy_info_file = os.getcwd() + '/csv/cleaned/energy_info.csv'
+    #df.to_csv(energy_info_file, index=False)
 
     return df
 
@@ -241,10 +239,8 @@ def main():
     # data frame containing static information
     df_static = read_static()
     df_energy = clean_data()
+    df_energy.info()
 
-    # read from cleaned data
-    df_static = pd.read_csv(os.getcwd() + '/csv/cleaned/static_info.csv')
-    df_energy = pd.read_csv(os.getcwd() + '/csv/cleaned/energy_info.csv')
     df_merge = pd.merge(df_energy, df_static, on='Portfolio Manager ID')
 
     logger.debug('Rearrange columns: ')
@@ -253,24 +249,39 @@ def main():
     newcols = cols[9:] + cols[:9]
     #logger.debug('new columns: \n{0}'.format(newcols))
 
-    df_merge = df_merge[newcols]
-    #df_merge.drop('End Date', axis=1, inplace=True)
-
-    # checks
-    logger.debug('Number of buildings in PM before merging')
-    logger.debug(len(df_merge['Building ID'].unique()))
-    df_merge.info()
-
-    # -- merging building meter
     # read euas buildings list
     euas = os.getcwd() + '/input/EUAS.csv'
     logger.debug('Read in EUAS region')
     df_t = pd.read_csv(euas, usecols=['Building ID'])
     df_t['Building ID'] = df_t['Building ID'].map(lambda x: x.partition(' ')[0][:8])
-    logger.debug('Number of buildings in EUAS')
     logger.debug(len(df_t['Building ID'].unique()))
     euas_set = set(df_t['Building ID'].tolist())
     assert((len(df_t['Building ID'].unique())) == len(euas_set))
+
+    df_merge = df_merge[newcols]
+    df_merge = df_merge[df_merge['Building ID'].isin(euas_set)]
+    print 'number of buildings'
+    print len(df_merge['Building ID'].unique())
+    df_merge.to_csv(os.getcwd() + '/csv/originalShape.csv', index=False)
+
+    '''
+    df_merge.drop('End Date', axis=1, inplace=True)
+
+    # checks
+    logger.debug('Number of buildings in PM before merging')
+    logger.debug(len(df_merge['Building ID'].unique()))
+    df_merge.info()
+    grouped = df_merge.groupby(['Building ID', 'Year', 'Month', 'Meter Type'])
+    for name, group in grouped:
+        if len(group) > 1:
+            print name
+
+    #check_null_df(df_merge)
+    #count_nn(df_merge, 'Usage/Quantity')
+    #merged_file = (os.getcwd() + '/csv/cleaned/all_info_c.csv')
+    #df_merge.to_csv(merged_file, index=False)
+
+    # -- merging building meter
 
     df_base = df_merge.drop(['Usage/Quantity', 'Usage Units', 'Cost ($)', 'Portfolio Manager Meter ID', 'Meter Type'], axis=1, inplace=False)
     df_base.info()
@@ -283,6 +294,13 @@ def main():
     logger.debug(len(euas_set.intersection(set(df_base['Building ID'].tolist()))))
 
     grouped = df_merge.groupby('Meter Type')
+    b1 = set(grouped.get_group('Electric - Grid')['Building ID'].tolist())
+    b2 = set(grouped.get_group('Natural Gas')['Building ID'].tolist())
+    b3 = set(grouped.get_group('Fuel Oil (No. 2)')['Building ID'].tolist())
+    b4 = set(grouped.get_group('Potable: Mixed Indoor/Outdoor')['Building ID'].tolist())
+    logger.debug('number of buildings with the four major energy source')
+    logger.debug(len(b1.union(b2.union(b3.union(b4)))))
+    #print grouped.groups.keys()
     df_01 = grouped.get_group('Electric - Grid')
     df_01.rename(columns={'Usage/Quantity':'elec_amt',
                           'Usage Units':'elec_unit',
@@ -292,6 +310,7 @@ def main():
     df_01.drop(['Building ID', 'State', 'Country', 'Postal Code',
                 'Year Built', 'GSF', 'Region'],
                axis=1, inplace=True)
+
     df_01.info()
     merge_01 = pd.merge(df_base, df_01, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
     merge_01.info()
@@ -332,7 +351,7 @@ def main():
                 'Year Built', 'GSF', 'Region', 'Meter Type'],
                axis=1, inplace=True)
     merge_04 = pd.merge(merge_03, df_04, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
-    #merge_04.drop(['Meter Type', 'Country'], axis=1, inplace=True)
+    merge_04.drop(['Meter Type', 'Country'], axis=1, inplace=True)
     merge_04.info()
     output = merge_04.drop_duplicates()
     output.info()
@@ -343,6 +362,6 @@ def main():
     logger.debug(len(merge_04['Building ID'].unique()))
     merge_04.info()
     merge_04.to_csv(os.getcwd() + '/csv/testmerge-euas.csv', index=False)
+    '''
 
 main()
-#split_energy_building()

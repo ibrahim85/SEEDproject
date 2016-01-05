@@ -58,6 +58,8 @@ def read_static():
     csv = indir + 'sheet-0.csv'
     logger.debug('read static info')
     df = pd.read_csv(csv)
+    # take the five digits of zip code
+    # BOOKMARK: get the word from string
     df['Property Name'] = df['Property Name'].map(lambda x: x.partition(' ')[0][:8])
     df['Postal Code'] = df['Postal Code'].map(lambda x: x[:5])
     logger.debug(df['Property Name'].tolist()[:10])
@@ -283,6 +285,13 @@ def main():
     logger.debug(len(euas_set.intersection(set(df_base['Building ID'].tolist()))))
 
     grouped = df_merge.groupby('Meter Type')
+    b1 = set(grouped.get_group('Electric - Grid')['Building ID'].tolist())
+    b2 = set(grouped.get_group('Natural Gas')['Building ID'].tolist())
+    b3 = set(grouped.get_group('Fuel Oil (No. 2)')['Building ID'].tolist())
+    b4 = set(grouped.get_group('Potable: Mixed Indoor/Outdoor')['Building ID'].tolist())
+    logger.debug('number of buildings with the four major energy source')
+    logger.debug(len(b1.union(b2.union(b3.union(b4)))))
+    #print grouped.groups.keys()
     df_01 = grouped.get_group('Electric - Grid')
     df_01.rename(columns={'Usage/Quantity':'elec_amt',
                           'Usage Units':'elec_unit',
@@ -292,8 +301,11 @@ def main():
     df_01.drop(['Building ID', 'State', 'Country', 'Postal Code',
                 'Year Built', 'GSF', 'Region'],
                axis=1, inplace=True)
+    df_01 = df_01.set_index(pd.DatetimeIndex(df_01['End Date']))
     df_01.info()
-    merge_01 = pd.merge(df_base, df_01, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
+    df_01 = df_01.resample('M', how='sum', fill_method=None)
+    df_01.dropna(inplace=True)
+    merge_01 = pd.merge(df_base, df_01, how='left', on=['End Date', 'Portfolio Manager ID'])
     merge_01.info()
     #check_null_df(merge_01)
     #merge_01.to_csv(os.getcwd() + '/csv/testmerge1.csv', index=False)
@@ -307,6 +319,9 @@ def main():
     df_02.drop(['Building ID', 'State', 'Country', 'Postal Code',
                 'Year Built', 'GSF', 'Region', 'Meter Type'],
                axis=1, inplace=True)
+    df_02 = df_02.set_index(pd.DatetimeIndex(df_02['End Date']))
+    df_02 = df_02.resample('M', how='sum', fill_method=None)
+    df_02.dropna(inplace=True)
     merge_02 = pd.merge(merge_01, df_02, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
     merge_02.info()
 
@@ -319,6 +334,9 @@ def main():
     df_03.drop(['Building ID', 'State', 'Country', 'Postal Code',
                 'Year Built', 'GSF', 'Region', 'Meter Type'],
                axis=1, inplace=True)
+    df_03 = df_03.set_index(pd.DatetimeIndex(df_03['End Date']))
+    df_03 = df_03.resample('M', how='sum', fill_method=None)
+    df_03.dropna(inplace=True)
     merge_03 = pd.merge(merge_02, df_03, how='left', on=['Year', 'Month', 'Portfolio Manager ID'])
     merge_03.info()
 
