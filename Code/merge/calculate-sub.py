@@ -83,6 +83,7 @@ def plot():
     df = pd.read_csv(os.getcwd() + '/csv/eui-2.csv')
     logger.debug('finished reading file eui-2.csv')
 
+    '''
     df.boxplot(column='EUI', by='Region')
     plt.ylabel('EUI')
     plt.xlabel('Region')
@@ -90,6 +91,7 @@ def plot():
     P.savefig(os.getcwd() + '/plot2/EUIbyRegion.png')
     plt.close()
 
+    # plot histogram
     import seaborn as sns
     grouped = df.groupby('Region')
     for name, group in grouped:
@@ -120,7 +122,32 @@ def plot():
     plt.title('EUI by Region Violin Plot')
     P.savefig(os.getcwd() + '/plot2/EUIbyRegionViolin-noDC0001ZZ.png')
     plt.close()
+    '''
 
+    group_yr = df.groupby(['Region', 'Year'])
+    df_med = group_yr.median()
+    #print df_med.head()
+    df_med = df_med.reindex()
+    df_med.to_csv(os.getcwd() + '/csv/eui-median.csv', index=True)
+
+    df2 = pd.read_csv(os.getcwd() + '/csv/eui-median.csv')
+    med = df2.groupby(['Region', 'Year'])
+    med.unstack(level=0)
+    '''
+    for name,group in group_r:
+        print
+        print name
+        group_ry = group.groupby('Year')
+        med = group_ry.median()
+        med.info()
+        #print med.head()
+        med.plot(columns = ['EUI'])
+        plt.title('EUI of Region {0}'.format(name))
+        plt.ylabel('EUI')
+        plt.xlabel('Year')
+        P.savefig(os.getcwd() + '/plot2/eui-region-{0}.png'.format(name))
+        #plt.plot(med['EUI'])
+    '''
 def main():
     #calculate()
     plot()
