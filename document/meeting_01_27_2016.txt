@@ -1,0 +1,12 @@
+TODOs for the next week:
+
+1. Use the table "ScopePortfolioReport_20160105.xlsx" to plot:
+EUI distribution by ECM action: Action 1, Action 2, ..., No Action
+
+2. Pie / bar plot of EUI by building typology using all buil
+
+3. Use table "Portfolio HPGB Dashboard 12-18-2015.xlsx" to plot
+distribution of "Project Type"
+
+4. Use table "Portfolio HPGB Dashboard 12-18-2015.xlsx" to plot EUI by
+finish year (need clearification)

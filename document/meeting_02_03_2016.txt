@@ -1,0 +1,56 @@
+TODO for the next week
+
+1. report sets of buildings we need to ask for energy data
+
+search box folder to find:
+    S: the building ids for the 400 buildings with 15 min interval data
+    D: the building ids for the 80 BAS buildings with all data
+
+in ECM high level action sheet, rank by time, intersect it with
+previous two sets of buildings S (400 buildings) and D (80 buildings),
+list the intersected set of buildings, S' and D' that has both energy
+data and ECM action completion date
+
+D (80 buildings): buildings with GSALink program, 8 has ECM completion
+date information.
+
+*. compare degree day calculation method
+
+-----------------------------------------------------------------------
+2. analyze ECM action only vs. no ECM action building energy
+distribution
+
+analyse the distribution of "Advanced metering" action
+only and "building envelope" action only for high level ECM action and
+create plots for total EUI, Electric EUI and Gas EUI
+
+use "Portfolio HPGB Dashboard_highlevel_dropdup.csv" and
+"join2015.csv" Issue, 
+
+    the "None category does not correspond with the bar chart for last
+week, because the "None" type in last time is not filtered with
+filters while they should elec >= 12, gas >= 3 etc.
+
+3. Continue modify weather normalization routine
+
+3.1 correct the baseload calculation method ?
+
+This need to be discussed and modified
+
+3.2 add month notation to the plots: denote each data point with a
+number denoting which month it is in
+
+3.3 change y axis label to
+    "monthly total gas + electricity [kbtu/sq. ft.]"
+    "monthly total gas [kbtu/sq. ft.]"
+    "monthly total electricity [kbtu/sq. ft.]"
+
+3.4 change the color coding of gas, electric and combined plot:
+
+*   electric plot use turcoise in the combined plot, and in
+    electricity-cdd plot use a shade of light to dark denoting year
+    2013 to 2015
+
+*   electric plot use orange in the combined plot, and in gas-hdd plot
+    use a shade of light to dark denoting year 2013 to 2015
+

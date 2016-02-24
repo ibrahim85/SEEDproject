@@ -1,0 +1,5 @@
+"Nonparametric regression is a form of regression analysis in which the
+predictor does not take a predetermined form but is constructed
+according to information derived from the data."
+
+

@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+\linespread{1.3}
+\usepackage{hyperref}
+\usepackage{enumitem}
+%\usepackage{enumerate}
+\usepackage{changepage,lipsum,titlesec, longtable}
+\usepackage{cite}
+\usepackage{comment, xcolor}
+\usepackage[pdftex]{graphicx}
+  \graphicspath{{images/}, {images/stat/}}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png, .jpg}
+\usepackage[cmex10]{amsmath}
+\usepackage{tikz}
+\usepackage{array} 
+\usepackage{subfigure} 
+\newcommand{\grey}[1]{\textcolor{black!30}{#1}}
+\newcommand{\red}[1]{\textcolor{red!50}{#1}}
+\newcommand{\question}[1]{\textcolor{magenta}{\textbf{Question: } {#1}}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\eref}[1]{Equation~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\aref}[1]{Appendix~\ref{#1}}
+\newcommand{\note}[0]{\textbf{Note: }}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\\arabic{enumii}.}
+
+\oddsidemargin0cm
+\topmargin-2cm %I recommend adding these three lines to increase the
+\textwidth16.5cm %amount of usable space on the page (and save trees)
+\textheight23.5cm
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+% draw diagram
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{data} = [font=\scriptsize, rectangle, rounded corners, minimum width=1.5cm, minimum height=1cm,align=left, draw=black, fill=black!30]
+\tikzstyle{database} = [font=\scriptsize, rectangle, rounded corners, minimum width=3cm, minimum height=1cm,align=left, draw=black, fill=green!30]
+\tikzstyle{query} = [font=\scriptsize,trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [font=\scriptsize,rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{spliter} = [font=\scriptsize,diamond, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{decision} = [font=\scriptsize,diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{bi-arrow} = [thick,->,>=stealth]
+
+
+\begin{document}
+\title{New GSA data process and weather normalization\\
+       \large GSA project}
+\maketitle
+\tableofcontents
+\newpage
+\section{Introduction}\label{sec:intro}
+This document records the coding of weather normalization
+
+\begin{enumerate}
+\item Retrieve weather data from weather station: 441 total stations, 250 with complete data.
+  filter out \texttt{['No Data', ' ', 'Arc Off-line', '[-10722] PINET: Timeout on PI RPC or System Call.', 'Tag not found']}
+\item Calculate monthly mean temperature
+\item Calculate degree day, base from 55F to 75F, \texttt{calculate_dd()}
+\item Generate a building - weather station lookup table, \texttt{building_station_lookup.csv}
+\item create two degree-day file (a HDD and a CDD) for each station, col 1 is time, col 2 up is degree day: \texttt{sep_dd}
+\item create one average temperature for each station, col 1 is time, col 2 is monthly mean temperature \texttt{sep_temp}
+\item for each building - station pair, join energy data and weather data (mean temp) with month and year \texttt{join_building_temp()}
+  note: in \texttt{building_to_station()}, use 'good area' as the criteria, results are put in ``energy_temp'' folder
+  -------------------------------------------------------------------------
+\item Plot temperature-energy
+\item Sort the points based on
+\item partition the points into two sets based on temperature
+\end{enumerate}
+
+\newpage
+\bibliographystyle{plain} \bibliography{myCitation}
+\end{document}

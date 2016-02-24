@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\linespread{1.3}
+\usepackage{hyperref}
+\usepackage{enumitem}
+%\usepackage{enumerate}
+\usepackage{changepage,lipsum,titlesec, longtable}
+\usepackage{cite}
+\usepackage{comment, xcolor}
+\usepackage[pdftex]{graphicx}
+  \graphicspath{{images/}, {images/stat/}}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png, .jpg}
+\usepackage[cmex10]{amsmath}
+\usepackage{tikz}
+\usepackage{array} 
+\usepackage{subfigure} 
+\newcommand{\grey}[1]{\textcolor{black!30}{#1}}
+\newcommand{\red}[1]{\textcolor{red!50}{#1}}
+\newcommand{\question}[1]{\textcolor{magenta}{\textbf{Question: } {#1}}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\eref}[1]{Equation~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\aref}[1]{Appendix~\ref{#1}}
+\newcommand{\note}[0]{\textbf{Note: }}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\\arabic{enumii}.}
+
+\oddsidemargin0cm
+\topmargin-2cm %I recommend adding these three lines to increase the
+\textwidth16.5cm %amount of usable space on the page (and save trees)
+\textheight23.5cm
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+% draw diagram
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{data} = [font=\scriptsize, rectangle, rounded corners, minimum width=1.5cm, minimum height=1cm,align=left, draw=black, fill=black!30]
+\tikzstyle{database} = [font=\scriptsize, rectangle, rounded corners, minimum width=3cm, minimum height=1cm,align=left, draw=black, fill=green!30]
+\tikzstyle{query} = [font=\scriptsize,trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [font=\scriptsize,rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{spliter} = [font=\scriptsize,diamond, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{decision} = [font=\scriptsize,diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{bi-arrow} = [thick,->,>=stealth]
+
+\begin{document}
+\title{Approach for calculating piece-wise regression line of energy vs. temperature\\
+  \large GSA project}
+\maketitle
+\tableofcontents
+\section{Introduction}
+The document records a possible way to calculate the piece-wise
+regression line for each building.
+
+From the initial plots of the buildings, there seems to be a large
+variation in the inflation point.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}
+  \centering
+  \includegraphics[width=0.4\linewidth]{WA0067BP_KBLI_gas.png}
+  \caption{Dot plot of monthly natural gas consumption vs. temperature of building WA0067BP}
+  \label{fig:WA0067BP_KBLI_gas}
+\end{subfigure}
+~
+\begin{subfigure}
+  \centering
+  \includegraphics[width=0.4\linewidth]{WA0067BP_KBLI_elec.png}
+  \caption{Dot plot of monthly electricity consumption vs. temperature of building WA0067BP}
+  \label{fig:WA0067BP_KBLI_elec}
+\end{subfigure}
+\end{figure}
+
+\subsection{Brute force}
+\subsubsection{Natural Gas}
+The shape of the curve should have a inflation point. When temperature
+is below the temperature, the natural gas consumption increases
+linearly with the decreasing of the temperature.
+
+There are only 36 points in the analysis, which allows for a brute
+force approach as follows:
+
+\begin{verbatim}
+The input point P = [(x1, y1), (x2, y2), ..., (xn, yn)], 
+Sort the points in P by x axis:
+P_sorted = sorted(P, key = x value)
+partition P_sorted into two sets of points: P_1 and P_2
+P_1 contains the first m elements of P_sorted and P_2 contains the
+rest
+m can range from 2 to (n - 2)
+erros = []
+for each m in 2 to (n - 2):
+    compute regression for P_1 and get line L_1
+    compute regression for P_1 and get line L_2
+    compute the intersection point of L_1 and L_2, call it C
+    compute the squared error of E_1 = (P_1, L_1) and E_2 = (P_2, L_2)
+    E = E_1 + E_2
+    erros.append(R)
+
+Find the least error e in erros, the corresponding m is the partition
+of the points and the corresponding intersection, C, is the inflation
+point, the y-axis of C is the base load
+\end{verbatim}
+
+\subsubsection{Electricity}
+Break into two cases: 1 inflation point and 2 inflation point.
+Calculate both case and take the best fit (the one with the least
+error in the two cases)
+\newpage
+\bibliographystyle{plain} \bibliography{myCitation}
+\end{document}

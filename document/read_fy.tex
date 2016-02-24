@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+\linespread{1.3}
+\usepackage{hyperref}
+\usepackage{enumitem}
+%\usepackage{enumerate}
+\usepackage{changepage,lipsum,titlesec, longtable}
+\usepackage{cite}
+\usepackage{comment, xcolor}
+\usepackage[pdftex]{graphicx}
+  \graphicspath{{images/}, {images/stat/}}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png, .jpg}
+\usepackage[cmex10]{amsmath}
+\usepackage{tikz}
+\usepackage{array} 
+\usepackage{subfigure} 
+\newcommand{\grey}[1]{\textcolor{black!30}{#1}}
+\newcommand{\red}[1]{\textcolor{red!50}{#1}}
+\newcommand{\question}[1]{\textcolor{magenta}{\textbf{Question: } {#1}}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\eref}[1]{Equation~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\aref}[1]{Appendix~\ref{#1}}
+\newcommand{\note}[0]{\textbf{Note: }}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\\arabic{enumii}.}
+
+\oddsidemargin0cm
+\topmargin-2cm %I recommend adding these three lines to increase the
+\textwidth16.5cm %amount of usable space on the page (and save trees)
+\textheight23.5cm
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+% draw diagram
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{data} = [font=\scriptsize, rectangle, rounded corners, minimum width=1.5cm, minimum height=1cm,align=left, draw=black, fill=black!30]
+\tikzstyle{database} = [font=\scriptsize, rectangle, rounded corners, minimum width=3cm, minimum height=1cm,align=left, draw=black, fill=green!30]
+\tikzstyle{query} = [font=\scriptsize,trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [font=\scriptsize,rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{spliter} = [font=\scriptsize,diamond, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{decision} = [font=\scriptsize,diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{bi-arrow} = [thick,->,>=stealth]
+
+\begin{document}
+\title{Data processing for PM data\\
+       \large GSA project}
+\maketitle
+\tableofcontents
+\newpage
+\section{Introduction}\label{sec:intro}
+The document records the process of plotting the new FY data 
+
+\section{Checks}
+\subsection{Sheets}
+sheet names:
+\makeatletter
+\def\verbatim@font{\linespread{1}\small\ttfamily}
+\begin{verbatim}
+# FY 13
+[u'R1', u'R2', u'R3', u'R4', u'R5', u'R6', u'R7', u'R8', u'R9', u'R10', u'R11']
+# FY 14
+[u'r1 fy14', u'r2 fy14', u'r3 fy14', u'r4 fy14', u'r5 fy14', u'r6 fy14', u'r7 fy14', u'r8 fy14', u'r9 fy14', u'r10 fy14', u'r11 fy14', u'Sheet2']
+# FY 15
+[u'R1 FY15', u'R2 FY15', u'R3 FY15', u'R4 FY15', u'R5 FY15', u'R6 FY15', u'R7 FY15', u'R8 FY15', u'R9 FY15', u'R10 FY15', u'R11 FY15']
+\end{verbatim}
+The names of sheets are not standard but the order of region is, so use index of sheets when reading.
+For faster processing, split excel files to single sheet csv files
+\subsection{Number of building}
+\begin{table}[h!]
+\centering
+\caption{Number of buildings in each file}
+\label{tab:num_bd}
+\begin{tabular}{llll}
+  \hline
+Region&FY13 & FY14 & FY15\\
+  \hline
+1    & 76   & 74   & 74  \\
+2    & 167  & 165  & 154 \\
+3    & 80   & 79   & 78  \\
+4    & 127  & 126  & 130 \\
+5    & 160  & 150  & 146 \\
+6    & 43   & 40   & 40  \\
+7    & 133  & 131  & 129 \\
+8    & 57   & 56   & 56  \\
+9    & 75   & 74   & 72  \\
+10   & 62   & 59   & 59  \\
+11   & 119  & 130  & 117 \\
+  \hline
+\end{tabular}
+\end{table} 
+
+\subsection{Common buildings}
+There are 1012 buildings that has records for all three years.\\
+There are 1141 buildings covered in one of the three files.
+\begin{table}[h!]
+\centering
+\caption{Building record and its year}
+\label{my-label}
+\begin{tabular}{llll}
+  \hline
+Building Number & 2013 & 2014 & 2015 \\
+  \hline
+NJ4666ZZ        & 0    & 0    & 1    \\
+NY7182ZZ        & 1    & 1    & 1    \\
+OR0053ZZ        & 1    & 1    & 1    \\
+IA0121ZZ        & 1    & 1    & 1    \\
+OH2433ZZ        & 1    & 1    & 1    \\
+IL2540ZZ        & 1    & 1    & 1    \\
+AZ0000WW        & 1    & 1    & 1    \\
+MA0050ZZ        & 1    & 1    & 1    \\
+TX2747ZZ        & 1    & 1    & 1    \\
+ME0009ZZ        & 1    & 0    & 0    \\
+FL3323ZZ        & 0    & 1    & 1    \\
+  \hline
+\end{tabular}
+\end{table}
+
+note: ``1'' denotes the building has records in the corresponding
+year of the column, ``0'' denotes there are no records for this
+building in that year
+
+\section{Splitting buildings to single csv files}
+\section{For each single building file calculate eui}
+Check the buildings with monthly energy records:
+\begin{verbatim}
+NY7288ZZ (region 2) in 2013 has records for only Apr. to Dec.
+VI3977ZZ (region 2) in 2013 has records for only Oct. to Dec.
+VI3987ZZ (region 2) in 2013 has records for only Jul. to Dec.
+\end{verbatim}
+
+\section{Calculate annual eui}
+Note, for the three buildings above, there will be an under-estimate.
+\section{Join eui with program information}
+
+\newpage
+\bibliographystyle{plain} \bibliography{myCitation}
+\end{document}

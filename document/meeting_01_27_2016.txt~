@@ -1,0 +1,10 @@
+TODOs for the next week:
+
+1. Use the table "ScopePortfolioReport_20160105.xlsx" to plot: by ECM action
+EUI distribution by ECM action: Action 1, Action 2, ..., No Action
+Pie / bar plot of EUI by building typology
+EUI by finish year ??
+
+2. Use the table "Light-Touch M_V - ARRA Targets to Actuals and
+Commissioning Details.xlsx" to create a pie/bar chart about column
+"Project Type" (New construction, Full Modernization, etc.)

@@ -1,0 +1,18 @@
+1. ask Bertrand to join the box check if the newly uploaded dataset is right 
+
+-----------------------------------------------------------------------
+
+2. add a column beside the high level to be GSALink alone 
+for the box plot, take out the GSALink for noECM group
+compare Advanced metering with GSALink
+
+3. weather normalization
+Dark and dashed for fit line 
+
+4. presentation form for weather normalization
+normalized to 2015, try Metric
+
+5. join the EnergyStar PM data to EUAS to get address/ZipCode
+
+6. check regression calculation in document
+"ashrae_-_inverse_modeling_toolkit_-_numerical_algorithms.pdf"
