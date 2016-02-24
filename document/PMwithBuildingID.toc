@@ -5,3 +5,4 @@
 \contentsline {subsubsection}{\numberline {2.2.1}Diagram}{5}{subsubsection.2.2.1}
 \contentsline {subsection}{\numberline {2.3}Retrieving Building Snapshot ID}{5}{subsection.2.3}
 \contentsline {section}{\numberline {3}PM Excel file to template file converter}{5}{section.3}
+\contentsline {section}{\numberline {4}Modified flow chart}{6}{section.4}

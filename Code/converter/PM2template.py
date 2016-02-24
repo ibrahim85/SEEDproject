@@ -29,6 +29,11 @@ def processOneFile(filename, in_dir, out_dir):
     df_energy.insert(0, 'Street Address',
                      df_energy['Portfolio Manager ID'].map(lambda x:
                                                            address_dict[x]))
+    df_energy.info()
+    df_energy.rename(columns={'Portfolio Manager ID': 'Custom ID',
+                              'Portfolio Manager Meter ID':
+                              'Custom Meter ID'},
+                     inplace=True)
     file_out = filename[len(in_dir):-5] + '_temp.xlsx'
     df_energy.to_excel(out_dir + file_out, index=False)
 

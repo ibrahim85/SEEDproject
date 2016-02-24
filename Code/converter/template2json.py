@@ -7,6 +7,7 @@ import json
 import glob
 import numpy as np
 import datetime as dt
+import random as rd
 
 import query as qr
 
@@ -59,14 +60,19 @@ def pm2jsonSingle(excel, in_dir, out_dir):
 
     meter_con_df['reading_kind'] = 'energy'
 
+    # fill Custom ID and Meter ID with random number !!update Dec 18, 2015
+    meter_con_df['Custom ID'].fillna(str(rd.randint(1, 10)), inplace=True)
+    meter_con_df['Custom Meter ID'] = meter_con_df.apply(lambda row:row['Meter Type'] if np.isnan(row['Custom Meter ID']) else row['Custom Meter ID'], axis=1)
+
     # renaming columns of df
     name_lookup = {u'Start Date':u'start',
                    u'End Date':u'end',
-                   u'Portfolio Manager Meter ID':u'meter_id',
+                   u'Custom Meter ID':u'meter_id',
                    u'Usage/Quantity':u'value',
                    u'Usage Units':'uom'}
 
     meter_con_df = meter_con_df.rename(columns=name_lookup)
+    meter_con_df.info()
 
     file_out = excel[len(in_dir):-5] + '_json.txt'
     # the 'interval' output is in [ns], so use ns for all time object and

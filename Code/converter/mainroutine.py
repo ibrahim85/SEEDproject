@@ -1,3 +1,5 @@
+# The process starts from the /PMinput/ folder
+# Assuming PMinput contains valid PM table downloaded from EnergyStar Website
 import os
 
 import template2json as tm
@@ -21,6 +23,7 @@ pm_out_dir = os.getcwd() + "/PMfile/PMoutput/"
 pm.readPM(pm_in_dir, pm_out_dir)
 logger.info('\nend converting pm to template')
 
+pm_out_dir = os.getcwd() + "/PMfile/PMoutput/"
 logger.info('\n## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##')
 logger.info('process template')
 logger.info('## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##')
@@ -35,7 +38,7 @@ logger.info('\n## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##')
 logger.info('post process json')
 logger.info('## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##')
 # post-process json files
-#post_out_dir = os.getcwd() + "/Jsonfile/post/"
+#post_out_dir = os.getcwd() + "/Jsonfile/post/" #original file, there's an offset
 post_out_dir = os.getcwd() + "/Jsonfile/local_post/"
 ps.postProcess(json_out_dir, post_out_dir)
 logger.info('\n## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##')

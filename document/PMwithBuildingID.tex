@@ -188,7 +188,7 @@ For each table in the folder:
     Address Line 1\\
     Interval Start Date\\
     Interval End Date\\
-    Usage/Quantity(?)\\
+    Usage/Quantity\\
     Unit Of Measure\\
     Cost};
   \node (remote folder) [data, below of=upload2, yshift=-2cm]{\textbf{Filled template}:\\
@@ -232,6 +232,58 @@ Wrote a query.py file to query SEED test database and retrieve
 \section{PM Excel file to template file converter}
 Wrote a PM2template.py file to convert EnergyStar PM file to the excel
 template
+\section{Modified flow chart}
+
+\begin{tikzpicture}
+  \node (PM_table) [data]{\textbf{PM Energy Data}:\\
+    Street Address (sheet-0)\\
+    Energy Data (sheet-5)};
+  \node (upload)[query, right of = PM_table, xshift=3cm]{Upload};
+  \node (upload2)[query, below of = PM_table, yshift=-2.5cm]{Process};
+  \node (SEED db)[database, right of = upload, xshift=2cm]{\textbf{SEED}\\
+    \textbf{buildingsnapshot\_id}\\
+    Address Line 1\\
+    Interval Start Date\\
+    Interval End Date\\
+    Usage/Quantity(?)\\
+    Unit Of Measure\\
+    Cost};
+  \node (remote folder) [data, below of=upload2, yshift=-2cm]{\textbf{Energy Data Template}:\\
+    Sheet-0:\\
+    Street Address\\
+    Start Date\\
+    End Date\\
+    Usage/Quantity\\
+    Usage Units\\
+    Cost(\$)};
+  \node (download)[query, right of = remote folder, xshift=3cm]{Read};
+  \node(dataframe)[database, right of=download, xshift = 2.5cm]{\textbf{Python Dataframe}\\
+    buildingsnapshot\_id\\
+    canonical\_building \\
+    Street Address\\
+    Start Date\\
+    End Date\\
+    Usage/Quantity\\
+    Usage Units\\
+    Cost(\$)};
+  \node(query)[query, above of=dataframe, yshift=2cm]{Query};
+  \node(json)[data, right of=dataframe, xshift=2cm]{json};
+  \node(ext)[process, right of=json, xshift=2cm]{TS Data Analyzer};
+  \draw[arrow](PM_table) -- (upload);
+  \draw[arrow](upload) -- (SEED db);
+  \draw[arrow](PM_table) -- (upload2);
+  \draw[arrow](upload2) -- (remote folder);
+  \draw[arrow](remote folder) -- (download);
+  \draw[arrow](download) -- (dataframe);
+  \draw[arrow](dataframe) -- (query);
+  \draw[arrow](query) -- (dataframe);
+  \draw[arrow](dataframe) -- (json);
+  \draw[arrow](json) -- (ext);
+  \draw[-latex] (query) to[bend left=10] node [xshift=-1cm]{Street Address} (SEED
+  db); 
+  \draw[-latex] (SEED db) to[bend left=10] node [xshift=2cm,align=center]{buildingsnapshot\_id\\canonical\_building}
+  (query);
+\end{tikzpicture}
 \newpage
 \bibliographystyle{plain}
 \bibliography{myCitation}

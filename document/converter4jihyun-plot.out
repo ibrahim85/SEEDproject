@@ -1,2 +1,10 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Check data time range for each meter type}{}% 2
+\BOOKMARK [1][-]{section.2}{Process}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Convert natural gas unit to kbtu}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Adding Gas and Electricity}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Get monthly energy}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Approach I}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Approach II}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Approach III}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{EUI graphs}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{By region alone}{section.4}% 10

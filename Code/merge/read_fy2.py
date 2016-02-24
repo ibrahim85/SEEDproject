@@ -109,10 +109,8 @@ def building_info():
 
 def calculate():
     filelist = glob.glob(os.getcwd() + '/csv_FY/single/*.csv')
-    for csv in filelist:
+    for csv in filelist[:3]:
         df = pd.read_csv(csv)
-        filename = csv[csv.find('single') + 7:]
-        print filename
         df['elec'] = df['Electricity (KWH)'] * 3.412
         df['gas'] = df['Gas (Cubic Ft)'] * 1.026
         df['eui_elec'] = df['elec']/df['Gross Sq.Ft']
@@ -122,88 +120,13 @@ def calculate():
         df['eui'] = (df['elec'] + df['gas'])/df['Gross Sq.Ft']
         bd = df.ix[0, 'Building Number']
         yr = int(df.ix[0, 'Fiscal Year'])
-        # note: cols is for pandas v0.13.0, for v.017.0, use columns
+        # use colums not working BOOKMARK !!
         df.to_csv(os.getcwd() + '/csv_FY/single_eui/{0}_{1}.csv'.format(bd,yr),
-                  cols = ['Region No.', 'Fiscal Month', 'Fiscal Year',
-                          'Building Number', 'eui_elec', 'eui_gas', 'eui_oil',
-                          'eui_water', 'eui'],
-                  index=False)
-
-def aggregate(year):
-    filelist = glob.glob(os.getcwd() +
-                         '/csv_FY/single_eui/*{0}.csv'.format(year))
-    dfs = []
-    for csv in filelist:
-        df = pd.read_csv(csv)
-        filename = csv[csv.find('single_eui') + 11:]
-        # check monthly records availability
-        '''
-        if (len(df) != 12 or len(df['Fiscal Month'].unique()) != 12):
-            print filename
-        '''
-        df['Region No.'] = df['Region No.'].map(lambda x: str(x))
-        df['Fiscal Year'] = df['Fiscal Year'].map(lambda x: str(int(x)))
-        df['Fiscal Month'] = df['Fiscal Month'].map(lambda x: str(int(x)))
-        region = df.ix[0, 'Region No.']
-        yr = df.ix[0, 'Fiscal Year']
-        bd = df.ix[0, 'Building Number']
-        df_agg = df.groupby('Fiscal Year').sum()
-        df_agg['Region No.'] = region
-        df_agg['Fiscal Year'] = yr
-        df_agg['Building Number'] = bd
-        dfs.append(df_agg)
-    df_yr = pd.concat(dfs)
-    df_yr.to_csv(os.getcwd() + '/csv_FY/agg/eui_{0}.csv'.format(year),
-                 index=False)
-
-def aggregate_allyear(yearlist):
-    for year in yearlist:
-        aggregate(year)
-
-def euas2csv():
-    df = pd.read_excel(os.getcwd() + '/input/FY/GSA_F15_EUAS_v2.2.xls',
-                       sheetname=0)
-    program_hd = ['GP', 'LEED', 'first fuel', 'Shave Energy',
-                  'GSALink Option(26)', 'GSAlink I(55)', 'E4', 'ESPC',
-                  'Energy Star']
-    '''
-    for hd in program_hd:
-        print df[hd].value_counts()
-    '''
-    df.to_csv(os.getcwd() + '/csv_FY/program/GSA_F15_EUAS.csv', index=False,
-              cols=['Building ID', 'GP', 'LEED', 'first fuel', 'Shave Energy',
-                    'GSALink Option(26)', 'GSAlink I(55)', 'E4', 'ESPC',
-                    'Energy Star', 'Cat'])
-    df_bool2int = pd.read_csv(os.getcwd() + '/csv_FY/program/GSA_F15_EUAS.csv')
-    for col in program_hd:
-        df_bool2int[col] = df_bool2int[col].map(lambda x: 1 if x == '1_Yes'
-                                              else 0)
-    df_bool2int['Total Programs_v2'] = df_bool2int[program_hd].sum(axis=1)
-    df_bool2int['Total Programs (Y/N)_v2'] = df_bool2int['Total Programs_v2'].map(lambda x: 1 if x > 0 else 0)
-    df_bool2int.to_csv(os.getcwd() + '/csv_FY/program/GSA_F15_EUAS_int.csv',
-                       index=False)
-
-# join EUAS program info and eui info for year 2015
-def join_program():
-    df_eui = pd.read_csv(os.getcwd() + '/csv_FY/agg/eui_2015.csv')
-    df_pro = pd.read_csv(os.getcwd() + '/csv_FY/program/GSA_F15_EUAS_int.csv')
-    bd_eui = set(df_eui['Building Number'].tolist())
-    bd_pro = set(df_pro['Building ID'].tolist())
-    print 'number of buildings in eui_2015: {0}'.format(len(bd_eui))
-    print 'number of buildings in program : {0}'.format(len(bd_pro))
-    print 'number of common buildings: {0}'.format(len(bd_eui.intersection(bd_pro)))
-    df_merge = pd.merge(df_eui, df_pro, how='inner', left_on='Building Number',
-                        right_on = 'Building ID')
-    df_merge.info()
-    df_merge.drop('Building Number', inplace=True, axis=1)
-    df_merge.to_csv(os.getcwd() + '/csv_FY/join/join_2015.csv', index=False)
+                  columns = ['eui_elec', 'eui_gas', 'eui_oil', 'eui_water', 'eui'], index=False)
 
 def main():
     #excel2csv()
     #building_info()
     #region2building()
-    #calculate()
-    #aggregate_allyear([2013, 2014, 2015])
-    #euas2csv()
-    join_program()
+    calculate()
 main()
