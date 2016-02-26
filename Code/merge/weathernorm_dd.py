@@ -49,8 +49,10 @@ xlabel_dict = {'temp': 'Monthly Mean Temperature, Deg F',
                'all': 'Monthly HDD(-)/CDD(+), Deg F',
                'cdd': 'Monthly CDD, Deg F'}
 
+# change the filename to the one with the weather data you want
 def excel2csv():
     print 'read excel file'
+    # filename = os.getcwd() + '/input/FY/WeatherGSA.xlsx'
     filename = os.getcwd() + '/input/FY/weatherData.xlsx'
     df = pd.read_excel(filename, sheetname=0)
     df.to_csv(homedir + 'weatherData.csv')
@@ -66,12 +68,11 @@ def check_data():
     #   2012-Sep-01 1:00:00 79.9899978637695
     #   2012-Sep-01 2:00:00 79
 
-    # drop first two rows of non-temperature data
-    df.drop([0, 1], inplace=True)
+    # drop rows with empty time stamp
+    df.dropna(subset=['Unnamed: 0'], inplace=True)
     df.to_csv(homedir + 'weatherData_2.csv', index=False)
     # 27000 lines of data in csv, change it to small number for testing
-    nrows = 27000
-    df = pd.read_csv(homedir + 'weatherData_2.csv', nrows=nrows, low_memory=False)
+    df = pd.read_csv(homedir + 'weatherData_2.csv', low_memory=False)
     cols = list(df)[1:]
     print 'number of columns before dropna: {0}'.format(len(cols))
     err_strings = []
@@ -271,7 +272,7 @@ def plot_energy_temp_byyear(df_energy, df_temp, df_hdd, df_cdd, theme,
                 #print 'Building: {0}, year: {1}, {2} {3} [kbtu/sq.ft.]'.format(b, int(name), round(group[theme].sum(), 2), title_dict[theme])
         else:
             if kind == 'cdd':
-                sns.set_palette(sns.color_palette(['paleturquoise', 'turquoise', 'darkturquoise']))
+                sns.set_palette(sns.color_palette('Blues'))
             elif kind == 'hdd':
                 sns.set_palette(sns.color_palette('Oranges'))
             sns.lmplot(x=kind, y=theme, hue='Fiscal Year', data=df, fit_reg=True)
@@ -508,7 +509,6 @@ def calculate(theme, method):
     bs_pair = read_building_weather('building_station_lookup.csv',
                                     'Building Number', 'Weather Station')
     study_set = get_gsalink_set()
-    study_set.append('AZ0000FF')
     bs_pair = [x for x in bs_pair if x[0] in study_set]
     df_temperature = read_temperature()
     df_temp_norm = read_temp_norm()
@@ -529,10 +529,12 @@ def calculate(theme, method):
     for b, s in bs_pair:
         print (b, s)
         df_energy = read_energy(b)[['Fiscal Year', 'year', 'month', 'eui_elec', 'eui_gas', 'eui']]
-        df_energy = df_energy[-36:] # remove this when weather data available
-        df_t = df_temperature[[s]]
-        df_h = df_hdd_65[[s]]
-        df_c = df_cdh_65[[s]]
+        # 2012 to 2015 data
+        df_energy = df_energy[-48:] # remove this when weather data available
+        df_t = df_temperature[[s]][-48:]
+        df_h = df_hdd_65[[s]][-48:]
+        df_c = df_cdh_65[[s]][-48:]
+        print (len(df_energy), len(df_t), len(df_h), len(df_c))
         '''
         plot_energy_temp_byyear(df_energy, df_t, df_h, df_c, theme,
                                 b, s, 'dot', 'all', True)
@@ -655,65 +657,34 @@ def join_building_temp():
                   index=False)
 
 # BOOKMARK
-'''
 def plot_building_temp(b, s):
-    sns.set_context("paper", font_scale=1.5)
-    filelist = glob.glob(os.getcwd() + homedir + 'energy_temp/*.csv')
-    for f in filelist:
-
-    dfs = [pd.read_csv(csv) for csv in filelist]
-    col = 'eui_gas'
-    dfs2 = [df[[col, 'month', 'year']] for df in dfs]
-    df3 = (pd.concat(dfs2))
-
-    temp = pd.read_csv(homedir + 'weatherData_meanTemp.csv')
-    temp['year'] = temp['Unnamed: 0'].map(lambda x: float(x[:4]))
-    temp['month'] = temp['Unnamed: 0'].map(lambda x: float(x[5:7]))
-    temp.set_index(pd.DatetimeIndex(temp['Unnamed: 0']), inplace=True)
-    temp = temp[[s, 'month', 'year']]
-    joint2 = pd.merge(df3, temp, on = ['year', 'month'], how = 'inner')
-    joint2.to_csv(os.getcwd() + '/csv_FY/testWeather/test_temp.csv', index=False)
-
-    sns.lmplot(s, col, data=joint2, col='year', fit_reg=False)
-    plt.xlim((joint2[s].min() - 10, joint2[s].max() + 10))
-    plt.ylim((0, joint2[col].max() + 0.1))
-    P.savefig(os.getcwd() + '/csv_FY/testWeather/plot/scatter_temp_byyear.png', dpi=150)
-    plt.close()
-
-    joint2 = joint2[(2012 < joint2['year']) & (joint2['year'] < 2015)]
-    sns.regplot(s, col, data=joint2, fit_reg=False)
-    plt.xlim((joint2[s].min() - 10, joint2[s].max() + 10))
-    plt.ylim((0, joint2[col].max() + 0.1))
-    P.savefig(os.getcwd() + '/csv_FY/testWeather/plot/scatter_temp_1314.png', dpi=150)
-    plt.close()
-'''
+    print 'not implemented'
+    return
 
 # BOOKMARK
 def process_weatherfile():
     # slow, comment out once you have the output
     # excel2csv()
 
-    # check null value
     # check_data()
     # get_mean_temp()
     # calculate_dd()
     # sep_dd('HDD')
     # sep_dd('CDD')
     # sep_temp()
+
     # building_to_station()
-    # join_building_temp()
-    # BOOKMARK
-    plot_building_temp()
+    join_building_temp()
+    # plot_building_temp()
 
 def calculate_dd():
-    for base in range(55, 75):
+    for base in range(50, 75):
         get_DD_itg(base, 'HDD')
         get_DD_itg(base, 'CDD')
 
 def main():
     # process_weatherfile()
-    #get_mean_temp()
-    #get_HDD(65.0)
+    # get_HDD(65.0)
 
     '''
     for base in [40.0, 45.0, 50.0, 55.0, 57.0, 60.0, 65.0]:

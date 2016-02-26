@@ -288,20 +288,43 @@ def plot_gsalink():
     import plot_dist_wtno as pdw
     themes = ['eui', 'eui_elec', 'eui_gas']
     ylims = [140, 140, 140]
-    columns = ['GSALink', 'None']
-    labels = ['GSALink', 'No ECM']
     inputfile = os.getcwd() + '/csv_FY/join/join_2015_ecm_only.csv'
+
+    '''
+    columns = ['None', 'GSALink']
+    labels = ['No ECM', 'GSALink']
     title = 'gsalink_noECM'
     for theme, ylim in zip(themes, ylims):
          pdw.plot_cols(inputfile, columns, labels, theme, title, ylim,
-                       False, 'Blues')
+                       False, 'Blues', 4, 5.5)
          pdw.plot_cols(inputfile, columns, labels, theme, title, ylim,
-                       True, 'Blues')
+                       True, 'Blues', 4, 5.5)
+    '''
+
+    columns = ['None', 'Advanced Metering_only']
+    labels = ['No ECM', 'Advanced Metering_only']
+    title = 'meter_noECM'
+    colors = ['#f0bac2', '#c93d64']
+    for theme, ylim in zip(themes, ylims):
+         pdw.plot_cols(inputfile, columns, labels, theme, title, ylim,
+                       False, sns.color_palette(colors), 4.5, 5.5)
+         pdw.plot_cols(inputfile, columns, labels, theme, title, ylim,
+                       True, sns.color_palette(colors), 4.5, 5.5)
+
+    columns = ['None', 'Building Envelope_only']
+    labels = ['No ECM', 'Building Envelope_only']
+    title = 'enve_noECM'
+    colors = ['#e1b258', '#886a32']
+    for theme, ylim in zip(themes, ylims):
+         pdw.plot_cols(inputfile, columns, labels, theme, title, ylim,
+                       False, sns.color_palette(colors), 4.5, 5.5)
+         pdw.plot_cols(inputfile, columns, labels, theme, title, ylim,
+                       True, sns.color_palette(colors), 4.5, 5.5)
 
 def plot_ecm_only():
     import plot_dist_wtno as pdw
-    themes = ['eui', 'eui_elec', 'eui_gas', 'eui_water']
-    ylims = [140, 140, 140, 30]
+    themes = ['eui', 'eui_elec', 'eui_gas']
+    ylims = [140, 140, 140]
     program = ['Advanced Metering', 'Building Envelope', 'GSALink']
 
     inputfile = os.getcwd() + '/csv_FY/join/join_2015_ecm_only.csv'
@@ -471,8 +494,7 @@ def main():
     #read_ecm_highlevel()
     #getTwoECM()
 
-    #BOOKMARK
-    #plot_ecm_only()
+    # plot_ecm_only()
     plot_gsalink()
     return
 

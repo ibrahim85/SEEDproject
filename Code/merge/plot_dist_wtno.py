@@ -23,10 +23,11 @@ def get_office():
     print len(df)
     return set(df['Property Name'].tolist())
 
-def plot_cols(inputfile, columns, labels, theme, title, ylim, office, palette):
+def plot_cols(inputfile, columns, labels, theme, title, ylim, office, palette,
+              w, h):
     sns.set_style("white")
     sns.set_context("paper", font_scale=0.8)
-    sns.mpl.rc("figure", figsize=(10,5.5))
+    sns.mpl.rc("figure", figsize=(w, h))
     df = pd.read_csv(inputfile)
     if theme == 'eui':
         df = df[df['eui_elec'] >= 12]
@@ -204,7 +205,7 @@ def plot_box_pro(theme, ylim, office):
         tick.label.set_fontsize(10)
     plt.ylim((0, ylim))
     plt.title('Total {0} Buildings'.format(totalnum), fontsize=15)
-    plt.ylabel((ylabel_dict[theme])(), fontsize=12)
+    plt.ylabel((ylabel_dict[theme])(), fontsize=12, position=(0, 0))
     bx.xaxis.set_label_coords(0.5, -0.08)
     plt.xlabel('Program', fontsize=12)
     plt.ylim((0, ylim))
@@ -219,8 +220,8 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
     #sns.set_context("paper", font_scale=3)
     sns.set_context("paper", font_scale=0.8)
     sns.mpl.rc("figure", figsize=(10,5.5))
-    colors_2 = sns.husl_palette(7, l=.8, s=.9) + [(192.0/255,192.0/255,192.0/255)]
-    colors_1 = sns.husl_palette(7, l=.5, s=.9) + [(104.0/255,104.0/255,104.0/255)]
+    colors_1 = sns.husl_palette(7, l=.8, s=.9) + [(192.0/255,192.0/255,192.0/255)]
+    colors_2 = sns.husl_palette(7, l=.5, s=.9) + [(104.0/255,104.0/255,104.0/255)]
     colors = [[x, y] for (x, y) in zip(colors_1, colors_2)]
     colors = reduce(lambda x, y: x + y, colors)
     office_set = get_office()
@@ -235,19 +236,7 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
         df = df[df['eui_elec'] >= 12]
         df = df[df['eui_gas'] >= 3]
         #print ('filter eui', len(df))
-        '''
-        p = 0.1
-        print '\n {0} {1} percentile'.format(theme, p)
-        print df[theme].quantile(p)
-        '''
     if theme == 'eui_water':
-        '''
-        df = df[df['eui_water'] > 0]
-        p = 0.1
-        print '\n {0} {1} percentile'.format(theme, p)
-        df = df[df['eui_water'] > 0]
-        print df[theme].quantile(p)
-        '''
         df = df[df[theme] >= 5]
         #print ('filter water', len(df))
     if theme == 'eui_gas':
@@ -280,22 +269,22 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
         print col
         print 'len of yes, {0}'.format(len(df_yes))
         print 'len of no, {0}'.format(len(df_no))
-        dfs.append(df_yes)
         dfs.append(df_no)
-        sizes.append(len(df_yes))
+        dfs.append(df_yes)
         sizes.append(len(df_no))
+        sizes.append(len(df_yes))
         percent_inprove = 0
         if df_no[theme].median() != 0:
             percent_inprove = (df_no[theme].median() - df_yes[theme].median())/df_no[theme].median()
         p_inc.append(percent_inprove)
     program = [x for x in program if x not in emptys]
-    ps = [[x, ''] for x in program]
+    ps = [['', x] for x in program]
     ps = reduce(lambda x, y: x + y, ps)
     df_all = pd.concat(dfs, ignore_index=True)
     df_plot = df_all[['program', theme]]
     p_inc = [[str(round(x, 4)*100) + '%', ''] for x in p_inc]
     p_inc = reduce(lambda x, y:x + y, p_inc)
-    yn = ['Yes', 'No'] * len(program)
+    yn = ['No', 'Yes'] * len(program)
 
     my_dpi = 300
     bx = sns.boxplot(x = 'program', y = theme, data = df_plot, fliersize=0, palette = sns.color_palette(colors))
@@ -311,7 +300,7 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
     plt.title('Total {0} Buildings'.format(totalnum), fontsize=15)
     plt.ylabel(ylabel_dict[theme], fontsize=12)
     bx.xaxis.set_label_coords(0.5, -0.08)
-    plt.xlabel('Program', fontsize=12)
+    plt.xlabel('', fontsize=12)
     plt.ylim((0, ylim))
 
     if office:

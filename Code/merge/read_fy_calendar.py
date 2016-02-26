@@ -211,7 +211,6 @@ def common_building_set(df_list):
     bd_set_list = [reduce(set.union, z) for z in bd_set_listlist]
     return list(reduce(set.intersection, bd_set_list))
 
-
 def region2building():
     filelist = glob.glob(os.getcwd() + '/csv_FY/sep/*.csv')
     for csv in filelist:
@@ -528,8 +527,30 @@ def weather_dict(criteria):
         yr = df.ix[0, 'Fiscal Year']
         print '{0}, num_building: {1}, common_building: {2}'.format(yr, len(bds), len(bds.intersection(weather_station)))
     '''
+def get_fuel_type(years):
+    for y in years[:1]:
+        df = pd.read_csv(os.getcwd() +
+                         '/csv_FY/raw_concat/FY{0}.csv'.format(y))
+        df_sum = df.groupby('Building Number').sum()
+        cols = ['Electricity (KWH)', 'Steam (Thou. lbs)', 
+                'Gas (Cubic Ft)', 'Oil (Gallon)', 
+                'Chilled Water (Ton Hr)']
+        df_sum = df_sum[cols]
+        for col in cols:
+            df_sum[col] = df_sum[col].apply(lambda x: 1 if x > 0 else
+                                            0)
+        df_sum['num_heat_fuel'] = df_sum['Steam (Thou. lbs)'] + \
+                                  df_sum['Gas (Cubic Ft)'] + \
+                                  df_sum['Oil (Gallon)']
+        df_sum['heat_oil_steam'] = \
+            df_sum.apply(lambda r: 1 if r['Gas (Cubic Ft)'] == 0 \
+                         and r['num_heat_fuel'] > 0 else 0, axis=1)
+        print df_sum.head()
+        df_sum.to_csv(os.getcwd() +
+                      '/csv_FY/fuel_type/FY{0}.csv'.format(y))
 
 def main():
+    get_fuel_type([10, 12, 13, 14, 15])
     #excel2csv()
     #building_info()
     #fiscal2calendar()
@@ -545,7 +566,7 @@ def main():
     #report_false_15()
     #weather_dict('none')
     #get_raw_concat()
-    get_flow_reorg()
+    #get_flow_reorg()
     #check_use_dupe()
     return
 main()
