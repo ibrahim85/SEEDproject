@@ -2,7 +2,12 @@ import pandas as pd
 import os
 import glob
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pylab as P
 # 'Cat' appear in file FY14, FY14, not FY13, this version account for this
+
+homedir = os.getcwd() + '/csv_FY/'
 
 def check_use_dupe():
     df = pd.read_csv(os.getcwd() + '/csv/all_column/sheet-0-all_col.csv')
@@ -528,13 +533,18 @@ def weather_dict(criteria):
         print '{0}, num_building: {1}, common_building: {2}'.format(yr, len(bds), len(bds.intersection(weather_station)))
     '''
 def get_fuel_type(years):
-    for y in years[:1]:
+    for y in years:
         df = pd.read_csv(os.getcwd() +
                          '/csv_FY/raw_concat/FY{0}.csv'.format(y))
         df_sum = df.groupby('Building Number').sum()
         cols = ['Electricity (KWH)', 'Steam (Thou. lbs)', 
                 'Gas (Cubic Ft)', 'Oil (Gallon)', 
                 'Chilled Water (Ton Hr)']
+        rename_cols = {'Electricity (KWH)': 'Electricity', 
+                       'Steam (Thou. lbs)': 'Steam',
+                       'Gas (Cubic Ft)': 'Gas', 
+                       'Oil (Gallon)': 'Oil',
+                       'Chilled Water (Ton Hr)': 'Chilled Water'}
         df_sum = df_sum[cols]
         for col in cols:
             df_sum[col] = df_sum[col].apply(lambda x: 1 if x > 0 else
@@ -545,12 +555,67 @@ def get_fuel_type(years):
         df_sum['heat_oil_steam'] = \
             df_sum.apply(lambda r: 1 if r['Gas (Cubic Ft)'] == 0 \
                          and r['num_heat_fuel'] > 0 else 0, axis=1)
+        df_sum.rename(columns = rename_cols, inplace=True)
         print df_sum.head()
         df_sum.to_csv(os.getcwd() +
                       '/csv_FY/fuel_type/FY{0}.csv'.format(y))
 
+def fuel_type_plot():
+    yearlist = [10, 12, 13, 14, 15]
+    filelist = ['{0}fuel_type/FY{1}.csv'.format(homedir, yr) for yr in yearlist]
+    dfs = []
+    for f in filelist:
+        df = pd.read_csv(f)
+        year = f[-6: -4]
+        df['year'] = '20{0}'.format(year)
+        dfs.append(df)
+    df_all = pd.concat(dfs, ignore_index=False)
+    df_all.rename(columns={'num_heat_fuel': 'Number of Heating Fuel'},
+                  inplace=True)
+    df_all.to_csv(homedir + 'fuel_type/fuel_type.csv', index=False)
+
+    sns.set_style("white")
+    sns.set_palette(sns.color_palette('Blues', 3))
+    sns.set_context("paper", font_scale=0.8)
+    sns.mpl.rc("figure", figsize=(10,5.5))
+    sns.countplot(x='year', hue='Number of Heating Fuel',
+                  hue_order=[0, 1, 2, 3], data=df_all, palette='Blues')
+    plt.legend(loc = 2, bbox_to_anchor=(1, 1))
+    my_dpi=300
+    plt.ylabel('Number of Buildings', fontsize=12)
+    plt.xlabel('Fiscal Year', fontsize=12)
+    P.savefig(os.getcwd() + '/plot_FY_annual/fuel_type.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
+    plt.close()
+    
+# join fuel types to filter bit
+def join_fueltype():
+    indicator_df = pd.read_csv(homedir + 'filter_bit/fis/indicator_all.csv')
+
+    yearlist = [10, 12, 13, 14, 15]
+    cols = ['Steam', 'Gas', 'Oil', 'num_heat_fuel', 'heat_oil_steam',
+            'Chilled Water']
+    dfs = []
+    for yr in yearlist:
+        df = pd.read_csv('{0}fuel_type/FY{1}.csv'.format(homedir, yr))
+        df = df[['Building Number'] + cols]
+        newcols = ['{0}_{1}'.format(x, yr) for x in cols]
+        df.rename(columns=dict(zip(cols, newcols)), inplace=True)
+        dfs.append(df)
+    df_all = reduce(lambda x, y: pd.merge(x, y, on='Building Number',
+                                          how='left'),
+                    [indicator_df] + dfs)
+    df_all['sum'] = df_all[[x for x in list(df_all) if 'heat_oil_steam' in x]].sum(axis=1)
+    df_all['heat_oil_steam'] = df_all['sum'].map(lambda x: 1 if x == 5 else 0)
+    df_all['sum'] = df_all[[x for x in list(df_all) if 'Chilled Water' in x]].sum(axis=1)
+    df_all['Chilled Water'] = df_all['sum'].map(lambda x: 1 if x == 5 else 0)
+    df_all.drop('sum', axis=1, inplace=True)
+    df_all.to_csv(homedir + 'filter_bit/fis/indicator_all_fuel.csv', index=False)
+    return
+
 def main():
-    get_fuel_type([10, 12, 13, 14, 15])
+    join_fueltype()
+    #fuel_type_plot()
+    #get_fuel_type([10, 12, 13, 14, 15])
     #excel2csv()
     #building_info()
     #fiscal2calendar()
