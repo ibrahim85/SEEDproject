@@ -240,7 +240,7 @@ def plot_energy_temp_byyear_2015(theme):
     #P.savefig(os.getcwd() + '/plot_FY_weather/27building_{0}_2015.png'.format(theme), dpi = 150)
     plt.close()
     return
-
+    
 #ld: line or dot plot
 def plot_energy_temp_byyear(df_energy, df_temp, df_hdd, df_cdd, theme,
                             b, s, ld, kind, remove0):
@@ -526,7 +526,7 @@ def calculate(theme, method):
         continue
     t_norm_list = list(list(t_norm.itertuples())[0])[2:]
     '''
-    for b, s in bs_pair:
+    for b, s in bs_pair[:1]:
         print (b, s)
         df_energy = read_energy(b)[['Fiscal Year', 'year', 'month', 'eui_elec', 'eui_gas', 'eui']]
         # 2012 to 2015 data
@@ -534,8 +534,6 @@ def calculate(theme, method):
         df_t = df_temperature[[s]][-48:]
         df_h = df_hdd_65[[s]][-48:]
         df_c = df_cdh_65[[s]][-48:]
-        print (len(df_energy), len(df_t), len(df_h), len(df_c))
-        '''
         plot_energy_temp_byyear(df_energy, df_t, df_h, df_c, theme,
                                 b, s, 'dot', 'all', True)
         '''
@@ -545,6 +543,7 @@ def calculate(theme, method):
         elif theme == 'eui_elec':
             plot_energy_temp_byyear(df_energy, df_t, df_h, df_c, theme, b, s,
                     'dot', 'cdd', True)
+        '''
         '''
         plot_energy_temp_byyear(df_energy, df_t, df_h, df_c, theme,
                                 b, s, 'line', 'all', True)
@@ -578,7 +577,7 @@ def calculate(theme, method):
         '''
 
 def building_to_station():
-    df = pd.read_csv(os.getcwd() + '/csv_FY/filter_bit/indicator_all.csv')
+    df = pd.read_csv(os.getcwd() + '/csv_FY/filter_bit/fis/indicator_all.csv')
     df = df[df['good_area'] == 1]
     good_building = set(df['Building Number'].tolist())
     good_station = set(list(pd.read_csv(homedir + 'weatherData_meanTemp.csv')))
@@ -601,10 +600,11 @@ def read_building_weather(filename, id_col, weather_col):
     return zip(df[id_col].tolist(), df[weather_col].tolist())
 
 # BOOKMARK: add CDD, un-comment [:1]
-def sep_dd(kind):
-    files_dd = [homedir + 'weatherData_{1}_itg_{0}F.csv'.format(i, kind) \
-            for i in range(55, 75)]
-    keys = ['{0}F'.format(x) for x in range(55, 75)]
+def sep_dd(kind, low, high):
+    files_dd = [homedir + 'weatherData_{1}_itg_{0}F.csv'.format(i,
+                                                                kind)\
+                for i in range(low, high)]
+    keys = ['{0}F'.format(x) for x in range(low, high)]
     dfs_dd = [pd.read_csv(f) for f in files_dd]
     # time column
     col_time = dfs_dd[0].iloc[:, 0]
@@ -669,36 +669,214 @@ def process_weatherfile():
     # check_data()
     # get_mean_temp()
     # calculate_dd()
-    # sep_dd('HDD')
-    # sep_dd('CDD')
+    sep_dd('HDD', 40, 81)
+    sep_dd('CDD', 40, 81)
     # sep_temp()
 
     # building_to_station()
-    join_building_temp()
+    # join_building_temp()
     # plot_building_temp()
 
 def calculate_dd():
-    for base in range(50, 75):
+    for base in range(40, 81):
         get_DD_itg(base, 'HDD')
         get_DD_itg(base, 'CDD')
 
+def join_dd_temp_energy(b, s, kind):
+    df_eng_temp = pd.read_csv(homedir +
+                              'energy_temp/{0}_{1}.csv'.format(b, s))
+    df_dd = pd.read_csv(homedir + 
+                        'station_dd/{0}_{1}.csv'.format(s, kind))
+    df_all = pd.merge(df_eng_temp, df_dd, on=['year', 'month'],
+                      how='inner')
+    df_all.to_csv(homedir + '/dd_temp_eng/{2}_{0}_{1}.csv'.format(b, s, kind), index=False)
+
+# kind: CDD, HDD
+def opt_lireg(b, s, kind):
+    df_eng_temp = pd.read_csv(homedir +
+                              'energy_temp/{0}_{1}.csv'.format(b, s))
+    df_dd = pd.read_csv(homedir + 
+                        'station_dd/{0}_{1}.csv'.format(s, kind))
+    df_all = pd.merge(df_eng_temp, df_dd, on=['year', 'month'],
+                      how='inner')
+    df_all = df_all[df_all['year'] < 2013]
+    dd_list = ['{0}F'.format(x) for x in range(40, 81)]
+    if kind == 'CDD':
+        theme = 'eui_elec'
+    else:
+        theme = 'eui_gas'
+
+    results = []
+    for col in dd_list:
+        lean_x = df_all[col]
+        lean_y = df_all[theme]
+        slope, intercept, r_value, p_value, std_err = \
+            stats.linregress(lean_x, lean_y)
+        results.append([slope, intercept, r_value, col])
+    ordered_result = sorted(results, key=lambda x: x[2], reverse=True)
+    print ordered_result[0]
+    '''
+    base_temp = ordered_result[0][3]
+    base_load = ordered_result[0][1]
+    plot_temp_fit(df_all, base_temp, b, s, kind, theme, base_load)
+    '''
+    slope_opt, intercept_opt, r_opt, col_opt = ordered_result[0]
+    plot_dd_fit(df_all, slope_opt, intercept_opt, r_opt, col_opt,
+                theme, kind, b, s)
+    return ordered_result[0]
+
+def plot_dd_fit(df_all, slope, intercept, r, xF, theme, kind, b, s):
+    x = df_all[xF]
+    y = df_all[theme]
+    xd = [0, x.max()]
+    yd = [intercept, slope * x.max() + intercept]
+    sns.set_style("white")
+    sns.set_palette("Set2")
+    sns.set_context("talk", font_scale=1.5)
+    bx = plt.axes()
+    bx.annotate('y = {0} x + {1}\nR^2: {2}'.format(round(slope, 3), 
+                                                   round(intercept, 3),
+                                                   round(r * r, 3)),
+                xy = (x.max() * 0.1, y.max() * 0.9),
+                xytext = (x.max() * 0.05, y.max() * 0.95), fontsize=20)
+    bx.plot(x, y, 'o', xd, yd, '-')
+    plt.ylim((0, y.max() * 1.1))
+    plt.title('{0} - {1} Plot'.format(title_dict[theme], kind))
+    plt.suptitle('Building {0}, Station {1}'.format(b, s))
+    plt.xlabel('{0} Deg F'.format(kind))
+    plt.ylabel(ylabel_dict[theme])
+    P.savefig(os.getcwd() + '/plot_FY_weather/dd_energy/{2}/{0}_{1}.png'.format(b, s, theme), dpi = 150)
+    plt.close()
+
+# s: station id
+def plot_temp_fit(df_all, basetemp, b, s, kind, theme, base_load):
+    print (basetemp, b, s, kind, theme)
+    x = df_all[s]
+    y = df_all[theme]
+    tmin = df_all[s].min()
+    tmax = df_all[s].max()
+    pairs = zip(x, y)
+    base = int(basetemp[:2])
+    left = [p for p in pairs if p[0] < base]
+    right = [p for p in pairs if p[0] >= base]
+    left_x = [p[0] for p in left]
+    left_y = [p[1] for p in left]
+    right_x = [p[0] for p in right]
+    right_y = [p[1] for p in right]
+    if len(left) > 0:
+        left_ave = sum(left_y)/len(left)
+        slope_l, intercept_l, r_value_l, p_value_l, std_err_l = \
+            stats.linregress(left_x, left_y)
+    if len(right) > 0:
+        right_ave = sum(right_y)/len(right)
+        slope_r, intercept_r, r_value_r, p_value_r, std_err_r = \
+            stats.linregress(right_x, right_y)
+    def fit(x, slope, intercept):
+        return np.array([slope * xi + intercept for xi in x])
+    def ave(x, length):
+        average = sum(x) / len(x)
+        return np.array([average] * length)
+    sns.set_style("white")
+    sns.set_palette("Set2")
+    sns.set_context("talk", font_scale=1.5)
+    #sns.mpl.rc("figure", figsize=(10,5.5))
+    plot_x_left = np.array(left_x)
+    plot_y_left = np.array(left_y)
+    plot_tmin_left = tmin
+    plot_tmax_left = base
+    xd_left = np.r_[plot_tmin_left:plot_tmax_left:1]
+    plot_x_right = np.array(right_x)
+    plot_y_right = np.array(right_y)
+    plot_tmin_right = base
+    plot_tmax_right = tmax 
+    xd_right = np.r_[plot_tmin_right:plot_tmax_right:1]
+    bx = plt.axes()
+    bx.plot(plot_x_left, plot_y_left, "o")
+    bx.plot(plot_x_right, plot_y_right, "o")
+    mean = -1.0
+    if kind == 'HDD':
+        if len(xd_right) > 0:
+            '''
+            meanlist = ave(plot_y_right, len(xd_right))
+            mean = meanlist[0]
+            '''
+            meanlist = [base_load] * len(xd_right)
+            bx.plot(xd_right, meanlist)
+        if len(xd_left) > 0:
+            '''
+            if (mean > -1.0 and slope_l != 0 and not
+                np.isnan(slope_l)): 
+                plot_tmax_left = (meanlist[0] - intercept_l) / slope_l
+                print ('modified base: {0}F'.format(plot_tmax_left))
+                bx.annotate('break-even point: {0}F,\nbase load: {1}'.format(int(round(plot_tmax_left, 0)), round(mean, 1)), xy = (plot_tmax_left, mean), xytext = (plot_tmax_left, mean + 0.2), fontsize=15)
+            '''
+            xd_left = np.r_[plot_tmin_left:plot_tmax_left:1]
+            bx.plot(xd_left, fit(xd_left, slope_l, intercept_l))
+    else:
+        if len(xd_left) > 0:
+            meanlist = ave(plot_y_left, len(xd_left))
+            mean = meanlist[0]
+            bx.plot(xd_left, ave(plot_y_left, len(xd_left)))
+        if len(xd_right) > 0:
+            if (mean > -1.0 and slope_r != 0 and not
+                np.isnan(slope_r)): 
+                plot_tmin_right = (meanlist[0] - intercept_r) / slope_r
+                print ('modified base: {0}F'.format(plot_tmin_right))
+                bx.annotate('break-even point: {0}F,\nbase load: {1}'.format(int(round(plot_tmin_right, 0)), round(mean, 1)), xy = (plot_tmin_right, mean), xytext = (plot_tmin_right - 13, mean + 0.2), fontsize=15)
+            xd_right = np.r_[plot_tmin_right:plot_tmax_right:1]
+            bx.plot(xd_right, fit(xd_right, slope_r, intercept_r))
+    plt.title('{0} - Temperature Plot'.format(title_dict[theme]))
+    plt.suptitle('Building {0}, Station {1}'.format(b, s))
+    plt.xlabel('Temperature Deg F')
+    plt.ylabel(ylabel_dict[theme])
+    P.savefig(os.getcwd() + '/plot_FY_weather/temp_energy/{2}/{0}_{1}.png'.format(b, s, theme), dpi = 150)
+    plt.close()
+    
+def calculate_dd_energy_regression():
+    kind = 'HDD'
+    bs_pair = read_building_weather('building_station_lookup.csv',
+                                    'Building Number', 'Weather Station')
+    study_set = get_gsalink_set()
+    bs_pair = [x for x in bs_pair if x[0] in study_set]
+    counter = 0
+    bs = []
+    ss = []
+    slopes = []
+    intercepts = []
+    rs = []
+    bases = []
+    for (b, s) in bs_pair:
+        print counter
+        slope, intercept, r_value, basetemp = opt_lireg(b, s, kind)
+        counter += 1
+        bs.append(b)
+        ss.append(s)
+        slopes.append(slope)
+        intercepts.append(intercept)
+        rs.append(r_value)
+        bases.append(int(basetemp[:2]))
+    summary = pd.DataFrame({'Building Number': bs, 'Weather Station':
+                            ss, 'Base Temperature': bases, 'k':
+                            slopes, 'b': intercepts, 'r': rs})
+    summary.to_csv(homedir + '{0}_regression.csv'.format(kind),
+                   index=False)
 def main():
-    # process_weatherfile()
-    # get_HDD(65.0)
+    bs_pair = read_building_weather('building_station_lookup.csv',
+                                    'Building Number', 'Weather Station')
+    study_set = get_gsalink_set()
+    bs_pair = [x for x in bs_pair if x[0] in study_set]
+    for (b, s) in bs_pair[:1]:
+        join_dd_temp_energy(b, s, 'HDD')
+        join_dd_temp_energy(b, s, 'CDD')
+    #building_to_station()
+    #process_weatherfile()
 
-    '''
-    for base in [40.0, 45.0, 50.0, 55.0, 57.0, 60.0, 65.0]:
-        get_DD_itg(base, 'HDD')
-    for base in [45.0, 50.0, 55.0, 57.0, 60.0, 65.0, 70.0, 72.0]:
-        get_DD_itg(base, 'CDD')
-    #get_CDD()
-    #get_CDH()
-    #for theme in ['eui_elec', 'eui_gas']:
-    '''
-    calculate('eui_gas', 'kernel')
-    calculate('eui_elec', 'kernel')
+    #calculate_dd_energy_regression()
+
+
+    #calculate('eui_gas', 'kernel')
+    #calculate('eui_elec', 'kernel')
     #plot_building_temp()
 
-    #building_to_station()
     return
 main()

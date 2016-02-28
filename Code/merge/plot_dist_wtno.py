@@ -215,7 +215,6 @@ def plot_box_pro(theme, ylim, office):
         P.savefig(os.getcwd() + '/plot_FY_annual/box_program_{0}.png'.format(theme), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
     plt.close()
 
-def plot_bar(data)
 def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
     sns.set_style("white")
     #sns.set_context("paper", font_scale=3)
