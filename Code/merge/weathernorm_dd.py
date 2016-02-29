@@ -892,10 +892,85 @@ def calculate_savings(theme, kind, cutoff, year):
         df.to_csv('{0}saving_{1}/{4}/{2}_{3}.csv'.format(homedir, year, b, s, theme), index=False)
     return
     
+def plot_saving_two(theme, kind):
+    sns.set_style("white")
+    sns.set_context("talk", font_scale=1.5)
+    filelist_1 = glob.glob('{0}saving_2014/{1}/*.csv'.format(homedir,
+                                                             theme))
+    filelist_2 = glob.glob('{0}saving_2015/{1}/*.csv'.format(homedir,
+                                                             theme))
+    if kind == 'HDD':
+        c1 = 'tomato'
+        c2 = 'lightsalmon'
+    else:
+        c1 = 'deepskyblue'
+        c2 = 'lightskyblue'
+
+    for (f1, f2) in zip(filelist_1, filelist_2):
+        df_1 = pd.read_csv(f1)
+        filename_1 = f1[f1.rfind('/') + 1:]
+        b_1 = filename_1[:8]
+        s_1 = filename_1[9: 13]
+        x_1 = df_1['month']
+        y1_1 = df_1[theme]
+        y2_1 = df_1[theme + '_hat']
+        save_percent_1 = int(round((y2_1.sum() - y1_1.sum()) /
+                                   y2_1.sum() * 100, 0))
+        df_2 = pd.read_csv(f2)
+        filename_2 = f1[f2.rfind('/') + 1:]
+        b_2 = filename_2[:8]
+        s_2 = filename_2[9: 13]
+        x_2 = df_2['month']
+        y1_2 = df_2[theme]
+        y2_2 = df_2[theme + '_hat']
+        save_percent_2 = int(round((y2_2.sum() - y1_2.sum()) /
+                                   y2_2.sum() * 100, 0))
+
+        fig, (ax_1, ax_2) = plt.subplots(2, 1, sharex=True)
+        ax_1.plot(x_1, y1_1, c=c1, ls='-', lw=2, marker='o')
+        ax_1.plot(x_1, y2_1, c=c2, ls='-', lw=2, marker='o')
+        ax_1.fill_between(x_1, y1_1, y2_1, where=y2_1 >= y1_1,
+                          facecolor='aquamarine', alpha=0.5,
+                          interpolate=True)
+        ax_1.fill_between(x_1, y1_1, y2_1, where=y2_1 < y1_1,
+                          facecolor='orange', alpha=0.5,
+                          interpolate=True)
+        ax_2.plot(x_2, y1_2, c=c1, ls='-', lw=2, marker='o')
+        ax_2.plot(x_2, y2_2, c=c2, ls='-', lw=2, marker='o')
+        ax_2.fill_between(x_2, y1_2, y2_2, where=y2_2 >= y1_2,
+                          facecolor='aquamarine', alpha=0.5,
+                          interpolate=True)
+        ax_2.fill_between(x_2, y1_2, y2_2, where=y2_2 < y1_2,
+                          facecolor='orange', alpha=0.5,
+                          interpolate=True)
+        if save_percent_1 > 0:
+            ax_1.set_title('Savings Plot {0} vs before 2012, {1}% less'.format(2014, save_percent_1))
+        else:
+            ax_1.set_title('Savings Plot {0} vs before 2012, {1}% more'.format(2014, abs(save_percent_1)))
+        if save_percent_2 > 0:
+            ax_2.set_title('Savings Plot {0} vs before 2012, {1}% less'.format(2015, save_percent_2))
+        else:
+            ax_2.set_title('Savings Plot {0} vs before 2012, {1}% more'.format(2015, abs(save_percent_2)))
+        plt.xticks(range(1, 13))
+        xticklabels = [calendar.month_abbr[m] for m in range(1, 13)]
+        plt.setp(ax_2, xticklabels=xticklabels)
+        plt.xlim((1, 12))
+        plt.suptitle('Building {0}, Station {1}'.format(b_1, s_1))
+        ax_1.set_ylabel('kBtu/sq.ft.')
+        ax_2.set_ylabel('kBtu/sq.ft.')
+        P.savefig(os.getcwd() + '/plot_FY_weather/saving/{2}/{0}_{1}.png'.format(b_1, s_1, theme), dpi = 150)
+        plt.close()
+
 def plot_saving(year, theme, kind):
     sns.set_style("white")
     sns.set_context("talk", font_scale=1.5)
     filelist = glob.glob('{0}saving_{1}/{2}/*.csv'.format(homedir, year, theme))
+    if kind == 'HDD':
+        c1 = 'tomato'
+        c2 = 'lightsalmon'
+    else:
+        c1 = 'deepskyblue'
+        c2 = 'lightskyblue'
     for f in filelist:
         df = pd.read_csv(f)
         filename = f[f.rfind('/') + 1:]
@@ -907,12 +982,6 @@ def plot_saving(year, theme, kind):
         y2 = df[theme + '_hat']
         save_percent = int(round((y2.sum() - y1.sum()) / y2.sum() *
                                  100, 0))
-        if kind == 'HDD':
-            c1 = 'tomato'
-            c2 = 'lightsalmon'
-        else:
-            c1 = 'deepskyblue'
-            c2 = 'lightskyblue'
         plt.plot(x, y1, c=c1, ls='-', lw=2, marker='o')
         plt.plot(x, y2, c=c2, ls='-', lw=2, marker='o')
         plt.fill_between(x, y1, y2, where=y2 >= y1,
@@ -957,6 +1026,9 @@ def join_regression_indi():
                        index=False)
 
 def main():
+    plot_saving_two('eui_gas', 'HDD')
+
+    '''
     for year in [2014, 2015]:
         calculate_savings('eui_elec', 'CDD', 0.6, year)
         plot_saving(year, 'eui_elec', 'CDD')
@@ -964,7 +1036,6 @@ def main():
         calculate_savings('eui_gas', 'HDD', 0.6, year)
         plot_saving(year, 'eui_gas', 'HDD')
     # join_regression_indi()
-    '''
     bs_pair = read_building_weather('building_station_lookup.csv',
                                     'Building Number', 'Weather Station')
     study_set = get_gsalink_set()
