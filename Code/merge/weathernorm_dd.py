@@ -326,7 +326,7 @@ def plot_energy_temp_byyear(df_energy, df_temp, df_hdd, df_cdd, theme,
                 base_gas_dict[name] = tempdf_gas['eui_gas'].mean()
 
                 tempdf_elec['base_month'] = \
-                        tempdf_elec['month'].map(lambda x: True \
+                  ap(lambda x: True \
                         if (6 <= x and x <= 8) else False)
                 tempdf_elec = tempdf_elec[tempdf_elec['base_month'] == True]
                 print tempdf_elec
@@ -661,7 +661,6 @@ def plot_building_temp(b, s):
     print 'not implemented'
     return
 
-# BOOKMARK
 def process_weatherfile():
     # slow, comment out once you have the output
     # excel2csv()
@@ -860,14 +859,120 @@ def calculate_dd_energy_regression():
                             slopes, 'b': intercepts, 'r': rs})
     summary.to_csv(homedir + '{0}_regression.csv'.format(kind),
                    index=False)
+
+# calculate savings for 'year', 'cutoff': r square cutoff
+def calculate_savings(theme, kind, cutoff, year):
+    df_reg = pd.read_csv(homedir + '{0}_regression.csv'.format(kind))
+    df_reg['r2'] = df_reg['r'].map(lambda x: x * x)
+    df_reg = df_reg[df_reg['r2'] >= cutoff]
+    df_reg_idx = df_reg.set_index('Building Number')
+    bs = df_reg['Building Number'].tolist()
+    print df_reg_idx.head()
+    filelist = ['{0}dd_temp_eng/{1}_{2}_{3}.csv'.\
+                format(homedir, kind, b, 
+                       df_reg_idx.ix[b, 'Weather Station']) for b in bs]
+    for f in filelist:
+        df = pd.read_csv(f)
+        filename = f[f.rfind('/') + 1:]
+        b = filename[4: 12]
+        s = filename[13: 17]
+        print b, s
+        df = df[df['year'] == year]
+        print df.head()
+        slope = df_reg_idx.ix[b, 'k']
+        intercept = df_reg_idx.ix[b, 'b']
+        t_base = str(df_reg_idx.ix[b, 'Base Temperature']) + 'F'
+        df = df[['Building Number', s, 'eui_elec', 'eui_gas', 'year',
+                 'month', t_base]]
+        print (slope, intercept, t_base)
+        if kind == 'HDD':
+            df['eui_gas_hat'] = df.apply(lambda r: slope * r[t_base] + intercept if r[t_base] > 0 else r['eui_gas'], axis=1)
+        else:
+            df['eui_elec_hat'] = df.apply(lambda r: slope * r[t_base] + intercept if r[t_base] > 0 else r['eui_elec'], axis=1)
+        df.to_csv('{0}saving_{1}/{4}/{2}_{3}.csv'.format(homedir, year, b, s, theme), index=False)
+    return
+    
+def plot_saving(year, theme, kind):
+    sns.set_style("white")
+    sns.set_context("talk", font_scale=1.5)
+    filelist = glob.glob('{0}saving_{1}/{2}/*.csv'.format(homedir, year, theme))
+    for f in filelist:
+        df = pd.read_csv(f)
+        filename = f[f.rfind('/') + 1:]
+        b = filename[:8]
+        s = filename[9: 13]
+        print (filename, b, s)
+        x = df['month']
+        y1 = df[theme]
+        y2 = df[theme + '_hat']
+        save_percent = int(round((y2.sum() - y1.sum()) / y2.sum() *
+                                 100, 0))
+        if kind == 'HDD':
+            c1 = 'tomato'
+            c2 = 'lightsalmon'
+        else:
+            c1 = 'deepskyblue'
+            c2 = 'lightskyblue'
+        plt.plot(x, y1, c=c1, ls='-', lw=2, marker='o')
+        plt.plot(x, y2, c=c2, ls='-', lw=2, marker='o')
+        plt.fill_between(x, y1, y2, where=y2 >= y1,
+                         facecolor='aquamarine', alpha=0.5,
+                         interpolate=True)
+        plt.fill_between(x, y1, y2, where=y2 < y1, facecolor='orange',
+                         alpha=0.5, interpolate=True)
+        bx = plt.axes()
+        plt.xticks(range(1, 13))
+        xticklabels = [calendar.month_abbr[m] for m in range(1, 13)]
+        bx.set(xticklabels=xticklabels)
+        plt.xlim((1, 12))
+        if save_percent > 0:
+            plt.title('Savings Plot {0} vs before 2012, {1}% less'.format(year, save_percent))
+        else:
+            plt.title('Savings Plot {0} vs before 2012, {1}% more'.format(year, abs(save_percent)))
+        plt.suptitle('Building {0}, Station {1}'.format(b, s))
+        #plt.xlabel('{0} Deg F'.format(kind))
+        plt.ylabel(ylabel_dict[theme])
+        P.savefig(os.getcwd() + '/plot_FY_weather/saving_{3}/{2}/{0}_{1}.png'.format(b, s, theme, year), dpi = 150)
+        plt.close()
+
+# join HDD_regression and CDD regression with 
+# indicator_all for fuel type
+def join_regression_indi():
+    df_hdd = pd.read_csv(homedir + 'HDD_regression.csv')
+    df_cdd = pd.read_csv(homedir + 'CDD_regression.csv')
+    df_indi = pd.read_csv(os.getcwd() + \
+                          '/csv_FY/filter_bit/fis/indicator_all_fuel.csv')
+    cols = ['Building Number'] + [c for c in list(df_indi) if \
+                                  ('heat_oil_steam' in c) or \
+                                  ('Chilled Water' in c)]
+    df_indi = df_indi[cols]
+    print cols
+    df_hdd_fuel = pd.merge(df_hdd, df_indi, on='Building Number',
+                           how='inner')
+    df_cdd_fuel = pd.merge(df_cdd, df_indi, on='Building Number',
+                           how='inner')
+    df_hdd_fuel.to_csv(homedir + 'HDD_regression_fuel.csv',
+                       index=False)
+    df_cdd_fuel.to_csv(homedir + 'CDD_regression_fuel.csv',
+                       index=False)
+
 def main():
+    for year in [2014, 2015]:
+        calculate_savings('eui_elec', 'CDD', 0.6, year)
+        plot_saving(year, 'eui_elec', 'CDD')
+    for year in [2014, 2015]:
+        calculate_savings('eui_gas', 'HDD', 0.6, year)
+        plot_saving(year, 'eui_gas', 'HDD')
+    # join_regression_indi()
+    '''
     bs_pair = read_building_weather('building_station_lookup.csv',
                                     'Building Number', 'Weather Station')
     study_set = get_gsalink_set()
     bs_pair = [x for x in bs_pair if x[0] in study_set]
-    for (b, s) in bs_pair[:1]:
-        join_dd_temp_energy(b, s, 'HDD')
+    for (b, s) in bs_pair:
         join_dd_temp_energy(b, s, 'CDD')
+        join_dd_temp_energy(b, s, 'HDD')
+    '''
     #building_to_station()
     #process_weatherfile()
 
