@@ -547,16 +547,27 @@ def get_fuel_type(years):
                        'Chilled Water (Ton Hr)': 'Chilled Water'}
         df_sum = df_sum[cols]
         for col in cols:
-            df_sum[col] = df_sum[col].apply(lambda x: 1 if x > 0 else
-                                            0)
+            df_sum[col] = df_sum[col].map(lambda x: 1 if x > 0 else 0)
         df_sum['num_heat_fuel'] = df_sum['Steam (Thou. lbs)'] + \
                                   df_sum['Gas (Cubic Ft)'] + \
                                   df_sum['Oil (Gallon)']
-        df_sum['heat_oil_steam'] = \
-            df_sum.apply(lambda r: 1 if r['Gas (Cubic Ft)'] == 0 \
-                         and r['num_heat_fuel'] > 0 else 0, axis=1)
         df_sum.rename(columns = rename_cols, inplace=True)
-        print df_sum.head()
+        df_sum['None (all electric?)'] = df_sum['num_heat_fuel'].map(lambda x: 1 if x == 0 else 0)
+        df_sum['Gas Only'] = df_sum.apply(lambda r: 1 if r['Gas'] == 1 and r['num_heat_fuel'] == 1 else 0, axis=1)
+        df_sum['Oil Only'] = df_sum.apply(lambda r: 1 if r['Oil'] == 1 and r['num_heat_fuel'] == 1 else 0, axis=1)
+        df_sum['Steam Only'] = df_sum.apply(lambda r: 1 if r['Steam'] == 1 and r['num_heat_fuel'] == 1 else 0, axis=1)
+        df_sum['Gas + Oil'] = df_sum['Gas'] & df_sum['Oil']
+        df_sum['Gas + Steam'] = df_sum['Gas'] & df_sum['Steam']
+        df_sum['Oil + Steam'] = df_sum['Oil'] & df_sum['Steam']
+        df_sum['Gas + Oil + Steam'] = df_sum['Oil'] & \
+                                      df_sum['Steam'] & \
+                                      df_sum['Gas']
+        df_sum.info()
+        for col in ['Gas + Oil', 'Gas + Steam', 'Oil + Steam', 
+                    'Gas + Oil + Steam', 'Gas Only', 'Oil Only', 
+                    'Steam Only']:
+            df_sum[col] = df_sum[col].apply(lambda x: 1 if x else 0)
+        df_sum.info()
         df_sum.to_csv(os.getcwd() +
                       '/csv_FY/fuel_type/FY{0}.csv'.format(y))
 
@@ -570,20 +581,32 @@ def fuel_type_plot():
         df['year'] = '20{0}'.format(year)
         dfs.append(df)
     df_all = pd.concat(dfs, ignore_index=False)
-    df_all.rename(columns={'num_heat_fuel': 'Number of Heating Fuel'},
-                  inplace=True)
-    df_all.to_csv(homedir + 'fuel_type/fuel_type.csv', index=False)
+    def select_col(r, cols):
+        values = [r[c] for c in cols]
+        return cols[values.index(1)]
+    fuel_type_cols = ['None (all electric?)', 'Gas Only', 'Oil Only', 
+                      'Steam Only', 'Gas + Oil', 'Gas + Steam', 
+                      'Oil + Steam', 'Gas + Oil + Steam']
+    df_all['Heating Fuel Type'] = \
+        df_all.apply(lambda r: select_col(r, fuel_type_cols), axis=1)
+    print df_all['Heating Fuel Type'].value_counts()
+    df_all = df_all[['Heating Fuel Type', 'year']]
+    df_2011 = pd.DataFrame({'year': [2011], 'Heating Fuel Type':
+                            [np.nan]})
+    df_all_fake = pd.concat([df_all, df_2011], ignore_index=True)
 
     sns.set_style("white")
-    sns.set_palette(sns.color_palette('Blues', 3))
-    sns.set_context("paper", font_scale=0.8)
-    sns.mpl.rc("figure", figsize=(10,5.5))
-    sns.countplot(x='year', hue='Number of Heating Fuel',
-                  hue_order=[0, 1, 2, 3], data=df_all, palette='Blues')
-    plt.legend(loc = 2, bbox_to_anchor=(1, 1))
+    sns.set_palette(sns.color_palette('Set2'))
+    sns.set_context("talk", font_scale=1.0)
+    sns.mpl.rc("figure", figsize=(10, 5))
+    sns.countplot(x='year', order= [str(x) for x in range(2010, 2016)],
+                  hue='Heating Fuel Type', palette='Set3',
+                  hue_order=fuel_type_cols, data=df_all_fake)
+    plt.legend(bbox_to_anchor=(0.05, 1), loc='upper left')
     my_dpi=300
-    plt.ylabel('Number of Buildings', fontsize=12)
-    plt.xlabel('Fiscal Year', fontsize=12)
+    plt.title('Heating Fuel Type Count (FY 2010, 2012-2015)')
+    plt.ylabel('Number of Buildings')
+    plt.xlabel('Fiscal Year')
     P.savefig(os.getcwd() + '/plot_FY_annual/fuel_type.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
     plt.close()
     
@@ -592,8 +615,9 @@ def join_fueltype():
     indicator_df = pd.read_csv(homedir + 'filter_bit/fis/indicator_all.csv')
 
     yearlist = [10, 12, 13, 14, 15]
-    cols = ['Steam', 'Gas', 'Oil', 'num_heat_fuel', 'heat_oil_steam',
-            'Chilled Water']
+    cols = ['None (all electric?)', 'Gas Only', 'Oil Only', 
+            'Steam Only', 'Gas + Oil', 'Gas + Steam', 
+            'Oil + Steam', 'Gas + Oil + Steam', 'Chilled Water']
     dfs = []
     for yr in yearlist:
         df = pd.read_csv('{0}fuel_type/FY{1}.csv'.format(homedir, yr))
@@ -604,16 +628,17 @@ def join_fueltype():
     df_all = reduce(lambda x, y: pd.merge(x, y, on='Building Number',
                                           how='left'),
                     [indicator_df] + dfs)
-    df_all['sum'] = df_all[[x for x in list(df_all) if 'heat_oil_steam' in x]].sum(axis=1)
-    df_all['heat_oil_steam'] = df_all['sum'].map(lambda x: 1 if x == 5 else 0)
-    df_all['sum'] = df_all[[x for x in list(df_all) if 'Chilled Water' in x]].sum(axis=1)
-    df_all['Chilled Water'] = df_all['sum'].map(lambda x: 1 if x == 5 else 0)
-    df_all.drop('sum', axis=1, inplace=True)
+    for c in cols:
+        df_all['sum_{0}'.format(c)] = df_all[[x for x in list(df_all) if c in x]].sum(axis=1)
+        df_all[c] = df_all['sum_{0}'.format(c)].map(lambda x: 1 if x == 5 else 0)
+
+    sum_cols = ['sum_{0}'.format(c) for c in cols]
+    df_all.drop(sum_cols, axis=1, inplace=True)
     df_all.to_csv(homedir + 'filter_bit/fis/indicator_all_fuel.csv', index=False)
     return
 
 def main():
-    join_fueltype()
+    #join_fueltype()
     #fuel_type_plot()
     #get_fuel_type([10, 12, 13, 14, 15])
     #excel2csv()

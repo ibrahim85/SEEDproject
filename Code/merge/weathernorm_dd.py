@@ -11,6 +11,7 @@ import pyqt_fit.nonparam_regression as smooth
 from pyqt_fit import npr_methods
 import calendar
 import re
+import textwrap as tw
 
 homedir = os.getcwd() + '/csv_FY/weather/'
 
@@ -24,7 +25,7 @@ ylabel_dict = {'eui':'Electricity + Gas [kBtu/sq.ft]',
 
 title_dict = {'eui':'Electricity + Gas',
               'eui_elec':'Electricity',
-              'eui_gas':'Natural Gas',
+              'eui_gas':'Gas',
               'eui_oil':'Oil',
               'all': 'Combined Electricity and Gas',
               'eui_water':'Water'}
@@ -599,7 +600,6 @@ def read_building_weather(filename, id_col, weather_col):
     df = pd.read_csv(homedir + filename)
     return zip(df[id_col].tolist(), df[weather_col].tolist())
 
-# BOOKMARK: add CDD, un-comment [:1]
 def sep_dd(kind, low, high):
     files_dd = [homedir + 'weatherData_{1}_itg_{0}F.csv'.format(i,
                                                                 kind)\
@@ -867,7 +867,7 @@ def calculate_savings(theme, kind, cutoff, year):
     df_reg = df_reg[df_reg['r2'] >= cutoff]
     df_reg_idx = df_reg.set_index('Building Number')
     bs = df_reg['Building Number'].tolist()
-    print df_reg_idx.head()
+    #print df_reg_idx.head()
     filelist = ['{0}dd_temp_eng/{1}_{2}_{3}.csv'.\
                 format(homedir, kind, b, 
                        df_reg_idx.ix[b, 'Weather Station']) for b in bs]
@@ -878,7 +878,6 @@ def calculate_savings(theme, kind, cutoff, year):
         s = filename[13: 17]
         print b, s
         df = df[df['year'] == year]
-        print df.head()
         slope = df_reg_idx.ix[b, 'k']
         intercept = df_reg_idx.ix[b, 'b']
         t_base = str(df_reg_idx.ix[b, 'Base Temperature']) + 'F'
@@ -900,22 +899,30 @@ def plot_saving_two(theme, kind):
     filelist_2 = glob.glob('{0}saving_2015/{1}/*.csv'.format(homedir,
                                                              theme))
     if kind == 'HDD':
-        c1 = 'tomato'
+        c1 = 'brown'
         c2 = 'lightsalmon'
+        location = 'upper center'
+        wrapwidth = 30
     else:
-        c1 = 'deepskyblue'
+        c1 = 'navy'
         c2 = 'lightskyblue'
+        location = 'lower center'
+        wrapwidth = 99
 
     for (f1, f2) in zip(filelist_1, filelist_2):
         df_1 = pd.read_csv(f1)
         filename_1 = f1[f1.rfind('/') + 1:]
         b_1 = filename_1[:8]
         s_1 = filename_1[9: 13]
+        print (b_1, s_1)
         x_1 = df_1['month']
         y1_1 = df_1[theme]
         y2_1 = df_1[theme + '_hat']
-        save_percent_1 = int(round((y2_1.sum() - y1_1.sum()) /
-                                   y2_1.sum() * 100, 0))
+        if y2_1.sum() != 0:
+            save_percent_1 = int(round((y2_1.sum() - y1_1.sum()) /
+                                       y2_1.sum() * 100, 0))
+        else:
+            save_percent_1 = 0
         df_2 = pd.read_csv(f2)
         filename_2 = f1[f2.rfind('/') + 1:]
         b_2 = filename_2[:8]
@@ -923,38 +930,49 @@ def plot_saving_two(theme, kind):
         x_2 = df_2['month']
         y1_2 = df_2[theme]
         y2_2 = df_2[theme + '_hat']
-        save_percent_2 = int(round((y2_2.sum() - y1_2.sum()) /
-                                   y2_2.sum() * 100, 0))
+        if y2_2.sum() != 0:
+            save_percent_2 = int(round((y2_2.sum() - y1_2.sum()) /
+                                       y2_2.sum() * 100, 0))
+        else:
+            save_percent_2 = 0
 
-        fig, (ax_1, ax_2) = plt.subplots(2, 1, sharex=True)
-        ax_1.plot(x_1, y1_1, c=c1, ls='-', lw=2, marker='o')
-        ax_1.plot(x_1, y2_1, c=c2, ls='-', lw=2, marker='o')
+        fig, (ax_1, ax_2) = plt.subplots(2, 1, sharex=True,
+                                         sharey=True)
+        line1_1, = ax_1.plot(x_1, y1_1, c=c1, ls='-', lw=2, marker='o')
+        line2_1, = ax_1.plot(x_1, y2_1, c=c2, ls='-', lw=2, marker='o')
         ax_1.fill_between(x_1, y1_1, y2_1, where=y2_1 >= y1_1,
                           facecolor='aquamarine', alpha=0.5,
                           interpolate=True)
         ax_1.fill_between(x_1, y1_1, y2_1, where=y2_1 < y1_1,
                           facecolor='orange', alpha=0.5,
                           interpolate=True)
-        ax_2.plot(x_2, y1_2, c=c1, ls='-', lw=2, marker='o')
-        ax_2.plot(x_2, y2_2, c=c2, ls='-', lw=2, marker='o')
+        ax_1.legend([line1_1, line2_1], 
+                    ['Actual {1} use in {0}'.format(2014, title_dict[theme]), '\n'.join(tw.wrap('{1} use given before 2013 habits but {0} weather'.format(2015, title_dict[theme]), wrapwidth))], loc=location)
+        line1_2, = ax_2.plot(x_2, y1_2, c=c1, ls='-', lw=2, marker='o')
+        line2_2, = ax_2.plot(x_2, y2_2, c=c2, ls='-', lw=2, marker='o')
         ax_2.fill_between(x_2, y1_2, y2_2, where=y2_2 >= y1_2,
                           facecolor='aquamarine', alpha=0.5,
                           interpolate=True)
         ax_2.fill_between(x_2, y1_2, y2_2, where=y2_2 < y1_2,
                           facecolor='orange', alpha=0.5,
                           interpolate=True)
+        ax_2.legend([line1_2, line2_2], 
+                    ['Actual {1} use in {0}'.format(2014, title_dict[theme]), '\n'.join(tw.wrap('{1} use given before 2013 habits but {0} weather'.format(2015, title_dict[theme]), wrapwidth))], loc=location)
         if save_percent_1 > 0:
-            ax_1.set_title('Savings Plot {0} vs before 2012, {1}% less'.format(2014, save_percent_1))
+            ax_1.set_title('{2} Savings Plot {0} vs before 2013, {1}% less'.format(2014, save_percent_1, title_dict[theme]))
         else:
-            ax_1.set_title('Savings Plot {0} vs before 2012, {1}% more'.format(2014, abs(save_percent_1)))
+            ax_1.set_title('{2} Savings Plot {0} vs before 2013, {1}% more'.format(2014, abs(save_percent_1), title_dict[theme]))
         if save_percent_2 > 0:
-            ax_2.set_title('Savings Plot {0} vs before 2012, {1}% less'.format(2015, save_percent_2))
+            ax_2.set_title('{2} Savings Plot {0} vs before 2013, {1}% less'.format(2015, save_percent_2, title_dict[theme]))
         else:
-            ax_2.set_title('Savings Plot {0} vs before 2012, {1}% more'.format(2015, abs(save_percent_2)))
+            ax_2.set_title('{2} Savings Plot {0} vs before 2013, {1}% more'.format(2015, abs(save_percent_2), title_dict[theme]))
         plt.xticks(range(1, 13))
         xticklabels = [calendar.month_abbr[m] for m in range(1, 13)]
         plt.setp(ax_2, xticklabels=xticklabels)
         plt.xlim((1, 12))
+        ylimit = max(max(y1_1.max(), y2_2.max()), max(y1_2.max(),
+                                                      y2_2.max()))
+        plt.ylim((0, ylimit * 1.1))
         plt.suptitle('Building {0}, Station {1}'.format(b_1, s_1))
         ax_1.set_ylabel('kBtu/sq.ft.')
         ax_2.set_ylabel('kBtu/sq.ft.')
@@ -966,10 +984,10 @@ def plot_saving(year, theme, kind):
     sns.set_context("talk", font_scale=1.5)
     filelist = glob.glob('{0}saving_{1}/{2}/*.csv'.format(homedir, year, theme))
     if kind == 'HDD':
-        c1 = 'tomato'
+        c1 = 'brown'
         c2 = 'lightsalmon'
     else:
-        c1 = 'deepskyblue'
+        c1 = 'navy'
         c2 = 'lightskyblue'
     for f in filelist:
         df = pd.read_csv(f)
@@ -980,24 +998,37 @@ def plot_saving(year, theme, kind):
         x = df['month']
         y1 = df[theme]
         y2 = df[theme + '_hat']
-        save_percent = int(round((y2.sum() - y1.sum()) / y2.sum() *
-                                 100, 0))
-        plt.plot(x, y1, c=c1, ls='-', lw=2, marker='o')
-        plt.plot(x, y2, c=c2, ls='-', lw=2, marker='o')
-        plt.fill_between(x, y1, y2, where=y2 >= y1,
+        if y2.sum() != 0:
+            save_percent = int(round((y2.sum() - y1.sum()) / y2.sum() *
+                                    100, 0))
+        else:
+            save_percent = 0
+        bx = plt.axes()
+        line1, = bx.plot(x, y1, c=c1, ls='-', lw=2, marker='o')
+        line2, = bx.plot(x, y2, c=c2, ls='-', lw=2, marker='o')
+        bx.fill_between(x, y1, y2, where=y2 >= y1,
                          facecolor='aquamarine', alpha=0.5,
                          interpolate=True)
-        plt.fill_between(x, y1, y2, where=y2 < y1, facecolor='orange',
+        bx.fill_between(x, y1, y2, where=y2 < y1, facecolor='orange',
                          alpha=0.5, interpolate=True)
         bx = plt.axes()
+        if kind == 'HDD':
+            location = 'upper left'
+        else:
+            location = 'lower left'
+        plt.legend([line1, line2], 
+                   ['Actual {1} use in {0}'.format(year, title_dict[theme]), 
+                    '{1} use given before 2013 habits but {0} weather'.format(year, title_dict[theme])], 
+                   loc=location)
         plt.xticks(range(1, 13))
         xticklabels = [calendar.month_abbr[m] for m in range(1, 13)]
         bx.set(xticklabels=xticklabels)
         plt.xlim((1, 12))
+        plt.ylim((0, max(y1.max(), y2.max()) * 1.1))
         if save_percent > 0:
-            plt.title('Savings Plot {0} vs before 2012, {1}% less'.format(year, save_percent))
+            plt.title('{2} Savings Plot {0} vs before 2013, {1}% less'.format(year, save_percent, title_dict[theme]))
         else:
-            plt.title('Savings Plot {0} vs before 2012, {1}% more'.format(year, abs(save_percent)))
+            plt.title('{2} Savings Plot {0} vs before 2013, {1}% more'.format(year, abs(save_percent), title_dict[theme]))
         plt.suptitle('Building {0}, Station {1}'.format(b, s))
         #plt.xlabel('{0} Deg F'.format(kind))
         plt.ylabel(ylabel_dict[theme])
@@ -1013,29 +1044,143 @@ def join_regression_indi():
                           '/csv_FY/filter_bit/fis/indicator_all_fuel.csv')
     cols = ['Building Number'] + [c for c in list(df_indi) if \
                                   ('heat_oil_steam' in c) or \
-                                  ('Chilled Water' in c)]
+                                  ('Chilled Water' in c) or \
+                                  ('Gas' in c)]
     df_indi = df_indi[cols]
     print cols
     df_hdd_fuel = pd.merge(df_hdd, df_indi, on='Building Number',
                            how='inner')
+    df_hdd_fuel['r2'] = df_hdd_fuel['r'] * df_hdd_fuel['r']
     df_cdd_fuel = pd.merge(df_cdd, df_indi, on='Building Number',
                            how='inner')
+    df_cdd_fuel['r2'] = df_cdd_fuel['r'] * df_cdd_fuel['r']
     df_hdd_fuel.to_csv(homedir + 'HDD_regression_fuel.csv',
                        index=False)
     df_cdd_fuel.to_csv(homedir + 'CDD_regression_fuel.csv',
                        index=False)
 
-def main():
-    plot_saving_two('eui_gas', 'HDD')
+# FIXME: not always set w, h right
+def plot_stat_regression():
+    w = 5
+    h = 6
+    sns.mpl.rc("figure", figsize=(w, h))
+    sns.set_style("white")
+    sns.set_palette("Set2")
+    sns.set_context("talk", font_scale=1.0)
+    my_dpi = 300
 
+    df = pd.read_csv(homedir + 'CDD_regression_fuel.csv')
+    df = df[df['Chilled Water'] == 0]
+    sns.boxplot(y='r2', data=df)
+    plt.ylabel('R square')
+    plt.title('Electricity - CDD regression distribution')
+    plt.suptitle('No chilled water (n = {0})'.format(len(df)))
+    #plt.show()
+    P.savefig(os.getcwd() + '/plot_FY_weather/summary/CDD_regression.png', dpi = my_dpi, figsize = (w * 20/my_dpi, h * 20/my_dpi))
+    plt.clf()
+
+    sns.mpl.rc("figure", figsize=(w, h))
+    df_2 = pd.read_csv(homedir + 'HDD_regression_fuel.csv')
+    df_2 = df_2[df_2['heat_oil_steam'] == 0]
+    df_2 = df_2[df_2['heat_oil_steam_12'] == 0]
+    sns.boxplot(x='heat_oil_steam', y='r2', data=df_2)
+    plt.ylabel('R square')
+    plt.title('Gas - HDD regression distribution')
+    plt.suptitle('Gas Heating Only (n = {0})'.format(len(df_2)))
+    #plt.show()
+    P.savefig(os.getcwd() + '/plot_FY_weather/summary/HDD_regression.png', dpi = my_dpi, figsize = (w * 20/my_dpi, h * 20/my_dpi))
+    plt.clf()
+
+def plot_dd_energy_byyear(kind, theme, cutoff):
+    sns.set_style("white")
+    sns.set_context("talk", font_scale=0.9)
+    df_reg = pd.read_csv(homedir + '{0}_regression.csv'.format(kind))
+    df_reg['r2'] = df_reg['r'].map(lambda x: x * x)
+    df_reg = df_reg[df_reg['r2'] >= cutoff]
+    df_reg_idx = df_reg.set_index('Building Number')
+    bs = df_reg['Building Number'].tolist()
+    filelist = ['{0}dd_temp_eng/{1}_{2}_{3}.csv'.\
+                format(homedir, kind, b, 
+                       df_reg_idx.ix[b, 'Weather Station']) \
+                for b in bs]
+    for f in filelist:
+        df = pd.read_csv(f)
+        filename = f[f.rfind('/') + 1:]
+        b = filename[4: 12]
+        s = filename[13: 17]
+        print b, s
+        t_base = str(df_reg_idx.ix[b, 'Base Temperature']) + 'F'
+        df = df[['Building Number', s, 'eui_elec', 'eui_gas', 'year',
+                 'month', t_base]]
+        df = df[df['year'] >= 2012]
+        df['GSALink rollout'] = df['year'].map(lambda x: 'Before' if x < 2014 else 'After')
+        if kind == 'CDD':
+            sns.set_palette(sns.color_palette('Blues'))
+        elif kind == 'HDD':
+            df[t_base] = df[t_base] * (-1.0)
+            sns.set_palette(sns.color_palette('Oranges'))
+        g = sns.lmplot(x=t_base, y=theme, hue='year', col='GSALink rollout', data=df, fit_reg=True, size=4, aspect=1)
+        #plt.title('{0}-{1} plot\nBuilding {2}, Station {3}'.format(kind, title_dict[theme], b, s))
+        plt.xlabel('{0} Deg F'.format(kind))
+        plt.ylabel(ylabel_dict[theme])
+        if kind == 'HDD':
+            plt.xlim((df[t_base].min(), 0))
+        else:
+            plt.xlim((0, df[t_base].max()))
+        plt.ylim((0, df[theme].max() * 1.1))
+
+        P.savefig(os.getcwd() + '/plot_FY_weather/{0}_{1}/{2}_{3}.png'.format(kind, theme, b, s), dpi = 150)
+        plt.close()
+
+def saving_summary(kind, theme):
+    df_dd = pd.read_csv(homedir + '{0}_regression.csv'.format(kind))
+    dfs = []
+    for year in [2014, 2015]:
+        filelist = glob.glob('{0}saving_{1}/{2}/*.csv'.format(homedir, year, theme))
+        bs = []
+        saves = []
+        for f in filelist:
+            filename = f[f.rfind('/') + 1:]
+            b = filename[:8]
+            s = filename[9: 13]
+            print (b, s)
+            df = pd.read_csv(f)
+            y = df[theme]
+            y_hat = df[theme + '_hat']
+            if y_hat.sum() != 0:
+                save_percent = (y_hat.sum() - y.sum()) / y_hat.sum() * 100
+            else:
+                save_percent = 0
+            bs.append(b)
+            saves.append(save_percent)
+        d = {'Building Number': bs, 'Saving_{0}'.format(year): saves}
+        df_year = pd.DataFrame(d)
+        dfs.append(df_year)
+    df_all = reduce(lambda x, y: pd.merge(x, y, how='left', on='Building Number'), [df_dd] + dfs)
+    print df_all.head()
+    df_all.to_csv(homedir + '{0}_saving_summary.csv'.format(kind),
+                  index=False)
+
+def main():
+    cutoff = -0.1
+    saving_summary('CDD', 'eui_gas')
     '''
     for year in [2014, 2015]:
-        calculate_savings('eui_elec', 'CDD', 0.6, year)
+        #calculate_savings('eui_elec', 'CDD', cutoff, year)
         plot_saving(year, 'eui_elec', 'CDD')
+    '''
+    '''
     for year in [2014, 2015]:
-        calculate_savings('eui_gas', 'HDD', 0.6, year)
+        calculate_savings('eui_gas', 'HDD', cutoff, year)
         plot_saving(year, 'eui_gas', 'HDD')
+    plot_dd_energy_byyear('HDD', 'eui_gas', cutoff)
+    plot_dd_energy_byyear('CDD', 'eui_elec', cutoff)
+    '''
+    # plot_stat_regression()
     # join_regression_indi()
+    # plot_saving_two('eui_elec', 'CDD')
+
+    '''
     bs_pair = read_building_weather('building_station_lookup.csv',
                                     'Building Number', 'Weather Station')
     study_set = get_gsalink_set()
