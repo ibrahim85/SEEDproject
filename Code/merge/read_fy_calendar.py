@@ -32,7 +32,7 @@ def get_building(df):
     return set(df['Building Number'].tolist())
 
 def check_region_state():
-    yearlist = [2010] + range(2012, 2016)
+    yearlist = range(2010, 2016)
     years = []
     regions = []
     states = []
@@ -54,7 +54,7 @@ def get_raw_concat():
     year_col = 'Fiscal Year'
     month_col = 'Fiscal Month'
     pre = 'FY'
-    yearlist = [2010] + range(2012, 2016)
+    yearlist = range(2010, 2016)
 
     for year in yearlist:
         label = str(int(year))[-2:]
@@ -69,7 +69,7 @@ def get_raw_concat():
 def add_filter_bit():
     calOrFiscal = 'fis'
     office_set = get_office()
-    yearlist = [2010] + range(2012, 2016)
+    yearlist = range(2010, 2016)
     for yr in yearlist:
         label = str(int(yr))[-2:]
         df_zero = pd.read_csv(os.getcwd() + '/csv_FY/raw_concat/FY{0}.csv'.format(label))
@@ -79,21 +79,38 @@ def add_filter_bit():
         df = pd.read_csv(os.getcwd() + '/csv_FY/agg/eui_{0}.csv'.format(yr))
         def suf(title):
             return '{0}_{1}'.format(title, label)
-        df[suf('good_elec')] = df['eui_elec'].map(lambda x: 1 if x >= 12
-                                                  else 0)
-        df[suf('good_gas')] = df['eui_gas'].map(lambda x: 1 if x >= 3 else 0)
-        df[suf('good_water')] = df['eui_water'].map(lambda x: 1 if x >= 5 else 0)
-        df[suf('good_both')] = df.apply(lambda row: 1 if row[suf('good_elec')] + row[suf('good_gas')] == 2 else 0, axis=1)
-        df[suf('good_all')] = df.apply(lambda row: 1 if row[suf('good_elec')] + row[suf('good_gas')] + row[suf('good_water')] == 3 else 0, axis=1)
+        df[suf('good_elec')] = df['eui_elec'].map(lambda x: 1 if x >=
+                                                  12 else 0)
+        df[suf('good_gas')] = df['eui_gas'].map(lambda x: 1 if x >= 3
+                                                else 0)
+        df[suf('good_water')] = df['eui_water'].map(lambda x: 1 if x
+                                                    >= 5 else 0)
+        df[suf('good_both')] = df.apply(lambda row: 1 if
+                                        row[suf('good_elec')] +
+                                        row[suf('good_gas')] == 2 else
+                                        0, axis=1)
+        df[suf('good_all')] = df.apply(lambda row: 1 if
+                                       row[suf('good_elec')] +
+                                       row[suf('good_gas')] +
+                                       row[suf('good_water')] == 3
+                                       else 0, axis=1)
         df_all = pd.merge(df_zero, df, on='Building Number', how = 'outer')
         df_all[suf('good_area')] = df_all['eui'].notnull().map(lambda x: 1 if x else 0)
         df_all[suf('office')] = df_all['Building Number'].map(lambda x: 1 if x in office_set else 0)
         df_all[suf('has_data')] = 1
-        df_all.fillna(dict(zip([suf('good_elec'), suf('good_gas'), suf('good_water')], [0, 0, 0])), inplace=True)
-        df_all.to_csv(os.getcwd() + '/csv_FY/filter_bit/{1}/eui_all_20{0}.csv'.format(label, calOrFiscal), index=False)
-        df_all.drop(['eui_elec', 'eui_gas', 'eui_oil', 'eui_water', 'eui', 'Region No.', 'Fiscal Year', 'Cat'], axis = 1, inplace=True)
-        df_all.to_csv(os.getcwd() + '/csv_FY/filter_bit/{1}/eui_clean_20{0}.csv'.format(label, calOrFiscal), index=False)
-        df.to_csv(os.getcwd() + '/csv_FY/filter_bit/{1}/eui_20{0}.csv'.format(label, calOrFiscal), index=False)
+        df_all.fillna(dict(zip([suf('good_elec'), suf('good_gas'),
+                                suf('good_water')], [0, 0, 0])),
+                      inplace=True)
+        df_all.to_csv(os.getcwd() +
+                      '/csv_FY/filter_bit/{1}/eui_all_20{0}.csv'.format(label, calOrFiscal), index=False)
+        df_all.drop(['eui_elec', 'eui_gas', 'eui_oil', 'eui_water',
+                     'eui', 'Region No.', 'Fiscal Year', 'Cat',
+                     'eui_steam'], axis = 1, inplace=True)
+        df_all.to_csv(os.getcwd() +
+                      '/csv_FY/filter_bit/{1}/eui_clean_20{0}.csv'.format(label, calOrFiscal), index=False)
+        df.to_csv(os.getcwd() +
+                  '/csv_FY/filter_bit/{1}/eui_20{0}.csv'.format(label,
+                                                                calOrFiscal), index=False)
 
 # merge quality indicator files
 def merge_indicator():
@@ -118,7 +135,7 @@ def report_number():
     if calOrFiscal == 'cal':
         yearlist = range(2009, 2016)
     else:
-        yearlist = [2010] + range(2012, 2016)
+        yearlist = range(2010, 2016)
 
     for yr in yearlist:
         label = str(int(yr))[-2:]
@@ -280,8 +297,11 @@ def fiscal2calendar():
             rg = i
             outfile = os.getcwd() + '/csv_FY/cal/FY{0}_{1}.csv'.format(yr, rg)
             print outfile
+            group.sort(columns=['Building Number', 'month'],
+                       inplace=True)
             group.to_csv(outfile, index=False)
 
+# deprecated
 def building_info():
     filelist = glob.glob(os.getcwd() + '/csv_FY/' + '*.csv')
     dfs13 = df_year(13)
@@ -315,7 +335,7 @@ def building_info():
 def calculate(calOrFiscal):
     cols = ['Region No.', 'Fiscal Month', 'Fiscal Year',
             'Building Number', 'eui_elec', 'eui_gas', 'eui_oil',
-            'eui_water', 'eui']
+            'eui_steam', 'eui_water', 'eui']
     cols_cat = cols + ['Cat']
     if calOrFiscal == 'cal':
         identifier = 'single_cal'
@@ -330,36 +350,42 @@ def calculate(calOrFiscal):
         year_col = 'Fiscal Year'
         month_col = 'Fiscal Month'
     filelist = glob.glob(os.getcwd() + '/csv_FY/{0}/*.csv'.format(identifier))
+    # remove later
+    #filelist = [f for f in filelist if 'TX0000LW' in f]
+
     for csv in filelist:
         df = pd.read_csv(csv)
         filename = csv[csv.find(identifier) + len(identifier) + 1:]
         print filename
         df = df[pd.notnull(df['Gross Sq.Ft'])]
-        df = df[df['Gross Sq.Ft'] > 0]
-        if len(df) == 0:
-            print filename
+        df_temp = df[df['Gross Sq.Ft'] > 0]
+        if len(df_temp) == 0:
+            print 'zero floor area in {0}'.format(filename)
             continue
+        area = df_temp['Gross Sq.Ft'].tolist()[0]
         df['elec'] = df['Electricity (KWH)'] * 3.412
         df['gas'] = df['Gas (Cubic Ft)'] * 1.026
-        df['eui_elec'] = df['elec']/df['Gross Sq.Ft']
-        df['eui_gas'] = df['gas']/df['Gross Sq.Ft']
-        df['eui_oil'] = df['Oil (Gallon)']/df['Gross Sq.Ft']
-        df['eui_water'] = df['Water (Gallon)']/df['Gross Sq.Ft']
-        df['eui'] = (df['elec'] + df['gas'])/df['Gross Sq.Ft']
+        df['eui_elec'] = df['elec']/area
+        df['eui_gas'] = df['gas']/area
+        df['eui_oil'] = df['Oil (Gallon)']/area
+        df['eui_steam'] = df['Steam (Thou. lbs)']/area * 1194
+        df['eui_water'] = df['Water (Gallon)']/area
+        df['eui'] = (df['elec'] + df['gas'])/area
         bd = df.ix[0, 'Building Number']
         yr = int(df.ix[0, year_col])
         # note: cols is for pandas v0.13.0, for v.017.0, use columns
         if 'Cat' in df:
             df.to_csv(os.getcwd() + \
-                    '/csv_FY/{2}/{0}_{1}.csv'.format(bd, yr, out_folder),
-                    cols = cols_cat, index=False)
+                      '/csv_FY/{2}/{0}_{1}.csv'.format(bd, yr,
+                                                       out_folder), 
+                      cols = cols_cat, index=False)
         else:
             df.to_csv(os.getcwd() + \
-                    '/csv_FY/{2}/{0}_{1}.csv'.format(bd, yr, out_folder),
-                    cols = cols, index=False)
+                      '/csv_FY/{2}/{0}_{1}.csv'.format(bd, yr,
+                                                       out_folder), 
+                      cols = cols, index=False)
 
 def aggregate(year, calOrFiscal):
-
     if calOrFiscal == 'cal':
         in_folder = 'single_eui_cal'
         out_folder = 'agg_cal'
@@ -370,7 +396,6 @@ def aggregate(year, calOrFiscal):
         out_folder = 'agg'
         year_col = 'Fiscal Year'
         month_col = 'Fiscal Month'
-
     filelist = glob.glob(os.getcwd() +
                          '/csv_FY/{1}/*{0}.csv'.format(year, in_folder))
     dfs = []
@@ -423,7 +448,7 @@ def aggregate_allyear(calOrFiscal):
         for year in yearlist:
             aggregate(year, calOrFiscal)
     else:
-        yearlist = [2010] + range(2012, 2016)
+        yearlist = range(2010, 2016)
         for year in yearlist:
             aggregate(year, calOrFiscal)
 
@@ -572,7 +597,7 @@ def get_fuel_type(years):
                       '/csv_FY/fuel_type/FY{0}.csv'.format(y))
 
 def fuel_type_plot():
-    yearlist = [10, 12, 13, 14, 15]
+    yearlist = range(10, 16)
     filelist = ['{0}fuel_type/FY{1}.csv'.format(homedir, yr) for yr in yearlist]
     dfs = []
     for f in filelist:
@@ -591,30 +616,26 @@ def fuel_type_plot():
         df_all.apply(lambda r: select_col(r, fuel_type_cols), axis=1)
     print df_all['Heating Fuel Type'].value_counts()
     df_all = df_all[['Heating Fuel Type', 'year']]
-    df_2011 = pd.DataFrame({'year': [2011], 'Heating Fuel Type':
-                            [np.nan]})
-    df_all_fake = pd.concat([df_all, df_2011], ignore_index=True)
-
     sns.set_style("white")
     sns.set_palette(sns.color_palette('Set2'))
     sns.set_context("talk", font_scale=1.0)
     sns.mpl.rc("figure", figsize=(10, 5))
     sns.countplot(x='year', order= [str(x) for x in range(2010, 2016)],
                   hue='Heating Fuel Type', palette='Set3',
-                  hue_order=fuel_type_cols, data=df_all_fake)
-    plt.legend(bbox_to_anchor=(0.05, 1), loc='upper left')
+                  hue_order=fuel_type_cols, data=df_all)
+    plt.legend(loc = 2, bbox_to_anchor=(1, 1))
     my_dpi=300
     plt.title('Heating Fuel Type Count (FY 2010, 2012-2015)')
     plt.ylabel('Number of Buildings')
     plt.xlabel('Fiscal Year')
-    P.savefig(os.getcwd() + '/plot_FY_annual/fuel_type.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
+    P.savefig(os.getcwd() + '/plot_FY_annual/fuel_type.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
     
 # join fuel types to filter bit
 def join_fueltype():
     indicator_df = pd.read_csv(homedir + 'filter_bit/fis/indicator_all.csv')
 
-    yearlist = [10, 12, 13, 14, 15]
+    yearlist = range(10, 16)
     cols = ['None (all electric?)', 'Gas Only', 'Oil Only', 
             'Steam Only', 'Gas + Oil', 'Gas + Steam', 
             'Oil + Steam', 'Gas + Oil + Steam', 'Chilled Water']
@@ -638,11 +659,8 @@ def join_fueltype():
     return
 
 def main():
-    #join_fueltype()
-    #fuel_type_plot()
-    #get_fuel_type([10, 12, 13, 14, 15])
     #excel2csv()
-    #building_info()
+    #building_info() # deprecated
     #fiscal2calendar()
     #region2building()
     #region2building_cal()
@@ -650,13 +668,18 @@ def main():
     #calculate('cal')
     #aggregate_allyear('fis')
     #aggregate_allyear('cal')
+    #get_raw_concat()
+    #get_flow_reorg()
+
+    #get_fuel_type(range(10, 16))
+    #join_fueltype()
+    fuel_type_plot()
+
     #euas2csv()
     #join_program()
     #report_false()
     #report_false_15()
     #weather_dict('none')
-    #get_raw_concat()
-    #get_flow_reorg()
     #check_use_dupe()
     return
 main()
