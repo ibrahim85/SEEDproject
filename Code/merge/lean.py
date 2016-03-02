@@ -9,37 +9,39 @@ import pytz
 from pytz import timezone
 from geopy.geocoders import Nominatim
 from geopy.distance import vincenty
+import os
 
 url = "https://128.2.109.159/piwebapi/dataservers/s0-MYhSMORGkyGTe9bdohw0AV0lOLTYyTlBVMkJWTDIw/points?namefilter=*underground/"
-filePath = "/home/seed-admin/Shilpi/degreedays/weather_station_mapping.csv"
+#filePath = os.getcwd() + "/csv_FY/weather/weatherinput/weather_station_mapping.csv"
+filePath = '/media/yujiex/work/SEED/gitDir/SEEDproject/Code/merge/csv_FY/weather/weatherinput/Weather Station Mapping.csv'
 
 def getStationId(city, state):
-	with open(filePath) as inf:
-		for line in inf:
-			line_words = line.split(',')
-			if(line_words[0] == city and (line_words[2] == state.upper() or line_words[3] == state.upper())):
-				return line_words[1]
-		else:
-			distance = 9999999
-			station = ''
-			geolocator = Nominatim()
-			location = geolocator.geocode(city+','+state)
-			if location is not None:
-				with open(filePath) as inf:
-					for newline in inf:
-						newline_words = newline.split(',')
-						temp_distance = (vincenty((location.latitude, location.longitude), (newline_words[4], newline_words[5])).miles)
-						if(temp_distance < distance):
-							station = newline_words[1]
-							distance = temp_distance
-							if(distance < 11):
-								print station + ':' + newline_words[0]
-								return station
-								break
-						else:
-							return 'NA'
-			else:
-				return 'NA'
+    with open(filePath) as inf:
+        for line in inf:
+            line_words = line.split(',')
+            if(line_words[0] == city and (line_words[2] == state.upper() or line_words[3] == state.upper())):
+                return line_words[1]
+        else:
+            distance = 9999999
+            station = ''
+            geolocator = Nominatim()
+            location = geolocator.geocode(city+','+state)
+            if location is not None:
+                with open(filePath) as inf:
+                    for newline in inf:
+                        newline_words = newline.split(',')
+                        temp_distance = (vincenty((location.latitude, location.longitude), (newline_words[4], newline_words[5])).miles)
+                        if(temp_distance < distance):
+                            station = newline_words[1]
+                            distance = temp_distance
+                            if(distance < 11):
+                                print station + ':' + newline_words[0]
+                                return station
+                                break
+                        else:
+                            return 'NA'
+            else:
+                return 'NA'
 
 def getUpperRange(lowerRange):
 	month = lowerRange.month

@@ -1,0 +1,56 @@
+Code/merge/csv/
+Code/merge/csv_FY/
+Code/merge/plot_FY/
+Code/merge/plot_FY_annual/
+Code/merge/plot_FY_cal/
+Code/merge/plot_FY_pie/
+Code/merge/plot_FY_weather/
+Code/merge/input/
+Code/merge/plot2/
+Code/merge/plot/
+Code/merge/manual/
+document/
+literature/
+web/
+data/
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+*.py~
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.swp
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

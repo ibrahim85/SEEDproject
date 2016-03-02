@@ -12,6 +12,9 @@ from pyqt_fit import npr_methods
 import calendar
 import re
 import textwrap as tw
+from geopy.geocoders import Nominatim
+from geopy.distance import vincenty
+import time.time()
 
 homedir = os.getcwd() + '/csv_FY/weather/'
 
@@ -50,33 +53,24 @@ xlabel_dict = {'temp': 'Monthly Mean Temperature, Deg F',
                'all': 'Monthly HDD(-)/CDD(+), Deg F',
                'cdd': 'Monthly CDD, Deg F'}
 
-# change the filename to the one with the weather data you want
+# read weather data in a folder and convert them to csv
 def excel2csv():
     print 'read excel file'
     # filename = os.getcwd() + '/input/FY/WeatherGSA.xlsx'
-    filename = os.getcwd() + '/input/FY/weatherData.xlsx'
-    df = pd.read_excel(filename, sheetname=0)
-    df.to_csv(homedir + 'weatherData.csv')
-    print 'output' + (homedir + 'weatherData.csv')
+    filelist = glob.glob(os.getcwd() + '/input/FY/weather/*.xlsx')
+    print filelist
+    for f in filelist:
+        filename = f[f.rfind('/') + 1: f.rfind('.')]
+        df = pd.read_excel(f, sheetname=0)
+        df.to_csv(homedir + 'weatherinput/{0}.csv'.format(filename))
+        print 'output' + (homedir +
+                          'weatherinput/{0}.csv'.format(filename))
 
+# check and remove nan values for weather data
 def check_data():
-    df = pd.read_csv(homedir + 'weatherData.csv')
-    # weather data is of the format:
-    #                       KBOS
-    #                       \\128.2.109.159\WeatherUnderground/KBOS/Temperature
-    #
-    #   2012-Sep-01 0:00:00 80.0999984741211
-    #   2012-Sep-01 1:00:00 79.9899978637695
-    #   2012-Sep-01 2:00:00 79
+    filelist = glob.glob(homedir + 'weatherinput/*.csv')
+    print filelist
 
-    # drop rows with empty time stamp
-    df.dropna(subset=['Unnamed: 0'], inplace=True)
-    df.to_csv(homedir + 'weatherData_2.csv', index=False)
-    # 27000 lines of data in csv, change it to small number for testing
-    df = pd.read_csv(homedir + 'weatherData_2.csv', low_memory=False)
-    cols = list(df)[1:]
-    print 'number of columns before dropna: {0}'.format(len(cols))
-    err_strings = []
     def is_string(s):
         # float, with possible trailing e-0x
         pattern = re.compile('-?[0-9]{0,3}\.?[0-9]{0,20}(e-[0-9]{2})?$')
@@ -85,23 +79,64 @@ def check_data():
         else:
             return False
 
-    for col in cols:
-        col_value = df[col].tolist()
-        str_value = [x for x in col_value if is_string(x)]
-        str_set = set(str_value)
-        if len(str_set) != 0:
-            err_strings += list(str_set)
-    err_str_set = set(err_strings)
-    print 'The set of error string: {0}'.format(set(err_str_set))
+    for f in filelist:
+        df = pd.read_csv(f)
+        # weather data is of the format:
+        #                       KBOS
+        #                       \\128.2.109.159\WeatherUnderground/KBOS/Temperature
+        #
+        #   2012-Sep-01 0:00:00 80.0999984741211
+        #   2012-Sep-01 1:00:00 79.9899978637695
+        #   2012-Sep-01 2:00:00 79
 
-    df.replace(list(err_str_set), np.nan, inplace=True)
-    df.dropna(axis=1, how='any', inplace=True)
-    clean_cols = list(df)
-    print 'number of columns after dropna: {0}'.format(len(clean_cols))
-    assert('KDMH' not in df)
-    df.to_csv(homedir + 'weatherData_nonan.csv',
-              index=False)
+        # drop rows with empty time stamp
+        df.dropna(subset=['Unnamed: 0'], inplace=True)
+        cols = list(df)[1:]
+        print 'number of columns before dropna: {0}'.format(len(cols))
+        err_strings = []
+        for col in cols:
+            col_value = df[col].tolist()
+            str_value = [x for x in col_value if is_string(x)]
+            str_set = set(str_value)
+            if len(str_set) != 0:
+                err_strings += list(str_set)
+        err_str_set = set(err_strings)
+        print 'The set of error string: {0}'.format(set(err_str_set))
+
+        df.replace(list(err_str_set), np.nan, inplace=True)
+        print len(df)
+        df.drop(len(df), axis=0, inplace=True)
+        print len(df)
+        df.dropna(axis=1, how='any', inplace=True)
+        clean_cols = list(df)
+        print 'number of columns after dropna: {0}'.format(len(clean_cols))
+        assert('KDMH' not in df)
+        df.to_csv(f.replace('.csv', '_nonan.csv'), index=False)
     return
+    
+# requires input files have the same time duration
+def union_weatherinput():
+    filelist = glob.glob(homedir + 'weatherinput/*_nonan.csv')
+    print filelist
+    df_base = pd.read_csv(filelist[0])
+    existing_cols = list(df_base)
+    print 'original number of stations: {0}'.format(len(existing_cols))
+    length = len(df_base)
+    other = filelist[1:]
+    for f in filelist:
+        df_i = pd.read_csv(f)
+        print f[f.rfind('/') + 1:]
+        assert(len(df_i) == length)
+        col_to_use = list(df_i.columns - df_base.columns)
+        col_to_use.append('Unnamed: 0')
+        df_base = pd.merge(df_base, df_i[col_to_use], on='Unnamed: 0',
+                           how='inner')
+        print(len(df_base))
+        existing_cols = list(df_base)
+        print 'number of stations after merge: {0}'.format(len(existing_cols))
+    cols = list(df_base)
+    assert(len(cols) == len(set(cols)))
+    df_base.to_csv(homedir + 'weatherData_nonan.csv', index=False)
 
 def get_mean_temp():
     outfile = (homedir + 'weatherData_meanTemp.csv')
@@ -123,8 +158,8 @@ def get_DD_itg(base, theme):
     df_day = df_hour.resample('D', how = 'mean')
     print 'base temperature: {0}'.format(base)
     print df_day['KBOS'].head()
-    df_day.to_csv(homedir + 'weatherData_Day{1}_itg_{0}F.csv'.format(int(base), theme))
-    df_month = df_day.resample('M', how = 'sum').to_csv(homedir + 'weatherData_{1}_itg_{0}F.csv'.format(int(base), theme))
+    df_day.to_csv(homedir + 'degreeday/Day{1}_itg_{0}F.csv'.format(int(base), theme))
+    df_month = df_day.resample('M', how = 'sum').to_csv(homedir + 'degreeday/{1}_itg_{0}F.csv'.format(int(base), theme))
 
 # read energy of building b
 def read_energy(b):
@@ -576,6 +611,71 @@ def calculate(theme, method):
             plot_normal(df, theme, b, s)
             plot_normal_only(df, theme, b, s)
         '''
+from geopy.geocoders import Nominatim
+from geopy.distance import vincenty
+
+def getICAO(StateAbbr, City, Address, zipcode, df_lookup):
+    df = df_lookup[df_lookup['StateAbbr'] == StateAbbr]
+    City = City.upper()
+    cities = df['City'].tolist()
+    counter = 0
+    if City in cities:
+        df.set_index('City', inplace=True)
+        return df.ix[City, 'ICAO']
+    else:
+        geolocator = Nominatim()
+        location = geolocator.geocode('{0},{1},{2},{3}'.format(Address, City, StateAbbr, zipcode))
+        #location = geolocator.geocode('{0}'.format(zipcode))
+        if location == None:
+            return 'Not Found'
+        print location
+        df['distance'] = df.apply(lambda r: vincenty((location.latitude, location.longitude), (r['Lat'], r['Long'])).miles, axis=1)
+        min_distance = df['distance'].min()
+        df = df[df['distance'] == min_distance]
+        return df['ICAO'].iloc[0]
+
+def pm_static_info_2_station():
+    df = pd.read_csv(os.getcwd() + '/csv/all_column/sheet-0-all_col.csv')
+    df = df[['Property Name', 'Street Address', 'City/Municipality',
+             'State/Province', 'Postal Code']]
+    df['Property Name'] = df['Property Name'].map(lambda x: x.partition(' ')[0][:8])
+    df['Postal Code'] = df['Postal Code'].map(lambda x: x[:5])
+
+    df_state = pd.read_csv(os.getcwd() + '/input/FY/state2abbr.csv')
+    df_state = df_state[['State', 'Postal']]
+    df_all = pd.merge(df, df_state, left_on='State/Province', right_on='State', how='left')
+    df_all.drop('State', axis=1, inplace=True)
+    df_all.rename(columns={'Property Name' : 'Building Number',
+                           'City/Municipality' : 'City',
+                           'State/Province' : 'State',
+                           'Postal': 'StateAbbr',
+                           'Postal Code': 'zipcode'}, inplace=True)
+    df_stationlookup = pd.read_csv(homedir + 'weatherinput/Weather Station Mapping.csv')
+    df_stationlookup = df_stationlookup[['City', 'ICAO', 'StateAbbr', 'Lat', 'Long']]
+    step = 50
+    dfs = [df_all[i * step: (i + 1) * step] for i in range(0, len(df_all)/step)]
+    for i in range(len(dfs))[:1]:
+        print i, len(dfs[i])
+        starttime = time.time()
+        dfs[i]['Weather Station'] = dfs[i].apply(lambda r: getICAO(r['StateAbbr'], r['City'], r['Street Address'], r['zipcode'], df_stationlookup), axis=1)
+        endtime = time.time()
+        # FIXME: print non- "Not Found" result count
+        dfs[i].to_csv(homedir + 'location_info_{0}.csv'.format(i), index=False)
+        print endtime-starttime
+    print 'end'
+
+# generate building station lookup table from state and city
+def building_to_station_fromlocation():
+    df_location = pm_static_info_2_station()
+    '''
+    df = pd.read_csv(os.getcwd() + '/csv_FY/filter_bit/fis/indicator_all.csv')
+    df = df[df['good_area'] == 1]
+    df = df[['Building Number']]
+    df_all = pd.merge(df, df_location, on='Building Number', how='left')
+    print df_all.head()
+    df_all.to_csv(homedir + 'building_station_lookup_loc.csv', index=False)
+    '''
+    return
 
 def building_to_station():
     df = pd.read_csv(os.getcwd() + '/csv_FY/filter_bit/fis/indicator_all.csv')
@@ -592,7 +692,7 @@ def building_to_station():
     #print '#{0}#'.format(station_info.iloc[60, 1])
     station_info = station_info[station_info['Weather Station'].isin(good_station)]
     station_info = station_info[station_info['Building Number'].isin(good_building)]
-    print station_info.head()
+    print 'number of building with station {0}'.format(len(station_info))
     station_info.to_csv(homedir + 'building_station_lookup.csv', index=False)
 
 # read building_station lookup table to pair list
@@ -601,8 +701,8 @@ def read_building_weather(filename, id_col, weather_col):
     return zip(df[id_col].tolist(), df[weather_col].tolist())
 
 def sep_dd(kind, low, high):
-    files_dd = [homedir + 'weatherData_{1}_itg_{0}F.csv'.format(i,
-                                                                kind)\
+    print 'start separating degree day'
+    files_dd = [homedir + 'degreeday/{1}_itg_{0}F.csv'.format(i, kind)\
                 for i in range(low, high)]
     keys = ['{0}F'.format(x) for x in range(low, high)]
     dfs_dd = [pd.read_csv(f) for f in files_dd]
@@ -624,8 +724,10 @@ def sep_dd(kind, low, high):
         df_s = df_s[re_order_col]
         df_s.to_csv(homedir + 'station_dd/{0}_{1}.csv'.format(s, kind),
                     index=False)
+    print 'end separating degree day'
 
 def sep_temp():
+    print 'start separating temperature'
     df_temp = pd.read_csv(homedir + 'weatherData_meanTemp.csv')
     col_time = df_temp.iloc[:, 0]
     stations = list(df_temp)[1:]
@@ -640,6 +742,7 @@ def sep_temp():
         df_s = df_s[re_order_col]
         df_s.to_csv(homedir + 'station_temp/{0}.csv'.format(s),
                     index=False)
+    print 'end separating temperature'
 
 def read_mean_temp(s):
     df = pd.read_csv(homedir + 'station_temp/{0}.csv'.format(s))
@@ -666,15 +769,18 @@ def process_weatherfile():
     # excel2csv()
 
     # check_data()
+    # union_weatherinput()
     # get_mean_temp()
     # calculate_dd()
-    sep_dd('HDD', 40, 81)
-    sep_dd('CDD', 40, 81)
+    # sep_dd('HDD', 40, 81)
+    # sep_dd('CDD', 40, 81)
     # sep_temp()
 
     # building_to_station()
+    building_to_station_fromlocation() # need Shilpi's file
     # join_building_temp()
     # plot_building_temp()
+    return
 
 def calculate_dd():
     for base in range(40, 81):
@@ -831,12 +937,7 @@ def plot_temp_fit(df_all, basetemp, b, s, kind, theme, base_load):
     P.savefig(os.getcwd() + '/plot_FY_weather/temp_energy/{2}/{0}_{1}.png'.format(b, s, theme), dpi = 150)
     plt.close()
     
-def calculate_dd_energy_regression():
-    kind = 'HDD'
-    bs_pair = read_building_weather('building_station_lookup.csv',
-                                    'Building Number', 'Weather Station')
-    study_set = get_gsalink_set()
-    bs_pair = [x for x in bs_pair if x[0] in study_set]
+def calculate_dd_energy_regression(kind, bs_pair):
     counter = 0
     bs = []
     ss = []
@@ -898,6 +999,9 @@ def plot_saving_two(theme, kind):
                                                              theme))
     filelist_2 = glob.glob('{0}saving_2015/{1}/*.csv'.format(homedir,
                                                              theme))
+    df_summary = pd.read_csv(homedir +
+                             '{0}_regression_fuel.csv'.format(kind))
+    df_summary.set_index('Building Number', inplace=True)
     if kind == 'HDD':
         c1 = 'brown'
         c2 = 'lightsalmon'
@@ -914,6 +1018,11 @@ def plot_saving_two(theme, kind):
         filename_1 = f1[f1.rfind('/') + 1:]
         b_1 = filename_1[:8]
         s_1 = filename_1[9: 13]
+        k_1 = df_summary.ix[b_1, 'k']
+        if k_1 == 0:
+            continue
+        r = df_summary.ix[b_1, 'r']
+        r2 = round(r * r, 3)
         print (b_1, s_1)
         x_1 = df_1['month']
         y1_1 = df_1[theme]
@@ -947,7 +1056,7 @@ def plot_saving_two(theme, kind):
                           facecolor='orange', alpha=0.5,
                           interpolate=True)
         ax_1.legend([line1_1, line2_1], 
-                    ['Actual {1} use in {0}'.format(2014, title_dict[theme]), '\n'.join(tw.wrap('{1} use given before 2013 habits but {0} weather'.format(2015, title_dict[theme]), wrapwidth))], loc=location)
+                    ['Actual {1} use in {0}'.format(2014, title_dict[theme]), '\n'.join(tw.wrap('{1} use given before 2013 habits but {0} weather'.format(2014, title_dict[theme]), wrapwidth))], loc=location)
         line1_2, = ax_2.plot(x_2, y1_2, c=c1, ls='-', lw=2, marker='o')
         line2_2, = ax_2.plot(x_2, y2_2, c=c2, ls='-', lw=2, marker='o')
         ax_2.fill_between(x_2, y1_2, y2_2, where=y2_2 >= y1_2,
@@ -957,15 +1066,15 @@ def plot_saving_two(theme, kind):
                           facecolor='orange', alpha=0.5,
                           interpolate=True)
         ax_2.legend([line1_2, line2_2], 
-                    ['Actual {1} use in {0}'.format(2014, title_dict[theme]), '\n'.join(tw.wrap('{1} use given before 2013 habits but {0} weather'.format(2015, title_dict[theme]), wrapwidth))], loc=location)
+                    ['Actual {1} use in {0}'.format(2015, title_dict[theme]), '\n'.join(tw.wrap('{1} use given before 2013 habits but {0} weather'.format(2015, title_dict[theme]), wrapwidth))], loc=location)
         if save_percent_1 > 0:
-            ax_1.set_title('{2} Savings Plot {0} vs before 2013, {1}% less'.format(2014, save_percent_1, title_dict[theme]))
+            ax_1.set_title('{2} Savings Plot {0} vs before 2013, {1}% less, R^2: {3}'.format(2014, save_percent_1, title_dict[theme], r2))
         else:
-            ax_1.set_title('{2} Savings Plot {0} vs before 2013, {1}% more'.format(2014, abs(save_percent_1), title_dict[theme]))
+            ax_1.set_title('{2} Savings Plot {0} vs before 2013, {1}% more R^2: {3}'.format(2014, abs(save_percent_1), title_dict[theme], r2))
         if save_percent_2 > 0:
-            ax_2.set_title('{2} Savings Plot {0} vs before 2013, {1}% less'.format(2015, save_percent_2, title_dict[theme]))
+            ax_2.set_title('{2} Savings Plot {0} vs before 2013, {1}% less R^2: {3}'.format(2015, save_percent_2, title_dict[theme], r2))
         else:
-            ax_2.set_title('{2} Savings Plot {0} vs before 2013, {1}% more'.format(2015, abs(save_percent_2), title_dict[theme]))
+            ax_2.set_title('{2} Savings Plot {0} vs before 2013, {1}% more R^2: {3}'.format(2015, abs(save_percent_2), title_dict[theme], r2))
         plt.xticks(range(1, 13))
         xticklabels = [calendar.month_abbr[m] for m in range(1, 13)]
         plt.setp(ax_2, xticklabels=xticklabels)
@@ -983,6 +1092,9 @@ def plot_saving(year, theme, kind):
     sns.set_style("white")
     sns.set_context("talk", font_scale=1.5)
     filelist = glob.glob('{0}saving_{1}/{2}/*.csv'.format(homedir, year, theme))
+    df_summary = pd.read_csv(homedir +
+                             '{0}_regression_fuel.csv'.format(kind))
+    df_summary.set_index('Building Number', inplace=True)
     if kind == 'HDD':
         c1 = 'brown'
         c2 = 'lightsalmon'
@@ -994,6 +1106,8 @@ def plot_saving(year, theme, kind):
         filename = f[f.rfind('/') + 1:]
         b = filename[:8]
         s = filename[9: 13]
+        r = df_summary.ix[b, 'r']
+        r2 = round(r * r, 3)
         print (filename, b, s)
         x = df['month']
         y1 = df[theme]
@@ -1026,9 +1140,9 @@ def plot_saving(year, theme, kind):
         plt.xlim((1, 12))
         plt.ylim((0, max(y1.max(), y2.max()) * 1.1))
         if save_percent > 0:
-            plt.title('{2} Savings Plot {0} vs before 2013, {1}% less'.format(year, save_percent, title_dict[theme]))
+            plt.title('{2} Savings Plot {0} vs before 2013, {1}% less, R^2: {3}'.format(year, save_percent, title_dict[theme], r2))
         else:
-            plt.title('{2} Savings Plot {0} vs before 2013, {1}% more'.format(year, abs(save_percent), title_dict[theme]))
+            plt.title('{2} Savings Plot {0} vs before 2013, {1}% more, R^2: {3}'.format(year, abs(save_percent), title_dict[theme], r2))
         plt.suptitle('Building {0}, Station {1}'.format(b, s))
         #plt.xlabel('{0} Deg F'.format(kind))
         plt.ylabel(ylabel_dict[theme])
@@ -1042,10 +1156,13 @@ def join_regression_indi():
     df_cdd = pd.read_csv(homedir + 'CDD_regression.csv')
     df_indi = pd.read_csv(os.getcwd() + \
                           '/csv_FY/filter_bit/fis/indicator_all_fuel.csv')
+    # 'None (all electric?)' and 'Chilled Water' to be taken out for
+    # electricity plot
+    # 'Gas Only', the set used for gas plot
     cols = ['Building Number'] + [c for c in list(df_indi) if \
-                                  ('heat_oil_steam' in c) or \
+                                  ('None (all electric?)' in c) or \
                                   ('Chilled Water' in c) or \
-                                  ('Gas' in c)]
+                                  ('Gas Only' in c)]
     df_indi = df_indi[cols]
     print cols
     df_hdd_fuel = pd.merge(df_hdd, df_indi, on='Building Number',
@@ -1061,39 +1178,35 @@ def join_regression_indi():
 
 # FIXME: not always set w, h right
 def plot_stat_regression():
-    w = 5
-    h = 6
-    sns.mpl.rc("figure", figsize=(w, h))
     sns.set_style("white")
     sns.set_palette("Set2")
     sns.set_context("talk", font_scale=1.0)
     my_dpi = 300
 
+    f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
     df = pd.read_csv(homedir + 'CDD_regression_fuel.csv')
-    df = df[df['Chilled Water'] == 0]
-    sns.boxplot(y='r2', data=df)
-    plt.ylabel('R square')
-    plt.title('Electricity - CDD regression distribution')
-    plt.suptitle('No chilled water (n = {0})'.format(len(df)))
-    #plt.show()
-    P.savefig(os.getcwd() + '/plot_FY_weather/summary/CDD_regression.png', dpi = my_dpi, figsize = (w * 20/my_dpi, h * 20/my_dpi))
-    plt.clf()
-
-    sns.mpl.rc("figure", figsize=(w, h))
-    df_2 = pd.read_csv(homedir + 'HDD_regression_fuel.csv')
-    df_2 = df_2[df_2['heat_oil_steam'] == 0]
-    df_2 = df_2[df_2['heat_oil_steam_12'] == 0]
-    sns.boxplot(x='heat_oil_steam', y='r2', data=df_2)
-    plt.ylabel('R square')
-    plt.title('Gas - HDD regression distribution')
-    plt.suptitle('Gas Heating Only (n = {0})'.format(len(df_2)))
-    #plt.show()
-    P.savefig(os.getcwd() + '/plot_FY_weather/summary/HDD_regression.png', dpi = my_dpi, figsize = (w * 20/my_dpi, h * 20/my_dpi))
-    plt.clf()
+    df = df[df['Chilled Water_10'] == 0]
+    df = df[df['Chilled Water_12'] == 0]
+    df = df[df['None (all electric?)_10'] == 0]
+    df = df[df['None (all electric?)_12'] == 0]
+    df2 = pd.read_csv(homedir + 'HDD_regression_fuel.csv')
+    df2 = df2[df2['Gas Only_10'] == 1]
+    df2 = df2[df2['Gas Only_12'] == 1]
+    sns.boxplot(y='r2', data=df, ax=ax1)
+    sns.boxplot(y='r2', data=df2, ax=ax2)
+    ax1.set_ylabel('R square')
+    ax1.set_title('Electricity - CDD regression distribution\n' + \
+                  'No district chilled water no all electric building \n(n = {0})'.format(len(df)))
+    ax2.set_title('Gas - HDD regression distribution\n' + \
+                  'Gas Heating Only \n(n = {0})'.format(len(df2)))
+    ax2.set_ylabel('')
+    P.savefig(os.getcwd() + '/plot_FY_weather/summary/regression.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
+    plt.close()
+    print 'end'
 
 def plot_dd_energy_byyear(kind, theme, cutoff):
     sns.set_style("white")
-    sns.set_context("talk", font_scale=0.9)
+    sns.set_context("talk", font_scale=1.0)
     df_reg = pd.read_csv(homedir + '{0}_regression.csv'.format(kind))
     df_reg['r2'] = df_reg['r'].map(lambda x: x * x)
     df_reg = df_reg[df_reg['r2'] >= cutoff]
@@ -1103,8 +1216,14 @@ def plot_dd_energy_byyear(kind, theme, cutoff):
                 format(homedir, kind, b, 
                        df_reg_idx.ix[b, 'Weather Station']) \
                 for b in bs]
+    if kind == 'HDD':
+        colors = ['lightpink', 'deeppink', 'lightskyblue', 'navy']
+    else:
+        colors = ['lightsalmon', 'brown', 'aquamarine', 'teal']
     for f in filelist:
         df = pd.read_csv(f)
+        if df[theme].sum() == 0:
+            continue
         filename = f[f.rfind('/') + 1:]
         b = filename[4: 12]
         s = filename[13: 17]
@@ -1119,8 +1238,10 @@ def plot_dd_energy_byyear(kind, theme, cutoff):
         elif kind == 'HDD':
             df[t_base] = df[t_base] * (-1.0)
             sns.set_palette(sns.color_palette('Oranges'))
-        g = sns.lmplot(x=t_base, y=theme, hue='year', col='GSALink rollout', data=df, fit_reg=True, size=4, aspect=1)
-        #plt.title('{0}-{1} plot\nBuilding {2}, Station {3}'.format(kind, title_dict[theme], b, s))
+        g = sns.lmplot(x=t_base, y=theme, hue='year', data=df,
+                       palette=sns.color_palette(colors),
+                       fit_reg=True, size=4, aspect=1)
+        plt.title('Building {0}, Station {1}, base {2}'.format(b, s, t_base))
         plt.xlabel('{0} Deg F'.format(kind))
         plt.ylabel(ylabel_dict[theme])
         if kind == 'HDD':
@@ -1128,8 +1249,7 @@ def plot_dd_energy_byyear(kind, theme, cutoff):
         else:
             plt.xlim((0, df[t_base].max()))
         plt.ylim((0, df[theme].max() * 1.1))
-
-        P.savefig(os.getcwd() + '/plot_FY_weather/{0}_{1}/{2}_{3}.png'.format(kind, theme, b, s), dpi = 150)
+        P.savefig(os.getcwd() + '/plot_FY_weather/{0}_{1}/{2}_{3}.png'.format(kind, theme, b, s), dpi = 300)
         plt.close()
 
 def saving_summary(kind, theme):
@@ -1161,39 +1281,38 @@ def saving_summary(kind, theme):
     df_all.to_csv(homedir + '{0}_saving_summary.csv'.format(kind),
                   index=False)
 
-def main():
-    cutoff = -0.1
-    saving_summary('CDD', 'eui_gas')
-    '''
-    for year in [2014, 2015]:
-        #calculate_savings('eui_elec', 'CDD', cutoff, year)
-        plot_saving(year, 'eui_elec', 'CDD')
-    '''
-    '''
-    for year in [2014, 2015]:
-        calculate_savings('eui_gas', 'HDD', cutoff, year)
-        plot_saving(year, 'eui_gas', 'HDD')
-    plot_dd_energy_byyear('HDD', 'eui_gas', cutoff)
-    plot_dd_energy_byyear('CDD', 'eui_elec', cutoff)
-    '''
-    # plot_stat_regression()
-    # join_regression_indi()
-    # plot_saving_two('eui_elec', 'CDD')
-
-    '''
+def process_gsalink():
     bs_pair = read_building_weather('building_station_lookup.csv',
                                     'Building Number', 'Weather Station')
     study_set = get_gsalink_set()
     bs_pair = [x for x in bs_pair if x[0] in study_set]
+    cutoff = -0.1 # no cutoff limitation for R square
+    '''
     for (b, s) in bs_pair:
         join_dd_temp_energy(b, s, 'CDD')
         join_dd_temp_energy(b, s, 'HDD')
+    calculate_dd_energy_regression('HDD', bs_pair)
+    calculate_dd_energy_regression('CDD', bs_pair)
+    saving_summary('CDD', 'eui_gas')
+    saving_summary('HDD', 'eui_elec')
+    join_regression_indi()
+    plot_stat_regression()
+    for year in [2014, 2015]:
+        calculate_savings('eui_elec', 'CDD', cutoff, year)
+        calculate_savings('eui_gas', 'HDD', cutoff, year)
+    for year in [2014, 2015]:
+        plot_saving(year, 'eui_elec', 'CDD')
+        plot_saving(year, 'eui_gas', 'HDD')
+    plot_saving_two('eui_elec', 'CDD')
+    plot_saving_two('eui_gas', 'HDD')
+    plot_dd_energy_byyear('CDD', 'eui_elec', cutoff)
+    plot_dd_energy_byyear('HDD', 'eui_gas', cutoff)
     '''
-    #building_to_station()
-    #process_weatherfile()
 
-    #calculate_dd_energy_regression()
-
+def main():
+    # BOOKMARK regenerate weather
+    process_weatherfile()
+    # process_gsalink()
 
     #calculate('eui_gas', 'kernel')
     #calculate('eui_elec', 'kernel')
