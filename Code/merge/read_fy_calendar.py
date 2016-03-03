@@ -101,11 +101,10 @@ def add_filter_bit():
         df_all.fillna(dict(zip([suf('good_elec'), suf('good_gas'),
                                 suf('good_water')], [0, 0, 0])),
                       inplace=True)
+        df_all.dropna(subset=['Building Number'], axis=0, inplace=True)
         df_all.to_csv(os.getcwd() +
                       '/csv_FY/filter_bit/{1}/eui_all_20{0}.csv'.format(label, calOrFiscal), index=False)
-        df_all.drop(['eui_elec', 'eui_gas', 'eui_oil', 'eui_water',
-                     'eui', 'Region No.', 'Fiscal Year', 'Cat',
-                     'eui_steam'], axis = 1, inplace=True)
+        df_all.drop(['eui_elec', 'eui_gas', 'eui_oil', 'eui_water', 'eui', 'Region No.', 'Fiscal Year', 'Cat', 'eui_steam'], axis = 1, inplace=True)
         df_all.to_csv(os.getcwd() +
                       '/csv_FY/filter_bit/{1}/eui_clean_20{0}.csv'.format(label, calOrFiscal), index=False)
         df.to_csv(os.getcwd() +
@@ -669,11 +668,11 @@ def main():
     #aggregate_allyear('fis')
     #aggregate_allyear('cal')
     #get_raw_concat()
-    #get_flow_reorg()
+    get_flow_reorg()
 
     #get_fuel_type(range(10, 16))
     #join_fueltype()
-    fuel_type_plot()
+    #fuel_type_plot()
 
     #euas2csv()
     #join_program()

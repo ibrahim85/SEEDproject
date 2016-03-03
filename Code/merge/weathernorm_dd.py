@@ -14,7 +14,7 @@ import re
 import textwrap as tw
 from geopy.geocoders import Nominatim
 from geopy.distance import vincenty
-import time.time()
+import time
 
 homedir = os.getcwd() + '/csv_FY/weather/'
 
@@ -541,6 +541,11 @@ def get_gsalink_set():
     df = pd.read_csv(os.getcwd() + '/input/FY/GSAlink 81 Buildings Updated 9_22_15.csv')
     return list(set(df['Building ID'].tolist()))
 
+# BOOKMARK
+def gsalink_action():
+    df_gsa = pd.read_csv(os.getcwd() + '/input/FY/Portfolio HPGB Dashboard_gsaLink.csv')
+    df_gsa = df_gsa['
+
 def calculate(theme, method):
     bs_pair = read_building_weather('building_station_lookup.csv',
                                     'Building Number', 'Weather Station')
@@ -611,8 +616,6 @@ def calculate(theme, method):
             plot_normal(df, theme, b, s)
             plot_normal_only(df, theme, b, s)
         '''
-from geopy.geocoders import Nominatim
-from geopy.distance import vincenty
 
 def getICAO(StateAbbr, City, Address, zipcode, df_lookup):
     df = df_lookup[df_lookup['StateAbbr'] == StateAbbr]
@@ -759,7 +762,6 @@ def join_building_temp():
         df.to_csv(homedir + 'energy_temp/{0}_{1}.csv'.format(b, s),
                   index=False)
 
-# BOOKMARK
 def plot_building_temp(b, s):
     print 'not implemented'
     return
@@ -777,7 +779,7 @@ def process_weatherfile():
     # sep_temp()
 
     # building_to_station()
-    building_to_station_fromlocation() # need Shilpi's file
+    # building_to_station_fromlocation() # need Shilpi's file
     # join_building_temp()
     # plot_building_temp()
     return
@@ -820,11 +822,6 @@ def opt_lireg(b, s, kind):
         results.append([slope, intercept, r_value, col])
     ordered_result = sorted(results, key=lambda x: x[2], reverse=True)
     print ordered_result[0]
-    '''
-    base_temp = ordered_result[0][3]
-    base_load = ordered_result[0][1]
-    plot_temp_fit(df_all, base_temp, b, s, kind, theme, base_load)
-    '''
     slope_opt, intercept_opt, r_opt, col_opt = ordered_result[0]
     plot_dd_fit(df_all, slope_opt, intercept_opt, r_opt, col_opt,
                 theme, kind, b, s)
@@ -1023,6 +1020,7 @@ def plot_saving_two(theme, kind):
             continue
         r = df_summary.ix[b_1, 'r']
         r2 = round(r * r, 3)
+        t_base = df_summary.ix[b_1, 'Base Temperature']
         print (b_1, s_1)
         x_1 = df_1['month']
         y1_1 = df_1[theme]
@@ -1082,7 +1080,7 @@ def plot_saving_two(theme, kind):
         ylimit = max(max(y1_1.max(), y2_2.max()), max(y1_2.max(),
                                                       y2_2.max()))
         plt.ylim((0, ylimit * 1.1))
-        plt.suptitle('Building {0}, Station {1}'.format(b_1, s_1))
+        plt.suptitle('Building {0}, Station {1}, Base {2}F'.format(b_1, s_1, t_base))
         ax_1.set_ylabel('kBtu/sq.ft.')
         ax_2.set_ylabel('kBtu/sq.ft.')
         P.savefig(os.getcwd() + '/plot_FY_weather/saving/{2}/{0}_{1}.png'.format(b_1, s_1, theme), dpi = 150)
@@ -1300,19 +1298,21 @@ def process_gsalink():
     for year in [2014, 2015]:
         calculate_savings('eui_elec', 'CDD', cutoff, year)
         calculate_savings('eui_gas', 'HDD', cutoff, year)
+    '''
+    plot_saving_two('eui_elec', 'CDD')
+    plot_saving_two('eui_gas', 'HDD')
+    '''
     for year in [2014, 2015]:
         plot_saving(year, 'eui_elec', 'CDD')
         plot_saving(year, 'eui_gas', 'HDD')
-    plot_saving_two('eui_elec', 'CDD')
-    plot_saving_two('eui_gas', 'HDD')
     plot_dd_energy_byyear('CDD', 'eui_elec', cutoff)
     plot_dd_energy_byyear('HDD', 'eui_gas', cutoff)
     '''
 
 def main():
-    # BOOKMARK regenerate weather
-    process_weatherfile()
-    # process_gsalink()
+    # process_weatherfile()
+    # join_building_temp()
+    process_gsalink()
 
     #calculate('eui_gas', 'kernel')
     #calculate('eui_elec', 'kernel')
