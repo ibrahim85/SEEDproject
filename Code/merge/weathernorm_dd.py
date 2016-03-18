@@ -13,16 +13,21 @@ import calendar
 import re
 import textwrap as tw
 from geopy.geocoders import Nominatim
-from geopy.distance import vincenty
+# from geopy.distance import vincenty
 import time
+import geocoder
+from vincenty import vincenty
 
 homedir = os.getcwd() + '/csv_FY/weather/'
+weatherdir = os.getcwd() + '/csv_FY/weather/'
+fldir = os.getcwd() + '/input/FL/'
 
 # label for plotting
 ylabel_dict = {'eui':'Electricity + Gas [kBtu/sq.ft]',
                'eui_elec':'Monthly Electricity [kBtu/sq.ft]',
                'eui_gas':'Monthly Natural Gas [kBtu/sq.ft]',
                'eui_oil':'Oil [Gallons/sq.ft]',
+               'eui_heat':'Gas+Oil+Steam [kBtu/sq.ft]',
                'all': 'Electricity-Gas [kBtu/sq.ft]',
                'eui_water':'Water [Gallons/sq.ft]'}
 
@@ -30,6 +35,7 @@ title_dict = {'eui':'Electricity + Gas',
               'eui_elec':'Electricity',
               'eui_gas':'Gas',
               'eui_oil':'Oil',
+              'eui_heat':'Gas+Oil+Steam',
               'all': 'Combined Electricity and Gas',
               'eui_water':'Water'}
 
@@ -70,14 +76,6 @@ def excel2csv():
 def check_data():
     filelist = glob.glob(homedir + 'weatherinput/*.csv')
     print filelist
-
-    def is_string(s):
-        # float, with possible trailing e-0x
-        pattern = re.compile('-?[0-9]{0,3}\.?[0-9]{0,20}(e-[0-9]{2})?$')
-        if type(s) is str:
-            return (not re.match(pattern, s))
-        else:
-            return False
 
     for f in filelist:
         df = pd.read_csv(f)
@@ -138,12 +136,72 @@ def union_weatherinput():
     assert(len(cols) == len(set(cols)))
     df_base.to_csv(homedir + 'weatherData_nonan.csv', index=False)
 
+def is_string(s):
+    # float, with possible trailing e-0x
+    pattern = re.compile('-?[0-9]{0,3}\.?[0-9]{0,20}(e-[0-9]{2})?$')
+    if type(s) is str:
+        return (not re.match(pattern, s))
+    else:
+        return False
+
+def check_data_single(f):
+    filename = f[f.rfind('/') + 1:]
+    s = filename[:4]
+    outfile = (weatherdir + 'weather_nostr/{0}'.format(filename))
+    df = pd.read_csv(f)
+    col_value = df[s].tolist()
+    str_value = [x for x in col_value if is_string(x)]
+    str_set = set(str_value)
+    if len(str_set) > 0:
+        print s, list(str_set)
+        df.replace(list(str_set), np.nan, inplace=True)
+    df.to_csv(outfile, index=False)
+
 def get_mean_temp():
     outfile = (homedir + 'weatherData_meanTemp.csv')
     print 'write mean temperature to {0}'.format(outfile)
     df = pd.read_csv(homedir + 'weatherData_nonan.csv')
     df.set_index(pd.DatetimeIndex(df['Unnamed: 0']), inplace=True)
     df.resample('M', how = 'mean').to_csv(outfile, index=True)
+
+def get_mean_temp_single(f):
+    filename = f[f.rfind('/') + 1:]
+    outfile = (weatherdir + 'station_temp/{0}'.format(filename))
+    print 'write mean temperature to {0}'.format(filename)
+    df = pd.read_csv(f)
+    df.drop('Timestamp', axis=1, inplace=True)
+    df.set_index(pd.DatetimeIndex(df['localTime']), inplace=True)
+    df = df.resample('M', how = 'mean').to_csv(outfile, index=True)
+    df2 = pd.read_csv(outfile)
+    df2['year'] = df2['Unnamed: 0'].map(lambda x: x[:4])
+    df2['month'] = df2['Unnamed: 0'].map(lambda x: int(x[5: 7]))
+    df2.rename(columns={'Unnamed: 0': 'timestamp'}, inplace=True)
+    cols = list(df2)
+    cols.remove('year')
+    cols.remove('month')
+    cols.insert(1, 'month')
+    cols.insert(1, 'year')
+    df2 = df2[cols]
+    df2.to_csv(outfile, index=False)
+
+def get_DD_itg_single(f, baselist, theme):
+    starttime = time.time()
+    df = pd.read_csv(f)
+    filename = f[f.rfind('/') + 1:]
+    s = filename[:4]
+    df.drop('Timestamp', axis=1, inplace=True)
+    df.set_index(pd.DatetimeIndex(df['localTime']), inplace=True)
+    df_hour = df.resample('H', how = 'mean')
+
+    for base in baselist:
+        base_hd = '{0}F'.format(base)
+        if theme == 'HDD':
+            df_hour[base_hd] = df_hour[s].map(lambda x: 0 if x >= base else base - x)
+        else:
+            df_hour[base_hd] = df_hour[s].map(lambda x: 0 if x <= base else x - base)
+    df_day = df_hour.resample('D', how = 'mean')
+    df_month = df_day.resample('M', how = 'sum').to_csv(weatherdir + 'station_dd/{0}_{1}.csv'.format(theme, s), index=True)
+    print 'calculating {0} for {1} in {2} s'.format(theme, s, round(time.time() - starttime, 2))
 
 def get_DD_itg(base, theme):
     df = pd.read_csv(homedir + 'weatherData_nonan.csv')
@@ -484,59 +542,6 @@ def plot_normal_only(df, theme, b, s):
     P.savefig(os.getcwd() + '/plot_FY_weather/{2}_norm/{0}_{1}.png'.format(b, s, theme), dpi=150)
     plt.close()
 
-def regression_hdd_changebase(df_all, theme):
-    fit_result = []
-    for t in range(55, 75):
-        df_temp = df_all.copy()
-        df_temp = df_temp['temperature'] < t
-        slope, intercept, r_value, p_value, std_err = stats.linregress(df_temp[t], df_temp[theme])
-        fit_result.append((slope, intercept, r_value, p_value, t))
-    best_fit = sorted(fit_result, key = lambda x: x[2])[0]
-    return best_fit
-
-def calculate_piecewise(theme):
-    b_list = ['FL0067ZZ', 'KY0045ZZ', 'MA0131ZZ', 'CO0039ZZ']
-    bs_pair = read_building_weather()
-    bs_pair = [x for x in bs_pair if x[0] in b_list]
-    # Oct 2012 to Sep 2013
-    df_temperature = read_temperature()
-    for b, s in bs_pair:
-        print (b, s)
-        df_energy = read_energy(b)[['Fiscal Year', 'year', 'month', 'eui_elec', 'eui_gas', 'eui']]
-        # read temperature and degree day
-        df_temp_dday = read_temp_dday(s)
-        df_all = pd.merge(df_energy, df_temp_dday, on='month', how = 'inner')
-        reg_result = regression_hdd_changebase(df_energy, df_temp_dday, theme)
-        t_change = reg[-1]
-        r_value = reg[2]
-        df_base = df_all.copy()
-        df_base = df_base[df_base['temperature'] > t_change]
-        baseload = df_base[theme].mean()
-        df_slope = df_all.copy()
-        df_slope = df_slope[df_slope['temperature'] < t_change]
-        sns.regplot(x = '{0}'.format(t_change), y = theme, data = df_slope)
-        plt.show()
-        plt.close()
-        print baseload
-    return
-
-def write_temp_dd():
-    bs_pair = read_building_weather()
-    stations = [x[1] for x in bs_pair]
-    print len(stations)
-    df_temp = read_temperature()
-    hdd_filelist = glob.glob(homedir + 'weatherData_HDD_itg_*')
-    dfs_hdd = [pd.read_csv(f) for f in hdd_filelist]
-    base_temp = [f[f.rfind('_') + 1: f.rfind('.')] for f in hdd_filelist]
-    length = len(dfs_hdd)
-    print length
-    for i in range(length):
-        s = stations[i]
-        df_s = df_temp[[s]].copy()
-        for base in base_temp:
-            df_s[base] = dfs_hdd[i][s]
-        df_s.to_csv(homedir + 'temp_dd/{0}.csv'.format(s))
-
 def get_gsalink_set():
     df = pd.read_csv(os.getcwd() + '/input/FY/GSAlink 81 Buildings Updated 9_22_15.csv')
     return list(set(df['Building ID'].tolist()))
@@ -544,7 +549,6 @@ def get_gsalink_set():
 # BOOKMARK
 def gsalink_action():
     df_gsa = pd.read_csv(os.getcwd() + '/input/FY/Portfolio HPGB Dashboard_gsaLink.csv')
-    df_gsa = df_gsa['
 
 def calculate(theme, method):
     bs_pair = read_building_weather('building_station_lookup.csv',
@@ -584,37 +588,8 @@ def calculate(theme, method):
         elif theme == 'eui_elec':
             plot_energy_temp_byyear(df_energy, df_t, df_h, df_c, theme, b, s,
                     'dot', 'cdd', True)
-        '''
-        '''
         plot_energy_temp_byyear(df_energy, df_t, df_h, df_c, theme,
                                 b, s, 'line', 'all', True)
-        df = df_energy
-        df['temperature'] = df_temperature[s].tolist()
-        if theme == 'eui_gas':
-            if method == 'hdd':
-                reg_list = [regression_hdd(t, s, df, theme) for t in [40, 45, 50, 55, 57, 60, 65]]
-                reg_list = sorted(reg_list, key = lambda x: x[2], reverse=True)
-                print reg_list
-                (slope, intercept, r_sqr, t) = reg_list[0]
-                print (round(r_sqr, 2), t)
-            elif method == 'temp':
-                t_min = df['temperature'].min()
-                t_max = df['temperature'].max()
-                dx = (t_max - t_min) / 10
-                reg = regression_gas_temp(b, s, df, theme)
-            elif method == 'kernel':
-                reg = regression_gas_kernel(b, s, df, theme)
-                df['t_norm'] = np.array((t_norm_list * 4)[9: 9+36])
-                df['e_norm'] = df.apply(lambda r: r[theme]/r['temperature']*r['t_norm'], axis=1)
-                plot_normal(df, theme, b, s)
-                plot_normal_only(df, theme, b, s)
-        else:
-            reg = regression_gas_kernel(b, s, df, theme)
-            # starting from october
-            df['t_norm'] = np.array((t_norm_list * 4)[9: 9+36])
-            df['e_norm'] = df.apply(lambda r: r[theme]/r['temperature']*r['t_norm'], axis=1)
-            plot_normal(df, theme, b, s)
-            plot_normal_only(df, theme, b, s)
         '''
 
 def getICAO(StateAbbr, City, Address, zipcode, df_lookup):
@@ -669,15 +644,15 @@ def pm_static_info_2_station():
 
 # generate building station lookup table from state and city
 def building_to_station_fromlocation():
-    df_location = pm_static_info_2_station()
-    '''
+    # BOOKMARK
+    df_location = pd.read_csv(homedir + 'master_table/building_stationAvailability.csv')
+    df_location = df_location[['Building Number', 'ICAO']]
     df = pd.read_csv(os.getcwd() + '/csv_FY/filter_bit/fis/indicator_all.csv')
     df = df[df['good_area'] == 1]
     df = df[['Building Number']]
     df_all = pd.merge(df, df_location, on='Building Number', how='left')
     print df_all.head()
     df_all.to_csv(homedir + 'building_station_lookup_loc.csv', index=False)
-    '''
     return
 
 def building_to_station():
@@ -699,8 +674,8 @@ def building_to_station():
     station_info.to_csv(homedir + 'building_station_lookup.csv', index=False)
 
 # read building_station lookup table to pair list
-def read_building_weather(filename, id_col, weather_col):
-    df = pd.read_csv(homedir + filename)
+def read_building_weather(path, id_col, weather_col):
+    df = pd.read_csv(path)
     return zip(df[id_col].tolist(), df[weather_col].tolist())
 
 def sep_dd(kind, low, high):
@@ -752,34 +727,73 @@ def read_mean_temp(s):
     return df
 
 def join_building_temp():
-    bs_pair = read_building_weather('building_station_lookup.csv',
-                                    'Building Number', 'Weather Station')
+    bs_pair = read_building_weather(homedir + 'master_table/building_stationAvailability.csv', 'Building Number', 'ICAO')
     for (b, s) in bs_pair:
         print (b, s)
         df_energy = read_energy(b)
+        df_energy['eui_heat'] = df_energy['eui_gas'] + \
+            df_energy['eui_oil'] + df_energy['eui_steam']
+        cols = list(df_energy)
+        cols.remove('eui_heat')
+        cols.insert(cols.index('eui_water'), 'eui_heat')
+        df_energy = df_energy[cols]
         df_temp = read_mean_temp(s)
-        df = pd.merge(df_energy, df_temp, how='inner', on=['year', 'month'])
+        df = pd.merge(df_energy, df_temp, how='inner', on=['year',
+                                                           'month'])
         df.to_csv(homedir + 'energy_temp/{0}_{1}.csv'.format(b, s),
                   index=False)
 
-def plot_building_temp(b, s):
-    print 'not implemented'
-    return
+def join_err_msg_cnt():
+    df = pd.read_csv(weatherdir + 'weatherinput/check_station_log.txt')
+    print df.head()
+    stations = df['ICAO'].tolist()
+    df.set_index('ICAO', inplace=True)
+    counts = []
+    for s in stations:
+        df_s = pd.read_csv(weatherdir + 'weatherinput/by_station/{0}.csv'.format(s))
+        df_s = df_s[df_s[s] == df.ix[s]['err_message']]
+        count = len(df_s)
+        print s, count
+        counts.append(count)
+    df['count'] = counts
+    print df
+    df.to_csv(weatherdir + 'weatherinput/station_errline_count.csv',
+              index=True)
 
-def process_weatherfile():
-    # slow, comment out once you have the output
-    # excel2csv()
+def process_single_stations():
+    filelist = glob.glob(weatherdir + 'weatherinput/by_station/*.csv')
+    length = len(filelist)
+    for i in range(length):
+        f = filelist[i]
+        print i
+        check_data_single(f)
+    join_err_msg_cnt()
 
-    # check_data()
-    # union_weatherinput()
-    # get_mean_temp()
-    # calculate_dd()
-    # sep_dd('HDD', 40, 81)
-    # sep_dd('CDD', 40, 81)
-    # sep_temp()
+def process_weatherfile(source):
+    if source == 'old':
+        # slow, comment out once you have the output
+        # excel2csv()
 
-    # building_to_station()
-    # building_to_station_fromlocation() # need Shilpi's file
+        # check_data()
+        # union_weatherinput()
+        # get_mean_temp()
+        calculate_dd()
+        sep_dd('HDD', 40, 81)
+        sep_dd('CDD', 40, 81)
+        sep_temp()
+
+        building_to_station()
+    else:
+        # process_single_stations()
+        filelist = glob.glob(weatherdir + 'weather_nostr/*.csv')
+        length = len(filelist)
+        baselist = range(40, 81)
+        for i in range(length):
+            f = filelist[i]
+            print i
+            get_mean_temp_single(f)
+            get_DD_itg_single(f, baselist, 'HDD')
+            get_DD_itg_single(f, baselist, 'CDD')
     # join_building_temp()
     # plot_building_temp()
     return
@@ -798,21 +812,9 @@ def join_dd_temp_energy(b, s, kind):
                       how='inner')
     df_all.to_csv(homedir + '/dd_temp_eng/{2}_{0}_{1}.csv'.format(b, s, kind), index=False)
 
-# kind: CDD, HDD
-def opt_lireg(b, s, kind):
-    df_eng_temp = pd.read_csv(homedir +
-                              'energy_temp/{0}_{1}.csv'.format(b, s))
-    df_dd = pd.read_csv(homedir + 
-                        'station_dd/{0}_{1}.csv'.format(s, kind))
-    df_all = pd.merge(df_eng_temp, df_dd, on=['year', 'month'],
-                      how='inner')
-    df_all = df_all[df_all['year'] < 2013]
+# kind: CDD, HDD, theme: 'eui_elec', 'eui_gas', 'eui_heat'
+def opt_lireg(b, s, df_all, kind, theme, status):
     dd_list = ['{0}F'.format(x) for x in range(40, 81)]
-    if kind == 'CDD':
-        theme = 'eui_elec'
-    else:
-        theme = 'eui_gas'
-
     results = []
     for col in dd_list:
         lean_x = df_all[col]
@@ -824,10 +826,11 @@ def opt_lireg(b, s, kind):
     print ordered_result[0]
     slope_opt, intercept_opt, r_opt, col_opt = ordered_result[0]
     plot_dd_fit(df_all, slope_opt, intercept_opt, r_opt, col_opt,
-                theme, kind, b, s)
+                theme, kind, b, s, status)
     return ordered_result[0]
 
-def plot_dd_fit(df_all, slope, intercept, r, xF, theme, kind, b, s):
+def plot_dd_fit(df_all, slope, intercept, r, xF, theme, kind, b, s,
+                status):
     x = df_all[xF]
     y = df_all[theme]
     xd = [0, x.max()]
@@ -843,11 +846,11 @@ def plot_dd_fit(df_all, slope, intercept, r, xF, theme, kind, b, s):
                 xytext = (x.max() * 0.05, y.max() * 0.95), fontsize=20)
     bx.plot(x, y, 'o', xd, yd, '-')
     plt.ylim((0, y.max() * 1.1))
-    plt.title('{0} - {1} Plot'.format(title_dict[theme], kind))
+    plt.title('{0} - {1} Plot, Base: {2}, {3} 2013'.format(title_dict[theme], kind, xF, status))
     plt.suptitle('Building {0}, Station {1}'.format(b, s))
     plt.xlabel('{0} Deg F'.format(kind))
     plt.ylabel(ylabel_dict[theme])
-    P.savefig(os.getcwd() + '/plot_FY_weather/dd_energy/{2}/{0}_{1}.png'.format(b, s, theme), dpi = 150)
+    P.savefig(os.getcwd() + '/plot_FY_weather/dd_energy/{2}/{0}_{1}_{3}.png'.format(b, s, theme, status), dpi = 150)
     plt.close()
 
 # s: station id
@@ -933,8 +936,9 @@ def plot_temp_fit(df_all, basetemp, b, s, kind, theme, base_load):
     plt.ylabel(ylabel_dict[theme])
     P.savefig(os.getcwd() + '/plot_FY_weather/temp_energy/{2}/{0}_{1}.png'.format(b, s, theme), dpi = 150)
     plt.close()
-    
-def calculate_dd_energy_regression(kind, bs_pair):
+
+# status: pre | post
+def calculate_dd_energy_regression(kind, theme, bs_pair, status):
     counter = 0
     bs = []
     ss = []
@@ -944,7 +948,15 @@ def calculate_dd_energy_regression(kind, bs_pair):
     bases = []
     for (b, s) in bs_pair:
         print counter
-        slope, intercept, r_value, basetemp = opt_lireg(b, s, kind)
+        df_all = pd.read_csv('{0}dd_temp_eng/{1}_{2}_{3}.csv'.format(homedir, kind, b, s))
+        if status == 'pre':
+            df_all = df_all[df_all['year'] < 2013]
+            # df_all = df_all[df_all['year'] == 2010]
+        else:
+            df_all = df_all[df_all['year'] > 2013]
+        slope, intercept, r_value, basetemp = opt_lireg(b, s, df_all,
+                                                        kind, theme,
+                                                        status)
         counter += 1
         bs.append(b)
         ss.append(s)
@@ -955,14 +967,15 @@ def calculate_dd_energy_regression(kind, bs_pair):
     summary = pd.DataFrame({'Building Number': bs, 'Weather Station':
                             ss, 'Base Temperature': bases, 'k':
                             slopes, 'b': intercepts, 'r': rs})
-    summary.to_csv(homedir + '{0}_regression.csv'.format(kind),
+    summary['R squared'] = summary['r'].map(lambda x: x * x)
+    summary.to_csv(homedir + \
+        '{0}_{1}_{2}_regression.csv'.format(kind, theme, status),
                    index=False)
 
 # calculate savings for 'year', 'cutoff': r square cutoff
 def calculate_savings(theme, kind, cutoff, year):
-    df_reg = pd.read_csv(homedir + '{0}_regression.csv'.format(kind))
-    df_reg['r2'] = df_reg['r'].map(lambda x: x * x)
-    df_reg = df_reg[df_reg['r2'] >= cutoff]
+    df_reg = pd.read_csv(homedir + '{0}_{1}_pre_regression.csv'.format(kind, theme))
+    df_reg = df_reg[df_reg['R squared'] >= cutoff]
     df_reg_idx = df_reg.set_index('Building Number')
     bs = df_reg['Building Number'].tolist()
     #print df_reg_idx.head()
@@ -979,13 +992,13 @@ def calculate_savings(theme, kind, cutoff, year):
         slope = df_reg_idx.ix[b, 'k']
         intercept = df_reg_idx.ix[b, 'b']
         t_base = str(df_reg_idx.ix[b, 'Base Temperature']) + 'F'
-        df = df[['Building Number', s, 'eui_elec', 'eui_gas', 'year',
-                 'month', t_base]]
+        df = df[['Building Number', s, 'eui_elec', 'eui_gas',
+                 'eui_heat', 'year', 'month', t_base]]
         print (slope, intercept, t_base)
         if kind == 'HDD':
-            df['eui_gas_hat'] = df.apply(lambda r: slope * r[t_base] + intercept if r[t_base] > 0 else r['eui_gas'], axis=1)
+            df[theme + '_hat'] = df.apply(lambda r: slope * r[t_base] + intercept if r[t_base] > 0 else r[theme], axis=1)
         else:
-            df['eui_elec_hat'] = df.apply(lambda r: slope * r[t_base] + intercept if r[t_base] > 0 else r['eui_elec'], axis=1)
+            df[theme + '_hat'] = df.apply(lambda r: slope * r[t_base] + intercept if r[t_base] > 0 else r[theme], axis=1)
         df.to_csv('{0}saving_{1}/{4}/{2}_{3}.csv'.format(homedir, year, b, s, theme), index=False)
     return
     
@@ -997,7 +1010,7 @@ def plot_saving_two(theme, kind):
     filelist_2 = glob.glob('{0}saving_2015/{1}/*.csv'.format(homedir,
                                                              theme))
     df_summary = pd.read_csv(homedir +
-                             '{0}_regression_fuel.csv'.format(kind))
+                             '{0}_{1}_pre_regression.csv'.format(kind, theme))
     df_summary.set_index('Building Number', inplace=True)
     if kind == 'HDD':
         c1 = 'brown'
@@ -1019,7 +1032,7 @@ def plot_saving_two(theme, kind):
         if k_1 == 0:
             continue
         r = df_summary.ix[b_1, 'r']
-        r2 = round(r * r, 3)
+        r2 = round(r * r, 2)
         t_base = df_summary.ix[b_1, 'Base Temperature']
         print (b_1, s_1)
         x_1 = df_1['month']
@@ -1083,7 +1096,7 @@ def plot_saving_two(theme, kind):
         plt.suptitle('Building {0}, Station {1}, Base {2}F'.format(b_1, s_1, t_base))
         ax_1.set_ylabel('kBtu/sq.ft.')
         ax_2.set_ylabel('kBtu/sq.ft.')
-        P.savefig(os.getcwd() + '/plot_FY_weather/saving/{2}/{0}_{1}.png'.format(b_1, s_1, theme), dpi = 150)
+        P.savefig(os.getcwd() + '/plot_FY_weather/saving/{2}/{0}_{1}.png'.format(b_1, s_1, theme), dpi = 150, bbox_inches='tight')
         plt.close()
 
 def plot_saving(year, theme, kind):
@@ -1149,9 +1162,11 @@ def plot_saving(year, theme, kind):
 
 # join HDD_regression and CDD regression with 
 # indicator_all for fuel type
-def join_regression_indi():
-    df_hdd = pd.read_csv(homedir + 'HDD_regression.csv')
-    df_cdd = pd.read_csv(homedir + 'CDD_regression.csv')
+def join_regression_indi(status):
+    df_hdd = pd.read_csv(homedir +
+                         'HDD_eui_gas_{0}_regression.csv'.format(status))
+    df_cdd = pd.read_csv(homedir +
+                         'CDD_eui_elec_{0}_regression.csv'.format(status))
     df_indi = pd.read_csv(os.getcwd() + \
                           '/csv_FY/filter_bit/fis/indicator_all_fuel.csv')
     # 'None (all electric?)' and 'Chilled Water' to be taken out for
@@ -1165,47 +1180,49 @@ def join_regression_indi():
     print cols
     df_hdd_fuel = pd.merge(df_hdd, df_indi, on='Building Number',
                            how='inner')
-    df_hdd_fuel['r2'] = df_hdd_fuel['r'] * df_hdd_fuel['r']
     df_cdd_fuel = pd.merge(df_cdd, df_indi, on='Building Number',
                            how='inner')
-    df_cdd_fuel['r2'] = df_cdd_fuel['r'] * df_cdd_fuel['r']
-    df_hdd_fuel.to_csv(homedir + 'HDD_regression_fuel.csv',
+    df_hdd_fuel.to_csv(homedir +
+                       '{0}_HDD_regression_fuel.csv'.format(status),
                        index=False)
-    df_cdd_fuel.to_csv(homedir + 'CDD_regression_fuel.csv',
+    df_cdd_fuel.to_csv(homedir +
+                       '{0}_CDD_regression_fuel.csv'.format(status),
                        index=False)
 
 # FIXME: not always set w, h right
-def plot_stat_regression():
+def plot_stat_regression(status):
     sns.set_style("white")
     sns.set_palette("Set2")
     sns.set_context("talk", font_scale=1.0)
     my_dpi = 300
 
     f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
-    df = pd.read_csv(homedir + 'CDD_regression_fuel.csv')
+    df = pd.read_csv(homedir +
+                     '{0}_CDD_regression_fuel.csv'.format(status))
     df = df[df['Chilled Water_10'] == 0]
     df = df[df['Chilled Water_12'] == 0]
     df = df[df['None (all electric?)_10'] == 0]
     df = df[df['None (all electric?)_12'] == 0]
-    df2 = pd.read_csv(homedir + 'HDD_regression_fuel.csv')
+    df2 = pd.read_csv(homedir + 
+                     '{0}_HDD_regression_fuel.csv'.format(status))
     df2 = df2[df2['Gas Only_10'] == 1]
     df2 = df2[df2['Gas Only_12'] == 1]
-    sns.boxplot(y='r2', data=df, ax=ax1)
-    sns.boxplot(y='r2', data=df2, ax=ax2)
+    sns.boxplot(y='R squared', data=df, ax=ax1)
+    sns.boxplot(y='R squared', data=df2, ax=ax2)
     ax1.set_ylabel('R square')
     ax1.set_title('Electricity - CDD regression distribution\n' + \
                   'No district chilled water no all electric building \n(n = {0})'.format(len(df)))
     ax2.set_title('Gas - HDD regression distribution\n' + \
                   'Gas Heating Only \n(n = {0})'.format(len(df2)))
     ax2.set_ylabel('')
-    P.savefig(os.getcwd() + '/plot_FY_weather/summary/regression.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
+    P.savefig(os.getcwd() + '/plot_FY_weather/summary/{0}_regression.png'.format(status), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
     plt.close()
     print 'end'
 
 def plot_dd_energy_byyear(kind, theme, cutoff):
     sns.set_style("white")
     sns.set_context("talk", font_scale=1.0)
-    df_reg = pd.read_csv(homedir + '{0}_regression.csv'.format(kind))
+    df_reg = pd.read_csv(homedir + 'pre_{0}_regression.csv'.format(kind))
     df_reg['r2'] = df_reg['r'].map(lambda x: x * x)
     df_reg = df_reg[df_reg['r2'] >= cutoff]
     df_reg_idx = df_reg.set_index('Building Number')
@@ -1215,9 +1232,11 @@ def plot_dd_energy_byyear(kind, theme, cutoff):
                        df_reg_idx.ix[b, 'Weather Station']) \
                 for b in bs]
     if kind == 'HDD':
-        colors = ['lightpink', 'deeppink', 'lightskyblue', 'navy']
+        # colors = ['lightpink', 'deeppink', 'darkmagenta'] + sns.color_palette('Blues', 3)
+        colors = sns.color_palette('RdPu', 3) + sns.color_palette('Blues_d', 3)
     else:
-        colors = ['lightsalmon', 'brown', 'aquamarine', 'teal']
+        colors = sns.color_palette('Oranges', 3) + sns.color_palette('Greens', 3)
+        # colors = ['lightsalmon', 'salmon', 'brown', 'red', 'aquamarine', 'teal', 'seagreen']
     for f in filelist:
         df = pd.read_csv(f)
         if df[theme].sum() == 0:
@@ -1229,7 +1248,8 @@ def plot_dd_energy_byyear(kind, theme, cutoff):
         t_base = str(df_reg_idx.ix[b, 'Base Temperature']) + 'F'
         df = df[['Building Number', s, 'eui_elec', 'eui_gas', 'year',
                  'month', t_base]]
-        df = df[df['year'] >= 2012]
+        df = df[df['year'] > 2009]
+        df['year'] = df['year'].map(int)
         df['GSALink rollout'] = df['year'].map(lambda x: 'Before' if x < 2014 else 'After')
         if kind == 'CDD':
             sns.set_palette(sns.color_palette('Blues'))
@@ -1276,47 +1296,342 @@ def saving_summary(kind, theme):
         dfs.append(df_year)
     df_all = reduce(lambda x, y: pd.merge(x, y, how='left', on='Building Number'), [df_dd] + dfs)
     print df_all.head()
-    df_all.to_csv(homedir + '{0}_saving_summary.csv'.format(kind),
+    df_all.to_csv(homedir + '{0}_{1}_saving_summary.csv'.format(kind,
+                                                                theme),
                   index=False)
+    
+def dd2temp(dd, t_base, kind):
+    if kind == 'HDD':
+        return t_base - dd/30.0
+    else:
+        return t_base + dd/30.0
+            
+def temp2dd(temp, t_base, kind):
+    if kind == 'HDD':
+        return (t_base - temp) * 30.0
+    else:
+        return (temp - t_base) * 30.0
+
+def test_dd2temp():
+    dd = 100
+    t_base = 50
+    kind = 'CDD'
+    print '({0}, {1}F, {2}) => {3}'.format(dd, t_base, kind,
+                                           dd2temp(dd, t_base, kind))
+
+def lean_one(b, s, k_hdd, k_cdd, base_gas, base_elec, t_base_hdd,
+             t_base_cdd, r2_hdd, r2_cdd, status, theme_h, theme_c):
+    y_upperlim = 14
+    x_leftlim = 22
+    x_rightlim = 90
+    base_elec = max(base_elec, 0)
+    base_gas = max(base_gas, 0)
+    df_hdd = pd.read_csv(homedir +
+                         'dd_temp_eng/HDD_{0}_{1}.csv'.format(b, s))
+    df_cdd = pd.read_csv(homedir +
+                         'dd_temp_eng/CDD_{0}_{1}.csv'.format(b, s))
+    if status == 'pre':
+        df_hdd = df_hdd[df_hdd['year'] < 2013]
+        df_cdd = df_cdd[df_cdd['year'] < 2013]
+    else:
+        df_hdd = df_hdd[df_hdd['year'] > 2013]
+        df_cdd = df_cdd[df_cdd['year'] > 2013]
+    hdd_base_header = '{0}F'.format(t_base_hdd)
+    cdd_base_header = '{0}F'.format(t_base_cdd)
+    print 'heating base temperature', hdd_base_header
+    df_hdd = df_hdd[['year', 'month', theme_h, s, hdd_base_header]]
+    df_cdd = df_cdd[['year', 'month', theme_c, cdd_base_header]]
+    df_hdd['cvt_temp_hdd'] = df_hdd[hdd_base_header].map(lambda x: dd2temp(x, t_base_hdd, 'HDD'))
+    df_cdd['cvt_temp_cdd'] = df_cdd[cdd_base_header].map(lambda x: dd2temp(x, t_base_cdd, 'CDD'))
+    df_hdd.rename(columns={hdd_base_header: hdd_base_header + '_HDD'},
+                  inplace=True)
+    df_cdd.rename(columns={cdd_base_header: cdd_base_header + '_CDD'},
+                  inplace=True)
+    # df_hdd.drop(hdd_base_header, axis=1, inplace=True)
+    # df_cdd.drop(cdd_base_header, axis=1, inplace=True)
+    df_plot = pd.merge(df_hdd, df_cdd, on=['year', 'month'],
+                       how='inner')
+    df_plot[theme_h + '_hat'] = df_plot[hdd_base_header + '_HDD'].map(lambda x: k_hdd * x + base_gas)
+    df_plot[theme_c + '_hat'] = df_plot[cdd_base_header + '_CDD'].map(lambda x: k_cdd * x + base_elec)
+    df_plot[theme_h + '_offset'] = \
+        df_plot.apply(lambda r: r[theme_h] + base_elec if
+                      r['cvt_temp_hdd'] < t_base_hdd else np.nan,
+                      axis=1)
+    df_plot[theme_c + '_offset'] = \
+        df_plot.apply(lambda r: r[theme_c] + base_gas if
+                      r['cvt_temp_cdd'] > t_base_cdd else np.nan,
+                      axis=1)
+    df_plot[theme_h + '_hat_offset'] = \
+        df_plot.apply(lambda r: r[theme_h + '_hat'] + base_elec if
+                      r['cvt_temp_hdd'] < t_base_hdd else np.nan,
+                      axis=1)
+    df_plot[theme_c + '_hat_offset'] = \
+        df_plot.apply(lambda r: r[theme_c + '_hat'] + base_gas if
+                      r['cvt_temp_cdd'] > t_base_cdd else np.nan,
+                      axis=1)
+    sns.set_style("white")
+    sns.set_palette("Set2")
+    sns.set_context("talk", font_scale=2)
+    bx = plt.axes()
+    x1 = df_plot['cvt_temp_hdd']
+    y1 = df_plot[theme_h + '_offset']
+    y1_hat = df_plot[theme_h + '_hat_offset']
+    sorted_x1y1hat = sorted(zip(x1, y1_hat), key=lambda x: x[0])
+    sorted_x1 = [p[0] for p in sorted_x1y1hat]
+    sorted_y1_hat = [p[1] for p in sorted_x1y1hat]
+    x2 = df_plot['cvt_temp_cdd']
+    y2 = df_plot[theme_c + '_offset']
+    y2_hat = df_plot[theme_c + '_hat_offset']
+    sorted_x2y2hat = sorted(zip(x2, y2_hat), key=lambda x: x[0])
+    sorted_x2 = [p[0] for p in sorted_x2y2hat]
+    sorted_y2_hat = [p[1] for p in sorted_x2y2hat]
+    xmin = min(x1.min(), x2.min())
+    xmax = max(x1.max(), x2.max())
+
+    bx = plt.axes()
+    gas_line_color = 'deeppink'
+    gas_mk_color = 'crimson'
+    elec_line_color = 'navy'
+    elec_mk_color = 'deepskyblue'
+    base_gas_color = 'orange'
+    base_elec_color = 'yellow'
+    plt.plot(x1, y1, 'o', markerfacecolor=gas_mk_color)
+    plt.plot(x2, y2, 'o', markerfacecolor=elec_mk_color)
+    plt.plot(sorted_x1, sorted_y1_hat, '-', color=gas_line_color)
+    bx.fill_between(sorted_x1, base_elec + base_gas, sorted_y1_hat, facecolor=gas_line_color, alpha=0.3)
+    plt.plot(sorted_x2, sorted_y2_hat, '-', color=elec_line_color)
+    bx.fill_between(sorted_x2, base_elec + base_gas, sorted_y2_hat, facecolor=elec_line_color, alpha=0.5)
+    plt.plot([xmin, xmax], [base_elec] * 2, color=base_elec_color)
+    bx.fill_between([xmin, xmax], 0, [base_elec] * 2, facecolor=base_elec_color, alpha=0.5)
+    plt.plot([xmin, xmax], [base_elec + base_gas] * 2, color=base_gas_color)
+    bx.fill_between([xmin, xmax], base_elec, [base_elec + base_gas] * 2, facecolor=base_gas_color, alpha=0.3)
+    print (round(r2_hdd, 2), round(r2_cdd, 2))
+    plt.title('Building {0}, {1} 2013\nHDD base {2}F (R^2: {4})\nCDD base {3}F(R^2: {5})'.format(b, status, t_base_hdd, t_base_cdd, round(r2_hdd, 2), round(r2_cdd, 2)))
+    plt.xlabel('Temperature Represented Degree Day [F]')
+    plt.ylabel('Monthly kBtu/sq.ft.')
+    plt.ylim((0, y_upperlim))
+    plt.xlim((x_leftlim, x_rightlim))
+    # plt.show()
+    P.savefig(os.getcwd() + '/plot_FY_weather/lean/{3}/{0}_{1}_{2}.png'.format(b, s, status, theme_h), dpi = 150, bbox_inches='tight')
+    plt.close()
+    return (xmin, xmax, y1.max(), y2.max())
+
+# joinkey is the field so that the returned lat lng could be joint to
+# the existing static info database
+def get_lat_long(joinkey, address):
+    g = geocoder.google(address)
+    if not (g.json['ok']):
+        print '{0},{1},{2}'.format(joinkey, 'Not Found', 'Not Found')
+    else:
+        latlng = g.latlng
+        print '{0},{1},{2}'.format(joinkey, latlng[0], latlng[1])
+
+def geocode_stat():
+    df = pd.read_csv(fldir + 'Building List.csv')
+    # df['geocoding_input'] = df.apply(lambda r: '{0} {1}'.format(r['Address'], r['City, State, Zip']), axis=1)
+    df['geocoding_input'] = df['City, State, Zip'].map(lambda x: x[x.find(',') + 2:])
+    df.to_csv(fldir + 'Building List_geoinput.csv', index=False)
+    addresses = list(set(df['geocoding_input'].tolist()))
+    length = len(addresses)
+    # for i in range(length):
+    #     address = addresses[i]
+    #     get_lat_long(address, address)
+
+def get_station():
+    names=['geocoding_input', 'Latitude', 'Longitude']
+    df = pd.read_csv(fldir + 'geocoding_log.txt', header=None,
+                     names=names)
+    result_dict = dict(zip(df['geocoding_input'].tolist(),
+                           [-1.0] * len(df)))
+    df2 = df.set_index('geocoding_input')
+    print df2.head()
+    df_lookup = pd.read_csv(weatherdir + \
+                            'weatherinput/Weather Station Mapping.csv')
+    for key in result_dict:
+        lat = df2.ix[key]['Latitude']
+        lng = df2.ix[key]['Longitude']
+        df_lookup['distance'] = df_lookup.apply(lambda r: vincenty((lat, lng), (r['Lat'], r['Long']), miles=True), axis=1)
+        min_distance = df_lookup['distance'].min()
+        df_temp = df_lookup[df_lookup['distance'] == min_distance]
+        result_dict[key] = (df_temp['ICAO'].tolist()[0], 
+                            df_temp['distance'].tolist()[0])
+        print result_dict[key]
+    # icaos = {k: v[0] for (k, v) in icaos.iteritems()}
+    # dists = {k: v[1] for (k, v) in icaos.iteritems()}
+    df['ICAO'] = df['geocoding_input'].map(lambda k: result_dict[k][0])
+    df['distance [mile]'] = df['geocoding_input'].map(lambda k: result_dict[k][1])
+    df.to_csv(fldir + 'address_station.csv', index=False)
+
+def join_geocode():
+    df_geo = pd.read_csv(fldir + 'address_station.csv')
+    df = pd.read_csv(fldir + 'Building List_geoinput.csv')
+    df_all = pd.merge(df, df_geo, how='left', on='geocoding_input')
+    df_all.to_csv(fldir + 'Building List_latlng.csv', index=False)
+
+def read_energy_fl():
+    df_lookup = pd.read_csv(fldir + 'file_sheet_buildingname.csv')
+    d = dict(zip(zip(df_lookup['filename'], df_lookup['sheetname']),
+                 df_lookup['building name']))
+    print d
+    filelist = glob.glob(fldir + 'excel_energy/*.xlsx')
+    for f in filelist[:1]:
+        filename = f[f.rfind('/') + 1:]
+        excel = pd.ExcelFile(f)
+        sheets = excel.sheet_names
+        for i in range(len(sheets))[:1]:
+            df = excel.parse(i)
+            df.info()
+            df = df[['Usage (kWh)']]
+            building = d[(filename, sheets[i])]
+            df['building name'] = building
+            df.to_csv(fldir + 'csv_energy/{0}.csv'.format(building),
+                      index=False)
+            print 'finish reading {0}'.format(building)
+
+def plot_lean_fl():
+    # geocode_stat()
+    # get_station()
+    # join_geocode()
+    read_energy_fl()
+    return
+
+def lean(bs_pair, theme_h, theme_c, cutoff):
+    df_pre_hdd = pd.read_csv(homedir + 'HDD_{0}_pre_regression.csv'.format(theme_h))
+    df_post_hdd = pd.read_csv(homedir + 'HDD_{0}_post_regression.csv'.format(theme_h))
+    df_pre_cdd = pd.read_csv(homedir + 'CDD_{0}_pre_regression.csv'.format(theme_c))
+    df_post_cdd = pd.read_csv(homedir + 'CDD_{0}_post_regression.csv'.format(theme_c))
+    df_upperlim = pd.read_csv(homedir + 'upper_limit_summary.csv')
+    df_pre_hdd.set_index('Building Number', inplace=True)
+    df_pre_cdd.set_index('Building Number', inplace=True)
+    df_post_hdd.set_index('Building Number', inplace=True)
+    df_post_cdd.set_index('Building Number', inplace=True)
+    df_upperlim.set_index('Building Number', inplace=True)
+    bs_pre = []
+    ss_pre = []
+    bs_post = []
+    ss_post = []
+    y1max_pre = []
+    y2max_pre = []
+    y1max_post = []
+    y2max_post = []
+    xmins_pre = []
+    xmaxs_pre = []
+    xmins_post = []
+    xmaxs_post = []
+    y_upperlim = 5
+    for (b, s) in bs_pair:
+        print (b, s)
+        k_hdd = df_pre_hdd.ix[b, 'k']
+        k_cdd = df_pre_cdd.ix[b, 'k']
+        base_gas = df_pre_hdd.ix[b, 'b']
+        base_elec = df_pre_cdd.ix[b, 'b']
+        t_base_hdd = df_pre_hdd.ix[b, 'Base Temperature']
+        t_base_cdd = df_pre_cdd.ix[b, 'Base Temperature']
+        r2_hdd = df_pre_hdd.ix[b, 'R squared']
+        r2_cdd = df_pre_cdd.ix[b, 'R squared']
+        if (k_hdd == 0.0 or k_cdd == 0.0): 
+            print 'Zero energy consumption error'
+            continue
+        if (r2_hdd < cutoff or r2_cdd < cutoff):
+            print 'low R squared: r2_hdd = {0}, r2_cdd = {1}'.format(r2_hdd, r2_cdd)
+            continue
+        # y_upperlim = df_upperlim.ix[b, 'y_upperlim']
+        xmin, xmax, y1max, y2max = lean_one(b, s, k_hdd, k_cdd,
+                                            base_gas, base_elec,
+                                            t_base_hdd, t_base_cdd,
+                                            r2_hdd, r2_cdd, 'pre',
+                                            theme_h, theme_c)
+        bs_pre.append(b)
+        ss_pre.append(s)
+        y1max_pre.append(y1max)
+        y2max_pre.append(y2max)
+        xmins_pre.append(xmin)
+        xmaxs_pre.append(xmax)
+        k_hdd = df_post_hdd.ix[b, 'k']
+        k_cdd = df_post_cdd.ix[b, 'k']
+        base_gas = df_post_hdd.ix[b, 'b']
+        base_elec = df_post_cdd.ix[b, 'b']
+        t_base_hdd = df_post_hdd.ix[b, 'Base Temperature']
+        t_base_cdd = df_post_cdd.ix[b, 'Base Temperature']
+        r2_hdd = df_post_hdd.ix[b, 'R squared']
+        r2_cdd = df_post_cdd.ix[b, 'R squared']
+        if (k_hdd == 0.0 or k_cdd == 0.0): 
+            print 'Zero energy consumption error'
+            continue
+        if (r2_hdd < 0.5 or r2_cdd < 0.5):
+            print 'low R squared: r2_hdd = {0}, r2_cdd = {1}'.format(r2_hdd, r2_cdd)
+            continue
+        xmin, xmax, y1max, y2max = lean_one(b, s, k_hdd, k_cdd,
+                                            base_gas, base_elec,
+                                            t_base_hdd, t_base_cdd,
+                                            r2_hdd, r2_cdd, 'post',
+                                            theme_h, theme_c)
+        bs_post.append(b)
+        ss_post.append(s)
+        y1max_post.append(y1max)
+        y2max_post.append(y2max)
+        xmins_post.append(xmin)
+        xmaxs_post.append(xmax)
+    # # run it once to generate plotting upper bound
+    # df1 = pd.DataFrame({'Building Number': bs_pre, 
+    #                     'Weather Station': ss_pre,
+    #                     'pre plot xmin': xmins_pre, 
+    #                     'pre plot xmax': xmaxs_pre, 
+    #                     'pre HDD plot upper limit': y1max_pre, 
+    #                     'pre CDD plot upper limit': y2max_pre})
+    # df2 = pd.DataFrame({'Building Number': bs_post, 
+    #                     'Weather Station': ss_post,
+    #                     'post plot xmin': xmins_post, 
+    #                     'post plot xmax': xmaxs_post, 
+    #                     'post HDD plot upper limit': y1max_post, 
+    #                     'post CDD plot upper limit': y2max_post})
+    # df_all = pd.merge(df1, df2, on=['Building Number', 
+    #                                 'Weather Station'], how='outer')
+    # df_all.to_csv(homedir + 'upper_limit_summary.csv', index=False)
+    return
 
 def process_gsalink():
-    bs_pair = read_building_weather('building_station_lookup.csv',
-                                    'Building Number', 'Weather Station')
+    bs_pair = read_building_weather(homedir + 'master_table/building_stationAvailability.csv', 'Building Number', 'ICAO')
     study_set = get_gsalink_set()
     bs_pair = [x for x in bs_pair if x[0] in study_set]
     cutoff = -0.1 # no cutoff limitation for R square
-    '''
-    for (b, s) in bs_pair:
-        join_dd_temp_energy(b, s, 'CDD')
-        join_dd_temp_energy(b, s, 'HDD')
-    calculate_dd_energy_regression('HDD', bs_pair)
-    calculate_dd_energy_regression('CDD', bs_pair)
-    saving_summary('CDD', 'eui_gas')
-    saving_summary('HDD', 'eui_elec')
-    join_regression_indi()
-    plot_stat_regression()
-    for year in [2014, 2015]:
-        calculate_savings('eui_elec', 'CDD', cutoff, year)
-        calculate_savings('eui_gas', 'HDD', cutoff, year)
-    '''
-    plot_saving_two('eui_elec', 'CDD')
-    plot_saving_two('eui_gas', 'HDD')
-    '''
-    for year in [2014, 2015]:
-        plot_saving(year, 'eui_elec', 'CDD')
-        plot_saving(year, 'eui_gas', 'HDD')
-    plot_dd_energy_byyear('CDD', 'eui_elec', cutoff)
-    plot_dd_energy_byyear('HDD', 'eui_gas', cutoff)
-    '''
+    # for (b, s) in bs_pair:
+    #     join_dd_temp_energy(b, s, 'CDD')
+    #     join_dd_temp_energy(b, s, 'HDD')
+    # calculate_dd_energy_regression('HDD', 'eui_gas', bs_pair, 'pre')
+    # calculate_dd_energy_regression('HDD', 'eui_gas', bs_pair, 'post')
+    # calculate_dd_energy_regression('CDD', 'eui_elec', bs_pair, 'pre')
+    # calculate_dd_energy_regression('CDD', 'eui_elec', bs_pair, 'post')
+    # calculate_dd_energy_regression('HDD', 'eui_heat', bs_pair, 'pre')
+    # calculate_dd_energy_regression('HDD', 'eui_heat', bs_pair,
+    # 'post')
+    # join_regression_indi('pre')
+    # join_regression_indi('post')
+    # plot_stat_regression('pre')
+    # plot_stat_regression('post')
+    # plot_dd_energy_byyear('CDD', 'eui_elec', cutoff)
+    # plot_dd_energy_byyear('HDD', 'eui_gas', cutoff)
+    # for year in [2014, 2015]:
+    #     calculate_savings('eui_heat', 'HDD', cutoff, year)
+    #     calculate_savings('eui_elec', 'CDD', cutoff, year)
+    #     calculate_savings('eui_gas', 'HDD', cutoff, year)
+    # saving_summary('HDD', 'eui_gas')
+    # saving_summary('HDD', 'eui_heat')
+    # saving_summary('CDD', 'eui_elec')
+    # plot_saving_two('eui_elec', 'CDD')
+    # plot_saving_two('eui_gas', 'HDD')
+    # plot_saving_two('eui_heat', 'HDD')
+    lean(bs_pair, 'eui_gas', 'eui_elec', 0.5)
+    # lean(bs_pair, 'eui_heat', 'eui_elec', 0.0)
 
 def main():
-    # process_weatherfile()
-    # join_building_temp()
+    # process_weatherfile('new')
     process_gsalink()
+    # plot_lean_fl()
 
     #calculate('eui_gas', 'kernel')
     #calculate('eui_elec', 'kernel')
     #plot_building_temp()
-
     return
+
 main()

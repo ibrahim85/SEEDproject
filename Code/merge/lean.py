@@ -70,9 +70,11 @@ def getTotalTemp(rec):
 
 def getCDDHDD(minDate,maxDate,city,state,baseTempCdd,baseTempHdd):
         print 'in getCDDHDD'
-        stationId = getStationId(city,state)
+        # stationId = getStationId(city,state)
+        stationId = 'KDDC'
         if(stationId != 'NA'):
                 url =  "https://128.2.109.159/piwebapi/dataservers/s0-MYhSMORGkyGTe9bdohw0AV0lOLTYyTlBVMkJWTDIw/points?namefilter=*underground/*"+stationId+"*tempe*"
+                print url
                 r = requests.get(url, auth=('Weather', 'Weather1!@'), verify=False)
                 webId = r.json()['Items'][0]['WebId']
                 lowerRange = datetime.datetime.strptime(minDate,'%d %b %Y %H:%M:%S')
@@ -85,7 +87,9 @@ def getCDDHDD(minDate,maxDate,city,state,baseTempCdd,baseTempHdd):
                         else:
                                 upperRangeString = maxDate
                         recordUrl = "https://128.2.109.159/piwebapi/streams/"+webId+"/recorded?starttime='"+lowerRangeString+"'&endtime='"+upperRangeString+"'&maxcount=149000"
+                        print recordUrl
                         rec = requests.get(recordUrl, auth=('Weather', 'Weather1!@'), verify=False)
+                        print rec.json()['Items'][0]
                         avgDailyTempString = getTotalTemp(rec)
                         tempMonthlyDict[lowerRange.strftime('%b-%Y')] = avgDailyTempString
                         lowerRange = upperRange +  datetime.timedelta(seconds=1)
@@ -99,6 +103,7 @@ def getCDDHDD(minDate,maxDate,city,state,baseTempCdd,baseTempHdd):
         else:
                 return 'NA'
 
+getCDDHDD('01 Oct 2009 00:00:00','03 Oct 2009 00:00:00','city','state',65,65)
 
 def getBuildingDetails(host,pgresdbname,pgresuser,pgrespwd,buildingsnapshotid):
         conn_string = "host='"+str(host)+"' dbname='"+str(pgresdbname)+"' user='"+str(pgresuser)+"' password='"+str(pgrespwd)+"'"
