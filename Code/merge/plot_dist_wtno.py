@@ -5,7 +5,7 @@ import glob
 import read_fy_withcat as rd
 import matplotlib.pyplot as plt
 import pylab as P
-
+import textwrap as tw
 import seaborn as sns
 
 ylabel_dict = {'eui':'Electricity + Gas [kBtu/sq.ft]',
@@ -215,14 +215,29 @@ def plot_box_pro(theme, ylim, office):
         P.savefig(os.getcwd() + '/plot_FY_annual/box_program_{0}.png'.format(theme), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
     plt.close()
 
-def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
+def plot_box_vio(inputfile, program, prefix, theme, ylim, office,
+                 isOnly):
+    ylabel_dict = {'eui':'Electricity + Gas [kBtu/sq.ft]',
+                'eui_elec':'Electric EUI [kBtu/sq.ft]',
+                'eui_gas':'Gas EUI [kBtu/sq.ft]',
+                'eui_oil':'Oil EUI [Gallons/sq.ft]',
+                'eui_water':'WEUI [Gallons/sq.ft]'}
+
+    filter_dict = {'eui':'EUI Electric >= 12 and EUI Gas >= 3',
+                'eui_elec':'Electric >= 12',
+                'eui_gas':'EUI Gas >= 3',
+                'eui_water':'WEUI >= 5'}
+
+    title_dict = {'eui':'EUI', 'eui_elec':'Electric EUI',
+                'eui_gas':'Gas EUI', 'eui_oil':'Oil EUI',
+                'eui_water':'WEUI'}
+
     sns.set_style("white")
-    #sns.set_context("paper", font_scale=3)
-    sns.set_context("paper", font_scale=0.8)
-    sns.mpl.rc("figure", figsize=(10,5.5))
-    colors_1 = sns.husl_palette(7, l=.8, s=.9) + [(192.0/255,192.0/255,192.0/255)]
+    sns.set_context("talk", font_scale=1.2)
+    # sns.mpl.rc("figure", figsize=(10,5.5))
+    # colors_1 = sns.husl_palette(7, l=.8, s=.9) + [(192.0/255,192.0/255,192.0/255)]
     colors_2 = sns.husl_palette(7, l=.5, s=.9) + [(104.0/255,104.0/255,104.0/255)]
-    colors = [[x, y] for (x, y) in zip(colors_1, colors_2)]
+    colors = [[x, y] for (x, y) in zip(colors_2, colors_2)]
     colors = reduce(lambda x, y: x + y, colors)
     office_set = get_office()
 
@@ -231,6 +246,9 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
     #print ('input length', len(df))
     if office:
         df = df[df['Building Number'].isin(office_set)]
+        plotset = 'office'
+    else:
+        plotset = 'all'
 
     if theme == 'eui':
         df = df[df['eui_elec'] >= 12]
@@ -248,7 +266,8 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
 
     totalnum = len(set(df['Building Number'].tolist()))
     print totalnum
-    program = [x + '_only' for x in program]
+    if isOnly == 'only':
+        program = [x + '_only' for x in program]
     dfs = []
     sizes = []
     p_inc = []
@@ -261,14 +280,10 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
         df_yes['program'] = col
         df_no = df[df['None'] == 1]
         df_no['program'] = 'no_' + col
-        if office:
-            print 'office'
-        else:
-            print 'all building'
-        print theme
-        print col
-        print 'len of yes, {0}'.format(len(df_yes))
-        print 'len of no, {0}'.format(len(df_no))
+        # print theme
+        # print col
+        # print 'len of yes, {0}'.format(len(df_yes))
+        # print 'len of no, {0}'.format(len(df_no))
         dfs.append(df_no)
         dfs.append(df_yes)
         sizes.append(len(df_no))
@@ -278,8 +293,9 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
             percent_inprove = (df_no[theme].median() - df_yes[theme].median())/df_no[theme].median()
         p_inc.append(percent_inprove)
     program = [x for x in program if x not in emptys]
-    ps = [['', x] for x in program]
+    ps = [['\n'.join(tw.wrap(x, 20)), ''] for x in program]
     ps = reduce(lambda x, y: x + y, ps)
+    print ps
     df_all = pd.concat(dfs, ignore_index=True)
     df_plot = df_all[['program', theme]]
     p_inc = [[str(round(x, 4)*100) + '%', ''] for x in p_inc]
@@ -291,27 +307,27 @@ def plot_box_vio(inputfile, program, prefix, theme, ylim, office):
     st = sns.stripplot(x = 'program', y = theme, data = df_plot,
                        jitter=0.2, edgecolor='gray',
                        color = 'gray', size=0.3, alpha=0.5)
-    xticklabels = ['{0}(n={1})\n                 {2}\n                 {3}'.format(indi, size, p, p_i) for indi, size, p, p_i in zip(yn, sizes, ps, p_inc)]
+    xticklabels = ['{0}(n={1})\n{2}\n{3}'.format(indi, size, p, p_i) for indi, size, p, p_i in zip(yn, sizes, ps, p_inc)]
     bx.set(xticklabels=xticklabels)
     for tick in bx.xaxis.get_major_ticks():
         tick.label.set_fontsize(7)
     for tick in bx.yaxis.get_major_ticks():
         tick.label.set_fontsize(10)
-    plt.title('Total {0} Buildings'.format(totalnum), fontsize=15)
-    plt.ylabel(ylabel_dict[theme], fontsize=12)
+    plt.title('Site {0} KBTU/ft2/year by ECM Program vs Not (n = {1})'.format(title_dict[theme], totalnum))
+    plt.suptitle('FY15 EUAS {1} building set (A, B, C, D, E, I) with positive sq.ft.\n{0} (exclude lowest 10%)'.format(filter_dict[theme], plotset))
+    plt.ylabel(ylabel_dict[theme])
     bx.xaxis.set_label_coords(0.5, -0.08)
     plt.xlabel('', fontsize=12)
     plt.ylim((0, ylim))
 
     if office:
         P.savefig(os.getcwd() + \
-                  '/plot_FY_annual/office/office_{1}_{0}.png'.format(theme,
-                                                                     prefix),
-                  dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
+                  '/plot_FY_annual/office/office_{1}_{0}.png'.format(theme, prefix),
+                  dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     else:
         P.savefig(os.getcwd() + \
                   '/plot_FY_annual/{1}_{0}.png'.format(theme, prefix),
-                  dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi))
+                  dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
 
 def plot_elec_eui_ratio():
