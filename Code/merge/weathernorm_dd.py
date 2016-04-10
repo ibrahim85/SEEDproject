@@ -18,6 +18,8 @@ import time
 import geocoder
 from vincenty import vincenty
 
+import lean_temperature as lt
+
 homedir = os.getcwd() + '/csv_FY/'
 weatherdir = os.getcwd() + '/csv_FY/weather/'
 fldir = os.getcwd() + '/input/FL/'
@@ -751,20 +753,20 @@ def join_building_temp(bs_pair):
     for (b, s) in bs_pair:
         df_energy = read_energy(b)
         print (b, s, len(df_energy))
-        # if len(df_energy) == 0:
-        #     print 'No energy info for {0}'.format(b)
-        #     continue
-        # df_energy['eui_heat'] = df_energy['eui_gas'] + \
-        #     df_energy['eui_oil'] + df_energy['eui_steam']
-        # cols = list(df_energy)
-        # cols.remove('eui_heat')
-        # cols.insert(cols.index('eui_water'), 'eui_heat')
-        # df_energy = df_energy[cols]
-        # df_temp = pd.read_csv(weatherdir + 'station_temp/{0}.csv'.format(s)) 
-        # df = pd.merge(df_energy, df_temp, how='inner', on=['year',
-        #                                                    'month'])
-        # df.to_csv(weatherdir + 'energy_temp/{0}_{1}.csv'.format(b, s),
-        #           index=False)
+        if len(df_energy) == 0:
+            print 'No energy info for {0}'.format(b)
+            continue
+        df_energy['eui_heat'] = df_energy['eui_gas'] + \
+            df_energy['eui_oil'] + df_energy['eui_steam']
+        cols = list(df_energy)
+        cols.remove('eui_heat')
+        cols.insert(cols.index('eui_water'), 'eui_heat')
+        df_energy = df_energy[cols]
+        df_temp = pd.read_csv(weatherdir + 'station_temp/{0}.csv'.format(s)) 
+        df = pd.merge(df_energy, df_temp, how='inner', on=['year',
+                                                           'month'])
+        df.to_csv(weatherdir + 'energy_temp/{0}_{1}.csv'.format(b, s),
+                  index=False)
 
 def join_err_msg_cnt():
     df = pd.read_csv(weatherdir + 'weatherinput/check_station_log.txt')
@@ -1024,6 +1026,7 @@ def get_time_filter(timerange):
         return None
 
 def calculate_dd_energy_regression(kind, theme, bs_pair, timerange):
+    print 'calculating dd energy regression'
     bs = []
     ss = []
     slopes = []
@@ -1036,6 +1039,7 @@ def calculate_dd_energy_regression(kind, theme, bs_pair, timerange):
         df_all = pd.read_csv('{0}dd_temp_eng/{1}_{2}_{3}.csv'.format(weatherdir, kind, b, s))
         df_all['in_range'] = df_all[yearcol].map(timefilter)
         df_all = df_all[df_all['in_range']]
+        # print df_all[['year', 'month']]
         slope, intercept, r_value, p_value, basetemp = opt_lireg(b, s, df_all, kind, theme, timerange)
         bs.append(b)
         ss.append(s)
@@ -1175,11 +1179,12 @@ def plot_saving_two(theme, kind, timerange):
         plt.xlim((1, 12))
         ylimit = max(max(y1_1.max(), y2_2.max()), max(y1_2.max(),
                                                       y2_2.max()))
-        plt.ylim((0, ylimit * 1.1))
+        ax_1.set_ylim([0, ylimit * 1.1])
+        ax_2.set_ylim([0, ylimit * 1.1])
         plt.suptitle('Building {0}, Station {1}, Base {2}F'.format(b_1, s_1, t_base))
         ax_1.set_ylabel('kBtu/sq.ft.')
         ax_2.set_ylabel('kBtu/sq.ft.')
-        P.savefig(os.getcwd() + '/plot_FY_weather/saving/{2}/{0}_{1}.png'.format(b_1, s_1, theme), dpi = 150, bbox_inches='tight')
+        P.savefig(os.getcwd() + '/plot_FY_weather/saving/{2}/{0}_{1}.png'.format(b_1, s_1, theme), dpi = 150)
         plt.close()
 
 # deprecated
@@ -1404,7 +1409,7 @@ def test_dd2temp():
                                            dd2temp(dd, t_base, kind))
 
 def lean_one(b, s, k_hdd, k_cdd, base_gas, base_elec, t_base_hdd,
-             t_base_cdd, r2_hdd, r2_cdd, status, theme_h, theme_c,
+             t_base_cdd, r2_hdd, r2_cdd, timerange, theme_h, theme_c,
              side):
     y_upperlim = 10
     x_leftlim = 22
@@ -1420,22 +1425,15 @@ def lean_one(b, s, k_hdd, k_cdd, base_gas, base_elec, t_base_hdd,
                          'dd_temp_eng/HDD_{0}_{1}.csv'.format(b, s))
     df_cdd = pd.read_csv(weatherdir +
                          'dd_temp_eng/CDD_{0}_{1}.csv'.format(b, s))
-    if status == 'pre 2013':
-        df_hdd = df_hdd[df_hdd['year'] < 2013]
-        df_cdd = df_cdd[df_cdd['year'] < 2013]
-    elif status == 'post 2013':
-        df_hdd = df_hdd[df_hdd['year'] > 2013]
-        df_cdd = df_cdd[df_cdd['year'] > 2013]
-    elif 'FY' in status:
-        df_hdd = df_hdd[df_hdd['Fiscal Year'] == int(status[2:])]
-        df_cdd = df_cdd[df_cdd['Fiscal Year'] == int(status[2:])]
-    elif 'CY' in status:
-        df_hdd = df_hdd[df_hdd['Year'] == int(status[2:])]
-        df_cdd = df_cdd[df_cdd['Year'] == int(status[2:])]
+    yearcol, timefilter = get_time_filter(timerange)
     hdd_base_header = '{0}F'.format(t_base_hdd)
     cdd_base_header = '{0}F'.format(t_base_cdd)
     df_hdd = df_hdd[['year', 'month', theme_h, s, hdd_base_header]]
     df_cdd = df_cdd[['year', 'month', theme_c, cdd_base_header]]
+    df_hdd['in_range'] = df_hdd[yearcol].map(timefilter)
+    df_hdd = df_hdd[df_hdd['in_range']]
+    df_cdd['in_range'] = df_cdd[yearcol].map(timefilter)
+    df_cdd = df_cdd[df_cdd['in_range']]
     df_hdd['cvt_temp_hdd'] = df_hdd[hdd_base_header].map(lambda x: dd2temp(x, t_base_hdd, 'HDD'))
     df_cdd['cvt_temp_cdd'] = df_cdd[cdd_base_header].map(lambda x: dd2temp(x, t_base_cdd, 'CDD'))
     df_hdd.rename(columns={hdd_base_header: hdd_base_header + '_HDD'},
@@ -1499,7 +1497,7 @@ def lean_one(b, s, k_hdd, k_cdd, base_gas, base_elec, t_base_hdd,
         plt.plot(x1, y1, 'o', markerfacecolor=gas_mk_color)
         plt.plot(sorted_x1, sorted_y1_hat, '-', color=gas_line_color)
         bx.fill_between(sorted_x1, base_elec + base_gas, sorted_y1_hat, facecolor=gas_line_color, alpha=0.3)
-    elif side == 'cooling' or side == 'combined':
+    if side == 'cooling' or side == 'combined':
         plt.plot(x2, y2, 'o', markerfacecolor=elec_mk_color)
         plt.plot(sorted_x2, sorted_y2_hat, '-', color=elec_line_color)
         bx.fill_between(sorted_x2, base_elec + base_gas, sorted_y2_hat, facecolor=elec_line_color, alpha=0.5)
@@ -1509,16 +1507,16 @@ def lean_one(b, s, k_hdd, k_cdd, base_gas, base_elec, t_base_hdd,
     bx.fill_between([xmin, xmax], base_elec, [base_elec + base_gas] * 2, facecolor=base_gas_color, alpha=0.3)
     print (round(r2_hdd, 2), round(r2_cdd, 2))
     if side == 'heating':
-        plt.title('Building {0}, {1}\nHDD base {2}F (R^2: {3})'.format(b, status, t_base_hdd, round(r2_hdd, 2)))
+        plt.title('Building {0}, {1}\nHDD base {2}F (R^2: {3})'.format(b, timerange, t_base_hdd, round(r2_hdd, 2)))
     elif side == 'cooling':
-        plt.title('Building {0}, {1}\nCDD base {2}F (R^2: {3})'.format(b, status, t_base_cdd, round(r2_cdd, 2)))
+        plt.title('Building {0}, {1}\nCDD base {2}F (R^2: {3})'.format(b, timerange, t_base_cdd, round(r2_cdd, 2)))
     else:
-        plt.title('Building {0}, {1}\nHDD base {2}F (R^2: {4})\nCDD base {3}F(R^2: {5})'.format(b, status, t_base_hdd, t_base_cdd, round(r2_hdd, 2), round(r2_cdd, 2)))
+        plt.title('Building {0}, {1}\nHDD base {2}F (R^2: {4})\nCDD base {3}F(R^2: {5})'.format(b, timerange, t_base_hdd, t_base_cdd, round(r2_hdd, 2), round(r2_cdd, 2)))
     plt.xlabel('Temperature Represented Degree Day [F]')
     plt.ylabel('Monthly kBtu/sq.ft.')
     plt.ylim((0, y_upperlim))
     plt.xlim((20, 90))
-    P.savefig(os.getcwd() + '/plot_FY_weather/lean_{4}/{3}/{0}_{1}_{2}.png'.format(b, s, status, theme_h, side), dpi = 150, bbox_inches='tight')
+    P.savefig(os.getcwd() + '/plot_FY_weather/lean_{4}/{3}/{0}_{1}_{2}.png'.format(b, s, timerange, theme_h, side), dpi = 150, bbox_inches='tight')
     plt.close()
     return (xmin, xmax, y1.max(), y2.max())
 
@@ -1741,10 +1739,11 @@ def plot_energy_dd_multi(timerange_list, kind, theme, side):
 
 def plot_energy_dd_multi_oneyear(bs_pair, timerange, kind, theme,
                                  side):
-    calculate_dd_energy_regression(kind, theme, bs_pair, timerange)
+    # calculate_dd_energy_regression(kind, theme, bs_pair, timerange)
     df_summary = pd.read_csv(weatherdir + '{2}_{0}_{1}_regression.csv'.format(theme, timerange, kind))
     # to remove the very horizontal lines
-    df_summary = df_summary[df_summary['p_value'] < 0.1]
+    if theme == 'heating':
+        df_summary = df_summary[df_summary['p_value'] < 0.1]
     df_summary = df_summary[df_summary['k'] > 0.0001]
     bs_pair = [x for x in bs_pair if x[0] in df_summary['Building Number'].tolist()]
     df_summary.set_index('Building Number', inplace=True)
@@ -1756,6 +1755,8 @@ def plot_energy_dd_multi_oneyear(bs_pair, timerange, kind, theme,
     elif side == 'cooling':
         sns.set_palette(sns.cubehelix_palette(50, rot=-.4))
         base_gas = 0
+    elif side == 'base':
+        sns.set_palette(sns.light_palette("yellow"))
     labels = []
     lines = []
     for b, s in bs_pair:
@@ -1772,14 +1773,26 @@ def plot_energy_dd_multi_oneyear(bs_pair, timerange, kind, theme,
         df_dd = df_dd[['year', 'month', theme, s, dd_base_header]]
         df_dd['cvt_temp_dd'] = df_dd[dd_base_header].map(lambda x: dd2temp(x, t_base, kind))
         df_plot = df_dd.copy()
-        df_plot[theme + '_hat'] = df_plot[dd_base_header].map(lambda x: k * x + intercept)
-        df_plot[theme + '_filter'] = \
-            df_plot.apply(lambda r: r[theme] if r['cvt_temp_dd'] <
-                          t_base else np.nan, axis=1)
-        df_plot[theme + '_hat_filter'] = \
-            df_plot.apply(lambda r: r[theme + '_hat'] if
-                          r['cvt_temp_dd'] < t_base else np.nan,
-                          axis=1)
+        if side == 'heating':
+            df_plot[theme + '_hat'] = df_plot[dd_base_header].map(lambda x: k * x + intercept)
+            df_plot[theme + '_filter'] = \
+                df_plot.apply(lambda r: r[theme] if r['cvt_temp_dd'] <
+                            t_base else np.nan, axis=1)
+            df_plot[theme + '_hat_filter'] = \
+                df_plot.apply(lambda r: r[theme + '_hat'] if
+                            r['cvt_temp_dd'] < t_base else np.nan,
+                            axis=1)
+        elif side == 'cooling':
+            df_plot[theme + '_hat'] = df_plot[dd_base_header].map(lambda x: k * x)
+            df_plot[theme + '_filter'] = \
+                df_plot.apply(lambda r: r[theme] if r['cvt_temp_dd'] >=
+                            t_base else np.nan, axis=1)
+            df_plot[theme + '_hat_filter'] = \
+                df_plot.apply(lambda r: r[theme + '_hat'] if
+                            r['cvt_temp_dd'] >= t_base else np.nan,
+                            axis=1)
+        elif side == 'base':
+            df_plot[theme + '_hat'] = df_plot[dd_base_header].map(lambda x: intercept)
         x1 = df_plot['cvt_temp_dd']
         y1 = df_plot[theme + '_filter']
         y1_hat = df_plot[theme + '_hat_filter']
@@ -1788,18 +1801,24 @@ def plot_energy_dd_multi_oneyear(bs_pair, timerange, kind, theme,
         sorted_y1_hat = [p[1] for p in sorted_x1y1hat]
         xmin = x1.min()
         xmax = x1.max()
-        plt.plot(x1, y1, 'o')
+        if side == 'heating':
+            plt.plot(x1, np.array(y1), 'o')
+        elif side == 'cooling':
+            plt.plot(x1, [max(0, y-intercept) for y in y1], 'o')
         line, = plt.plot(sorted_x1, sorted_y1_hat, '-')
-        plt.fill_between(sorted_x1, intercept, sorted_y1_hat,
+        plt.fill_between(sorted_x1, sorted_y1_hat,
                          alpha=0.3)
-        plt.fill_between([xmin, xmax], 0, [intercept] * 2, alpha=0.5)
+        # plt.fill_between([xmin, xmax], 0, [intercept] * 2, alpha=0.5)
         label = 'Building {0}, y = {1}x + {2}'.format(b, round(k, 5), round(intercept, 5))
         lines.append(line)
         labels.append(label)
     plt.title('{0} lean plot: {1} vs {2}, {3}'.format(side.capitalize(), title_dict[theme], kind, timerange))
     plt.xlabel('Temperature Represented Degree Day [F]')
     plt.ylabel('Monthly kBtu/sq.ft.')
-    plt.ylim((0, 12))
+    if side == 'heating':
+        plt.ylim((0, 12))
+    elif side == 'cooling':
+        plt.ylim((0, 4))
     plt.legend(lines, labels, loc='center left', 
                bbox_to_anchor=(1, 0.5), prop={'size':6})
     # plt.xlim((10, 70))
@@ -1810,12 +1829,15 @@ def plot_energy_dd_multi_oneyear(bs_pair, timerange, kind, theme,
 
 # FIXME: slight difference between from last round of regression calculation and saving percent
 def plot_lean_savings():
+    print 'plot savings and lean plot ...'
     cutoff = -0.1 # no cutoff limitation for R square
     df_bs3 = pd.read_csv(homedir + 'master_table/indicator_wECM_weather.csv')
     df_bs3 = df_bs3[df_bs3['Valid Weather Data'] == 1]
     bs_pair = zip(df_bs3['Building Number'], df_bs3['ICAO'])
     study_set = get_gsalink_set()
-    bs_pair = [x for x in bs_pair if x[0] in study_set]
+    # bs_pair = [x for x in bs_pair if x[0] in study_set]
+    bs_pair = [('TX0211ZZ', 'KHOU'), ('NM0050ZZ', 'KABQ'),
+               ('OH0046ZZ', 'KCMH')]
     join_building_temp(bs_pair)
     for (b, s) in bs_pair:
         join_dd_temp_energy(b, s, 'CDD')
@@ -1824,18 +1846,21 @@ def plot_lean_savings():
                                    'before CY2013 and after CY2009')
     calculate_dd_energy_regression('HDD', 'eui_gas', bs_pair, 
                                    'before CY2013 and after CY2009')
-    # calculate_dd_energy_regression('HDD', 'eui_heat', bs_pair, 
-    #                                'before CY2013 and after CY2009')
-    for year in [2014, 2015]:
-        # calculate_savings('eui_heat', 'HDD', cutoff, year, 
-        #                   'before CY2013 and after CY2009')
-        calculate_savings('eui_elec', 'CDD', cutoff, year, 
-                          'before CY2013 and after CY2009')
-        calculate_savings('eui_gas', 'HDD', cutoff, year, 
-                          'before CY2013 and after CY2009')
-    plot_saving_two('eui_elec', 'CDD', 'before CY2013 and after CY2009')
-    plot_saving_two('eui_gas', 'HDD', 'before CY2013 and after CY2009')
+    calculate_dd_energy_regression('CDD', 'eui_elec', bs_pair, 
+                                   'before CY2016 and after CY2013')
+    calculate_dd_energy_regression('HDD', 'eui_gas', bs_pair, 
+                                   'before CY2016 and after CY2013')
+    # for year in [2014, 2015]:
+    #     calculate_savings('eui_elec', 'CDD', cutoff, year, 
+    #                       'before CY2013 and after CY2009')
+    #     calculate_savings('eui_gas', 'HDD', cutoff, year, 
+    #                       'before CY2013 and after CY2009')
+    # plot_saving_two('eui_elec', 'CDD', 'before CY2013 and after CY2009')
+    # plot_saving_two('eui_gas', 'HDD', 'before CY2013 and after CY2009')
     # plot_saving_two('eui_heat', 'HDD', 'before CY2013 and after CY2009')
+    cutoff = 0.0
+    lean(bs_pair, 'eui_gas', 'eui_elec', cutoff, 'combined', 'before CY2013 and after CY2009')
+    lean(bs_pair, 'eui_gas', 'eui_elec', cutoff, 'combined', 'before CY2016 and after CY2013')
 
 def process_gsalink():
     # import read_fy_calendar as rd 
@@ -1884,6 +1909,20 @@ def process_gsalink():
     # plot_energy_dd_multi(bs_pair_cool, 'FY2015', 'CDD', 'eui_elec', 'cooling')
     return
 
+def piecewise_lean():
+    files = glob.glob(weatherdir + 'energy_temp/*.csv')
+    # for f in files[:30]:
+    #     filename = f[f.rfind('/') + 1:]
+    #     b = filename[:8]
+    #     s = filename[9:13]
+    #     print (b, s)
+    #     lt.lean_temperature(b, s, 2)
+    b = 'AL0010ZZ'
+    s = 'KBHM'
+    # lt.lean_temperature(b, s, 2)
+    # lt.lean_temperature(b, s, 3)
+    return
+
 def main():
     # missing_stations = ['KBFM', 'KAVL', 'KBJC', 'KSAN', 'KFTW', 'KLIT', 'KSYR', 'KDSM', 'KCGX']
     # missing_stations = []
@@ -1891,11 +1930,14 @@ def main():
     # process_gsalink()
     # plot_lean_savings()
     # plot_lean_fl()
-    plotyears = ['FY{0}'.format(y) for y in range(2010, 2016)]
-    plot_energy_dd_multi(plotyears, 'HDD', 'eui_gas', 'heating')
+    # plotyears = ['FY{0}'.format(y) for y in range(2010, 2016)]
+    # plot_energy_dd_multi(plotyears, 'HDD', 'eui_gas', 'heating')
+    # plot_energy_dd_multi(plotyears, 'CDD', 'eui_elec', 'cooling')
     #calculate('eui_gas', 'kernel')
     #calculate('eui_elec', 'kernel')
     #plot_building_temp()
+    piecewise_lean()
+
     return
 
 main()

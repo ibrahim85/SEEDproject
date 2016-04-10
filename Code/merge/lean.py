@@ -204,12 +204,7 @@ def createJSON(monthlyAggregatedData, monthlyCDDHDDArray, bldgDetails):
 	jsonElementDict['energy_data'] = monthlyAggregatedData
 	return jsonElementDict
 
-#if __name__=='__main__':
-def getJSONResponse(buildingid):
-	host = '128.2.110.179'
-	pgresdbname = 'seed-deploy'
-	pgresuser = 'seed-admin'
-	pgrespwd = 'SEEDDB@architecture.cmu.edu'
+pgrespwd = 'SEEDDB@architecture.cmu.edu'
 	localtimezone = 'America/New_York'
 	buildingsnapshotid = buildingid
 	baseTempCdd = '65.0'

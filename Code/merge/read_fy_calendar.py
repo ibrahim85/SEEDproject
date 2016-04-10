@@ -11,6 +11,7 @@ import time
 import geocoder
 import requests
 import textwrap as tw
+import sqlite3
 # from geopy.distance import vincenty
 # 'Cat' appear in file FY14, FY14, not FY13, this version account for this
 
@@ -41,21 +42,40 @@ def get_building(df):
 
 # concatnate fiscal year data to one file a year, only for fiscal year,
 # becuase there is different columns
-def get_raw_concat(yearlist):
-    print 'concatnate fiscal year data to one file a year'
-    year_col = 'Fiscal Year'
-    month_col = 'Fiscal Month'
-    pre = 'FY'
+def get_raw_concat(yearlist, calOrFiscal):
+    print 'concatnate {0} year data to one file a year'.format(calOrFiscal)
+    if calOrFiscal == 'fis':
+        conn = sqlite3.connect(homedir + \
+                               'db/EUAS_input_by_fiscal_year.db')
+        year_col = 'Fiscal Year'
+        month_col = 'Fiscal Month'
+        pre = 'FY'
+        folder = 'sep'
+    else:
+        conn = sqlite3.connect(homedir + \
+                               'db/EUAS_input_by_calendar_year.db')
+        year_col = 'year'
+        month_col = 'month'
+        pre = 'CY'
+        folder = 'cal'
+    c = conn.cursor()
 
     for year in yearlist:
-        print '    concatenating FY{0}'.format(year)
+        print '    concatenating {1}{0}'.format(year, pre)
         label = str(int(year))[-2:]
-        filelist = ['{0}/csv_FY/sep/FY{1}_{2}.csv'.format(os.getcwd(), label, i) for i in range(1, 12)]
+        filelist = ['{0}/csv_FY/{3}/{4}{1}_{2}.csv'.format(os.getcwd(), label, i, folder, pre) for i in range(1, 12)]
         dfs = [pd.read_csv(f) for f in filelist]
+        # for i, df in enumerate(dfs):
+        #     if 'AK0000AA' in df['Building Number'].tolist():
+        #         print filelist[i]
         df_all = pd.concat(dfs, join='inner', ignore_index=True)
+        df_all.sort(columns=['Building Number', month_col], inplace=True)
         df_all.to_csv(os.getcwd() + \
                 '/csv_FY/raw_concat/{0}{1}.csv'.format(pre, label),
                 index=False)
+        df_all.to_sql('{0}{1}'.format(pre, label), conn,
+                      if_exists='replace')
+    conn.close()
 
 def get_state_abbr_dict():
     df = pd.read_csv(os.getcwd() + '/input/FY/state2abbr.csv')
@@ -73,7 +93,50 @@ def get_most_common(L):
     return sorted(group_len_list, key=operator.itemgetter(1),
                   reverse=True)[0][0]
 
+def sanity_check_static_long(yearlist):
+    print '    checking static info ...'
+    labellist = [str(int(yr))[-2:] for yr in yearlist]
+    dfs = []
+    check_cols = ['Region No.', 'State', 'Cat', 'Gross Sq.Ft']
+    cols = ['Building Number', 'Fiscal Year'] + check_cols
+    for yr in yearlist:
+        label = str(int(yr))[-2:]
+        df = pd.read_csv(os.getcwd() + '/csv_FY/raw_concat/FY{0}_drop.csv'.format(label))
+        if not 'Cat' in df:
+            df['Cat'] = np.nan
+        df = df[cols]
+        df.dropna(subset=['Building Number'], inplace=True)
+        dfs.append(df)
+    df_all = pd.concat(dfs, ignore_index=True)
+    df_all.replace(get_state_abbr_dict(), inplace=True)
+    df_all.replace('******', np.nan, inplace=True)
+    df_all.sort(columns=['Region No.', 'Building Number', 'Fiscal Year'], inplace=True)
+    df_all.to_csv(homedir + 'master_table/static_info_EUAS_long.csv',
+                  index=False)
+    df = df_all.drop('Fiscal Year', axis=1)
+    dfs = []
+    for col in check_cols:
+        colname = 'Unique value count of {0}'.format(col)
+        df_temp = (df.groupby('Building Number')[col].nunique()).to_frame(name=colname)
+        df_temp = df_temp[df_temp[colname] > 1]
+        if len(df_temp) > 0:
+            df_temp.to_csv(homedir + \
+                           'master_table/EUAS_static_{0}_unique_count.csv'.format(col))
+    df_tidy = df.groupby('Building Number', as_index=False).last()
+    df_tidy.drop('Gross Sq.Ft', axis=1, inplace=True)
+    df_tidy.sort(columns=['Region No.', 'Building Number'],
+                 inplace=True)
+    df_tidy.to_csv(homedir + \
+                   'master_table/EUAS_static_tidy.csv'.format(col),
+                   index=False)
+    conn = sqlite3.connect(homedir + 'db/static_info_tidy.db')
+    c = conn.cursor()
+    df_tidy.to_sql('EUAS_static_tidy', conn, if_exists='replace')
+    return
+
 def sanity_check_static(yearlist):
+    conn = sqlite3.connect(homedir + 'db/static_info.db')
+    c = conn.cursor()
     print '    checking static info ...'
     labellist = [str(int(yr))[-2:] for yr in yearlist]
     dfs = []
@@ -115,6 +178,7 @@ def sanity_check_static(yearlist):
     df_all = df_all[newcols]
     df_all.sort(columns=['Building Number'], inplace=True)
     df_all.to_csv(os.getcwd() + '/csv_FY/master_table/static_info_EUAS_check.csv', index=False)
+    df_all.to_sql('static_info_EUAS_check', conn, if_exists='replace')
     def get_value(r, cols):
         values = [r[col] for col in cols]
         values = list(set(values))
@@ -161,17 +225,28 @@ def sanity_check_static(yearlist):
                                                 r['Cat_most_common'],
                                                 axis=1)
     df_all.drop(drop_cols, axis=1, inplace=True)
-    df_all.to_csv(os.getcwd() + '/csv_FY/master_table/static_info_EUAS.csv', index=False)
+    df_all.to_csv(os.getcwd() + '/csv_FY/master_table/static_info_from_EUAS.csv', index=False)
+    df_all.to_sql('static_info_from_EUAS', conn, if_exists='replace')
+    conn.close()
+    return
 
 def add_filter_bit(yearlist, calOrFiscal):
     office_set = get_office()
+    if calOrFiscal == 'fis':
+        pre = 'FY'
+        infolder = 'agg'
+        yearcol = 'Fiscal Year'
+    else:
+        pre = 'CY'
+        infolder = 'agg_cal'
+        yearcol = 'year'
     for yr in yearlist:
         label = str(int(yr))[-2:]
-        df_zero = pd.read_csv(os.getcwd() + '/csv_FY/raw_concat/FY{0}.csv'.format(label))
+        df_zero = pd.read_csv(os.getcwd() + '/csv_FY/raw_concat/{1}{0}.csv'.format(label, pre))
         df_zero.drop_duplicates(cols='Building Number', inplace=True)
-        df_zero.to_csv(os.getcwd() + '/csv_FY/raw_concat/FY{0}_drop.csv'.format(label), index=False)
+        df_zero.to_csv(os.getcwd() + '/csv_FY/raw_concat/{1}{0}_drop.csv'.format(label, pre), index=False)
         df_zero = df_zero[['Building Number']]
-        df = pd.read_csv(os.getcwd() + '/csv_FY/agg/eui_{0}.csv'.format(yr))
+        df = pd.read_csv(os.getcwd() + '/csv_FY/{1}/eui_{0}.csv'.format(yr, infolder))
         def suf(title):
             return '{0}_{1}'.format(title, label)
         df[suf('good_elec')] = df['eui_elec'].map(lambda x: 1 if x >=
@@ -199,7 +274,7 @@ def add_filter_bit(yearlist, calOrFiscal):
         df_all.dropna(subset=['Building Number'], axis=0, inplace=True)
         df_all.to_csv(os.getcwd() +
                       '/csv_FY/filter_bit/{1}/eui_all_20{0}.csv'.format(label, calOrFiscal), index=False)
-        df_all.drop(['eui_elec', 'eui_gas', 'eui_oil', 'eui_water', 'eui', 'Region No.', 'Fiscal Year', 'Cat', 'eui_steam'], axis = 1, inplace=True)
+        df_all.drop(['eui_elec', 'eui_gas', 'eui_oil', 'eui_water', 'eui', 'Region No.', yearcol, 'Cat', 'eui_steam'], axis = 1, inplace=True)
         df_all.to_csv(os.getcwd() +
                       '/csv_FY/filter_bit/{1}/eui_clean_20{0}.csv'.format(label, calOrFiscal), index=False)
         df.to_csv(os.getcwd() +
@@ -221,14 +296,13 @@ def merge_indicator(calOrFiscal):
 def get_num_char(char, string):
     return len([c for c in string if c == char])
 
+theme_dict = {'has_data': 'has energy data', 
+                'good_elec': 'with Electric EUI >= 12', 
+                'good_gas': 'with Gas EUI >= 3', 
+                'good_both': 'with Electric EUI >= 12 and Gas EUI >= 3'}
 # nyear: the number of years of data we want
 def plot_building_data_repl(yearlist, theme, calOrFiscal, catfilter,
                             nyear):
-    theme_dict = {'has_data': 'has energy data', 
-                  'good_elec': 'with Electric EUI >= 12', 
-                  'good_gas': 'with Gas EUI >= 3', 
-                  'good_both': 'with Electric EUI >= 12 and Gas EUI >= 3', 
-                  }
     print 'plotting representation for {0}'.format(theme)
     df_temp = pd.read_csv(os.getcwd() + '/csv_FY/filter_bit/{0}/sep_summary/{1}.csv'.format(calOrFiscal, theme))
     if catfilter == 'AI':
@@ -273,20 +347,27 @@ def plot_building_data_repl(yearlist, theme, calOrFiscal, catfilter,
     P.savefig(os.getcwd() + '/plot_FY_annual/EUAS_{0}_{1}.png'.format(theme, catfilter), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
 
-def sep_indicator():
+def sep_indicator(cutoff):
     print 'separating indicator_all.csv into single indicators ...'
     df = pd.read_csv(homedir + 'filter_bit/fis/indicator_all.csv')
     themes = ['has_data', 'good_area', 'good_elec', 'good_gas', 'good_water', 'good_both', 'good_all']
-    for theme in themes:
+    for theme in themes[:1]:
         df_temp = df.copy()
         cols = ['Building Number', 'Cat_latest', 'office'] + [x for x in list(df_temp) if theme in x]
         df_temp = df_temp[cols]
+        df_temp[theme + ' >= {0} years'.format(cutoff)] = \
+            df_temp[theme + '_sum'].map(lambda x: 1 if x >= cutoff
+                                        else 0) 
         df_temp.to_csv(homedir + \
                        'filter_bit/fis/sep_summary/{0}.csv'.format(theme),
                        index=False)
+        df_temp = df_temp[df_temp['Cat_latest'].isin(['A', 'I'])]
+        df_temp.to_csv(homedir + \
+                       'filter_bit/fis/sep_summary/{0}_AI.csv'.format(theme),
+                       index=False)
 
 # report number of each filter, use 'fis'
-def report_number(yearlist, calOrFiscal):
+def report_number(yearlist, calOrFiscal, cutoff):
     def suf(title, yr):
         return '{0}_{1}'.format(title, str(int(yr))[-2:])
     # for separate year:
@@ -296,14 +377,14 @@ def report_number(yearlist, calOrFiscal):
     for yr in yearlist:
         label = str(int(yr))[-2:]
         themes = [suf(x, yr) for x in ['has_data', 'good_area', 'good_elec', 'good_gas', 'good_water', 'good_both', 'good_all']]
+        # for theme in themes:
+            # print theme
+            # print df[theme].sum()
+        # print 'office'
         for theme in themes:
-            print theme
-            print df[theme].sum()
-        print 'office'
-        for theme in themes:
-            print 'office: {0}'.format(theme)
+            # print 'office: {0}'.format(theme)
             df_temp = df[df[suf('office', yr)] == 1]
-            print df_temp[theme].sum()
+            # print df_temp[theme].sum()
     themes = ['has_data', 'good_area', 'good_elec', 'good_gas', 'good_water', 'good_both', 'good_all']
 
     for theme in themes:
@@ -319,12 +400,13 @@ def report_number(yearlist, calOrFiscal):
             df['{0}_sum'.format(theme)] = df[sumcols].sum(axis=1)
             total_years = len(yearlist) - 1
         df[theme] = df['{0}_sum'.format(theme)].map(lambda x: 1 if x == total_years else 0)
-        print theme
-        print df[theme].sum()
+        df[theme + ' >= {0} years'.format(cutoff)] = df['{0}_sum'.format(theme)].map(lambda x: 1 if x >= cutoff else 0)
+        # print theme
+        # print df[theme].sum()
     
     office_list = get_office()
     df['office'] = df['Building Number'].map(lambda x: 1 if x in office_list else 0)
-    print 'office'
+    # print 'office'
     df_cat = pd.read_csv(homedir + 'master_table/static_info.csv')
     df_cat = df_cat[['Building Number', 'Cat_latest']]
     df_all = pd.merge(df, df_cat, on='Building Number', how='left')
@@ -332,16 +414,17 @@ def report_number(yearlist, calOrFiscal):
     df_all = df_all[df_all['Cat_latest'].isin(['A', 'I'])]
     df_all.to_csv(os.getcwd() + '/csv_FY/filter_bit/{0}/indicator_all_catAI.csv'.format(calOrFiscal), index=False)
     df_temp = df_all[df_all['office'] == 1]
-    for theme in themes:
-        print 'office: {0}'.format(theme)
-        print df_temp[theme].sum()
+    # for theme in themes:
+        # print 'office: {0}'.format(theme)
+        # print df_temp[theme].sum()
 
 # process starts from positive floor area
-def get_flow_reorg(yearlist):
-    # add_filter_bit(yearlist, 'fis')
-    # merge_indicator('fis')
-    # report_number(yearlist, 'fis')
-    sep_indicator()
+def get_flow_reorg(yearlist, calOrFiscal, cutoff):
+    add_filter_bit(yearlist, calOrFiscal)
+    merge_indicator(calOrFiscal)
+    report_number(yearlist, calOrFiscal, cutoff)
+    sep_indicator(cutoff)
+    return
 
 def check_num_bd(dfs):
     buildings = [get_building(df) for df in dfs]
@@ -458,9 +541,12 @@ def test_fiscal_convert():
 # note: must process two consecutive FY together
 # output FY{year}_{region}.csv files
 def fiscal2calendar():
+    conn = sqlite3.connect(homedir + 'db/EUAS_input_region_calendar_year.db')
+    c = conn.cursor()
     print 'converting fiscal year to calendar year ...'
     for i in range(1, 12):
-        filelist = glob.glob(os.getcwd() + '/csv_FY/sep/*_{0}*.csv'.format(i))
+        # FIXED: original _{0}* will read region 10 info into region 1
+        filelist = glob.glob(os.getcwd() + '/csv_FY/sep/*_{0}.csv'.format(i))
         dfs = [pd.read_csv(csv) for csv in filelist]
         df_con = pd.concat(dfs, ignore_index=True)
         df_con['month'] = df_con['Fiscal Month'].map(fiscal2calmonth)
@@ -470,11 +556,14 @@ def fiscal2calendar():
         for name, group in gr:
             yr = str(int(name))[-2:]
             rg = i
-            outfile = os.getcwd() + '/csv_FY/cal/FY{0}_{1}.csv'.format(yr, rg)
-            print '    writing to FY{0}_{1}.csv'.format(yr, rg)
+            outfile = os.getcwd() + '/csv_FY/cal/CY{0}_{1}.csv'.format(yr, rg)
+            print '    writing to CY{0}_{1}.csv'.format(yr, rg)
             group.sort(columns=['Building Number', 'month'],
                        inplace=True)
             group.to_csv(outfile, index=False)
+            group.to_sql('CY{0}_{1}'.format(yr, rg), conn,
+                         if_exists='replace')
+    conn.close()
 
 # deprecated
 def building_info():
@@ -565,15 +654,18 @@ def calculate(calOrFiscal):
 def aggregate(year, calOrFiscal):
     print 'aggregating {0} year {1}'.format(calOrFiscal, year)
     if calOrFiscal == 'cal':
+        conn = sqlite3.connect(homedir + 'db/eui_calendar.db')
         in_folder = 'single_eui_cal'
         out_folder = 'agg_cal'
         year_col = 'year'
         month_col = 'month'
     else:
+        conn = sqlite3.connect(homedir + 'db/eui_fiscal.db')
         in_folder = 'single_eui'
         out_folder = 'agg'
         year_col = 'Fiscal Year'
         month_col = 'Fiscal Month'
+    c = conn.cursor()
     filelist = glob.glob(os.getcwd() +
                          '/csv_FY/{1}/*{0}.csv'.format(year, in_folder))
     dfs = []
@@ -616,6 +708,9 @@ def aggregate(year, calOrFiscal):
     df_yr = df_yr.sort(columns='Region No.')
     df_yr.to_csv(os.getcwd() + \
             '/csv_FY/{1}/eui_{0}.csv'.format(year, out_folder), index=False)
+    df_yr.to_sql('eui_{0}'.format(year, out_folder), conn,
+                 if_exists='replace')
+    conn.close()
 
 # fix me
 def aggregate_allyear(calOrFiscal, yearlist):
@@ -847,6 +942,8 @@ def join_fueltype(years):
     return
 
 def concat_all(yearlist):
+    conn = sqlite3.connect(homedir + 'db/energy_info.db')
+    c = conn.cursor()
     print '    generating energy_info.csv master table ...'
     filelist = [homedir + 'raw_concat/FY{0}.csv'.format(str(x)[2:])
                 for x in yearlist]
@@ -858,22 +955,51 @@ def concat_all(yearlist):
         df = pd.read_csv(f)
         df = df[['Building Number', 'Fiscal Year', 'Fiscal Month',
                  'Electricity (KWH)', 'Steam (Thou. lbs)', 
-                 'Gas (Cubic Ft)', 'Oil (Gallon)', 
-                 'Chilled Water (Ton Hr)', 'Water (Gallon)']]
+                 'Gas (Cubic Ft)', 'Oil (Gallon)', 'Gross Sq.Ft'
+                 'Chilled Water (Ton Hr)', 'Water (Gallon)', ]]
         df['Electricity (kBtu)'] = df['Electricity (KWH)'] * 3.412
         df['Gas (kBtu)'] = df['Gas (Cubic Ft)'] * 1.026
         df['Oil (kBtu)'] = df['Oil (Gallon)'] * m_oil
         df['Steam (kBtu)'] = df['Steam (Thou. lbs)'] * 1194
         dfs.append(df)
     df_all = pd.concat(dfs, ignore_index=True)
+    df_all['month'] = df_all['Fiscal Month'].map(fiscal2calmonth)
+    df_all['year'] = df_all.apply(lambda row: fiscal2calyear(row['Fiscal Year'], row['Fiscal Month']), axis=1)
     df_all.sort(columns=['Building Number', 'Fiscal Year', 
                          'Fiscal Month'], inplace=True)
-    df_all.to_csv(homedir + 'master_table/energy_info.csv', index=False)
+    df_all.to_csv(homedir + 'master_table/energy_info_monthly.csv', index=False)
+    df_all.to_sql('energy_info_monthly', conn, if_exists='replace')
+
+    filelist = [homedir + 'agg/eui_{0}.csv'.format(str(x))
+                for x in yearlist]
+    dfs = [pd.read_csv(f) for f in filelist]
+    df_all = pd.concat(dfs, ignore_index=True)
+    df_all.sort(columns=['Building Number'], inplace=True)
+    df_all.to_csv(homedir + 'master_table/energy_info_eui_fiscal.csv',
+                  index=False)
+    df_all.to_sql('energy_info_eui_fiscal', conn, if_exists='replace')
+
+    cal_yearlist = range(yearlist[0] - 1, yearlist[-1])
+    filelist = [homedir + 'agg_cal/eui_{0}.csv'.format(str(x))
+                for x in cal_yearlist]
+    dfs = [pd.read_csv(f) for f in filelist]
+    df_all = pd.concat(dfs, ignore_index=True)
+    df_all.sort(columns=['Building Number'], inplace=True)
+    df_all.to_csv(homedir + \
+                  'master_table/energy_info_eui_calendar.csv',
+                  index=False)
+    df_all.to_sql('energy_info_eui_calendar', conn,
+                  if_exists='replace')
+    conn.close()
+    return
 
 def join_static():
+    conn = sqlite3.connect(homedir + 'db/static_info.db')
+    c = conn.cursor()
     print '    creating static_info.csv master table ...'
-    df1 = pd.read_csv(homedir + 'master_table/static_info_EUAS.csv')
+    df1 = pd.read_csv(homedir + 'master_table/static_info_from_EUAS.csv')
     df2 = pd.read_csv(os.getcwd() + '/input/FY/static info/Entire GSA Building Portfolio.csv')
+    df2.to_sql('Entire_GSA_Building_Portfolio_input', conn, if_exists='replace')
     df2 = df2[['Building ID', 'Street', 'City', 'State', 'Zip Code',
                'Gross Square Feet (GSF)', 'Building Name', 
                'Building Class', 'Predominant Use', 
@@ -883,6 +1009,8 @@ def join_static():
                inplace=True)
     filename = os.getcwd() + '/csv/all_column/sheet-0-all_col.csv'
     df_use = pd.read_csv(filename)
+    df_use.to_sql('building_type_PortfolioManager_input', conn,
+                  if_exists='replace')
     df_use = df_use[['Property Name', 'Self-Selected Primary Function']]
     df_use['Property Name'] = df_use['Property Name'].map(lambda x: x.partition(' ')[0][:8])
     df_use.rename(columns={'Property Name': 'Building Number'}, inplace=True)
@@ -892,82 +1020,178 @@ def join_static():
 
     df_all.to_csv(homedir + 'master_table/static_info.csv',
                   index=False)
+    df_all.to_sql('static_info', conn, if_exists='replace')
+    conn.close()
+    return
 
 def join_static_ecm():
-    print '    join static_info.csv with ecm_highlevel.csv ...'
+    print '    join static_info.csv with ecm_highlevelAction.csv ...'
     df1 = pd.read_csv(homedir + 'master_table/static_info.csv')
-    df2 = pd.read_csv(homedir + 'master_table/ecm_highlevel.csv')
+    df2 = pd.read_csv(homedir + \
+                      'master_table/ECM/ecm_highlevelAction.csv')
     df2.rename(columns={'Building ID': 'Building Number'},
                inplace=True)
     df = pd.merge(df1, df2, on='Building Number', how='left')
     df.to_csv(homedir + 'master_table/static_info_wECM.csv',
               index=False)
-    df11 = df1[['Building Number', 'Cat_latest']]
-    df_all = pd.merge(df11, df2, on='Building Number', how='left')
-    df_all.to_csv(homedir + 'master_table/euasset_highlevelECM.csv', index=False)
+    conn = sqlite3.connect(homedir + 'db/static_info.db')
+    c = conn.cursor()
+    df.to_sql('static_info_wECM', conn, if_exists='replace')
+    conn.close()
     return
 
-def join_indicator_static_all():
+def join_indicator_static_all(filtercols):
     df1 = pd.read_csv(homedir + 'master_table/static_info_wECM.csv')
     df2 = pd.read_csv(homedir + 'filter_bit/fis/indicator_all.csv')
-    df2 = df2[df2['good_area_15'] == 1]
-    df2 = df2[['Building Number', 'good_area_15']]
+    # ATTENTION!!!!!
+    df2 = df2[['Building Number'] + filtercols]
     df = pd.merge(df1, df2, on='Building Number', how='left')
+    print 'write to "static_info_wECM_indicator" ...'
     df.to_csv(homedir + 'master_table/static_info_wECM_indicator.csv',
               index=False)
+    df3 = pd.read_csv(homedir + 'join/join_2015_proonly.csv')
+    df3 = df3[['Building Number', 'GP', 'LEED', 'first fuel', 
+               'Shave Energy', 'E4', 'ESPC', 'GP_only', 'LEED_only', 
+               'first fuel_only', 'Shave Energy_only', 'E4_only',
+               'ESPC_only', 'GSALink_only']]
+    df = df[['Building Number', 'Cat_latest', 'GSALink', 
+             'Advanced Metering', 'Building Envelope' , 
+             'Building Tuneup or Utility Improvements' ,
+             'HVAC' , 'IEQ' , 'Lighting'] + filtercols]
+    df_all = pd.merge(df, df3, how='left', on='Building Number')
+    print 'write to "static_info_ECM_program" ...'
+    df_all.to_csv(homedir + \
+                  'master_table/static_info_ECM_program.csv',
+                  index=False)
     return
-
-def plot_static(plotset):
-    df = pd.read_csv(homedir + 'master_table/static_info_wECM_indicator.csv')
-    # only FY2015
+    
+def plot_action_by_prog():
+    join_indicator_static_all(['has_data >= 8 years', 
+                               'good_both >= 8 years', 'good_area_15'])
+    df = pd.read_csv(homedir + \
+                     'master_table/static_info_ECM_program.csv')
     df = df[df['good_area_15'] == 1]
-    df.fillna({'Predominant Use': 'No Data', 'Self-Selected Primary Function': 'No Data'}, inplace=True)
+    df.rename(columns={'GP_only': 'GSA Guiding Principles_only', 
+                       'first fuel_only':
+                       'first fuel'.title() + '_only'}, inplace=True)
+    # programs = ['GSA Guiding Principles', 'LEED', 'First Fuel', 
+    #             'Shave Energy', 'E4', 'ESPC', 'GSALink']
+
+    programs = ['GSA Guiding Principles_only', 'LEED_only', 
+                'First Fuel_only', 'Shave Energy_only', 'E4_only', 
+                'ESPC_only', 'GSALink_only']
+    actions = ['Advanced Metering', 'Building Envelope', 
+               'Building Tuneup or Utility Improvements', 'HVAC', 
+               'IEQ', 'Lighting']
+    dfs = []
+    for p in programs:
+        df1 = df[df[p] == 1]
+        df1['program'] = p
+        for a in actions:
+            df2 = df1[df1[a] == 1]
+            df2['action'] = a
+            dfs.append(df2)
+    df_all = pd.concat(dfs, ignore_index=False)
+    my_dpi = 300
+    sns.set_palette(sns.color_palette('Set3'))
+    sns.set_context("talk", font_scale=1.2)
+    sns.countplot(y='program', hue='action', data=df_all)
+    plt.ylabel('Program')
+    plt.xlabel('Building Count')
+    plt.legend(loc = 2, bbox_to_anchor=(1, 1))
+    plt.title('Building ECM Action by Energy Program (Solo) Plot')
+    plt.suptitle('Plot set: All building with energy data in FY2015')
+    P.savefig(os.getcwd() + '/plot_FY_annual/action_by_program_only.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
+    plt.close()
+
+def get_time_filter_label(timerange):
+    tokens = timerange.split(' ')
+    if len(tokens) < 1:
+        print 'illegal time range expression'
+        return None
+    elif len(tokens) == 1:
+        ab = int(tokens[0][2:])
+        return (ab, ab)
+    elif len(tokens) == 2:
+        if token[0] == 'before':
+            b = int(tokens[1][2:])
+            return (None, b)
+        elif token[0] == 'after':
+            a = int(tokens[1][2:])
+            return (a, None)
+        else:
+            print 'illegal time range expression'
+            return None
+    elif len(tokens) == 5:
+        b = int(tokens[1][2:])
+        a = int(tokens[4][2:])
+        return (a, b)
+    else:
+        print 'illegal time range expression'
+        return None
+
+# FIXME, use timerange to calculate filter
+def plot_static(plotset, range_cat, range_function, range_ecm, title_cat, title_function, title_ecm):
+    df = pd.read_csv(homedir + 'master_table/static_info_wECM_indicator.csv')
     office_list = get_office()
     if plotset == 'office':
-        df = df[df['Building Number'].isin(office_list)]
-    df.info()
+        df2 = df2[df2['Building Number'].isin(office_list)]
 
     my_dpi = 300
     sns.set_palette(sns.color_palette('Set2'))
     sns.set_context("talk", font_scale=1.2)
-
-    # sns.countplot(y='Predominant Use', data=df)
-    # plt.title('Building Type Count Plot')
-    # plt.suptitle('Plot set: {0} building with at least one year energy data'.format(plotset))
-    # P.savefig(os.getcwd() + '/plot_FY_annual/use_count_from_gsatable.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
-    # plt.close()
-
-    sns.countplot(y='Self-Selected Primary Function', data=df,
+    
+    df2 = df[df[range_function] == 1]
+    df2.info()
+    df2.fillna({'Self-Selected Primary Function': 'No Data'}, inplace=True)
+    df2['with ECM Action'] = df2['number of ECM action'].map(lambda x: 1 if x > 0 else 0)
+    # print df2['Self-Selected Primary Function'].value_counts()
+    sns.countplot(y='Self-Selected Primary Function', data=df2,
                   orient='v')
     plt.title('Building Type Count Plot')
-    plt.suptitle('Plot set: {0} building with at least one year energy data'.format(plotset))
-    plt.ylabel('Building Count')
+    plt.suptitle('plot set: {0} building {1}'.format(plotset, title_function))
+    plt.ylabel('Self-Selected Primary Function')
+    plt.xlabel('Building Count')
     P.savefig(os.getcwd() + '/plot_FY_annual/use_count_from_pm.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
+    df3 = df2[['Self-Selected Primary Function', 'with ECM Action']]
+    print df3.groupby(['Self-Selected Primary Function', 'with ECM Action']).count()
 
-    df.rename(columns={'Cat_latest': 'Cat'}, inplace=True)
-    df['Cat'].replace('False', 'No Data', inplace=True)
+    df2 = df[df[range_cat] == 1]
+    df.rename(columns={'Cat_latest': 'Category'}, inplace=True)
+    df['Category'].replace('False', 'No Data', inplace=True)
     # print df['Cat'].value_counts()
     # # temp
     # df = df[df['Cat'].isin(['A', 'I'])]
     # df = df[df['with ECM action'] == 1]
-    sns.countplot(x='Cat', order=['A', 'I', 'B', 'C', 'D', 'E'],
-                  data=df)
+    rename_dict = {\
+        'A': 'A\n{0}'.format('\n'.join(tw.wrap('Government Goal', 10))), 
+        'I': 'I\n{0}'.format('\n'.join(tw.wrap('Energy Intensive', 10))), 
+        'B': 'B\n{0}'.format('\n'.join(tw.wrap('Government Exempt', 10))), 
+        'C': 'C\n{0}'.format('\n'.join(tw.wrap('Lease', 10))), 
+        'D': 'D\n{0}'.format('\n'.join(tw.wrap('Lease Exempt', 10))), 
+                   'E': 'E\n{0}'.format('\n'.join(tw.wrap('Reimbursable non reportable', 12)))}
+
+    df.replace(rename_dict, inplace=True)
+    order = [rename_dict[k] for k in ['A', 'I', 'B', 'C', 'D', 'E']]
+    sns.countplot(x='Category', order=order, data=df)
     plt.title('Building Category Count Plot')
-    plt.suptitle('Plot set: {0} building with at least one year energy data'.format(plotset))
+    plt.suptitle('plot set: {0} building {1}'.format(plotset, range_cat))
     plt.ylabel('Building Count')
     P.savefig(os.getcwd() + '/plot_FY_annual/cat_count_from_euas.png', dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
 
-    df_ecm = df[df['with ECM action'] == 1]
+    df2 = df[df[range_ecm] == 1]
+    df_ecm = df.copy()
     df_ecm['number of ECM action'] = df_ecm['number of ECM action'].map(lambda x: int(x) if not np.isnan(x) else 0)
+    df_ecm = df[df['number of ECM action'] > 0]
     sns.countplot(x='number of ECM action', order=range(1, 7), data=df_ecm)
     plt.title('Building ECM Action Count Plot')
-    # plt.suptitle('Plot set: {0} building with at least one year energy data'.format(plotset))
     plt.ylabel('Building Count')
-    plt.suptitle('Plot set: {0} building'.format(plotset))
+    plt.suptitle('plot set: {0} building {1}'.format(plotset, title_ecm))
     P.savefig(os.getcwd() + '/plot_FY_annual/{0}_ecm_count.png'.format(plotset), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
+
     ECMs = ['Advanced Metering', 'Building Envelope', 
             'Building Tuneup or Utility Improvements', 
             'HVAC', 'IEQ', 'Lighting']
@@ -983,7 +1207,7 @@ def plot_static(plotset):
     sns.countplot(x='ECM Actions', data=df_all)
     plt.title('ECM high level action count plot')
     plt.ylabel('Building Count')
-    plt.suptitle('Plot set: {0} building in FY2015 EUAS dataset with positive sq.ft'.format(plotset))
+    plt.suptitle('plot set: {0} building {1}'.format(plotset, title_ecm))
     P.savefig(os.getcwd() + '/plot_FY_annual/{0}_ecmCount.png'.format(plotset), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
     return
@@ -1024,10 +1248,11 @@ def plot_program(plotset):
     my_dpi = 300
     sns.set_palette(sns.color_palette('Set2'))
     sns.set_context("talk", font_scale=1.2)
-    # sns.countplot(y='Number of ECM Program', order=range(7), data=df)
-    # plt.title('ECM Program Count Plot')
-    # plt.suptitle('Plot set: {0} building in FY2015 EUAS dataset with positive sq.ft'.format(plotset))
-    # P.savefig(os.getcwd() + '/plot_FY_annual/{0}_pro_count_from_euas15.png'.format(plotset), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
+    sns.countplot(y='Number of ECM Program', order=range(7), data=df)
+    plt.title('ECM Program Count Plot')
+    plt.suptitle('Plot set: {0} building with energy data in {1}'.format(plotset, timerange))
+    P.savefig(os.getcwd() + '/plot_FY_annual/{0}_pro_count_from_euas15.png'.format(plotset), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
+    plt.close()
     # BOOKMARK: plot program
     df.rename(columns={'GP': 'GSA Guiding Principles', 'first fuel': 'first fuel'.title()}, inplace=True)
     programs = ['GSA Guiding Principles', 'LEED', 'First Fuel', 
@@ -1043,7 +1268,7 @@ def plot_program(plotset):
     sns.countplot(x='ECM Program', data=df_all)
     plt.title('ECM program count plot')
     plt.ylabel('Building Count')
-    plt.suptitle('Plot set: {0} building in FY2015 EUAS dataset with positive sq.ft'.format(plotset))
+    plt.suptitle('Plot set: {0} building with energy data in {1}'.format(plotset, timerange))
     P.savefig(os.getcwd() + '/plot_FY_annual/{0}_pro_from_euas15.png'.format(plotset), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
 
@@ -1089,7 +1314,7 @@ def plot_program_yesno(theme, plotset):
     P.savefig(os.getcwd() + '/plot_FY_annual/{1}_prog_melt_{0}.png'.format(theme, plotset), dpi = my_dpi, figsize = (2000/my_dpi, 500/my_dpi), bbox_inches='tight')
     plt.close()
 
-def plot_program_energy(theme, plotset):
+def plot_program_energy(plotset):
     import plot_dist_wtno as pdw
     themes = ['eui', 'eui_elec', 'eui_gas', 'eui_water']
     ylims = [140, 140, 140, 40]
@@ -1192,7 +1417,7 @@ def plot_program_num(theme, plotset):
 
 # temp usage
 def join_cost():
-    df1 = pd.read_csv(homedir + 'master_table/ecm_highlevel.csv', parse_dates=['Substantial Completion Date'])
+    df1 = pd.read_csv(homedir + 'master_table/ecm_highlevelAction.csv', parse_dates=['Substantial Completion Date'])
     df1.replace(0, np.nan, inplace=True)
     # df2 = pd.read_csv(os.getcwd() + '/input/FY/ECM info/Light-Touch M_V - ARRA Targets to Actuals and Commissioning Details-sheet0.csv', parse_dates=['Substantial Completion Date'])
     df2 = pd.read_csv(os.getcwd() + '/input/FY/ECM info/Light-Touch M_V-sheet1.csv', parse_dates=['Substantial Completion Date'])
@@ -1229,8 +1454,10 @@ def join_cost():
     df.info()
 
 def read_ecm_highlevel():
+    print 'reading and cleaning high level ECM action files'
     df = pd.read_csv(os.getcwd() + \
                      '/input/FY/Portfolio HPGB Dashboard_highlevel.csv', parse_dates=['Substantial Completion Date'])
+    df.to_csv(homedir + 'master_table/ECM/Portfolio HPGB Dashboard_highlevel.csv', index=False)
     ecm_cols = ['Substantial Completion Date', 'Building ID',
                 'Advanced Metering', 'Building Envelope', 
                 'Building Tuneup or Utility Improvements', 
@@ -1255,14 +1482,15 @@ def read_ecm_highlevel():
     df = df[df['Substantial Completion Date'] < pd.Timestamp('2016-01-01')]
     print 'drop unfinished action, ', len(df)
     df.drop('num_ecm', axis=1, inplace=True)
-    df.to_csv(homedir + 'master_table/ecm_high_clean.csv', index=False)
+    df.to_csv(homedir + 'master_table/ECM/Portfolio_HPGB_clean.csv', index=False)
     print 'number of building', len(set(df['Building ID'].tolist()))
     df2 = df.groupby('Building ID').max()
     # taking max of action and date
-    df2.to_csv(homedir + 'master_table/ecm_high_collapse.csv')
-    df2 = pd.read_csv(homedir + 'master_table/ecm_high_collapse.csv')
-    df_gsalink = pd.read_csv(os.getcwd() + '/input/FY/GSAlink 81 Buildings Updated 9_22_15.csv')
-    df_gsadate = pd.read_csv(os.getcwd() + '/input/FY/GSAlink_Buildings_First_55_Opiton_26_Start_Stop_Dates.csv')
+    df2.to_csv(homedir + 'master_table/ECM/Portfolio_HPGB_collapse.csv')
+    df2 = pd.read_csv(homedir + 'master_table/ECM/Portfolio_HPGB_collapse.csv')
+    df_gsadate = pd.read_csv(os.getcwd() + \
+                             '/input/FY/GSAlink_Buildings_First_55_Opiton_26_Start_Stop_Dates.csv')
+    df_gsadate.to_csv(homedir + 'master_table/ECM/GSAlink_Buildings_First_55_Opiton_26_Start_Stop_Dates.csv', index=False)
     df_gsadate = df_gsadate[['Building ID', 'Rollout Date']]
     print 'gsa date', len(df_gsadate)
     df_gsadate['GSALink'] = 1
@@ -1273,10 +1501,26 @@ def read_ecm_highlevel():
     ecm_cols.remove('Rollout Date')
     total_action = df_all[ecm_cols].sum(axis=1)
     df_all['number of ECM action'] = total_action
+    df_all['with ECM action'] = df_all['number of ECM action'].map(lambda x: 1 if x > 0 else 0)
     df_all.sort(columns=['Building ID', 'Substantial Completion Date',
                          'Rollout Date'], inplace=True)
-    df_all.to_csv(homedir + 'master_table/ecm_highlevel.csv',
+    df_all.to_csv(homedir + 'master_table/ECM/ecm_highlevelAction.csv',
                   index=False)
+    df_all_no_collapse = pd.merge(df, df_gsadate, how='outer', on='Building ID')
+    df_all_no_collapse.to_csv(homedir +
+                              'master_table/ECM/ecm_highlevelAction_no_collapse.csv',
+                              index=False)
+
+    conn = sqlite3.connect(homedir + 'db/ecm_info.db')
+    c = conn.cursor()
+    filelist = glob.glob(homedir + 'master_table/ECM/*.csv')
+    for f in filelist:
+        filename = f[(f.rfind('/') + 1): f.rfind('.')]
+        filename = filename.replace(' ', '_')
+        df = pd.read_csv(f)
+        df.to_sql(filename, conn, if_exists='replace')
+    conn.close()
+    return
     
 def read_icao():
     # source: http://weather.noaa.gov/tg/site.shtml
@@ -1607,12 +1851,13 @@ def join_static_detailECM():
 
 def process_master(yearlist):
     print 'processing master tables ...'
-    # sanity_check_static(yearlist)
-    # concat_all(yearlist)
+    # sanity_check_static_long(yearlist)
+    concat_all(yearlist)
     # join_static()
     # read_ecm_highlevel()
     # join_static_ecm()
-    join_indicator_static_all()
+    # join_indicator_static_all(['has_data >= 8 years', 
+    #                            'good_both >= 8 years', 'good_area_15'])
     # join_static_detailECM()
     # get_all_station_loc()
     # concat_weather_station()
@@ -1623,6 +1868,7 @@ def process_master(yearlist):
 
 # if file extension is .xls, it cannot be properly converted, need to 
 def excel2csv_singlesheet(yearlist):
+    df = pd.read_csv(homedir + 'master_table/energy_info.csv')
     for year in yearlist:
         print 'converting EUAS {0} data to csv ...'.format(year)
         filelist = \
@@ -1645,11 +1891,11 @@ def excel2csv_singlesheet(yearlist):
                                                     tokens[1]),
                       index=False)
 
-def input_energy():
+def input_energy(cutoffyear):
     # yearlist = [2003, 2004, 2007, 2008, 2009, 2016]
-    yearlist = [2005, 2006]
+    yearlist = range(2003, 2017)
     agg_yearlist = range(2003, 2017)
-    agg_cal_yearlist = range(2002, 2015)
+    agg_cal_yearlist = range(2002, 2016)
 
     # excel2csv()
     # excel2csv_singlesheet(yearlist)
@@ -1662,25 +1908,43 @@ def input_energy():
     # # the FY data currently available
     # aggregate_allyear('fis', agg_yearlist)
     # aggregate_allyear('cal', agg_cal_yearlist)
-    # get_raw_concat(agg_yearlist)
-    # get_flow_reorg(agg_yearlist)
+    # get_raw_concat(agg_yearlist, 'fis')
+    # get_raw_concat(agg_cal_yearlist, 'cal')
+    # get_flow_reorg(agg_yearlist, 'fis', cutoffyear)
+    # get_flow_reorg(agg_cal_yearlist, 'cal', cutoffyear)
     # for theme in ['has_data', 'good_elec', 'good_gas', 'good_water',
     #               'good_both']:
-    #     plot_building_data_repl(agg_yearlist, theme, 'fis', 'All', 8)
-    #     plot_building_data_repl(agg_yearlist, theme, 'fis', 'AI', 8)
+    #     plot_building_data_repl(agg_yearlist, theme, 'fis', 'All', cutoffyear)
+    #     plot_building_data_repl(agg_yearlist, theme, 'fis', 'AI', cutoffyear)
+    input_to_db()
+    return
+
+def input_to_db():
+    conn = sqlite3.connect(homedir + 'db/eui_fiscal.db')
+    c = conn.cursor()
+    print 'dumping to eui_info'
+    filelist = glob.glob(homedir + 'filter_bit/fis/eui_all_*.csv')
+    for f in filelist:
+        filename = f[f.rfind('/') + 1: -4]
+        filename = filename.replace('all_', 'FY')
+        print filename
+        pd.read_csv(f).to_sql(filename, conn, if_exists='replace')
+    conn.close()
     return
 
 def main():
     yearlist = [2005, 2006]
     agg_yearlist = range(2003, 2017)
-    agg_cal_yearlist = range(2002, 2015)
-
-    # input_energy()
+    agg_cal_yearlist = range(2002, 2016)
+    # input_energy(8)
+    # plot_action_by_prog()
     process_master(agg_yearlist)
-    # plot_static('FY2015')
+    # plot_static('office')
+    # plot_static('All', 'has_data >= 8 years', 'good_both >= 8 years', 'has_data >= 8 years', 'has at least 8 year EUAS data', theme_dict['good_both'], 'has at least 8 year EUAS data')
     # join_station_gsa()
-    # plot_program('all')
+    # plot_program('All', 'FY2015')
     # plot_program_energy('eui', 'all')
+    # plot_program_energy('all')
     # for theme in ['eui', 'eui_elec', 'eui_gas', 'eui_water']:
     #     # plot_program_yesno(theme, 'office')
     #     # plot_program_yesno(theme, 'all')
