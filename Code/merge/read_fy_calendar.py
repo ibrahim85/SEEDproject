@@ -941,7 +941,7 @@ def join_fueltype(years):
     df_all.to_csv(homedir + 'filter_bit/fis/indicator_all_fuel_catAI.csv', index=False)
     return
 
-def concat_all(yearlist):
+def energy_info(yearlist):
     conn = sqlite3.connect(homedir + 'db/energy_info.db')
     c = conn.cursor()
     print '    generating energy_info.csv master table ...'
@@ -954,9 +954,10 @@ def concat_all(yearlist):
         filename = f[f.rfind('/') + 1:]
         df = pd.read_csv(f)
         df = df[['Building Number', 'Fiscal Year', 'Fiscal Month',
-                 'Electricity (KWH)', 'Steam (Thou. lbs)', 
-                 'Gas (Cubic Ft)', 'Oil (Gallon)', 'Gross Sq.Ft'
-                 'Chilled Water (Ton Hr)', 'Water (Gallon)', ]]
+                 'Gross Sq.Ft', 'Electricity (KWH)', 
+                 'Steam (Thou. lbs)', 'Gas (Cubic Ft)', 
+                 'Oil (Gallon)', 'Chilled Water (Ton Hr)', 
+                 'Water (Gallon)']]
         df['Electricity (kBtu)'] = df['Electricity (KWH)'] * 3.412
         df['Gas (kBtu)'] = df['Gas (Cubic Ft)'] * 1.026
         df['Oil (kBtu)'] = df['Oil (Gallon)'] * m_oil
@@ -967,60 +968,97 @@ def concat_all(yearlist):
     df_all['year'] = df_all.apply(lambda row: fiscal2calyear(row['Fiscal Year'], row['Fiscal Month']), axis=1)
     df_all.sort(columns=['Building Number', 'Fiscal Year', 
                          'Fiscal Month'], inplace=True)
+    df_all = df_all[['Building Number', 'Fiscal Year', 'Fiscal Month',
+                     'year', 'month', 'Gross Sq.Ft', 'Electricity' + 
+                     ' (kBtu)', 'Gas (kBtu)', 'Oil (kBtu)', 'Steam' + 
+                     ' (kBtu)', 'Water (Gallon)', 'Chilled Water (Ton'
+                     ' Hr)']]
     df_all.to_csv(homedir + 'master_table/energy_info_monthly.csv', index=False)
     df_all.to_sql('energy_info_monthly', conn, if_exists='replace')
-
-    filelist = [homedir + 'agg/eui_{0}.csv'.format(str(x))
-                for x in yearlist]
-    dfs = [pd.read_csv(f) for f in filelist]
-    df_all = pd.concat(dfs, ignore_index=True)
-    df_all.sort(columns=['Building Number'], inplace=True)
-    df_all.to_csv(homedir + 'master_table/energy_info_eui_fiscal.csv',
-                  index=False)
-    df_all.to_sql('energy_info_eui_fiscal', conn, if_exists='replace')
-
-    cal_yearlist = range(yearlist[0] - 1, yearlist[-1])
-    filelist = [homedir + 'agg_cal/eui_{0}.csv'.format(str(x))
-                for x in cal_yearlist]
-    dfs = [pd.read_csv(f) for f in filelist]
-    df_all = pd.concat(dfs, ignore_index=True)
-    df_all.sort(columns=['Building Number'], inplace=True)
-    df_all.to_csv(homedir + \
-                  'master_table/energy_info_eui_calendar.csv',
-                  index=False)
-    df_all.to_sql('energy_info_eui_calendar', conn,
-                  if_exists='replace')
+    df_zero = df_all[df_all['Gross Sq.Ft'] == 0]
+    df_zero = df_zero[['Building Number', 'Fiscal Year', 'Fiscal '
+        'Month', 'Gross Sq.Ft']]
+    df_zero.to_csv(homedir + 'master_table/zero_area_entries.csv',
+                   index=False)
+    df_all = df_all[df_all['Gross Sq.Ft'] > 0]
+    df_all['eui_elec'] = df_all['Electricity (kBtu)']/df_all['Gross '
+        'Sq.Ft']
+    df_all['eui_gas'] = df_all['Gas (kBtu)']/df_all['Gross Sq.Ft']
+    df_all['eui_oil'] = df_all['Oil (kBtu)']/df_all['Gross Sq.Ft']
+    df_all['eui_steam'] = df_all['Steam (kBtu)']/df_all['Gross Sq.Ft']
+    df_all['eui_water'] = df_all['Water (Gallon)']/df_all['Gross '
+        'Sq.Ft']
+    df_all['eui'] = (df_all['eui_elec'] + df_all['eui_gas'])
+    df_all.to_csv(homedir + 'master_table/energy_eui_monthly.csv', index=False)
+    df_all.to_sql('energy_eui_monthly', conn, if_exists='replace')
+    df_eui_fy = df_all.groupby(['Building Number', 'Fiscal Year'],
+                               as_index=False).sum()
+    df_eui_fy = df_eui_fy[['Building Number', 'Fiscal Year',
+                           'eui_elec', 'eui_gas', 'eui_oil',
+                           'eui_steam', 'eui_water', 'eui']]
+    df_eui_fy.to_csv(homedir + 'master_table/eui_by_fy.csv',
+                     index=False)
+    df_eui_fy.to_sql('eui_by_fy', conn, if_exists='replace')
+    df_eui_cy = df_all.groupby(['Building Number', 'year'],
+                               as_index=False).sum()
+    df_eui_cy = df_eui_cy[['Building Number', 'year',
+                           'eui_elec', 'eui_gas', 'eui_oil',
+                           'eui_steam', 'eui_water', 'eui']]
+    df_eui_cy.to_csv(homedir + 'master_table/eui_by_cy.csv',
+                     index=False)
+    df_eui_cy.to_sql('eui_by_cy', conn, if_exists='replace')
     conn.close()
     return
 
 def join_static():
-    conn = sqlite3.connect(homedir + 'db/static_info.db')
+    conn = sqlite3.connect(homedir + 'db/static_info_tidy.db')
     c = conn.cursor()
     print '    creating static_info.csv master table ...'
-    df1 = pd.read_csv(homedir + 'master_table/static_info_from_EUAS.csv')
+    df1 = pd.read_csv(homedir + 'master_table/EUAS_static_tidy.csv')
     df2 = pd.read_csv(os.getcwd() + '/input/FY/static info/Entire GSA Building Portfolio.csv')
     df2.to_sql('Entire_GSA_Building_Portfolio_input', conn, if_exists='replace')
-    df2 = df2[['Building ID', 'Street', 'City', 'State', 'Zip Code',
-               'Gross Square Feet (GSF)', 'Building Name', 
-               'Building Class', 'Predominant Use', 
-               'Owned or Leased Indicator']]
-    df2.rename(columns={'State': 'State Abbr', 
-                        'Building ID': 'Building Number'}, 
-               inplace=True)
+    df2 = df2[['Building ID', 'Street', 'City', 'Zip Code']]
+    df2.rename(columns={'Building ID': 'Building Number', 'Street':
+                        'Street Address'}, inplace=True)
+    df2['Zip Code'] = df2['Zip Code'].map(lambda x: x[:5])
+    df2['source'] = 'Entire_GSA_Building_Portfolio_input'
     filename = os.getcwd() + '/csv/all_column/sheet-0-all_col.csv'
     df_use = pd.read_csv(filename)
-    df_use.to_sql('building_type_PortfolioManager_input', conn,
+    df_use.to_sql('PortfolioManager_sheet0_input', conn,
                   if_exists='replace')
-    df_use = df_use[['Property Name', 'Self-Selected Primary Function']]
+    df_use = df_use[['Property Name', 'Street Address',
+                     'City/Municipality', 'Postal Code']]
     df_use['Property Name'] = df_use['Property Name'].map(lambda x: x.partition(' ')[0][:8])
-    df_use.rename(columns={'Property Name': 'Building Number'}, inplace=True)
+    df_use['Postal Code'] = df_use['Postal Code'].map(lambda x: x[:5])
+    df_use.rename(columns={'Property Name': 'Building Number',
+                           'City/Municipality': 'City', 'Postal Code':
+                           'Zip Code'}, inplace=True)
     df_use.drop_duplicates(cols='Building Number', inplace=True)
-    df_all = pd.merge(df1, df2, how='left', on='Building Number')
-    df_all = pd.merge(df_all, df_use, how='left', on='Building Number')
-
-    df_all.to_csv(homedir + 'master_table/static_info.csv',
+    df_use['source'] = 'PortfolioManager_sheet0_input'
+    df_loc = pd.concat([df2, df_use], ignore_index=True)
+    df_loc.sort(columns=['Building Number'], inplace=True)
+    df_loc.to_csv(homedir + 'master_table/building_address_source.csv',
                   index=False)
-    df_all.to_sql('static_info', conn, if_exists='replace')
+    df_loc.to_sql('building_address_source', conn, if_exists='replace')
+    df_loc.drop_duplicates(cols=['Building Number', 'Street Address',
+                                 'City', 'Zip Code'], inplace=True)
+    # print (df_loc.groupby('Building Number').filter(lambda x: len(x) > 1))
+    df_loc.to_csv(homedir + \
+                  'master_table/building_address_source_dropdup.csv',
+                  index=False)
+    # df_loc.drop_duplicates(cols=['Building Number'], inplace=True)
+    df_all = pd.merge(df1, df_loc, how='left', on='Building Number')
+    df_all.to_csv(homedir + 'master_table/EUAS_address.csv',
+                  index=False)
+    df_all.to_sql('EUAS_address', conn, if_exists='replace')
+    df_all.drop_duplicates(cols=['Building Number'], inplace=True)
+    df_all.to_csv(homedir + 'master_table/EUAS_address_dropdupe.csv',
+                  index=False)
+    df_all.to_sql('EUAS_address_dropdupe', conn, if_exists='replace')
+    df_no_address = df_all[df_all['Street Address'].isnull()]
+    df_no_address.to_csv(homedir + 'master_table/EUAS_no_address.csv',
+                         index=False)
+    df_no_address.to_sql('EUAS_no_address', conn, if_exists='replace')
     conn.close()
     return
 
@@ -1852,7 +1890,7 @@ def join_static_detailECM():
 def process_master(yearlist):
     print 'processing master tables ...'
     # sanity_check_static_long(yearlist)
-    concat_all(yearlist)
+    # energy_info(yearlist)
     # join_static()
     # read_ecm_highlevel()
     # join_static_ecm()
